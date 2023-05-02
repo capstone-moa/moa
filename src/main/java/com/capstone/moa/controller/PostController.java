@@ -1,5 +1,6 @@
 package com.capstone.moa.controller;
 
+import com.capstone.moa.dto.FindPostResponse;
 import com.capstone.moa.dto.FindPostsByInterestResponse;
 import com.capstone.moa.dto.FindPostsResponse;
 import com.capstone.moa.dto.WritePostRequest;
@@ -30,5 +31,10 @@ public class PostController {
     @GetMapping
     public ResponseEntity<FindPostsByInterestResponse> findPostsByInterest(@RequestParam("interest") String interest) {
         return ResponseEntity.ok(postService.findPostsByInterest(interest));
+    }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<FindPostResponse> findPostById(@PathVariable("postId") Long postId) {
+        return ResponseEntity.ok(postService.findPostById(postId));
     }
 }
