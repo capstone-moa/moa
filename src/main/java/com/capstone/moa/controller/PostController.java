@@ -1,9 +1,6 @@
 package com.capstone.moa.controller;
 
-import com.capstone.moa.dto.FindPostResponse;
-import com.capstone.moa.dto.FindPostsByInterestResponse;
-import com.capstone.moa.dto.FindPostsResponse;
-import com.capstone.moa.dto.WritePostRequest;
+import com.capstone.moa.dto.*;
 import com.capstone.moa.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +15,8 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
-    public ResponseEntity<Void> writePost(@RequestBody WritePostRequest postRequest) {
-        postService.writePost(postRequest);
+    public ResponseEntity<Void> writePost(@RequestBody WritePostRequest request) {
+        postService.writePost(request);
         return ResponseEntity.noContent().build();
     }
 
@@ -36,5 +33,11 @@ public class PostController {
     @GetMapping("/{postId}")
     public ResponseEntity<FindPostResponse> findPostById(@PathVariable("postId") Long postId) {
         return ResponseEntity.ok(postService.findPostById(postId));
+    }
+
+    @PutMapping("/{postId}")
+    public ResponseEntity<Void> modifyPost(@PathVariable("postId") Long postId, @RequestBody ModifyPostRequest request) {
+        postService.modifyPost(postId, request);
+        return ResponseEntity.noContent().build();
     }
 }
