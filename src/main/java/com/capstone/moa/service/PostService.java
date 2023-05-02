@@ -61,4 +61,15 @@ public class PostService {
 
         post.modify(request.getTitle(), request.getContent(), request.getInterest());
     }
+
+    public void deletePost(Long postId, String memberId) {
+        Post post = postRepository.findById(postId)
+            .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+
+        if (!post.isSameWriter(memberId)) {
+            throw new IllegalArgumentException("You are not the writer of this post");
+        }
+
+        postRepository.delete(post);
+    }
 }
