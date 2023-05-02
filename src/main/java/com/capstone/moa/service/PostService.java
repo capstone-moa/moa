@@ -43,4 +43,11 @@ public class PostService {
 
         return new FindPostsByInterestResponse(selectedInterest, posts);
     }
+
+    public FindPostResponse findPostById(Long postId) {
+        Post post = postRepository.findById(postId)
+            .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+
+        return FindPostResponse.from(post);
+    }
 }
