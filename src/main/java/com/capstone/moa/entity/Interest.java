@@ -5,6 +5,9 @@ public enum Interest {
     APP,
     IOT,
     AI,
+    GAME,
+    QNA,
+    ETC,
     ;
 
     public static Interest find(String interest) {
