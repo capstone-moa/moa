@@ -18,11 +18,11 @@ public class PostService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
 
-    public void writePost(WritePostRequest writePostRequest) {
-        Member member = memberRepository.findByMemberId(writePostRequest.getMemberId())
+    public void writePost(WritePostRequest request) {
+        Member member = memberRepository.findByMemberId(request.getMemberId())
             .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
-        postRepository.save(new Post(member, writePostRequest.getTitle(), writePostRequest.getContent(), writePostRequest.getInterest()));
+        postRepository.save(new Post(member, request.getTitle(), request.getContent(), request.getInterest()));
     }
 
     public FindPostsResponse findAllPosts() {
@@ -49,5 +49,16 @@ public class PostService {
             .orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
         return FindPostResponse.from(post);
+    }
+
+    public void modifyPost(Long postId, ModifyPostRequest request) {
+        Post post = postRepository.findById(postId)
+            .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+
+        if (!post.isSameWriter(request.getMemberId())) {
+            throw new IllegalArgumentException("You are not the writer of this post");
+        }
+
+        post.modify(request.getTitle(), request.getContent(), request.getInterest());
     }
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -36,5 +38,15 @@ public class Post extends BaseTimeEntity {
         this.title = title;
         this.content = content;
         this.interest = interest;
+    }
+
+    public boolean isSameWriter(String memberId) {
+        return Objects.equals(this.member.getMemberId(), memberId);
+    }
+
+    public void modify(String title, String content, String interest) {
+        this.title = title;
+        this.content = content;
+        this.interest = Interest.find(interest);
     }
 }
