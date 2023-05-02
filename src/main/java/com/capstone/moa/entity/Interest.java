@@ -5,4 +5,9 @@ public enum Interest {
     APP,
     IOT,
     AI,
+    ;
+
+    public static Interest find(String interest) {
+        return Interest.valueOf(interest.toUpperCase());
+    }
 }
