@@ -1,8 +1,7 @@
 package com.capstone.moa.service;
 
-import com.capstone.moa.dto.FindPostResponse;
-import com.capstone.moa.dto.FindPostsResponse;
-import com.capstone.moa.dto.WritePostRequest;
+import com.capstone.moa.dto.*;
+import com.capstone.moa.entity.Interest;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.entity.Post;
 import com.capstone.moa.repository.MemberRepository;
@@ -27,10 +26,21 @@ public class PostService {
     }
 
     public FindPostsResponse findAllPosts() {
-        List<FindPostResponse> posts = postRepository.findAll().stream()
+        List<FindPostResponse> posts = postRepository.findAll()
+            .stream()
             .map(FindPostResponse::from)
             .toList();
 
         return new FindPostsResponse(posts);
+    }
+
+    public FindPostsByInterestResponse findPostsByInterest(String interest) {
+        Interest selectedInterest = Interest.find(interest);
+        List<FindPostByInterestResponse> posts = postRepository.findAllByInterest(selectedInterest)
+            .stream()
+            .map(FindPostByInterestResponse::from)
+            .toList();
+
+        return new FindPostsByInterestResponse(selectedInterest, posts);
     }
 }
