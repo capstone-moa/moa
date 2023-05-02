@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-public class Post {
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +15,12 @@ public class Post {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Lob
-    private String content;
-
+    @Column(length = 500, nullable = false)
     private String title;
+
+    @Lob
+    @Column(nullable = false)
+    private String content;
 
     @Enumerated(EnumType.STRING)
     private Interest interest;
