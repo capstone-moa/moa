@@ -1,4 +1,4 @@
-package com.capstone.moa;
+package com.capstone.moa.entity;
 
 public enum Interest {
     WEB,
