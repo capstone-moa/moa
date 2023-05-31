@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/posts")
@@ -35,10 +33,16 @@ public class PostController {
         return ResponseEntity.ok(postService.findPostsByInterest(interest));
     }
 
-    @Operation(summary = "게시물 아이디로 게시물 조회")
+    @Operation(summary = "게시물 아이디로 게시물 상세 조회")
     @GetMapping("/{postId}")
     public ResponseEntity<FindPostResponse> findPostById(@PathVariable("postId") Long postId) {
         return ResponseEntity.ok(postService.findPostById(postId));
+    }
+
+    @Operation(summary = "게시물 아이디로 게시물 상세 조회 댓글포함")
+    @GetMapping("/{postId}/comments")
+    public ResponseEntity<FindPostWithCommentsResponse> findPostWithCommentsById(@PathVariable("postId") Long postId) {
+        return ResponseEntity.ok(postService.findPostWithCommentsByPostId(postId));
     }
 
     @Operation(summary = "게시글 수정")
@@ -50,8 +54,8 @@ public class PostController {
 
     @Operation(summary = "게시글 삭제")
     @DeleteMapping("/{postId}")
-    public ResponseEntity<Void> deletePost(@PathVariable("postId") Long postId, @RequestBody Map<String, String> email) {
-        postService.deletePost(postId, email.get("email"));
+    public ResponseEntity<Void> deletePost(@PathVariable("postId") Long postId, @RequestBody String email) {
+        postService.deletePost(postId, email);
         return ResponseEntity.noContent().build();
     }
 }
