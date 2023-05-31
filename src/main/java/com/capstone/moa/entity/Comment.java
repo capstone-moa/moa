@@ -33,8 +33,8 @@ public class Comment extends BaseTimeEntity {
         this.content = content;
     }
 
-    public boolean isSameWriter(String memberId) {
-        return Objects.equals(this.member.getMemberId(), memberId);
+    public boolean isSameWriter(String email) {
+        return Objects.equals(this.member.getEmail(), email);
     }
 
     public void modifyComment(String content) {

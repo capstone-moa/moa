@@ -40,8 +40,8 @@ public class Post extends BaseTimeEntity {
         this.interest = interest;
     }
 
-    public boolean isSameWriter(String memberId) {
-        return Objects.equals(this.member.getMemberId(), memberId);
+    public boolean isSameWriter(String email) {
+        return Objects.equals(this.member.getEmail(), email);
     }
 
     public void modify(String title, String content, String interest) {

@@ -22,7 +22,7 @@ public class CommentService {
 
     @Transactional
     public void writeComment(Long postId, WriteCommentRequest request) {
-        Member member = memberRepository.findByMemberId(request.getMemberId())
+        Member member = memberRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
         Post post = postRepository.findById(postId)
@@ -32,14 +32,14 @@ public class CommentService {
     }
 
     @Transactional
-    public void deleteComment(Long postId, Long commentId, String memberId) {
+    public void deleteComment(Long postId, Long commentId, String email) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
 
-        if (!comment.isSameWriter(memberId)) {
+        if (!comment.isSameWriter(email)) {
             throw new IllegalArgumentException("You are not the writer of this comment");
         }
 

@@ -8,6 +8,7 @@ import com.capstone.moa.repository.MemberRepository;
 import com.capstone.moa.repository.PostRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,13 +19,15 @@ public class PostService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
 
+    @Transactional
     public void writePost(WritePostRequest request) {
-        Member member = memberRepository.findByMemberId(request.getMemberId())
+        Member member = memberRepository.findByEmail(request.getEmail())
             .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
         postRepository.save(new Post(member, request.getTitle(), request.getContent(), request.getInterest()));
     }
 
+    @Transactional(readOnly = true)
     public FindPostsResponse findAllPosts() {
         List<FindPostResponse> posts = postRepository.findAll()
             .stream()
@@ -34,6 +37,7 @@ public class PostService {
         return new FindPostsResponse(posts);
     }
 
+    @Transactional(readOnly = true)
     public FindPostsByInterestResponse findPostsByInterest(String interest) {
         Interest selectedInterest = Interest.find(interest);
         List<FindPostByInterestResponse> posts = postRepository.findAllByInterest(selectedInterest)
@@ -44,6 +48,7 @@ public class PostService {
         return new FindPostsByInterestResponse(selectedInterest, posts);
     }
 
+    @Transactional(readOnly = true)
     public FindPostResponse findPostById(Long postId) {
         Post post = postRepository.findById(postId)
             .orElseThrow(() -> new IllegalArgumentException("Post not found"));
@@ -51,22 +56,24 @@ public class PostService {
         return FindPostResponse.from(post);
     }
 
+    @Transactional
     public void modifyPost(Long postId, ModifyPostRequest request) {
         Post post = postRepository.findById(postId)
             .orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
-        if (!post.isSameWriter(request.getMemberId())) {
+        if (!post.isSameWriter(request.getEmail())) {
             throw new IllegalArgumentException("You are not the writer of this post");
         }
 
         post.modify(request.getTitle(), request.getContent(), request.getInterest());
     }
 
-    public void deletePost(Long postId, String memberId) {
+    @Transactional
+    public void deletePost(Long postId, String email) {
         Post post = postRepository.findById(postId)
             .orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
-        if (!post.isSameWriter(memberId)) {
+        if (!post.isSameWriter(email)) {
             throw new IllegalArgumentException("You are not the writer of this post");
         }
 
