@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class WritePostRequest {
 
-    private String memberId;
+    private String email;
     private String title;
     private String content;
     private String interest;
