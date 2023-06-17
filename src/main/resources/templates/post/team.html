@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link href="/css/team.css" rel="stylesheet" />
+    <title>team_board</title>
+</head>
+
+<body>
+    <div class="v10_483">
+        <!--헤더-->
+        <div class="header_bar">
+            <div class="logo" th:onclick="|location.href='@{/posts/community}'|"></div>
+            <div class='v-line'></div>
+            <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
+            <span class="nav_text_community">커뮤니티</span>
+            <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
+            <span class="nav_text_team">팀원모집</span>
+            <div class="search">
+                <input type="text" placeholder="검색어 입력">
+                <button type="button" onclick="" class="img_search">
+                    <i class="material-icons">search</i>
+                </button>
+            </div>
+            <div class="v10_2253">
+                <button type="button" th:onclick="|location.href='@{/posts/login}'|" class="login_border"><span class="name_login">로그인</span></button>
+            </div>
+            <div class="v10_2261">
+                <button type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join">회원가입</span></button>
+            </div>
+            <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+        </div>
+
+        <!--좌측 네비게이션 바-->
+        
+        <div class="v10_580">
+
+            <div class="v10_582" onclick="">
+                <span class="v10_584">FRONT</span><span class="board_num">1</span>
+                <hr class="nav_role">
+                <div class="hashtag"></div>
+            </div>
+            <div class="v10_592" onclick="">
+                <span class="v10_584">BACK</span><span class="board_num">1</span>
+                <hr class="nav_role">
+                <div class="hashtag"></div>
+            </div>
+            <div class="v10_602" onclick="">
+                <span class="v10_584">STUDY</span><span class="board_num">1</span>
+                <hr class="nav_role">
+                <div class="hashtag"></div>
+            </div>
+            <div class="v10_611" onclick="">
+                <span class="v10_584">CODING TEST</span><span class="board_num">1</span>
+                <hr class="nav_role">
+                <div class="hashtag"></div>
+            </div>
+            <div class="v10_620" onclick="">
+                <span class="v10_584">DESIGNER</span><span class="board_num">1</span>
+                <hr class="nav_role">
+                <div class="hashtag"></div>
+            </div>
+            <div class="v10_628" onclick="">
+                <span class="v10_584">ALL</span><span class="board_num">1</span>
+                <div class="hashtag"></div>
+            </div>
+        </div>
+
+        <!--상단 네비게이션 바-->
+        <div class="v10_636">
+            <div class="v10_658" onclick="">
+                <div class="top_nav_box"></div><span class="top_nav_text">전체</span>
+            </div>
+            <div class="v10_661" onclick="">
+                <div class="top_nav_box"></div><span class="top_nav_text">서울/인천</span>
+            </div>
+            <div class="v10_664" onclick="">
+                <div class="top_nav_box"></div><span class="top_nav_text">경기/충청</span>
+             </div>
+            <div class="v10_667" onclick="">
+                <div class="top_nav_box"></div><span class="top_nav_text">대전/강원</span>
+            </div>
+            <div class="v10_670" onclick="">
+                <div class="top_nav_box"></div><span class="top_nav_text">부산/울산</span>
+            </div>
+            <div class="v10_673" onclick="">
+                <div class="top_nav_box"></div><span class="top_nav_text">대구/경상</span>
+            </div>
+            <div class="v10_674" onclick="">
+                <div class="top_nav_box"></div><span class="top_nav_text">그 외
+                </span>
+            </div>
+        </div>
+
+        <!--게시판 메인-->
+        <div class="v10_488">
+            <div class="v10_490">
+                <button type="button" class="button" onclick="location.href='team_board_write.html'"><span class="v30_1660">작성</span></button>
+                <span class="v10_493">팀원모집</span>
+                <span class="v10_491"><hr>팀원을 모집하는 공간</span>
+            </div>
+
+            <!--정렬-->
+            <div class="v10_497"> 
+                <select name="" id="">
+                    <option value="">최근순</option>
+                    <option value="">인기순</option>
+                </select>
+            </div>
+
+            <!--게시판 내용-->
+            <div class="v10_501">
+                <!--게시글 한개-->
+                <th:block th:each="recruit : ${recruitPosts}">
+                <div class="v10_502">
+                    <div class="white_box">
+                    <div class="v10_506">
+                        <span class="v10_507" th:text="${recruit.memberName()}">아이디1</span>
+                        <span class="v10_508" th:text="${recruit.memberJob()}">iOS developer</span>
+                        <span class="v10_2226" th:text="${recruit.createdAt()}">2023.05-01</span>
+                        <div class="profile_image_509"></div>
+                    </div>
+                    <div class="v10_510">
+                        <div class="v10_511"></div>
+                        <div class="v10_512"></div>
+                        <div class="v10_513"></div>
+                    </div>
+                    <span class="v10_505" th:text="${recruit.title()}">포트폴리오 프로젝트 같이 협업하실 디자이너분 한분 구합니다!</span>
+                    <hr class="bar">
+                    <div class="blue_box"></div><span class="blue_font" th:text="|# ${recruit.interest()}|">#Designer</span>
+                    <div class="blue_box2"></div><span class="blue_font2">경기/인천</span>
+                    <!--댓글-->
+                    <div class="v10_315"></div>
+                    <span class="v10_317" th:text="${recruit.commentCnt()}">3</span>
+                </div>
+                </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
