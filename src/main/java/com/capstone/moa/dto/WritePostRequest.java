@@ -13,4 +13,5 @@ public class WritePostRequest {
     private String title;
     private String content;
     private String interest;
+    private String postType;
 }

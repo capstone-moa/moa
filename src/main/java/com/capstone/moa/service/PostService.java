@@ -4,7 +4,7 @@ import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.Interest;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.entity.Post;
-import com.capstone.moa.repository.CommentRepository;
+import com.capstone.moa.entity.PostType;
 import com.capstone.moa.repository.MemberRepository;
 import com.capstone.moa.repository.PostRepository;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class PostService {
         Member member = memberRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
-        postRepository.save(new Post(member, request.getTitle(), request.getContent(), request.getInterest()));
+        postRepository.save(new Post(member, request.getTitle(), request.getContent(), request.getInterest(), request.getPostType()));
     }
 
     @Transactional(readOnly = true)
@@ -47,6 +47,16 @@ public class PostService {
                 .toList();
 
         return new FindPostsByInterestResponse(selectedInterest, posts);
+    }
+
+    @Transactional(readOnly = true)
+    public FindPostsResponse findPostsByPostType(String postType) {
+        PostType selectedPostType = PostType.find(postType);
+        List<FindPostResponse> posts = postRepository.findAllByPostType(selectedPostType)
+                .stream()
+                .map(FindPostResponse::from)
+                .toList();
+        return new FindPostsResponse(posts);
     }
 
     @Transactional(readOnly = true)

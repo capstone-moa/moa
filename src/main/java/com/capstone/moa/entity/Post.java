@@ -31,18 +31,22 @@ public class Post extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Interest interest;
 
+    @Enumerated(EnumType.STRING)
+    private PostType postType;
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    public Post(Member member, String title, String content, String interest) {
-        this(member, title, content, Interest.find(interest));
+    public Post(Member member, String title, String content, String interest, String postType) {
+        this(member, title, content, Interest.find(interest), PostType.find(postType));
     }
 
-    private Post(Member member, String title, String content, Interest interest) {
+    private Post(Member member, String title, String content, Interest interest, PostType postType) {
         this.member = member;
         this.title = title;
         this.content = content;
         this.interest = interest;
+        this.postType = postType;
     }
 
     public boolean isSameWriter(String email) {
