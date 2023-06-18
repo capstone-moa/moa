@@ -7,7 +7,6 @@ body {
 .v10_483 {
   width: 100%;
   height: 1600px;
-  position: relative;
   background: rgba(247,249,251,1);
   overflow: hidden;
 }
@@ -28,7 +27,7 @@ body {
   width: 340px;
   position : absolute;
   top: 28px;
-  right: 600px;
+  left: 600px;
 }
 
 input {
@@ -75,7 +74,7 @@ input {
   top: 20px;
   left: 382px;
   border-radius: 10px 10px 10px 10px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 .nav_text_community{
   color: rgba(24,24,24);
@@ -110,8 +109,8 @@ input {
 .v10_2253 {
   position: absolute;
   top: 26px;
-  left: 1172px;
-  
+  left: 1230px;
+
 }
 .login_border {
   width: 91px;
@@ -151,7 +150,7 @@ input {
   opacity: 1;
   position: absolute;
   top: 26px;
-  left: 1055px;
+  left: 1110px;
   overflow: hidden;
 }
 .join_border {
@@ -206,20 +205,19 @@ input {
 }
 
 .v10_490 {
-  width: 840px;
+  width: 862px;
   height: 105px;
-  top: 100px;
-  left: 360px;
   background: rgba(255,255,255,1);
   opacity: 1;
-  position: absolute;
+  position: relative;
+  top: 53px;
+  left: 360px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   overflow: hidden;
 }
-
 .button {
   width: 91px;
   height: 32px;
@@ -284,7 +282,7 @@ select {
 }
 
 select::-ms-expand {
-display: none;
+  display: none;
 }
 
 .v10_497 {
@@ -292,17 +290,17 @@ display: none;
   height: 30px;
   opacity: 1;
   position: absolute;
-  top: 230px;
+  top: 200px;
   left: 720px;
   overflow: hidden;
 }
 
 .v10_501 {
-  width: 840px;
+  width: 860px;
   height: 865px;
   opacity: 1;
   position: absolute;
-  top: 300px;
+  top: 260px;
   left: 360px;
   overflow: hidden;
 }
@@ -639,7 +637,7 @@ hr.bar {
   background-position: center center;
   background-size: cover;
   position: absolute;
-  top: 172px;
+  top: 170px;
   left: 790px;
   border-radius: 10px 10px 10px 10px;
   overflow: hidden;
@@ -649,7 +647,7 @@ hr.bar {
   width: 8px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 174px;
+  top: 170px;
   left: 820px;
   font-family: NanumGothic;
   font-weight: Bold;

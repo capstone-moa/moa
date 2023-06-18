@@ -10,35 +10,36 @@
 
 <body>
 
-    <!--헤더-->
-    <div class="header_bar">
-        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
-        <div class='v-line'></div>
-        <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
-        <span class="nav_text_community">커뮤니티</span>
-        <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
-        <span class="nav_text_team">팀원모집</span>
-        <div class="search">
-            <input type="text" placeholder="검색어 입력">
-            <button type="button" onclick="" class="img_search">
-                <i class="material-icons">search</i>
-            </button>
-        </div>
-        <div class="v10_2253">
-            <button type="button" th:onclick="|location.href='@{/posts/login}'|" class="login_border"><span class="name_login">로그인</span></button>
-        </div>
-        <div class="v10_2261">
-            <button type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join">회원가입</span></button>
-        </div>
-        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+<!--헤더-->
+<div class="header_bar">
+    <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+    <div class='v-line'></div>
+    <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
+    <span class="nav_text_community">커뮤니티</span>
+    <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
+    <span class="nav_text_team">팀원모집</span>
+    <div class="search">
+        <input type="text" placeholder="검색어 입력">
+        <button type="button" onclick="" class="img_search">
+            <i class="material-icons">search</i>
+        </button>
     </div>
+    <div class="v10_2253">
+        <button type="button" th:onclick="|location.href='@{/posts/login}'|" class="login_border"><span class="name_login">로그인</span></button>
+    </div>
+    <div class="v10_2261">
+        <button type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join">회원가입</span></button>
+    </div>
+    <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+</div>
+
 
 <div class="v10_150">
     <!--커뮤니티 게시판-->
     <div class="community_board">
         <!--커뮤니티 메인-->
         <div class="hidden">
-            <div class="v10_157"></div><span class="v10_158"><hr>개발자들이 소통하는 공간</span>
+            <div class="v10_157"></div><span class="v10_158"><br><hr>개발자들이 소통하는 공간</span>
             <span class="v10_160">커뮤니티</span>
             <div class="v30_1649">
                 <button type="button" th:onclick="|location.href='@{/posts/community/write}'|" class="button"><span class="v30_1651">작성</span></button>
@@ -46,32 +47,32 @@
         </div>
         <!--커뮤니티 게시글-->
         <th:block th:each="community : ${communityPosts}">
-        <div class="v10_162">
-            <div class="white_box"></div>
-            <div class="v10_165"><span class="v10_166" th:text="${community.memberName()}">아이디</span><span class="v10_167" th:text="${community.memberJob()}">직업</span><span class="v10_2226" th:text="${community.createdAt()}">작성일</span>
-                <div class="profile_image_168"></div>
-            </div>
-            <div class="v10_249">
-                <div class="v10_250"></div>
-                <div class="v10_251"></div>
-                <div class="v10_252"></div>
-            </div>
-            <span class="v10_164" th:text="${community.title()}">제목</span>
-            <hr class="bar">
-            <div class="blue_box"></div>
-            <span class="blue_font" th:text="|# ${community.interest()}|">#JAVA</span>
+            <div class="v10_162">
+                <div class="white_box"></div>
+                <div class="v10_165"><span class="v10_166" th:text="${community.memberName()}">아이디</span><span class="v10_167" th:text="${community.memberJob()}">직업</span><span class="v10_2226" th:text="${community.createdAt()}">작성일</span>
+                    <div class="profile_image_168"></div>
+                </div>
+                <div class="v10_249">
+                    <div class="v10_250"></div>
+                    <div class="v10_251"></div>
+                    <div class="v10_252"></div>
+                </div>
+                <span class="v10_164" th:text="${community.title()}">제목</span>
+                <hr class="bar">
+                <div class="blue_box"></div>
+                <span class="blue_font" th:text="|#${community.interest()}|">#JAVA</span>
 
-            <!--댓글-->
-            <div class="v10_315"></div>
-            <span class="v10_317" th:text="${community.commentCnt()}">3</span>
-        </div>
+                <!--댓글-->
+                <div class="v10_315"></div>
+                <span class="v10_317" th:text="${community.commentCnt()}">3</span>
+            </div>
         </th:block>
     </div>
     <!--팀원모집 게시판-->
     <div class="community_board">
         <!--팀원모집 메인-->
         <div class="hidden">
-            <div class="v10_157"></div><span class="v10_158"><hr>팀원을 모집하는 공간</span>
+            <div class="v10_157"></div><span class="v10_158"><br><hr>팀원을 모집하는 공간</span>
             <span class="v10_160">팀원모집</span>
             <div class="v30_1649">
                 <button type="button" class="button"><span class="v30_1651">작성</span></button>
@@ -79,25 +80,25 @@
         </div>
         <!--팀원모집 게시글-->
         <th:block th:each="recruit : ${recruitPosts}">
-        <div class="v10_162">
-            <div class="white_box"></div>
-            <div class="v10_165"><span class="v10_166" th:text="${recruit.memberName()}">아이디</span><span class="v10_167" th:text="${recruit.memberJob()}">iOS developer</span><span class="v10_2226" th:text="${recruit.createdAt()}">작성일</span>
-                <div class="profile_image_247"></div>
-            </div>
-            <div class="v10_249">
-                <div class="v10_250"></div>
-                <div class="v10_251"></div>
-                <div class="v10_252"></div>
-            </div>
-            <span class="v10_243" th:text="${recruit.title()}">제목</span>
-            <hr class="bar">
-            <div class="blue_box"></div>
-            <span class="blue_font" th:text="|# ${recruit.interest()}|">#JAVA</span>
+            <div class="v10_162">
+                <div class="white_box"></div>
+                <div class="v10_165"><span class="v10_166" th:text="${recruit.memberName()}">아이디</span><span class="v10_167" th:text="${recruit.memberJob()}">iOS developer</span><span class="v10_2226" th:text="${recruit.createdAt()}">작성일</span>
+                    <div class="profile_image_247"></div>
+                </div>
+                <div class="v10_249">
+                    <div class="v10_250"></div>
+                    <div class="v10_251"></div>
+                    <div class="v10_252"></div>
+                </div>
+                <span class="v10_243" th:text="${recruit.title()}">제목</span>
+                <hr class="bar">
+                <div class="blue_box"></div>
+                <span class="blue_font" th:text="|#${recruit.interest()}|">#JAVA</span>
 
-            <!--댓글-->
-            <div class="v10_315"></div>
-            <span class="v10_317" th:text="${recruit.commentCnt()}">3</span>
-        </div>
+                <!--댓글-->
+                <div class="v10_315"></div>
+                <span class="v10_317" th:text="${recruit.commentCnt()}">3</span>
+            </div>
         </th:block>
     </div>
 </div>
