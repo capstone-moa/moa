@@ -31,7 +31,7 @@ body {
   width: 340px;
   position : absolute;
   top: 28px;
-  right: 600px;
+  left: 600px;
 }
 
 input {
@@ -113,7 +113,7 @@ input {
 .v10_2253 {
   position: absolute;
   top: 26px;
-  left: 1172px;
+  left: 1230px;
 
 }
 .login_border {
@@ -154,7 +154,7 @@ input {
   opacity: 1;
   position: absolute;
   top: 26px;
-  left: 1055px;
+  left: 1110px;
   overflow: hidden;
 }
 .join_border {
@@ -205,7 +205,7 @@ input {
   width: 581px;
   position: relative;
   padding: 20px 10px;
-  /*top: 93px;*/
+  top: 40px;
   /*left: 125px;*/
   float: left;
   overflow: hidden;
@@ -245,7 +245,7 @@ input {
   width: 194px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 35px;
+  top: 38px;
   left: 32px;
   font-family: NanumGothic;
   font-weight: Bold;
@@ -261,8 +261,8 @@ input {
   background-size: cover;
   opacity: 1;
   position: absolute;
-  top: 25px;
-  left: 450px;
+  top: 32px;
+  left: 440px;
   overflow: hidden;
 }
 
