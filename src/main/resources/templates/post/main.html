@@ -42,7 +42,7 @@
             <div class="v10_157"></div><span class="v10_158"><br><hr>개발자들이 소통하는 공간</span>
             <span class="v10_160">커뮤니티</span>
             <div class="v30_1649">
-                <button type="button" th:onclick="|location.href='@{/posts/community/write}'|" class="button"><span class="v30_1651">작성</span></button>
+                <button type="button" th:onclick="|location.href='@{/posts/write}'|" class="button"><span class="v30_1651">작성</span></button>
             </div>
         </div>
         <!--커뮤니티 게시글-->
@@ -75,7 +75,7 @@
             <div class="v10_157"></div><span class="v10_158"><br><hr>팀원을 모집하는 공간</span>
             <span class="v10_160">팀원모집</span>
             <div class="v30_1649">
-                <button type="button" class="button"><span class="v30_1651">작성</span></button>
+                <button type="button" th:onclick="|location.href='@{/posts/write}'|" class="button"><span class="v30_1651">작성</span></button>
             </div>
         </div>
         <!--팀원모집 게시글-->
