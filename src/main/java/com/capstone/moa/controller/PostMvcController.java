@@ -1,12 +1,16 @@
 package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.FindPostsResponse;
+import com.capstone.moa.dto.WritePostRequest;
+import com.capstone.moa.entity.Interest;
 import com.capstone.moa.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -43,19 +47,21 @@ public class PostMvcController {
         return "post/team";
     }
 
-    /*-----------기능 구현 필요 ---------*/
-    @GetMapping("/community/write")
-    public String community() {
-        return "post/community_write";
+    @GetMapping("/write")
+    public String write(Model model) {
+        model.addAttribute("writePostRequest", new WritePostRequest());
+        return "post/write";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "post/login";
+    @PostMapping("/write")
+    public String save(WritePostRequest request) {
+        postService.writePost(request);
+        return "redirect:/posts";
     }
 
-    @GetMapping("/join")
-    public String join() {
-        return "post/join";
+    @ModelAttribute("interests")
+    private Interest[] putInterest() {
+        return Interest.values();
     }
+
 }
