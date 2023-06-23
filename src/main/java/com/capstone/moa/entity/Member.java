@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -24,4 +27,7 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private Job job;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<GroupMember> groupMembers = new ArrayList<>();
 }
