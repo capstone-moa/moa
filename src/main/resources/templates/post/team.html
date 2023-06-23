@@ -35,38 +35,12 @@
     </div>
 
     <!--좌측 네비게이션 바-->
-
-    <div class="v10_580">
-
-        <div class="v10_582" onclick="">
-            <span class="v10_584">FRONT</span><span class="board_num">1</span>
+    <div class="category">
+        <button type="button" class="v10_582" onclick="location.href='login.html'" th:each="interest : ${interests}">
+            <span class="v10_584" th:text="${interest.name()}"></span>
+            <div class="hashtag"></div>
             <hr class="nav_role">
-            <div class="hashtag"></div>
-        </div>
-        <div class="v10_592" onclick="">
-            <span class="v10_584">BACK</span><span class="board_num">1</span>
-            <hr class="nav_role">
-            <div class="hashtag"></div>
-        </div>
-        <div class="v10_602" onclick="">
-            <span class="v10_584">STUDY</span><span class="board_num">1</span>
-            <hr class="nav_role">
-            <div class="hashtag"></div>
-        </div>
-        <div class="v10_611" onclick="">
-            <span class="v10_584">CODING TEST</span><span class="board_num">1</span>
-            <hr class="nav_role">
-            <div class="hashtag"></div>
-        </div>
-        <div class="v10_620" onclick="">
-            <span class="v10_584">DESIGNER</span><span class="board_num">1</span>
-            <hr class="nav_role">
-            <div class="hashtag"></div>
-        </div>
-        <div class="v10_628" onclick="">
-            <span class="v10_584">ALL</span><span class="board_num">1</span>
-            <div class="hashtag"></div>
-        </div>
+        </button>
     </div>
 
     <!--상단 네비게이션 바-->
