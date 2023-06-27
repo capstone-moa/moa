@@ -42,4 +42,10 @@ public class Group extends BaseTimeEntity {
     public void putGroupMember(GroupMember groupMember) {
         this.groupMembers.add(groupMember);
     }
+
+    public void modify(String name, String interest, String introduce) {
+        this.name = name;
+        this.interest = Interest.find(interest);
+        this.introduce = introduce;
+    }
 }

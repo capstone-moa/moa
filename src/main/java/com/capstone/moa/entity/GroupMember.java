@@ -33,4 +33,8 @@ public class GroupMember {
         this.member = member;
         this.groupRole = groupRole;
     }
+
+    public boolean isGroupLeader() {
+        return this.groupRole.equals(GroupRole.LEADER);
+    }
 }
