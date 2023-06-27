@@ -1,14 +1,12 @@
 package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.CreateGroupRequest;
+import com.capstone.moa.dto.ModifyGroupRequest;
 import com.capstone.moa.service.GroupService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -21,6 +19,13 @@ public class GroupController {
     @PostMapping
     public ResponseEntity<Void> createGroup(@RequestBody CreateGroupRequest request) {
         groupService.createGroup(request);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "그룹 수정")
+    @PutMapping("/{groupId}")
+    public ResponseEntity<Void> modifyGroup(@PathVariable("groupId") Long groupId, @RequestBody ModifyGroupRequest request) {
+        groupService.modifyGroup(groupId, request);
         return ResponseEntity.noContent().build();
     }
 }
