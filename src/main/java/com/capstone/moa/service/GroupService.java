@@ -54,4 +54,21 @@ public class GroupService {
 
         group.modify(request.getGroupName(), request.getInterest(), request.getIntroduce());
     }
+
+    @Transactional
+    public void deleteGroup(Long groupId, String email) {
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(() -> new IllegalArgumentException("Group not found"));
+
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+        GroupMember groupMember = groupMemberRepository.findGroupMemberByGroupAndMember(group, member)
+                .orElseThrow(() -> new IllegalArgumentException("GroupMember not found"));
+
+        if (!groupMember.isGroupLeader()) {
+            throw new IllegalArgumentException("You are not the leader of this group");
+        }
+        groupRepository.delete(group);
+    }
 }
