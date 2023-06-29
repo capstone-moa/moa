@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/group")
@@ -26,6 +28,13 @@ public class GroupController {
     @PutMapping("/{groupId}")
     public ResponseEntity<Void> modifyGroup(@PathVariable("groupId") Long groupId, @RequestBody ModifyGroupRequest request) {
         groupService.modifyGroup(groupId, request);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "그룹 삭제")
+    @DeleteMapping("/{groupId}")
+    public ResponseEntity<Void> deletePost(@PathVariable("groupId") Long groupId, @RequestBody Map<String, String> email) {
+        groupService.deleteGroup(groupId, email.get("email"));
         return ResponseEntity.noContent().build();
     }
 }
