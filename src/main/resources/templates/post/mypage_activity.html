@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link href="/css/mypage_activity.css" rel="stylesheet" />
     <title>mypage_activity</title>
 </head>
@@ -26,7 +26,7 @@
             </button>
         </div>
         <div class="v10_2253" th:onclick="|location.href='@{/posts/mypage_activity}'|">
-            <div class="header_profile_image" ></div>
+            <div class="header_profile_image"></div>
             <span class="header_profile_name">hong kildong</span>
         </div>
         <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
@@ -34,13 +34,13 @@
 
     <!--좌측 네비게이션 바-->
     <div class="category">
-        <button type="button" class="v10_582" onclick="" >
-            <span class="v10_584" >마이페이지</span>
+        <button type="button" class="v10_582" onclick="">
+            <span class="v10_584">마이페이지</span>
             <div class="hashtag"></div>
             <hr class="nav_role">
         </button>
-        <button type="button" class="v10_582" onclick="" >
-            <span class="v10_584" >그룹관리</span>
+        <button type="button" class="v10_582" onclick="">
+            <span class="v10_584">그룹관리</span>
             <div class="hashtag"></div>
             <hr class="nav_role">
         </button>
@@ -59,10 +59,10 @@
                 <div class="profile_image"></div>
                 <span class="profile_name_font">hongkildong</span>
                 <span class="profile_intro">백엔드 개발자로 취업 희망 중인 취준생 입니다!
-                    웹 프로그래밍에 관심이 있으며 이커백엔드 개발자로 취업 희망 중인 취준생 입니다!
-                    웹 프로그래밍에 관심이 있으며 이백엔드 개발자로 취업 희망 중인 취준생 입니다!
-                    웹 프로그래밍에 관심이 있으며 이백엔드 개발자로 취업 희망 중인 취준생 입니다!
-                    웹 프로그래밍에 관심이 있으며 이머스 서비스 개발을 희망합니다 </span>
+                        웹 프로그래밍에 관심이 있으며 이커백엔드 개발자로 취업 희망 중인 취준생 입니다!
+                        웹 프로그래밍에 관심이 있으며 이백엔드 개발자로 취업 희망 중인 취준생 입니다!
+                        웹 프로그래밍에 관심이 있으며 이백엔드 개발자로 취업 희망 중인 취준생 입니다!
+                        웹 프로그래밍에 관심이 있으며 이머스 서비스 개발을 희망합니다 </span>
                 <div class="interest">
                     <div class="github_image"></div>
                     <span class="v10_769">GitHub : <span>github.com/hongkildong</span></span>
@@ -76,45 +76,49 @@
 
                 </div>
             </div>
+
+
+            <!--마이페이지 중간 카테고리 -------주소 바꿔야함-------->
+            <div class="v10_796">
+                <div class="v10_800" th:onclick="|location.href='@{/posts/mypage_activity}'|"><span class="text_white">활동</span></div>
+                <div class="v10_798" th:onclick="|location.href='@{/posts/mypage_group}'|"><span class="text_black">그룹 관리</span></div>
+            </div>
+
+            <!-----------활동 내역------------>
+            <div class="v10_780">
+            <span class="v10_782">활동 내역
+                <hr></span>
+
+                <!--게시글 한개-->
+                <div class="v10_501">
+                    <th:block th:each="">
+                        <div class="v10_502">
+                            <div class="white_box">
+                                <div class="v10_506">
+                                    <span class="v10_507" th:text="${community.memberName()}">아이디1</span>
+                                    <span class="v10_508" th:text="${community.memberJob()}">직업</span>
+                                    <span class="v10_2226" th:text="${community.createdAt()}">2023.05-01</span>
+                                    <div class="profile_image_509"></div>
+                                </div>
+                                <div class="v10_510">
+                                    <div class="v10_511"></div>
+                                    <div class="v10_512"></div>
+                                    <div class="v10_513"></div>
+                                </div>
+                                <span class="v10_505" th:text="${community.title()}">제목</span>
+                                <span class="v10_509" th:text="${community.content()}">내용</span>
+                                <hr class="bar">
+                                <div class="blue_box"></div><span class="blue_font" th:text="|# ${community.interest()}|">#Designer</span>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
         </div>
     </form>
-    <!--마이페이지 중간 카테고리 -------주소 바꿔야함-------->
-    <div class="v10_796">
-        <div class="v10_800" th:onclick="|location.href='@{/posts/mypage_activity}'|"><span class="text_white">활동</span></div>
-        <div class="v10_798" th:onclick="|location.href='@{/posts/mypage_group}'|"><span class="text_black">그룹 관리</span></div>
-    </div>
-
-    <!-----------활동 내역------------>
-    <div class="v10_780">
-        <span class="v10_782">활동 내역<hr></span>
-
-        <!--게시글 한개-->
-        <div class="v10_501">
-            <th:block th:each="">
-                <div class="v10_502">
-                    <div class="white_box">
-                        <div class="v10_506">
-                            <span class="v10_507" th:text="${community.memberName()}">아이디1</span>
-                            <span class="v10_508" th:text="${community.memberJob()}">직업</span>
-                            <span class="v10_2226" th:text="${community.createdAt()}">2023.05-01</span>
-                            <div class="profile_image_509"></div>
-                        </div>
-                        <div class="v10_510">
-                            <div class="v10_511"></div>
-                            <div class="v10_512"></div>
-                            <div class="v10_513"></div>
-                        </div>
-                        <span class="v10_505" th:text="${community.title()}">제목</span>
-                        <span class="v10_509" th:text="${community.content()}">내용</span>
-                        <hr class="bar">
-                        <div class="blue_box"></div><span class="blue_font" th:text="|# ${community.interest()}|">#Designer</span>
-                    </div>
-                </div>
-            </th:block>
-        </div>
-    </div>
 </div>
 </div>
 </div>
 </body>
+
 </html>
