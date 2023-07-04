@@ -1,7 +1,7 @@
 package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.InviteGroupRequest;
-import com.capstone.moa.service.InviteService;
+import com.capstone.moa.service.InvitationService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
-public class InviteController {
+public class InvitationController {
 
-    private final InviteService inviteService;
+    private final InvitationService invitationService;
 
     @Operation(summary = "그룹 초대", description = "email로 회원을 검색해 그룹에 초대한다")
     @PostMapping("/invite")
     public ResponseEntity<Void> inviteToGroup(@RequestBody InviteGroupRequest request) {
-        inviteService.inviteToGroup(request);
+        invitationService.inviteToGroup(request);
         return ResponseEntity.noContent().build();
     }
 
@@ -26,7 +26,7 @@ public class InviteController {
     public ResponseEntity<Void> acceptInvite(
             @PathVariable("memberId") Long memberId,
             @PathVariable("inviteId") Long inviteId) {
-        inviteService.acceptInvite(memberId, inviteId);
+        invitationService.acceptInvite(memberId, inviteId);
         return ResponseEntity.noContent().build();
     }
 }

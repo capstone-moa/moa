@@ -2,10 +2,10 @@ package com.capstone.moa.service;
 
 import com.capstone.moa.dto.InviteGroupRequest;
 import com.capstone.moa.entity.GroupMember;
-import com.capstone.moa.entity.Invite;
+import com.capstone.moa.entity.Invitation;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.repository.GroupMemberRepository;
-import com.capstone.moa.repository.InviteRepository;
+import com.capstone.moa.repository.InvitationRepository;
 import com.capstone.moa.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,10 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class InviteService {
+public class InvitationService {
 
     private final GroupMemberRepository groupMemberRepository;
-    private final InviteRepository inviteRepository;
+    private final InvitationRepository invitationRepository;
     private final MemberRepository memberRepository;
 
     @Transactional
@@ -34,25 +34,25 @@ public class InviteService {
         if (groupMemberRepository.existsGroupMemberByGroupAndMember(leader.getGroup(), member)) {
             throw new IllegalArgumentException(request.getEmail() + " is already a GroupMember");
         }
-        if (inviteRepository.existsByGroupAndMember(leader.getGroup(), member)) {
+        if (invitationRepository.existsByGroupAndMember(leader.getGroup(), member)) {
             throw new IllegalArgumentException("Invitation already sent");
         }
 
-        inviteRepository.save(new Invite(member, leader.getGroup()));
+        invitationRepository.save(new Invitation(member, leader.getGroup()));
     }
 
     @Transactional
     public void acceptInvite(Long memberId, Long inviteId) {
-        Invite invite = inviteRepository.findById(inviteId)
-                .orElseThrow(() -> new IllegalArgumentException("Invite request not found"));
+        Invitation invitation = invitationRepository.findById(inviteId)
+                .orElseThrow(() -> new IllegalArgumentException("Invitation request not found"));
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
-        if (!Objects.equals(invite.getMember(), member)) {
+        if (!Objects.equals(invitation.getMember(), member)) {
             throw new IllegalArgumentException("It's not your invitation");
         }
-        invite.accept();
+        invitation.accept();
 
-        groupMemberRepository.save(new GroupMember(invite.getGroup(), invite.getMember(), "Member"));
+        groupMemberRepository.save(new GroupMember(invitation.getGroup(), invitation.getMember(), "Member"));
     }
 }
