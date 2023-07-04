@@ -1,28 +1,24 @@
 package com.capstone.moa.service;
 
 import com.capstone.moa.dto.CreateGroupRequest;
-import com.capstone.moa.dto.InviteGroupRequest;
 import com.capstone.moa.dto.ModifyGroupRequest;
 import com.capstone.moa.entity.Group;
 import com.capstone.moa.entity.GroupMember;
-import com.capstone.moa.entity.Invite;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.repository.GroupMemberRepository;
 import com.capstone.moa.repository.GroupRepository;
-import com.capstone.moa.repository.InviteRepository;
 import com.capstone.moa.repository.MemberRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class GroupService {
 
     private final GroupRepository groupRepository;
     private final MemberRepository memberRepository;
     private final GroupMemberRepository groupMemberRepository;
-    private final InviteRepository inviteRepository;
 
     @Transactional
     public void createGroup(CreateGroupRequest request) {
@@ -53,20 +49,6 @@ public class GroupService {
         isGroupLeader(groupLeader);
 
         groupRepository.delete(groupLeader.getGroup());
-    }
-
-    @Transactional
-    public void inviteToGroup(Long groupId, InviteGroupRequest request) {
-        GroupMember leader = checkGroupMember(groupId, request.getLeaderEmail());
-        isGroupLeader(leader);
-        Member member = memberRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
-
-        if (groupMemberRepository.existsGroupMemberByGroupAndMember(leader.getGroup(), member)) {
-            throw new IllegalArgumentException(request.getEmail() + " is already a GroupMember");
-        }
-
-        inviteRepository.save(new Invite(member, leader.getGroup()));
     }
 
     private GroupMember checkGroupMember(Long groupId, String email) {

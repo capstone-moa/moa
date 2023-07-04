@@ -26,12 +26,12 @@ public class Invite {
     private InviteStatus inviteStatus;
 
     public Invite(Member member, Group group) {
-        this(member, group, InviteStatus.REQUEST);
-    }
-
-    private Invite(Member member, Group group, InviteStatus inviteStatus) {
         this.member = member;
         this.group = group;
-        this.inviteStatus = inviteStatus;
+        this.inviteStatus = InviteStatus.REQUEST;
+    }
+
+    public void accept() {
+        this.inviteStatus = InviteStatus.ACCEPT;
     }
 }
