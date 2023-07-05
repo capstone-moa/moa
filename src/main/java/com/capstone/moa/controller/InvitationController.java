@@ -1,11 +1,14 @@
 package com.capstone.moa.controller;
 
+import com.capstone.moa.dto.FindInvitationResponse;
 import com.capstone.moa.dto.InviteGroupRequest;
 import com.capstone.moa.service.InvitationService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -28,5 +31,11 @@ public class InvitationController {
             @PathVariable("inviteId") Long inviteId) {
         invitationService.acceptInvite(memberId, inviteId);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "회원이 받은 초대 요청 목록 조회")
+    @GetMapping("/my-page/{memberId}/group")
+    public ResponseEntity<List<FindInvitationResponse>> findInvitationsByMember(@PathVariable("memberId") Long memberId) {
+        return ResponseEntity.ok(invitationService.findInvitationsByMember(memberId));
     }
 }

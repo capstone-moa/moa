@@ -29,6 +29,9 @@ public class Group extends BaseTimeEntity {
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<GroupMember> groupMembers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    private List<Invitation> invitations = new ArrayList<>();
+
     public Group(String name, String interest, String introduce) {
         this(name, Interest.find(interest), introduce);
     }

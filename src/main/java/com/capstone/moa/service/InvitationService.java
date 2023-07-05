@@ -1,8 +1,10 @@
 package com.capstone.moa.service;
 
+import com.capstone.moa.dto.FindInvitationResponse;
 import com.capstone.moa.dto.InviteGroupRequest;
 import com.capstone.moa.entity.GroupMember;
 import com.capstone.moa.entity.Invitation;
+import com.capstone.moa.entity.InviteStatus;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.repository.GroupMemberRepository;
 import com.capstone.moa.repository.InvitationRepository;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -54,5 +57,16 @@ public class InvitationService {
         invitation.accept();
 
         groupMemberRepository.save(new GroupMember(invitation.getGroup(), invitation.getMember(), "Member"));
+    }
+
+    @Transactional(readOnly = true)
+    public List<FindInvitationResponse> findInvitationsByMember(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+        return invitationRepository.findAllByMemberAndInviteStatus(member, InviteStatus.REQUEST)
+                .stream()
+                .map(FindInvitationResponse::from)
+                .toList();
     }
 }
