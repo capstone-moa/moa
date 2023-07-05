@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Invite {
+public class Invitation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,13 +25,21 @@ public class Invite {
     @Enumerated(EnumType.STRING)
     private InviteStatus inviteStatus;
 
-    public Invite(Member member, Group group) {
-        this(member, group, InviteStatus.REQUEST);
-    }
-
-    private Invite(Member member, Group group, InviteStatus inviteStatus) {
+    public Invitation(Member member, Group group) {
         this.member = member;
         this.group = group;
-        this.inviteStatus = inviteStatus;
+        this.inviteStatus = InviteStatus.REQUEST;
+    }
+
+    public void accept() {
+        if (this.inviteStatus.equals(InviteStatus.REQUEST)) {
+            this.inviteStatus = InviteStatus.ACCEPT;
+        }
+    }
+
+    public void reject() {
+        if (this.inviteStatus.equals(InviteStatus.REQUEST)) {
+            this.inviteStatus = InviteStatus.REJECT;
+        }
     }
 }
