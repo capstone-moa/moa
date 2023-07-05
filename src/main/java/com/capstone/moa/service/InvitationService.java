@@ -48,15 +48,23 @@ public class InvitationService {
     public void acceptInvite(Long memberId, Long inviteId) {
         Invitation invitation = invitationRepository.findById(inviteId)
                 .orElseThrow(() -> new IllegalArgumentException("Invitation request not found"));
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
-
-        if (!Objects.equals(invitation.getMember(), member)) {
+        if (!Objects.equals(invitation.getMember().getId(), memberId)) {
             throw new IllegalArgumentException("It's not your invitation");
         }
-        invitation.accept();
 
+        invitation.accept();
         groupMemberRepository.save(new GroupMember(invitation.getGroup(), invitation.getMember(), "Member"));
+    }
+
+    @Transactional
+    public void rejectInvite(Long memberId, Long inviteId) {
+        Invitation invitation = invitationRepository.findById(inviteId)
+                .orElseThrow(() -> new IllegalArgumentException("Invitation request not found"));
+        if (!Objects.equals(invitation.getMember().getId(), memberId)) {
+            throw new IllegalArgumentException("It's not your invitation");
+        }
+
+        invitation.reject();
     }
 
     @Transactional(readOnly = true)
@@ -69,4 +77,5 @@ public class InvitationService {
                 .map(FindInvitationResponse::from)
                 .toList();
     }
+
 }

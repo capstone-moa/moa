@@ -32,6 +32,14 @@ public class Invitation {
     }
 
     public void accept() {
-        this.inviteStatus = InviteStatus.ACCEPT;
+        if (this.inviteStatus.equals(InviteStatus.REQUEST)) {
+            this.inviteStatus = InviteStatus.ACCEPT;
+        }
+    }
+
+    public void reject() {
+        if (this.inviteStatus.equals(InviteStatus.REQUEST)) {
+            this.inviteStatus = InviteStatus.REJECT;
+        }
     }
 }

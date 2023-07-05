@@ -25,11 +25,20 @@ public class InvitationController {
     }
 
     @Operation(summary = "그룹 초대 요청 수락")
-    @PostMapping("/my-page/{memberId}/group/{inviteId}")
+    @PatchMapping("/my-page/{memberId}/group/{inviteId}/accept")
     public ResponseEntity<Void> acceptInvite(
             @PathVariable("memberId") Long memberId,
             @PathVariable("inviteId") Long inviteId) {
         invitationService.acceptInvite(memberId, inviteId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "그룹 초대 요청 거절")
+    @PatchMapping("/my-page/{memberId}/group/{inviteId}/reject")
+    public ResponseEntity<Void> rejectInvite(
+            @PathVariable("memberId") Long memberId,
+            @PathVariable("inviteId") Long inviteId) {
+        invitationService.rejectInvite(memberId, inviteId);
         return ResponseEntity.noContent().build();
     }
 
