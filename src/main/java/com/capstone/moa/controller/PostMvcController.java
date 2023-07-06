@@ -1,22 +1,18 @@
 package com.capstone.moa.controller;
 
+import com.capstone.moa.dto.FindPostWithCommentsResponse;
 import com.capstone.moa.dto.FindPostsResponse;
 import com.capstone.moa.dto.WritePostRequest;
 import com.capstone.moa.entity.Interest;
 import com.capstone.moa.service.PostService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/posts")
-@Slf4j
 public class PostMvcController {
 
     private final PostService postService;
@@ -64,4 +60,10 @@ public class PostMvcController {
         return Interest.values();
     }
 
+    @GetMapping("/{postId}")
+    public String findPostDetailById(@PathVariable("postId") Long postId, Model model) {
+        FindPostWithCommentsResponse postDetail = postService.findPostWithCommentsByPostId(postId);
+        model.addAttribute("postDetail", postDetail);
+        return "post/view";
+    }
 }
