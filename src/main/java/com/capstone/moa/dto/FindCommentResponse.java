@@ -2,11 +2,11 @@ package com.capstone.moa.dto;
 
 import com.capstone.moa.entity.Comment;
 
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public record FindCommentResponse(
         Long commentId, String content, String memberName,
-        LocalDateTime createdAt
+        String createdDateTime
 
 ) {
     public static FindCommentResponse from(Comment comment) {
@@ -14,7 +14,7 @@ public record FindCommentResponse(
                 comment.getId(),
                 comment.getContent(),
                 comment.getMember().getName(),
-                comment.getCreatedDateTime()
+                comment.getCreatedDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         );
 
     }

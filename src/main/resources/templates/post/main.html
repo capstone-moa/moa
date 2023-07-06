@@ -49,7 +49,7 @@
         <th:block th:each="community : ${communityPosts}">
             <div class="v10_162">
                 <div class="white_box"></div>
-                <div class="v10_165"><span class="v10_166" th:text="${community.memberName()}">아이디</span><span class="v10_167" th:text="${community.memberJob()}">직업</span><span class="v10_2226" th:text="${community.createdAt()}">작성일</span>
+                <div class="v10_165"><span class="v10_166" th:text="${community.memberName()}">아이디</span><span class="v10_167" th:text="${community.memberJob()}">직업</span><span class="v10_2226" th:text="${community.createdDateTime()}">작성일</span>
                     <div class="profile_image_168"></div>
                 </div>
                 <div class="v10_249">
@@ -57,7 +57,7 @@
                     <div class="v10_251"></div>
                     <div class="v10_252"></div>
                 </div>
-                <span class="v10_164" th:text="${community.title()}">제목</span>
+                <span class="v10_164" th:text="${community.title()}" th:onclick="|location.href='@{/posts/{postId}(postId=${community.postId()})}'|">제목</span>
                 <hr class="bar">
                 <div class="blue_box"></div>
                 <span class="blue_font" th:text="|#${community.interest()}|">#JAVA</span>
@@ -82,7 +82,7 @@
         <th:block th:each="recruit : ${recruitPosts}">
             <div class="v10_162">
                 <div class="white_box"></div>
-                <div class="v10_165"><span class="v10_166" th:text="${recruit.memberName()}">아이디</span><span class="v10_167" th:text="${recruit.memberJob()}">iOS developer</span><span class="v10_2226" th:text="${recruit.createdAt()}">작성일</span>
+                <div class="v10_165"><span class="v10_166" th:text="${recruit.memberName()}">아이디</span><span class="v10_167" th:text="${recruit.memberJob()}">iOS developer</span><span class="v10_2226" th:text="${recruit.createdDateTime()}">작성일</span>
                     <div class="profile_image_247"></div>
                 </div>
                 <div class="v10_249">
@@ -90,7 +90,7 @@
                     <div class="v10_251"></div>
                     <div class="v10_252"></div>
                 </div>
-                <span class="v10_243" th:text="${recruit.title()}">제목</span>
+                <span class="v10_243" th:text="${recruit.title()}" th:onclick="|location.href='@{/posts/{postId}(postId=${recruit.postId()})}'|">제목</span>
                 <hr class="bar">
                 <div class="blue_box"></div>
                 <span class="blue_font" th:text="|#${recruit.interest()}|">#JAVA</span>

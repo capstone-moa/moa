@@ -38,15 +38,15 @@
         <div class="v104_2505">
             <!-- 게시물 메인 -->
 
-            <span class="view_title">대학생 인지과학 관련 스터디 모집 D-1</span>
-            <textarea class="view_text" cols="33" placeholder="안녕하세요. 뇌과학과 심리학을 공부하는 뇌트워크 입니다. 인지과학, 인공지능 등 동아리의 관련 분야에 대하여 관심만 있다면 자유로운 활동이 가능하며 배경지식이 부족하다면 기초부터 쌓아가시면 됩니다. 단순히 공부만 하는 동아리가 아니라 시각디자인, 마케팅, 스포츠의학, 교육학, AI산업 등 다양한 분야에 적용이 가능하도록 지식을 교류하고 대외활동을 통해 많은 경험을 쌓는 것이 목표입니다. 세미나 청강, 독서활동과 같은 가벼운 활동부터 시작해 관심분야를 찾고 진로를 탐색하셔도 좋습니다. 또한 매달 사회동향이나 논문등을 조사해 소개하는 홍보팀의 매거진 활동, 대외 활동 등 다양한 컨텐츠가 있습니다." readonly></textarea>
+            <span class="view_title" th:text="${postDetail.title()}">제목</span>
+            <textarea class="view_text" cols="33" th:text="${postDetail.content()}" readonly>내용</textarea>
             <div class="v104_2678">
-                <span class="v104_2679">#JAVA</span>
+                <span class="v104_2679" th:text="|#${postDetail.interest()}|">#JAVA</span>
             </div>
             <div class="writer_profile">
-                <span class="v104_2511">Theresa Steward</span>
-                <span class="v104_2512">iOS developer</span>
-                <span class="v104_2676">2023.06-18 10:23</span>
+                <span class="v104_2511" th:text="${postDetail.memberName()}">작성자 이름</span>
+                <span class="v104_2512" th:text="${postDetail.memberJob()}">작성자 직업</span>
+                <span class="v104_2676" th:text="${postDetail.createdDateTime()}">작성일</span>
                 <div class="writer_image"></div>
             </div>
             <form>
@@ -61,10 +61,10 @@
                         </div>
                     </div>
                     <!-- 댓글 조회1 -->
-                    <div>
-                        <p><textarea class="v104_2689" placeholder="관심있습니다 연락주세요" readonly></textarea></p>
-                        <span class="v104_2690">2023.06-18 10:23</span>
-                        <span class="v104_2691">닉네임1</span>
+                    <div th:each="comment : ${postDetail.comments()}">
+                        <p><textarea class="v104_2689" th:text="${comment.content()}" readonly></textarea></p>
+                        <span class="v104_2690" th:text="${comment.createdDateTime()}">댓글 작성일</span>
+                        <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
                         <div class="comment_profile_image1"></div>
                     </div>
                 </div>
