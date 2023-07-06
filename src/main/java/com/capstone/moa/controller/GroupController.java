@@ -1,6 +1,7 @@
 package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.CreateGroupRequest;
+import com.capstone.moa.dto.GroupIntroResponse;
 import com.capstone.moa.dto.ModifyGroupRequest;
 import com.capstone.moa.service.GroupService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,5 +37,11 @@ public class GroupController {
     public ResponseEntity<Void> deleteGroup(@PathVariable("groupId") Long groupId, @RequestBody Map<String, String> email) {
         groupService.deleteGroup(groupId, email.get("email"));
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "그룹 소개 페이지 조회")
+    @GetMapping("/{groupId}")
+    public ResponseEntity<GroupIntroResponse> findGroupById(@PathVariable("groupId") Long groupId) {
+        return ResponseEntity.ok(groupService.findGroupById(groupId));
     }
 }

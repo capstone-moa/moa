@@ -1,6 +1,7 @@
 package com.capstone.moa.service;
 
 import com.capstone.moa.dto.CreateGroupRequest;
+import com.capstone.moa.dto.GroupIntroResponse;
 import com.capstone.moa.dto.ModifyGroupRequest;
 import com.capstone.moa.entity.Group;
 import com.capstone.moa.entity.GroupMember;
@@ -49,6 +50,14 @@ public class GroupService {
         isGroupLeader(groupLeader);
 
         groupRepository.delete(groupLeader.getGroup());
+    }
+
+    @Transactional(readOnly = true)
+    public GroupIntroResponse findGroupById(Long groupId) {
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(() -> new IllegalArgumentException("Group not found"));
+
+        return GroupIntroResponse.from(group);
     }
 
     private GroupMember checkGroupMember(Long groupId, String email) {
