@@ -12,4 +12,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllByInterest(Interest interest);
 
     List<Post> findAllByPostType(PostType postType);
+
+    List<Post> findAllByPostTypeAndInterest(PostType postType, Interest interest);
 }

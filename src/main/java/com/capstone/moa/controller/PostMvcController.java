@@ -17,29 +17,35 @@ public class PostMvcController {
 
     private final PostService postService;
     private final String COMMUNITY = "COMMUNITY";
-    private final String RECRUIT = "RECRUIT";
+    private final String TEAM = "TEAM";
 
     @GetMapping
     public String findAllPosts(Model model) {
         FindPostsResponse communityList = postService.findPostsByPostType(COMMUNITY);
-        FindPostsResponse recruitList = postService.findPostsByPostType(RECRUIT);
+        FindPostsResponse teamList = postService.findPostsByPostType(TEAM);
         model.addAttribute("communityPosts", communityList.posts());
-        model.addAttribute("recruitPosts", recruitList.posts());
+        model.addAttribute("teamPosts", teamList.posts());
 
         return "post/main";
     }
 
     @GetMapping("/community")
-    public String communityList(Model model) {
+    public String communityList(@RequestParam(value = "interest", required = false) String interest, Model model) {
         FindPostsResponse communityList = postService.findPostsByPostType(COMMUNITY);
+        if (interest != null) {
+            communityList = postService.findPostsByPostTypeAndInterest(COMMUNITY, interest);
+        }
         model.addAttribute("communityPosts", communityList.posts());
         return "post/community";
     }
 
     @GetMapping("/team")
-    public String teamRecruitList(Model model) {
-        FindPostsResponse recruitPosts = postService.findPostsByPostType(RECRUIT);
-        model.addAttribute("recruitPosts", recruitPosts.posts());
+    public String teamRecruitList(@RequestParam(value = "interest", required = false) String interest, Model model) {
+        FindPostsResponse teamPosts = postService.findPostsByPostType(TEAM);
+        if (interest != null) {
+            teamPosts = postService.findPostsByPostTypeAndInterest(TEAM, interest);
+        }
+        model.addAttribute("teamPosts", teamPosts.posts());
         return "post/team";
     }
 

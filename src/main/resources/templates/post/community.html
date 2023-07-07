@@ -36,11 +36,13 @@
 
     <!--좌측 네비게이션 바-->
     <div class="category">
-        <button type="button" class="v10_582" onclick="" th:each="interest : ${interests}">
-            <span class="v10_584" th:text="${interest.name()}"></span>
+        <th:block th:each="interest : ${interests}">
+        <button type="button" class="v10_582" th:onclick="|location.href='@{/posts/community(interest=${interest})}'|" >
+            <span class="v10_584" th:text="${interest.name()}" ></span>
             <div class="hashtag"></div>
             <hr class="nav_role">
         </button>
+        </th:block>
     </div>
 
     <!--게시판 메인-->

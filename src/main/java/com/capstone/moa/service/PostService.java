@@ -60,6 +60,17 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
+    public FindPostsResponse findPostsByPostTypeAndInterest(String postType, String interest) {
+        PostType selectedPostType = PostType.find(postType);
+        Interest selectedInterest = Interest.find(interest);
+        List<FindPostResponse> posts = postRepository.findAllByPostTypeAndInterest(selectedPostType, selectedInterest)
+                .stream()
+                .map(FindPostResponse::from)
+                .toList();
+        return new FindPostsResponse(posts);
+    }
+
+    @Transactional(readOnly = true)
     public FindPostResponse findPostById(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("Post not found"));

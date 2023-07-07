@@ -3,7 +3,7 @@ package com.capstone.moa.entity;
 public enum PostType {
 
     COMMUNITY,
-    RECRUIT;
+    TEAM;
 
     public static PostType find(String postType) {
         return PostType.valueOf(postType.toUpperCase());
