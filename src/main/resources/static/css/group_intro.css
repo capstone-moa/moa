@@ -602,7 +602,7 @@ hr.nav_role{
 }
 .interest_intro {
   width: 740px;
-  height: 120px;
+  height: 100px;
   background: rgba(255,255,255,1);
   border: 1px solid rgba(2,117,177,1);
   border-top-left-radius: 4px;
@@ -799,7 +799,7 @@ hr.nav_role{
   color: rgba(24,24,24,1);
   position: relative;
   top: 29px;
-  left: 38px;
+  left: 10px;
   font-family: NanumGothic;
   font-weight: normal;
   font-size: 12px;

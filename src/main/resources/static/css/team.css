@@ -200,7 +200,7 @@ input {
   width: 100%;
   height: 1214px;
   position: relative;
-  left: 64px;
+  left: 384px;
   overflow: hidden;
 }
 
@@ -211,7 +211,7 @@ input {
   opacity: 1;
   position: relative;
   top: 53px;
-  left: 360px;
+  left: 40px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -292,9 +292,10 @@ select::-ms-expand {
   opacity: 1;
   position: absolute;
   top: 200px;
-  left: 720px;
+  left: 410px;
   overflow: hidden;
 }
+
 
 .v10_501 {
   width: 860px;
@@ -302,7 +303,7 @@ select::-ms-expand {
   opacity: 1;
   position: absolute;
   top: 260px;
-  left: 360px;
+  left: 40px;
   overflow: hidden;
 }
 
