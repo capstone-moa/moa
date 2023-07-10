@@ -2,7 +2,8 @@ package com.capstone.moa.service;
 
 import com.capstone.moa.dto.CreateGroupRequest;
 import com.capstone.moa.dto.GroupIntroResponse;
-import com.capstone.moa.dto.ModifyGroupRequest;
+import com.capstone.moa.dto.ModifyGroupInfoRequest;
+import com.capstone.moa.dto.ModifyGroupIntroRequest;
 import com.capstone.moa.entity.Group;
 import com.capstone.moa.entity.GroupMember;
 import com.capstone.moa.entity.Member;
@@ -37,11 +38,19 @@ public class GroupService {
     }
 
     @Transactional
-    public void modifyGroup(Long groupId, ModifyGroupRequest request) {
+    public void modifyGroupInfo(Long groupId, ModifyGroupInfoRequest request) {
         GroupMember groupLeader = checkGroupMember(groupId, request.getEmail());
         isGroupLeader(groupLeader);
 
-        groupLeader.getGroup().modify(request.getGroupName(), request.getInterest(), request.getIntroduce());
+        groupLeader.getGroup().modifyGroupInfo(request.getIntroduce());
+    }
+
+    @Transactional
+    public void modifyGroupIntro(Long groupId, ModifyGroupIntroRequest request) {
+        GroupMember groupLeader = checkGroupMember(groupId, request.getEmail());
+        isGroupLeader(groupLeader);
+
+        groupLeader.getGroup().modifyGroupIntro(request.getInterest(), request.getProjectDescription(), request.getSkills());
     }
 
     @Transactional
