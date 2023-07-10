@@ -88,7 +88,8 @@
             <!-----------그룹 소개------------>
 
             <div class="v10_780">
-                <button class="v10_777_intro" th:onclick="|location.href='@{/group/intro/modify/1'|">그룹소개 수정</button>
+                <span class="v10_777_intro" th:onclick="|location.href='@{/group/intro/modify/{groupId}(groupId=${groupIntro.id()})}'|">그룹소개 수정</span>
+
                 <!-----------그룹 주소------------>
                 <div class="interest_intro">
                     <div class="github_image_intro"></div>

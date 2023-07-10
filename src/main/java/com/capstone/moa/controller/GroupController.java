@@ -34,7 +34,7 @@ public class GroupController {
     }
 
     @Operation(summary = "그룹 소개 수정")
-    @PutMapping("/{groupId}/intro")
+    @PutMapping("/intro/modify/{groupId}")
     public ResponseEntity<Void> modifyGroupIntro(@PathVariable("groupId") Long groupId, @RequestBody ModifyGroupIntroRequest request) {
         groupService.modifyGroupIntro(groupId, request);
         return ResponseEntity.noContent().build();
