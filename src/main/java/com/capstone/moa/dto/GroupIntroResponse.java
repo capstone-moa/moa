@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record GroupIntroResponse(
-        Long id, String name, String interest, String introduce,
-        List<FindGroupMemberResponse> groupMembers
+        Long id, String name, String interest, String introduce, String projectDescription,
+        String skills, List<FindGroupMemberResponse> groupMembers
 ) {
     public static GroupIntroResponse from(Group group) {
         return new GroupIntroResponse(
@@ -15,6 +15,8 @@ public record GroupIntroResponse(
                 group.getName(),
                 group.getInterest().name(),
                 group.getIntroduce(),
+                group.getProjectDescription(),
+                group.getSkills(),
                 group.getGroupMembers()
                         .stream()
                         .map(FindGroupMemberResponse::from)
