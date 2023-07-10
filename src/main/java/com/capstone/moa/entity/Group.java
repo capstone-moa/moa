@@ -26,6 +26,14 @@ public class Group extends BaseTimeEntity {
     @Lob
     private String introduce;
 
+    @Lob
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    private String projectDescription;
+
+    @Lob
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    private String skills;
+
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<GroupMember> groupMembers = new ArrayList<>();
 
@@ -46,9 +54,13 @@ public class Group extends BaseTimeEntity {
         this.groupMembers.add(groupMember);
     }
 
-    public void modify(String name, String interest, String introduce) {
-        this.name = name;
-        this.interest = Interest.find(interest);
+    public void modifyGroupInfo(String introduce) {
         this.introduce = introduce;
+    }
+
+    public void modifyGroupIntro(String interest, String projectDescription, String skills) {
+        this.interest = Interest.find(interest);
+        this.projectDescription = projectDescription;
+        this.skills = skills;
     }
 }

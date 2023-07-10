@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link href="/css/group_intro_modify.css" rel="stylesheet"/>
+    <title>group_intro_modify</title>
+</head>
+
+<body>
+<div class="v10_483">
+    <!--로그인 한 헤더-->
+    <div class="header_bar">
+        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+        <div class='v-line'></div>
+        <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
+        <span class="nav_text_community">커뮤니티</span>
+        <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
+        <span class="nav_text_team">팀원모집</span>
+        <div class="search">
+            <input type="text" placeholder="검색어 입력">
+            <button type="button" onclick="" class="img_search">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+        <div class="v10_2253" th:onclick="|location.href='@{/posts/mypage_activity}'|">
+            <div class="header_profile_image"></div>
+            <span class="header_profile_name">hong kildong</span>
+        </div>
+        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+    </div>
+
+    <!--좌측 네비게이션 바-->
+    <div class="category">
+        <button type="button" class="v10_582" onclick="">
+            <span class="v10_584">마이페이지</span>
+            <div class="hashtag"></div>
+            <hr class="nav_role">
+        </button>
+        <button type="button" class="v10_582" onclick="">
+            <span class="v10_584">그룹관리</span>
+            <div class="hashtag"></div>
+            <hr class="nav_role">
+        </button>
+        <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
+        <button type="button" class="v10_582" onclick="" th:each="interest : ${interests}">
+            <span class="v10_584" th:text="${interest.name()}">MOA</span>
+            <hr class="nav_role">
+        </button>
+    </div>
+
+    <!--그룹페이지 메인 소개-->
+    <form th:object="${modifyGroupIntroRequest}" th:method="put">
+        <div class="grouppage_intro">
+            <div class="v10_762">
+                <div class="back_image"></div>
+                <div class="profile_image"></div>
+                <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
+                <span class="profile_intro" th:text="${groupIntro.introduce()}">개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게
+                        진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!</span>
+                <div class="interest">
+                    <div class="github_image"></div>
+                    <span class="v10_769">GitHub : <span>https://github.com/capstone-moa</span></span>
+                    <span class="v10_770">Interest : </span>
+                    <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span></div>
+                </div>
+                <div class="v10_775">
+                    <div class="v10_779"></div>
+                    <span class="mypage_location">경기도, 오산</span>
+                    <button class="v10_777">그룹정보 수정</button>
+                </div>
+            </div>
+
+            <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
+            <div class="v10_796">
+                <div class="middle_category1" th:onclick="|location.href='@{/posts/group_intro}'|"><span
+                        class="text_white">그룹소개</span></div>
+                <div class="middle_category2" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">공지사항</span>
+                </div>
+                <div class="middle_category3" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">프로젝트 관리</span>
+                </div>
+                <div class="middle_category4" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">일정관리</span>
+                </div>
+                <div class="middle_category5" th:onclick="|location.href='@{/posts/group}'|"><span
+                        class="text_black">이슈</span></div>
+            </div>
+
+            <!-----------그룹 소개------------>
+
+            <div class="v10_780">
+                <!-----------내용 수정하면 이거 버튼 누르면 저장되게 만들 예정...!----------->
+                <button class="v10_777_intro">그룹소개 수정</button>
+                <!-----------그룹 주소------------>
+                <div class="interest_intro">
+                    <div class="github_image_intro"></div>
+                    <div class="v10_769_intro">GitHub : <input class="blue"
+                                                               placeholder="https://github.com/capstone-moa"
+                                                               size="30px"></div>
+                    <span class="v10_769_intro">Interest : </span>
+                    <div class="v10_771_intro">
+                        <select name="interest" class="v10_494" id="tag" th:field="*{interest}">
+                            <option value="">관심사 선택</option>
+                            <option th:each="interest : ${interests}" th:value="${interest.name()}"
+                                    th:text="${interest.name()}"></option>
+                        </select>
+                    </div>
+                    <div class="notion_image_intro"></div>
+                    <div class="v10_770_intro">Notion : <input class="blue"
+                                                               placeholder="https://notion.com/capstone-moa"
+                                                               size="30px"></div>
+                    <div class="v10_770_intro">Email : <input class="blue" placeholder="moa_backend@gmail.com"
+                                                              size="30px"></div>
+                </div>
+
+                <!-----------그룹 주제(글자수 제한)------------>
+                <div class="title_intro">
+                    <h2 class="v10_782">프로젝트 소개</h2>
+                    <textarea name="projectDescription" class="v10_783" th:text="${groupIntro.projectDescription()}" required>개발자들을 연결시켜 공모전개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!!</textarea>
+                </div>
+                <div class="skill_intro">
+                    <h2 class="v10_782">적용 기술</h2>
+                    <textarea name="skills" class="v10_784" th:text="${groupIntro.skills()}"></textarea>
+                </div>
+
+                <textarea th:field="*{email}" required></textarea>
+
+                <!-----------그룹원 소개------------>
+                <div class="v10_501">
+                    <span class="v10_782">그룹원 소개</span>
+                    <!-----------그룹원 한세트(두명)------------>
+                    <th:block th:each="groupmember, i : ${groupIntro.groupMembers()}">
+                        <div th:class="${i.odd}? 'v10_506' : 'v10_510'" class="v10_506">
+                            <span class="v10_507" th:text="${groupmember.email()}">아이디1</span>
+                            <span class="v10_508" th:text="${groupmember.job()}">직업</span>
+                            <div class="profile_image_509"></div>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

@@ -7,10 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ModifyGroupRequest {
+public class ModifyGroupIntroRequest {
 
     private String email;
-    private String groupName;
-    private String Interest;
-    private String introduce;
+    private String interest;
+    private String projectDescription;
+    private String skills;
 }
