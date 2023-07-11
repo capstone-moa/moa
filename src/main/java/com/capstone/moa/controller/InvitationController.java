@@ -47,4 +47,14 @@ public class InvitationController {
     public ResponseEntity<List<FindInvitationResponse>> findInvitationsByMember(@PathVariable("memberId") Long memberId) {
         return ResponseEntity.ok(invitationService.findInvitationsByMember(memberId));
     }
+
+    @Operation(summary = "그룹 멤버 퇴출")
+    @DeleteMapping("/my-page/{leaderId}/group/{inviteId}/{memberId}")
+    public ResponseEntity<Void> removeGroupMember(
+            @PathVariable("leaderId") Long leaderId,
+            @PathVariable("memberId") Long memberId,
+            @PathVariable("inviteId") Long inviteId) {
+        invitationService.removeGroupMember(leaderId, memberId, inviteId);
+        return ResponseEntity.noContent().build();
+    }
 }
