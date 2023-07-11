@@ -67,6 +67,27 @@ public class InvitationService {
         invitation.reject();
     }
 
+    @Transactional
+    public void removeGroupMember(Long leaderId, Long memberId, Long inviteId) {
+        Invitation invitation = invitationRepository.findById(inviteId)
+                .orElseThrow(() -> new IllegalArgumentException("Invitation request not found"));
+
+        GroupMember leader = groupMemberRepository.findById(leaderId)
+                .orElseThrow(() -> new IllegalArgumentException("GroupMember Not found"));
+        if (!leader.isGroupLeader()) {
+            throw new IllegalArgumentException("You are not the leader of this group");
+        }
+        GroupMember member = groupMemberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("GroupMember Not found"));
+
+        if (!Objects.equals(invitation.getMember().getId(), member.getMember().getId())) {
+            throw new IllegalArgumentException("Wrong invitation");
+        }
+
+        invitation.remove();
+        groupMemberRepository.delete(member);
+    }
+
     @Transactional(readOnly = true)
     public List<FindInvitationResponse> findInvitationsByMember(Long memberId) {
         Member member = memberRepository.findById(memberId)

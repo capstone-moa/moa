@@ -5,6 +5,7 @@ public enum InviteStatus {
     REQUEST,
     REJECT,
     ACCEPT,
+    REMOVE
     ;
 
     public static InviteStatus find(String inviteStatus) {
