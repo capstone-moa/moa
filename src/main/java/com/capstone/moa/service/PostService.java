@@ -71,12 +71,24 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
+    public FindPostsResponse findPostsByMember(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+        List<FindPostResponse> posts = postRepository.findAllByMember(member)
+                .stream()
+                .map(FindPostResponse::from)
+                .toList();
+        return new FindPostsResponse(posts);
+    }
+
+    @Transactional(readOnly = true)
     public FindPostResponse findPostById(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
         return FindPostResponse.from(post);
     }
+
 
     @Transactional(readOnly = true)
     public FindPostWithCommentsResponse findPostWithCommentsByPostId(Long postId) {
