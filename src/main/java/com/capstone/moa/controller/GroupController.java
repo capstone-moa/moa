@@ -1,15 +1,13 @@
 package com.capstone.moa.controller;
 
-import com.capstone.moa.dto.CreateGroupRequest;
-import com.capstone.moa.dto.GroupIntroResponse;
-import com.capstone.moa.dto.ModifyGroupInfoRequest;
-import com.capstone.moa.dto.ModifyGroupIntroRequest;
+import com.capstone.moa.dto.*;
 import com.capstone.moa.service.GroupService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -51,5 +49,11 @@ public class GroupController {
     @GetMapping("/{groupId}/intro")
     public ResponseEntity<GroupIntroResponse> findGroupById(@PathVariable("groupId") Long groupId) {
         return ResponseEntity.ok(groupService.findGroupById(groupId));
+    }
+
+    @Operation(summary = "멤버 별 가입한 그룹 목록 조회")
+    @GetMapping("/my-page/{memberId}")
+    public ResponseEntity<List<FindGroupByMemberIdResponse>> findGroupsByMember(@PathVariable("memberId") Long memberId) {
+        return ResponseEntity.ok(groupService.findGroupsByMemberId(memberId));
     }
 }
