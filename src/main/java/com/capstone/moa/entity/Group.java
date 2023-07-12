@@ -27,11 +27,11 @@ public class Group extends BaseTimeEntity {
     private String introduce;
 
     @Lob
-    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String projectDescription;
 
     @Lob
-    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "LONGTEXT")
     private String skills;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
