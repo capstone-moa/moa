@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
@@ -12,15 +12,15 @@
     /*그룹 생성 결과값 받는 건 바꿔야함*/
     function group_create_function() {
         let text;
-        let person = prompt("만들 그룹명을 입력해주세요");
+        let groupName = prompt("만들 그룹명을 입력해주세요");
         let intro = prompt("간단한 그룹 소개글을 입력해주세요");
         let inter = prompt("그룹 관심사를 선택해주세요");
 
-        if (person == null || person == "") {
+        if (groupName == null || groupName === "") {
             text = "그룹명을 입력하지 않으셨습니다 :<";
         }
         else {
-            text = "그룹명 : " + person + "이/가 생성되었습니다 :)";
+            text = "그룹명 : " + groupName + "이/가 생성되었습니다 :)";
         }
         document.getElementById("test").innerHTML = text;
     }
@@ -29,7 +29,7 @@
         let text;
         let person = confirm("정말 그룹을 삭제하시겠습니까?");
 
-        if (isFemale == true){
+        if (isFemale === true){
             alert ("그룹이 삭제되었습니다.")
         }
         document.getElementById("test").innerHTML = text;
@@ -72,8 +72,8 @@
             <hr class="nav_role">
         </button>
         <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
-        <button type="button" class="v10_582" onclick="" th:each="interest : ${interests}">
-            <span class="v10_584" th:text="${interest.name()}"></span>
+        <button type="button" class="v10_582" th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${group.groupId()})}'|" th:each="group : ${groups}">
+            <span class="v10_584" th:text="${group.groupName()}"></span>
             <hr class="nav_role">
         </button>
     </div>
@@ -84,7 +84,7 @@
             <div class="v10_762">
                 <div class="back_image"></div>
                 <div class="profile_image"></div>
-                <span class="profile_name_font">hongkildong</span>
+                <span class="profile_name_font" th:text="${member.name()}">hongkildong</span>
                 <span class="profile_intro">백엔드 개발자로 취업 희망 중인 취준생 입니다!
                     웹 프로그래밍에 관심이 있으며 이커백엔드 개발자로 취업 희망 중인 취준생 입니다!
                     웹 프로그래밍에 관심이 있으며 이백엔드 개발자로 취업 희망 중인 취준생 입니다!
@@ -94,7 +94,7 @@
                     <div class="github_image"></div>
                     <span class="v10_769">GitHub : <span>github.com/hongkildong</span></span>
                     <span class="v10_770">Interest : </span>
-                    <div class="v10_771"><span class="v10_772">#web</span></div>
+                    <div class="v10_771"><span class="v10_772" th:text="|# ${member.interest()}|">#web</span></div>
                 </div>
                 <div class="v10_775">
                     <div class="v10_779"></div>
@@ -107,8 +107,8 @@
 
             <!--마이페이지 중간 카테고리 -------주소 바꿔야함-------->
             <div class="v10_796">
-                <div class="v10_798" th:onclick="|location.href='@{/posts/mypage_activity}'|"><span class="text_black">활동</span></div>
-                <div class="v10_800" th:onclick="|location.href='@{/posts/mypage_group}'|"><span class="text_white">그룹 관리</span></div>
+                <div class="v10_798" th:onclick="|location.href='@{/member/mypage/{memberId}/activity(memberId=${member.id()})}'|"><span class="text_black">활동</span></div>
+                <div class="v10_800" th:onclick="|location.href='@{/member/mypage/{memberId}/group(memberId=${member.id()})}'|"><span class="text_white">그룹 관리</span></div>
             </div>
 
             <!-----------그룹 관리------------>
@@ -119,43 +119,29 @@
                 </div>
 
                 <div class="v10_501">
-                    <th:block th:each="">
+                    <th:block th:each="group : ${groups}">
                         <!------그룹 한개------>
                         <!--그룹명-->
-                        <p class="h-line">MOA</p>
+                        <p class="h-line" th:text="${group.groupName()}">MOA</p>
                         <div class="group_delete">
                             <button type="button" class="group_delete_box" onclick="group_delete_function()"><span class="name_login">그룹 삭제</span></button>
                         </div>
 
                         <!--그룹원 한명-->
-                        <div class="v10_502">
+                        <div class="v10_502" th:each="groupMember : ${group.groupMembers()}">
                             <div class="white_box">
                                 <div class="v10_506">
-                                    <span class="v10_507" th:text="${community.memberName()}">SEMI</span>
-                                    <span class="v10_508" th:text="${community.memberJob()}">Designer</span>
+                                    <span class="v10_507" th:text="${groupMember.email()}">SEMI</span>
+                                    <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
                                     <div class="profile_image_509"></div>
                                     <div class="v10_22">
                                         <button type="button" class="login_border"><span class="name_login">추방</span></button>
                                     </div>
-                                    <span class="blue_font" th:text="|# ${community.interest()}|">#Interest</span>
+                                    <span class="blue_font" >#Interest</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!--그룹원 한명2-->
-                        <div class="v10_502">
-                            <div class="white_box">
-                                <div class="v10_506">
-                                    <span class="v10_507" th:text="${community.memberName()}">SEMI</span>
-                                    <span class="v10_508" th:text="${community.memberJob()}">Designer</span>
-                                    <div class="profile_image_509"></div>
-                                    <div class="v10_22">
-                                        <button type="button" class="login_border"><span class="name_login">추방</span></button>
-                                    </div>
-                                    <span class="blue_font" th:text="|# ${community.interest()}|">#Interest</span>
-                                </div>
-                            </div>
-                        </div>
                         <!------그룹 한개 끝------>
 
                     </th:block>
@@ -168,12 +154,12 @@
                     </div>
 
                     <!------초대받은 그룹 하나(소개 최대 글자 80자 이후 "..." 표시)------>
-                    <div class="v10_502">
+                    <div class="v10_502" th:each="invitation : ${invitations}">
                         <div class="white_box">
                             <div class="v10_506">
-                                <span class="v10_507" th:text="">MOA</span>
+                                <span class="v10_507" th:text="${invitation.groupName()}">MOA</span>
                                 <div class="group_profile_image_509"></div>
-                                <div class="group_intro">개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다! 안녕하세요</div>
+                                <div class="group_intro" th:text="${invitation.groupIntroduce()}">개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다! 안녕하세요</div>
                                 <div class="v10_21">
                                     <button type="button" class="join_border"><span class="name_join">수락</span></button>
                                 </div>
@@ -184,6 +170,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

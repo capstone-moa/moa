@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet" />
@@ -44,11 +44,6 @@
             <div class="hashtag"></div>
             <hr class="nav_role">
         </button>
-        <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
-        <button type="button" class="v10_582" onclick="" th:each="interest : ${interests}">
-            <span class="v10_584" th:text="${interest.name()}"></span>
-            <hr class="nav_role">
-        </button>
     </div>
 
     <!--마이페이지 메인 소개-->
@@ -57,7 +52,7 @@
             <div class="v10_762">
                 <div class="back_image"></div>
                 <div class="profile_image"></div>
-                <span class="profile_name_font">hongkildong</span>
+                <span class="profile_name_font" th:text="${member.name()}">hongkildong</span>
                 <span class="profile_intro">백엔드 개발자로 취업 희망 중인 취준생 입니다!
                         웹 프로그래밍에 관심이 있으며 이커백엔드 개발자로 취업 희망 중인 취준생 입니다!
                         웹 프로그래밍에 관심이 있으며 이백엔드 개발자로 취업 희망 중인 취준생 입니다!
@@ -67,7 +62,7 @@
                     <div class="github_image"></div>
                     <span class="v10_769">GitHub : <span>github.com/hongkildong</span></span>
                     <span class="v10_770">Interest : </span>
-                    <div class="v10_771"><span class="v10_772">#web</span></div>
+                    <div class="v10_771"><span class="v10_772" th:text="|# ${member.interest()}|">#web</span></div>
                 </div>
                 <div class="v10_775">
                     <div class="v10_779"></div>
@@ -80,8 +75,8 @@
 
             <!--마이페이지 중간 카테고리 -------주소 바꿔야함-------->
             <div class="v10_796">
-                <div class="v10_800" th:onclick="|location.href='@{/posts/mypage_activity}'|"><span class="text_white">활동</span></div>
-                <div class="v10_798" th:onclick="|location.href='@{/posts/mypage_group}'|"><span class="text_black">그룹 관리</span></div>
+                <div class="v10_800" th:onclick="|location.href='@{/member/mypage/{memberId}/activity(memberId=${member.id()})}'|"><span class="text_white">활동</span></div>
+                <div class="v10_798" th:onclick="|location.href='@{/member/mypage/{memberId}/group(memberId=${member.id()})}'|"><span class="text_black">그룹 관리</span></div>
             </div>
 
             <!-----------활동 내역------------>
@@ -91,24 +86,19 @@
 
                 <!--게시글 한개-->
                 <div class="v10_501">
-                    <th:block th:each="">
+                    <th:block th:each="post : ${posts}">
                         <div class="v10_502">
                             <div class="white_box">
                                 <div class="v10_506">
-                                    <span class="v10_507" th:text="${community.memberName()}">아이디1</span>
-                                    <span class="v10_508" th:text="${community.memberJob()}">직업</span>
-                                    <span class="v10_2226" th:text="${community.createdAt()}">2023.05-01</span>
+                                    <span class="v10_507" th:text="${post.memberName()}">아이디1</span>
+                                    <span class="v10_508" th:text="${post.memberJob()}">직업</span>
+                                    <span class="v10_2226" th:text="${post.createdDateTime()}">2023.05-01</span>
                                     <div class="profile_image_509"></div>
                                 </div>
-                                <div class="v10_510">
-                                    <div class="v10_511"></div>
-                                    <div class="v10_512"></div>
-                                    <div class="v10_513"></div>
-                                </div>
-                                <span class="v10_505" th:text="${community.title()}">제목</span>
-                                <span class="v10_509" th:text="${community.content()}">내용</span>
+
+                                <span class="v10_505" th:onclick="|location.href='@{/posts/{postId}(postId=${post.postId()})}'|"  th:text="${post.title()}">제목</span>
                                 <hr class="bar">
-                                <div class="blue_box"></div><span class="blue_font" th:text="|# ${community.interest()}|">#Designer</span>
+                                <div class="blue_box"></div><span class="blue_font" th:text="|# ${post.interest()}|">#Designer</span>
                             </div>
                         </div>
                     </th:block>

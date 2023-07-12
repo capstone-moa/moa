@@ -42,4 +42,10 @@ public class Invitation {
             this.inviteStatus = InviteStatus.REJECT;
         }
     }
+
+    public void remove() {
+        if (this.inviteStatus.equals(InviteStatus.ACCEPT)) {
+            this.inviteStatus = InviteStatus.REMOVE;
+        }
+    }
 }

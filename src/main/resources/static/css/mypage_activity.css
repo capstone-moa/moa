@@ -285,7 +285,7 @@ hr.nav_role{
 /**************마이페이지 메인소개***************/
 .mypage_intro {
   width: 100%;
-  height: 1214px;
+  height: 80%;
   position: relative;
   left: 64px;
   overflow: hidden;
@@ -574,9 +574,9 @@ hr.nav_role{
 /**********************/
 .v10_501 {
   width: 848px;
-  height: 180px;
+  height: 80%;
   opacity: 1;
-  position: absolute;
+  position: relative;
   top: 80px;
   overflow: hidden;
 }

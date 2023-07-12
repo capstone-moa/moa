@@ -1,9 +1,6 @@
 package com.capstone.moa.service;
 
-import com.capstone.moa.dto.CreateGroupRequest;
-import com.capstone.moa.dto.GroupIntroResponse;
-import com.capstone.moa.dto.ModifyGroupInfoRequest;
-import com.capstone.moa.dto.ModifyGroupIntroRequest;
+import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.Group;
 import com.capstone.moa.entity.GroupMember;
 import com.capstone.moa.entity.Member;
@@ -13,6 +10,9 @@ import com.capstone.moa.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -67,6 +67,18 @@ public class GroupService {
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));
 
         return GroupIntroResponse.from(group);
+    }
+
+    @Transactional(readOnly = true)
+    public List<FindGroupByMemberIdResponse> findGroupsByMemberId(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+        List<GroupMember> groupMembers = groupMemberRepository.findAllByMember(member);
+        List<Group> groups = groupMembers.stream().map(GroupMember::getGroup).toList();
+        return groups
+                .stream()
+                .map(FindGroupByMemberIdResponse::from)
+                .collect(Collectors.toList());
     }
 
     private GroupMember checkGroupMember(Long groupId, String email) {
