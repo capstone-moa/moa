@@ -202,7 +202,7 @@ input {
 
 .board_view {
   width: 850px;
-  height: 1204px;
+  height: 1800px;
   position: absolute;
   top: 40px;
   left: 295px;
@@ -211,7 +211,7 @@ input {
 
 .v104_2505 {
   width: 850px;
-  height: 1150px;
+  height: 1800px;
   position: absolute;
   top: 54px;
   left: 0px;
@@ -276,7 +276,7 @@ input {
 }
 .writer_profile {
   width: 790px;
-  height: 55px;
+  height: 70px;
   opacity: 1;
   position: absolute;
   top: 27px;
@@ -310,8 +310,8 @@ input {
   width: 86px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 0px;
-  left: 700px;
+  top: 40px;
+  left: 720px;
   font-family: NanumGothic;
   font-size: 10px;
   opacity: 1;
@@ -334,11 +334,79 @@ input {
   border-bottom-right-radius: 26px;
   overflow: hidden;
 }
+.v10_510 {
+  width: 40px;
+  height: 24px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 750px;
+  overflow: hidden;
+  border: none;
+}
+.v10_511 {
+  width: 2px;
+  height: 2px;
+  position: absolute;
+  top: 11px;
+  left: 12px;
+  border: 2px solid rgba(24,24,24,1);
+}
+.v10_512 {
+  width: 2px;
+  height: 2px;
+  position: absolute;
+  top: 11px;
+  left: 19px;
+  border: 2px solid rgba(24,24,24,1);
+}
+.v10_513 {
+  width: 2px;
+  height: 2px;
+  position: absolute;
+  top: 11px;
+  left: 5px;
+  border: 2px solid rgba(24,24,24,1);
+}
+
+.Toggle{
+  width: 50px;
+  height: 60px;
+  font-size:14px;
+  position: absolute;
+  top: 10px;
+  left: 690px;
+  border: 2px solid rgba(0,119,181,1);
+  background-color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.v10_514 {
+  width: 50px;
+  height: 25px;
+  position: relative;
+  top: 3px;
+  left: -2px;
+  color: rgba(0,119,181,1);
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  background: none;
+}
+
+
+
 
 /********댓글 작성*******/
 .v104_2683 {
   width: 770px;
-  height: 484px;
+  height: 1200px;
   position: absolute;
   top: 400px;
   left: 35px;
@@ -432,28 +500,28 @@ input {
 .v10_comment {
   width: 770px;
   height: 604px;
-  position: absolute;
+  position: relative;
   overflow: hidden;
 }
 .comment {
   width: 770px;
   height: 150px;
   position: relative;
-  top: 160px;
+  top: 120px;
   overflow: hidden;
 }
 
 .v104_2689 {
   width: 677px;
   color: rgba(24,24,24,1);
-  position: absolute;
-  top: 140px;
-  left: 80px;
+  position: relative;
+  top: 110px;
+  left: 70px;
   font-family: NanumGothic;
   font-size: 14px;
   opacity: 1;
   text-align: left;
-  height: 200px;
+  height: 50px;
   padding: 10px;
   border: none;
   resize: none;

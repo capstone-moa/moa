@@ -125,18 +125,7 @@ input {
   border-bottom-right-radius: 4px;
   overflow: hidden;
 }
-.name_login {
-  width: 34px;
-  color: rgba(182,182,182,1);
-  position: absolute;
-  top: 8px;
-  left: 29px;
-  font-family: NanumGothic;
-  font-weight: Bold;
-  font-size: 12px;
-  opacity: 1;
-  text-align: center;
-}
+
 .v10_2261 {
   width: 91px;
   height: 32px;
@@ -150,7 +139,7 @@ input {
   overflow: hidden;
 }
 .join_border {
-  width: 91px;
+  width: 100px;
   height: 32px;
   background: linear-gradient(rgba(0,119,181,1), rgba(14,102,148,1));
   opacity: 1;
@@ -587,34 +576,24 @@ hr.nav_role{
   top: 80px;
   overflow: hidden;
 }
-.group_delete {
+.group_invite_box {
   width: 100px;
   height: 40px;
   position: relative;
-  top: -25px;
-  left: 700px;
+
+  left: 600px;
   overflow: hidden;
 }
 .group_delete_box {
   width: 100px;
   height: 40px;
-  background: none;
-  border: none;
+  position: relative;
+  top: -40px;
+  left: 700px;
   overflow: hidden;
 }
 
-.name_login {
-  width: 100px;
-  color: rgba(182, 182, 182, 0.775);
-  position: absolute;
-  top: 30px;
-  left: 700px;
-  font-family: NanumGothic;
-  font-weight: Bold;
-  font-size: 12px;
-  opacity: 1;
-  text-align: center;
-}
+
 
 .h-line {
   display: flex;
@@ -644,6 +623,7 @@ hr.nav_role{
   width: 848px;
   height: 100px;
   position: relative;
+  top: -20px;
   overflow: hidden;
 }
 .white_box {
@@ -745,11 +725,11 @@ hr.nav_role{
   overflow: hidden;
 }
 .name_login {
-  width: 34px;
+  width: 50px;
   color: rgba(182,182,182,1);
   position: absolute;
   top: 8px;
-  left: 29px;
+  left: 20px;
   font-family: NanumGothic;
   font-weight: Bold;
   font-size: 12px;
