@@ -404,7 +404,7 @@ select::-ms-expand {
   color: rgba(24,24,24,1);
   position: absolute;
   top: 0px;
-  left: 700px;
+  left: 710px;
   font-family: NanumGothic;
   font-weight: normal;
   font-size: 10px;
@@ -426,40 +426,6 @@ select::-ms-expand {
   border-bottom-left-radius: 26px;
   border-bottom-right-radius: 26px;
   overflow: hidden;
-}
-.v10_510 {
-  width: 24px;
-  height: 24px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 823px;
-  overflow: hidden;
-}
-.v10_511 {
-  width: 2px;
-  height: 2px;
-  position: absolute;
-  top: 11px;
-  left: 12px;
-  border: 2px solid rgba(24,24,24,1);
-}
-.v10_512 {
-  width: 2px;
-  height: 2px;
-  position: absolute;
-  top: 11px;
-  left: 19px;
-  border: 2px solid rgba(24,24,24,1);
-}
-.v10_513 {
-  width: 2px;
-  height: 2px;
-  position: absolute;
-  top: 11px;
-  left: 5px;
-  border: 2px solid rgba(24,24,24,1);
 }
 
 .blue_box {
@@ -698,7 +664,7 @@ hr.bar {
   background-position: center center;
   background-size: cover;
   position: absolute;
-  top: 172px;
+  top: 166px;
   left: 790px;
   border-radius: 10px 10px 10px 10px;
   overflow: hidden;
@@ -708,7 +674,7 @@ hr.bar {
   width: 8px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 174px;
+  top: 168px;
   left: 820px;
   font-family: NanumGothic;
   font-weight: Bold;

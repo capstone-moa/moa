@@ -6,7 +6,7 @@ body {
 }
 .v10_483 {
   width: 100%;
-  height: 1600px;
+  height: 1800px;
   background: rgba(247,249,251,1);
   overflow: hidden;
 }
@@ -282,12 +282,12 @@ hr.nav_role{
   background-size: cover;
 
 }
-/**************마이페이지 메인소개***************/
-.mypage_intro {
+/**************그룹페이지 메인소개***************/
+.grouppage_intro {
   width: 100%;
-  height: 1214px;
+  height: 1600px;
   position: relative;
-  left: 64px;
+  left: 364px;
   overflow: hidden;
 }
 .v10_762 {
@@ -295,7 +295,7 @@ hr.nav_role{
   height: 364px;
   position: relative;
   top: 53px;
-  left: 360px;
+  left: 60px;
   background: rgba(255,255,255,1);
   overflow: hidden;
 }
@@ -480,50 +480,80 @@ hr.nav_role{
   top: 3px;
   left: 8px;
 }
-/********마이페이지 중간 카테고리*********/
+/********그룹페이지 중간 카테고리*********/
 .v10_796 {
   width: 862px;
   height: 50px;
   overflow: hidden;
   position: relative;
   top: 65px;
-  left: 360px;
+  left: 60px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   overflow: hidden;
 }
-.v10_800 {
-  width: 240px;
-  height: 50px;
-  background: linear-gradient(rgba(0,119,181,1), rgba(14,102,148,1));
-  opacity: 1;
+.middle_category1 {
+  width: 171px;
+  height: 35px;
+  background: rgba(255,255,255,1);opacity: 1;
   position: relative;
-  top: 0px;
+  top: 15px;
   left: 0px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border: 1px solid rgba(230,230,230,1);
   overflow: hidden;
 }
 .text_white {
   width: 63px;
   color: rgba(255,255,255,1);
   position: absolute;
-  top: 19px;
-  left: 79px;
+  top: 14px;
+  left: 58px;
   font-family: NanumGothic;
   font-weight: Bold;
   font-size: 15px;
   opacity: 1;
   text-align: center;
 }
-.v10_798 {
-  width: 240px;
+.middle_category2 {
+  width: 180px;
   height: 40px;
+  position: relative;
+  top: -25px;
+  left: 171px;
+  background: linear-gradient(rgba(0,119,181,1), rgba(14,102,148,1));
+  opacity: 1;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  overflow: hidden;
+}
+.middle_category3 {
+  width: 171px;
+  height: 35px;
   position: absolute;
-  top: 10px;
-  left: 240px;
+  top: 15px;
+  left: 351px;
+  background: rgba(255,255,255,1);
+  border: 1px solid rgba(230,230,230,1);
+  overflow: hidden;
+}
+.middle_category4 {
+  width: 171px;
+  height: 35px;
+  position: absolute;
+  top: 15px;
+  left: 522px;
+  background: rgba(255,255,255,1);
+  border: 1px solid rgba(230,230,230,1);
+  overflow: hidden;
+}
+.middle_category5 {
+  width: 170px;
+  height: 35px;
+  position: absolute;
+  top: 15px;
+  left: 693px;
   background: rgba(255,255,255,1);
   border: 1px solid rgba(230,230,230,1);
   overflow: hidden;
@@ -532,8 +562,8 @@ hr.nav_role{
   width: 124px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 15px;
-  left: 51px;
+  top: 8px;
+  left: 26px;
   font-family: NanumGothic;
   font-weight: Bold;
   font-size: 15px;
@@ -542,13 +572,13 @@ hr.nav_role{
 }
 
 
-/***************활동 내역*****************/
+/***************그룹 소개*****************/
 .v10_780 {
   width: 862px;
-  height: 1214px;
+  height: 1600px;
   position: relative;
   top: 65px;
-  left: 360px;
+  left: 60px;
   overflow: hidden;
   background: rgba(255,255,255,1);
   border-top-left-radius: 4px;
@@ -556,9 +586,8 @@ hr.nav_role{
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-
 .v10_782 {
-  width: 790px;
+  width: 700px;
   color: rgba(24,24,24,1);
   position: absolute;
   top: 30px;
@@ -569,20 +598,57 @@ hr.nav_role{
   opacity: 1;
   text-align: left;
 }
+.v10_491 {
+  width: 800px;
+  color: rgba(24,24,24,0.20000000298023224);
+  position: absolute;
+  top: 58px;
+  left: 32px;
+  font-family: NanumGothic;
+  font-weight: normal;
+  font-size: 16px;
+  opacity: 1;
+  text-align: left;
+}
+.v30_1660 {
+  width: 23px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 9px;
+  left: 34px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 12px;
+  opacity: 1;
+  text-align: center;
+}
+.button {
+  width: 91px;
+  height: 32px;
+  background-color:rgba(0,119,181,1);
+  position: relative;
+  top: 19px;
+  left: 734px;
+  overflow: hidden;
+  border: none;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
 
-
-/**********게시글 한개************/
+/*****************게시글 한개*************/
 .v10_501 {
   width: 848px;
-  height: 180px;
+  height: 1600px;
   opacity: 1;
-  position: absolute;
+  position: relative;
   top: 80px;
   overflow: hidden;
 }
 .v10_502 {
   width: 848px;
-  height: 205px;
+  height: 300px;
   position: relative;
   overflow: hidden;
 }
@@ -633,155 +699,46 @@ hr.nav_role{
   width: 539px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 90px;
-  left: 140px;
+  top: 50px;
+  left: 60px;
   font-family: NanumGothic;
   font-weight: Bold;
-  font-size: 16px;
+  font-size: 20px;
   text-align: left;
 }
 
-.v10_506 {
-  width: 900px;
-  height: 51px;
-  position: absolute;
-  top: 26px;
-  left: 49px;
-  overflow: hidden;
-}
-.v10_507 {
-  width: 128px;
-  color: rgba(24,24,24,1);
-  position: absolute;
-  top: 8px;
-  left: 89px;
-  font-family: NanumGothic;
-  font-weight: Bold;
-  font-size: 14px;
-  text-align: left;
-}
-.v10_508 {
-  width: 142px;
-  color: rgba(24,24,24,1);
-  position: absolute;
-  top: 29px;
-  left: 91px;
-  font-family: NanumGothic;
-  font-weight: normal;
-  font-size: 10px;
-  text-align: left;
-}
 .v10_509 {
-  width: 539px;
+  width: 700px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 120px;
-  left: 140px;
+  top: 100px;
+  left: 60px;
   font-family: NanumGothic;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
   text-align: left;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-.v10_2226 {
-  width: 96px;
-  color: rgba(24,24,24,1);
-  position: absolute;
-  top: 0px;
-  left: 690px;
-  font-family: NanumGothic;
-  font-weight: normal;
-  font-size: 10px;
-  text-align: left;
-}
-.profile_image_509 {
-  width: 64px;
-  height: 52px;
-  background: url("../images/v10_168.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  border-top-left-radius: 26px;
-  border-top-right-radius: 26px;
-  border-bottom-left-radius: 26px;
-  border-bottom-right-radius: 26px;
-  overflow: hidden;
-}
-.v10_510 {
-  width: 24px;
-  height: 24px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 800px;
-  overflow: hidden;
+
   border: none;
-}
-.v10_511 {
-  width: 2px;
-  height: 2px;
-  position: absolute;
-  top: 11px;
-  left: 12px;
-  border: 2px solid rgba(24,24,24,1);
-}
-.v10_512 {
-  width: 2px;
-  height: 2px;
-  position: absolute;
-  top: 11px;
-  left: 19px;
-  border: 2px solid rgba(24,24,24,1);
-}
-.v10_513 {
-  width: 2px;
-  height: 2px;
-  position: absolute;
-  top: 11px;
-  left: 5px;
-  border: 2px solid rgba(24,24,24,1);
+  outline: none;
+  resize: none;
 }
 
 
-hr.bar {
-  border: solid 2px #F7F9FB;
+.v10_514 {
+  width: 50px;
+  height: 25px;
   position: absolute;
-  left: 30px;
-  top: 170px;
-  width: 883px;
-}
-.blue_box {
-  width: 75px;
-  height: 24px;
-  background: rgba(232,240,247,1);
-  opacity: 1;
-  position: absolute;
-  top: 140px;
-  left: 40px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  overflow: hidden;
-}
-
-.blue_font {
-  width: 70px;
-  color: rgba(90,147,232,1);
-  position: absolute;
-  top: 145px;
-  left: 47px;
+  top: 40px;
+  left: 760px;
+  color: rgba(0,119,181,1);
   font-family: NanumGothic;
   font-weight: Bold;
-  font-size: 12px;
-  opacity: 1;
-  text-align: left;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  background: none;
 }

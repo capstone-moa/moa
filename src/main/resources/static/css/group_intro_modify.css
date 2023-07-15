@@ -15,7 +15,23 @@ input.blue {
   height:15px;
   display : inline;
   border : none;
-
+}
+input.blue2 {
+  width:300px;
+  height:15px;
+  display : inline;
+  border : none;
+}
+input.blue3 {
+  width:90px;
+  height:15px;
+  display : inline;
+  border : none;
+  font-family: NanumGothic;
+  font-weight: normal;
+  font-size: 11px;
+  opacity: 1;
+  text-align: left;
 }
 
 /*******************상단바*******************/
@@ -363,6 +379,8 @@ hr.nav_role{
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  border: none;
+  resize: none;
 }
 .interest {
   width: 403px;
@@ -393,7 +411,7 @@ hr.nav_role{
   overflow: hidden;
 }
 .v10_769 {
-  width: 300px;
+  width: 460px;
   color: rgba(2,117,177,1);
   position: absolute;
   top: 10px;
