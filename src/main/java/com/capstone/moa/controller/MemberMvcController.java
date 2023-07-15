@@ -9,10 +9,7 @@ import com.capstone.moa.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,6 +45,12 @@ public class MemberMvcController {
 
         model.addAttribute("createGroupRequest", new CreateGroupRequest());
         return "member/mypage_group";
+    }
+
+    @GetMapping("/mypage/{memberId}/group/{inviteId}/accept")
+    public String pushAcceptBtn(@PathVariable("memberId") Long memberId, @PathVariable("inviteId") Long inviteId) {
+        invitationService.acceptInvite(memberId, inviteId);
+        return "redirect:/member/mypage/{memberId}/group";
     }
 
     @ModelAttribute("interests")
