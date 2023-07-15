@@ -75,8 +75,8 @@
 
             <!--마이페이지 중간 카테고리 -------주소 바꿔야함-------->
             <div class="v10_796">
-                <div class="v10_800" th:onclick="|location.href='@{/member/mypage/{memberId}/activity(memberId=${member.id()})}'|"><span class="text_white">활동</span></div>
-                <div class="v10_798" th:onclick="|location.href='@{/member/mypage/{memberId}/group(memberId=${member.id()})}'|"><span class="text_black">그룹 관리</span></div>
+                <div class="v10_800" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${member.id()})}'|"><span class="text_white">활동</span></div>
+                <div class="v10_798" th:onclick="|location.href='@{/mypage/{memberId}/group(memberId=${member.id()})}'|"><span class="text_black">그룹 관리</span></div>
             </div>
 
             <!-----------활동 내역------------>

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/member")
+@RequestMapping("/mypage")
 public class MemberMvcController {
 
     private final PostService postService;
@@ -23,7 +23,7 @@ public class MemberMvcController {
     private final InvitationService invitationService;
     private final MemberService memberService;
 
-    @GetMapping("/mypage/{memberId}/activity")
+    @GetMapping("/{memberId}/activity")
     public String findMemberActivities(@PathVariable("memberId") Long memberId, Model model) {
         FindPostsResponse postList = postService.findPostsByMember(memberId);
         FindMemberByIdResponse member = memberService.findMemberById(memberId);
@@ -33,7 +33,7 @@ public class MemberMvcController {
         return "member/mypage_activity";
     }
 
-    @GetMapping("/mypage/{memberId}/group")
+    @GetMapping("/{memberId}/group")
     public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model) {
         List<FindGroupByMemberIdResponse> groups = groupService.findGroupsByMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
@@ -47,10 +47,16 @@ public class MemberMvcController {
         return "member/mypage_group";
     }
 
-    @GetMapping("/mypage/{memberId}/group/{inviteId}/accept")
+    @GetMapping("/{memberId}/group/{inviteId}/accept")
     public String pushAcceptBtn(@PathVariable("memberId") Long memberId, @PathVariable("inviteId") Long inviteId) {
         invitationService.acceptInvite(memberId, inviteId);
-        return "redirect:/member/mypage/{memberId}/group";
+        return "redirect:/mypage/{memberId}/group";
+    }
+
+    @GetMapping("/{memberId}/group/{inviteId}/reject")
+    public String pushRejectBtn(@PathVariable("memberId") Long memberId, @PathVariable("inviteId") Long inviteId) {
+        invitationService.rejectInvite(memberId, inviteId);
+        return "redirect:/mypage/{memberId}/group";
     }
 
     @ModelAttribute("interests")

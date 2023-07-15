@@ -107,8 +107,8 @@
 
             <!--마이페이지 중간 카테고리 -------주소 바꿔야함-------->
             <div class="v10_796">
-                <div class="v10_798" th:onclick="|location.href='@{/member/mypage/{memberId}/activity(memberId=${member.id()})}'|"><span class="text_black">활동</span></div>
-                <div class="v10_800" th:onclick="|location.href='@{/member/mypage/{memberId}/group(memberId=${member.id()})}'|"><span class="text_white">그룹 관리</span></div>
+                <div class="v10_798" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${member.id()})}'|"><span class="text_black">활동</span></div>
+                <div class="v10_800" th:onclick="|location.href='@{/mypage/{memberId}/group(memberId=${member.id()})}'|"><span class="text_white">그룹 관리</span></div>
             </div>
 
             <!-----------그룹 관리------------>
@@ -162,10 +162,11 @@
                                 <div class="group_intro" th:text="${invitation.groupIntroduce()}">개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다! 안녕하세요</div>
                                 <div class="v10_21">
                                     <button type="button" class="join_border"><span class="name_join"
-                                        th:onclick="|location.href='@{/member/mypage/{memberId}/group/{inviteId}/accept(memberId=${member.id()}, inviteId=${invitation.id()})}'|">수락</span></button>
+                                        th:onclick="|location.href='@{/mypage/{memberId}/group/{inviteId}/accept(memberId=${member.id()}, inviteId=${invitation.id()})}'|">수락</span></button>
                                 </div>
                                 <div class="v10_22">
-                                    <button type="button" class="login_border"><span class="name_login">거절</span></button>
+                                    <button type="button" class="login_border"
+                                            th:onclick="|location.href='@{/mypage/{memberId}/group/{inviteId}/reject(memberId=${member.id()}, inviteId=${invitation.id()})}'|"><span class="name_login">거절</span></button>
                                 </div>
 
                             </div>
