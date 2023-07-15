@@ -9,16 +9,13 @@ import com.capstone.moa.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/member")
+@RequestMapping("/mypage")
 public class MemberMvcController {
 
     private final PostService postService;
@@ -26,7 +23,7 @@ public class MemberMvcController {
     private final InvitationService invitationService;
     private final MemberService memberService;
 
-    @GetMapping("/mypage/{memberId}/activity")
+    @GetMapping("/{memberId}/activity")
     public String findMemberActivities(@PathVariable("memberId") Long memberId, Model model) {
         FindPostsResponse postList = postService.findPostsByMember(memberId);
         FindMemberByIdResponse member = memberService.findMemberById(memberId);
@@ -36,7 +33,7 @@ public class MemberMvcController {
         return "member/mypage_activity";
     }
 
-    @GetMapping("/mypage/{memberId}/group")
+    @GetMapping("/{memberId}/group")
     public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model) {
         List<FindGroupByMemberIdResponse> groups = groupService.findGroupsByMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
@@ -48,6 +45,18 @@ public class MemberMvcController {
 
         model.addAttribute("createGroupRequest", new CreateGroupRequest());
         return "member/mypage_group";
+    }
+
+    @GetMapping("/{memberId}/group/{inviteId}/accept")
+    public String pushAcceptBtn(@PathVariable("memberId") Long memberId, @PathVariable("inviteId") Long inviteId) {
+        invitationService.acceptInvite(memberId, inviteId);
+        return "redirect:/mypage/{memberId}/group";
+    }
+
+    @GetMapping("/{memberId}/group/{inviteId}/reject")
+    public String pushRejectBtn(@PathVariable("memberId") Long memberId, @PathVariable("inviteId") Long inviteId) {
+        invitationService.rejectInvite(memberId, inviteId);
+        return "redirect:/mypage/{memberId}/group";
     }
 
     @ModelAttribute("interests")
