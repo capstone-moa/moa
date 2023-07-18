@@ -59,6 +59,12 @@ public class MemberMvcController {
         return "redirect:/mypage/{memberId}/group";
     }
 
+    @GetMapping("/{leaderMemberId}/group/{groupMemberId}/remove")
+    public String pushRemoveBtn(@PathVariable("leaderMemberId") Long leaderMemberId, @PathVariable("groupMemberId") Long groupMemberId) {
+        invitationService.removeGroupMember(leaderMemberId, groupMemberId);
+        return "redirect:/mypage/{leaderMemberId}/group";
+    }
+
     @ModelAttribute("interests")
     private Interest[] putInterest() {
         return Interest.values();

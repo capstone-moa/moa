@@ -135,9 +135,9 @@
                                     <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
                                     <div class="profile_image_509"></div>
                                     <div class="v10_22">
-                                        <button type="button" class="login_border"><span class="name_login">추방</span></button>
+                                        <button th:if="${groupMember.email()} != ${member.email()}" type="button" class="login_border"
+                                                th:onclick="|location.href='@{/mypage/{leaderMemberId}/group/{groupMemberId}/remove(leaderMemberId=${member.id()}, groupMemberId=${groupMember.id()})}'|"><span class="name_login">추방</span></button>
                                     </div>
-                                    <span class="blue_font" >#Interest</span>
                                 </div>
                             </div>
                         </div>
