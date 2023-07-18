@@ -35,7 +35,7 @@ public class MemberMvcController {
 
     @GetMapping("/{memberId}/group")
     public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model) {
-        List<FindGroupByMemberIdResponse> groups = groupService.findGroupsByMemberId(memberId);
+        List<FindGroupByLeaderMemberIdResponse> groups = groupService.findGroupsByLeaderMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
         FindMemberByIdResponse member = memberService.findMemberById(memberId);
 
@@ -57,6 +57,12 @@ public class MemberMvcController {
     public String pushRejectBtn(@PathVariable("memberId") Long memberId, @PathVariable("inviteId") Long inviteId) {
         invitationService.rejectInvite(memberId, inviteId);
         return "redirect:/mypage/{memberId}/group";
+    }
+
+    @GetMapping("/{leaderMemberId}/group/{groupMemberId}/remove")
+    public String pushRemoveBtn(@PathVariable("leaderMemberId") Long leaderMemberId, @PathVariable("groupMemberId") Long groupMemberId) {
+        invitationService.removeGroupMember(leaderMemberId, groupMemberId);
+        return "redirect:/mypage/{leaderMemberId}/group";
     }
 
     @ModelAttribute("interests")

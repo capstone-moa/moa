@@ -49,12 +49,11 @@ public class InvitationController {
     }
 
     @Operation(summary = "그룹 멤버 퇴출")
-    @DeleteMapping("/my-page/{leaderId}/group/{inviteId}/{memberId}")
+    @DeleteMapping("/my-page/{memberId}/group/{groupMemberId}")
     public ResponseEntity<Void> removeGroupMember(
-            @PathVariable("leaderId") Long leaderId,
             @PathVariable("memberId") Long memberId,
-            @PathVariable("inviteId") Long inviteId) {
-        invitationService.removeGroupMember(leaderId, memberId, inviteId);
+            @PathVariable("groupMemberId") Long groupMemberId) {
+        invitationService.removeGroupMember(memberId, groupMemberId);
         return ResponseEntity.noContent().build();
     }
 }
