@@ -2,6 +2,7 @@ package com.capstone.moa.repository;
 
 import com.capstone.moa.entity.Group;
 import com.capstone.moa.entity.GroupMember;
+import com.capstone.moa.entity.GroupRole;
 import com.capstone.moa.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,5 +15,5 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> 
 
     boolean existsGroupMemberByGroupAndMember(Group group, Member member);
 
-    List<GroupMember> findAllByMember(Member member);
+    List<GroupMember> findAllByMemberAndGroupRole(Member member, GroupRole groupRole);
 }

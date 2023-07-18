@@ -51,9 +51,9 @@ public class GroupController {
         return ResponseEntity.ok(groupService.findGroupById(groupId));
     }
 
-    @Operation(summary = "멤버 별 가입한 그룹 목록 조회")
+    @Operation(summary = "멤버 별 가입한 그룹 목록 조회(본인이 리더인 그룹만 조회!!)")
     @GetMapping("/my-page/{memberId}")
-    public ResponseEntity<List<FindGroupByMemberIdResponse>> findGroupsByMember(@PathVariable("memberId") Long memberId) {
-        return ResponseEntity.ok(groupService.findGroupsByMemberId(memberId));
+    public ResponseEntity<List<FindGroupByLeaderMemberIdResponse>> findGroupsByMember(@PathVariable("memberId") Long memberId) {
+        return ResponseEntity.ok(groupService.findGroupsByLeaderMemberId(memberId));
     }
 }

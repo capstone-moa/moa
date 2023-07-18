@@ -3,6 +3,7 @@ package com.capstone.moa.service;
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.Group;
 import com.capstone.moa.entity.GroupMember;
+import com.capstone.moa.entity.GroupRole;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.repository.GroupMemberRepository;
 import com.capstone.moa.repository.GroupRepository;
@@ -70,14 +71,14 @@ public class GroupService {
     }
 
     @Transactional(readOnly = true)
-    public List<FindGroupByMemberIdResponse> findGroupsByMemberId(Long memberId) {
+    public List<FindGroupByLeaderMemberIdResponse> findGroupsByLeaderMemberId(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
-        List<GroupMember> groupMembers = groupMemberRepository.findAllByMember(member);
+        List<GroupMember> groupMembers = groupMemberRepository.findAllByMemberAndGroupRole(member, GroupRole.LEADER);
         List<Group> groups = groupMembers.stream().map(GroupMember::getGroup).toList();
         return groups
                 .stream()
-                .map(FindGroupByMemberIdResponse::from)
+                .map(FindGroupByLeaderMemberIdResponse::from)
                 .collect(Collectors.toList());
     }
 
