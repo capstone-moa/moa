@@ -67,25 +67,26 @@ public class InvitationService {
         invitation.reject();
     }
 
+    //leader의 memberId, 추방하려는 member의 groupMemberId 입력 받아야 함
     @Transactional
-    public void removeGroupMember(Long leaderId, Long memberId, Long inviteId) {
-        Invitation invitation = invitationRepository.findById(inviteId)
-                .orElseThrow(() -> new IllegalArgumentException("Invitation request not found"));
+    public void removeGroupMember(Long memberId, Long groupMemberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
-        GroupMember leader = groupMemberRepository.findById(leaderId)
+        GroupMember groupMember = groupMemberRepository.findById(groupMemberId)
+                .orElseThrow(() -> new IllegalArgumentException("GroupMember Not found"));
+
+        GroupMember leader = groupMemberRepository.findGroupMemberByGroupAndMember(groupMember.getGroup(), member)
                 .orElseThrow(() -> new IllegalArgumentException("GroupMember Not found"));
         if (!leader.isGroupLeader()) {
             throw new IllegalArgumentException("You are not the leader of this group");
         }
-        GroupMember member = groupMemberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("GroupMember Not found"));
 
-        if (!Objects.equals(invitation.getMember().getId(), member.getMember().getId())) {
-            throw new IllegalArgumentException("Wrong invitation");
-        }
+        Invitation invitation = invitationRepository.findByMemberAndGroup(groupMember.getMember(), groupMember.getGroup())
+                .orElseThrow(() -> new IllegalArgumentException("Invitation Not found"));
 
         invitation.remove();
-        groupMemberRepository.delete(member);
+        groupMemberRepository.delete(groupMember);
     }
 
     @Transactional(readOnly = true)
