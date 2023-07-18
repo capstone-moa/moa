@@ -35,7 +35,7 @@ public class MemberMvcController {
 
     @GetMapping("/{memberId}/group")
     public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model) {
-        List<FindGroupByMemberIdResponse> groups = groupService.findGroupsByMemberId(memberId);
+        List<FindGroupByLeaderMemberIdResponse> groups = groupService.findGroupsByLeaderMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
         FindMemberByIdResponse member = memberService.findMemberById(memberId);
 
