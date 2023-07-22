@@ -1,4 +1,4 @@
-package com.capstone.moa.controller;
+package com.capstone.moa.controller.api;
 
 import com.capstone.moa.dto.ModifyCommentRequest;
 import com.capstone.moa.dto.WriteCommentRequest;
