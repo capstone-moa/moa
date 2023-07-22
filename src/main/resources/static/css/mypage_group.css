@@ -274,9 +274,9 @@ hr.nav_role{
 /**************마이페이지 메인소개***************/
 .mypage_intro {
   width: 100%;
-  height: 100%;
+  height: 1214px;
   position: relative;
-  left: 64px;
+  left: 364px;
   overflow: hidden;
 }
 .v10_762 {
@@ -284,7 +284,7 @@ hr.nav_role{
   height: 364px;
   position: relative;
   top: 53px;
-  left: 360px;
+  left: 60px;
   background: rgba(255,255,255,1);
   overflow: hidden;
 }
@@ -476,7 +476,7 @@ hr.nav_role{
   overflow: hidden;
   position: relative;
   top: 65px;
-  left: 360px;
+  left: 60px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -537,7 +537,7 @@ hr.nav_role{
   height: 1214px;
   position: relative;
   top: 65px;
-  left: 360px;
+  left: 60px;
   overflow: hidden;
   background: rgba(255,255,255,1);
   border-top-left-radius: 4px;
@@ -580,7 +580,6 @@ hr.nav_role{
   width: 100px;
   height: 40px;
   position: relative;
-
   left: 600px;
   overflow: hidden;
 }
