@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Service
 @AllArgsConstructor
 public class NoticeService {
@@ -18,12 +20,29 @@ public class NoticeService {
 
     @Transactional
     public void createNotice(WriteNoticeRequest request) {
-        GroupMember leader = groupMemberRepository.findById(request.getGroupMemberId())
+        GroupMember leader = findGroupLeader(request.getGroupMemberId());
+
+        noticeRepository.save(new Notice(leader.getGroup(), request.getTitle(), request.getContent()));
+    }
+
+    @Transactional
+    public void deleteNotice(Long noticeId, Long groupLeaderId) {
+        GroupMember leader = findGroupLeader(groupLeaderId);
+        Notice notice = noticeRepository.findById(noticeId)
+                .orElseThrow(() -> new IllegalArgumentException("Notice not found"));
+        if (!Objects.equals(leader.getGroup(), notice.getGroup())) {
+            throw new IllegalArgumentException("You don't have permission");
+        }
+
+        noticeRepository.delete(notice);
+    }
+
+    private GroupMember findGroupLeader(Long groupLeaderId) {
+        GroupMember leader = groupMemberRepository.findById(groupLeaderId)
                 .orElseThrow(() -> new IllegalArgumentException("GroupMember not found"));
         if (!leader.isGroupLeader()) {
             throw new IllegalArgumentException("You are not the Leader of this group");
         }
-
-        noticeRepository.save(new Notice(leader.getGroup(), request.getTitle(), request.getContent()));
+        return leader;
     }
 }
