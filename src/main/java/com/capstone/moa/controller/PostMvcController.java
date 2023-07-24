@@ -2,6 +2,7 @@ package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.FindPostWithCommentsResponse;
 import com.capstone.moa.dto.FindPostsResponse;
+import com.capstone.moa.dto.WriteCommentRequest;
 import com.capstone.moa.dto.WritePostRequest;
 import com.capstone.moa.entity.Interest;
 import com.capstone.moa.service.PostService;
@@ -70,6 +71,7 @@ public class PostMvcController {
     public String findPostDetailById(@PathVariable("postId") Long postId, Model model) {
         FindPostWithCommentsResponse postDetail = postService.findPostWithCommentsByPostId(postId);
         model.addAttribute("postDetail", postDetail);
+        model.addAttribute("writeCommentRequest", new WriteCommentRequest());
         return "post/view";
     }
 }
