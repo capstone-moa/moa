@@ -72,9 +72,9 @@
         </button>
         <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
         <button type="button" class="v10_582"
-                th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${group.groupId()})}'|"
-                th:each="group : ${groups}">
-            <span class="v10_584" th:text="${group.groupName()}"></span>
+                th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupCategory.groupId()})}'|"
+                th:each="groupCategory : ${groupCategories}">
+            <span class="v10_584" th:text="${groupCategory.groupName()}"></span>
             <hr class="nav_role">
         </button>
     </div>

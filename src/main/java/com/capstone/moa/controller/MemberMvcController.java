@@ -30,21 +30,23 @@ public class MemberMvcController {
 
         model.addAttribute("member", member);
         model.addAttribute("posts", postList.posts());
-        return "member/mypage_activity";
+        return "mypage/mypage_activity";
     }
 
     @GetMapping("/{memberId}/group")
     public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model) {
         List<FindGroupByLeaderMemberIdResponse> groups = groupService.findGroupsByLeaderMemberId(memberId);
+        List<FindGroupsByMemberIdResponse> groupsForCategory = groupService.findGroupsByMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
         FindMemberByIdResponse member = memberService.findMemberById(memberId);
 
         model.addAttribute("member", member);
         model.addAttribute("groups", groups);
+        model.addAttribute("groupCategories", groupsForCategory);
         model.addAttribute("invitations", invitations);
 
         model.addAttribute("createGroupRequest", new CreateGroupRequest());
-        return "member/mypage_group";
+        return "mypage/mypage_group";
     }
 
     @GetMapping("/{memberId}/group/{inviteId}/accept")
