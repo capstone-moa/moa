@@ -4,7 +4,7 @@
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-    <link href="/css/view.css" rel="stylesheet" />
+    <link href="/css/view.css" rel="stylesheet"/>
     <title>view</title>
 </head>
 
@@ -24,10 +24,12 @@
         </button>
     </div>
     <div class="v10_2253">
-        <button type="button" th:onclick="|location.href='@{/posts/login}'|" class="login_border"><span class="name_login">로그인</span></button>
+        <button type="button" th:onclick="|location.href='@{/posts/login}'|" class="login_border"><span
+                class="name_login">로그인</span></button>
     </div>
     <div class="v10_2261">
-        <button type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join">회원가입</span></button>
+        <button type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join">회원가입</span>
+        </button>
     </div>
     <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
 </div>
@@ -49,26 +51,29 @@
                 <span class="v104_2676" th:text="${postDetail.createdDateTime()}">작성일</span>
                 <div class="writer_image"></div>
             </div>
-            <form>
-                <!-- 댓글 -->
-                <!-- 댓글 작성-->
-                <div class="v104_2683"><hr>
+            <!-- 댓글 -->
+            <!-- 댓글 작성-->
+
+            <div class="v104_2683" th:object="${writeCommentRequest}" method="post">
+                <form th:action="@{/posts/{postId}(postId=${postDetail.postId()})}" method="post">
                     <div class="v104_2684">
                         <div class="comment_profile_image"></div>
-                        <p><textarea class="comment_textarea" placeholder="댓글을 작성해보세요"></textarea></p>
+                        <p><textarea  name="email" hidden="hidden" value="mem1@gmail.com" placeholder="작성자 메일을 적어주세요"></textarea></p>
+                        <p><textarea  class="comment_textarea"  name="content" placeholder="댓글을 작성해보세요"></textarea></p>
                         <div class="v30_1649">
-                            <button type="button" th:onclick="" class="button"><span class="v30_1651">작성</span></button>
+                            <button type="submit" class="button"><span class="v30_1651">작성</span>
+                            </button>
                         </div>
                     </div>
-                    <!-- 댓글 조회1 -->
-                    <div th:each="comment : ${postDetail.comments()}">
-                        <p><textarea class="v104_2689" th:text="${comment.content()}" readonly></textarea></p>
-                        <span class="v104_2690" th:text="${comment.createdDateTime()}">댓글 작성일</span>
-                        <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
-                        <div class="comment_profile_image1"></div>
-                    </div>
+                </form>
+                <!-- 댓글 조회1 -->
+                <div th:each="comment : ${postDetail.comments()}">
+                    <p><textarea class="v104_2689" th:text="${comment.content()}" readonly></textarea></p>
+                    <span class="v104_2690" th:text="${comment.createdDateTime()}">댓글 작성일</span>
+                    <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
+                    <div class="comment_profile_image1"></div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
