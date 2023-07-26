@@ -1,9 +1,9 @@
 package com.capstone.moa.repository;
 
-import com.capstone.moa.entity.Interest;
+import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.entity.Post;
-import com.capstone.moa.entity.PostType;
+import com.capstone.moa.entity.enums.PostType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

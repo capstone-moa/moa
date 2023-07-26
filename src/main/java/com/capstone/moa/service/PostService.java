@@ -1,10 +1,10 @@
 package com.capstone.moa.service;
 
 import com.capstone.moa.dto.*;
-import com.capstone.moa.entity.Interest;
+import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.entity.Post;
-import com.capstone.moa.entity.PostType;
+import com.capstone.moa.entity.enums.PostType;
 import com.capstone.moa.repository.MemberRepository;
 import com.capstone.moa.repository.PostRepository;
 import lombok.AllArgsConstructor;

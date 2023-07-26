@@ -1,6 +1,6 @@
 package com.capstone.moa.dto;
 
-import com.capstone.moa.entity.Interest;
+import com.capstone.moa.entity.enums.Interest;
 
 import java.util.List;
 

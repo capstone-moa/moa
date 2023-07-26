@@ -4,7 +4,7 @@ import com.capstone.moa.dto.FindInvitationResponse;
 import com.capstone.moa.dto.InviteGroupRequest;
 import com.capstone.moa.entity.GroupMember;
 import com.capstone.moa.entity.Invitation;
-import com.capstone.moa.entity.InviteStatus;
+import com.capstone.moa.entity.enums.InviteStatus;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.repository.GroupMemberRepository;
 import com.capstone.moa.repository.InvitationRepository;
