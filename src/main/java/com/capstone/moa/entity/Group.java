@@ -41,6 +41,9 @@ public class Group extends BaseTimeEntity {
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<Invitation> invitations = new ArrayList<>();
 
+    @OneToOne(mappedBy = "group", cascade = CascadeType.ALL)
+    private Link link;
+
     public Group(String name, String interest, String introduce) {
         this(name, Interest.find(interest), introduce);
     }
