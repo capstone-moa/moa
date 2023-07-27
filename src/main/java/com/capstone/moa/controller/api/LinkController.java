@@ -22,4 +22,10 @@ public class LinkController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "figma 링크 등록")
+    @PostMapping("/figma/{groupId}")
+    public ResponseEntity<Void> addFigmaLink(@PathVariable(name = "groupId") Long groupId, @RequestBody Map<String, String> figmaLink) {
+        linkService.addFigmaLink(groupId, figmaLink.get("figmaLink"));
+        return ResponseEntity.noContent().build();
+    }
 }

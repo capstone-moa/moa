@@ -29,6 +29,21 @@ public class LinkService {
         }
     }
 
+    @Transactional
+    public void addFigmaLink(Long groupId, String figmaLink) {
+        Group group = findGroup(groupId);
+
+        if (linkRepository.existsLinkByGroup(group)) {
+            Link link = group.getLink();
+            link.modifyFigma(figmaLink);
+        } else {
+            linkRepository.save(Link.builder()
+                    .figma(figmaLink)
+                    .group(group)
+                    .build());
+        }
+    }
+
     private Group findGroup(Long groupId) {
         return groupRepository.findById(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));
