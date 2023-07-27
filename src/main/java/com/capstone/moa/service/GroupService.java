@@ -3,7 +3,7 @@ package com.capstone.moa.service;
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.Group;
 import com.capstone.moa.entity.GroupMember;
-import com.capstone.moa.entity.GroupRole;
+import com.capstone.moa.entity.enums.GroupRole;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.repository.GroupMemberRepository;
 import com.capstone.moa.repository.GroupRepository;

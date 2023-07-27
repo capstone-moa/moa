@@ -1,6 +1,7 @@
 package com.capstone.moa.repository;
 
 import com.capstone.moa.entity.*;
+import com.capstone.moa.entity.enums.InviteStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

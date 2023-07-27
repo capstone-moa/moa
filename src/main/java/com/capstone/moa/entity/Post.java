@@ -1,5 +1,7 @@
 package com.capstone.moa.entity;
 
+import com.capstone.moa.entity.enums.Interest;
+import com.capstone.moa.entity.enums.PostType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

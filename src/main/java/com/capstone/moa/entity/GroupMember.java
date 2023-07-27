@@ -1,5 +1,6 @@
 package com.capstone.moa.entity;
 
+import com.capstone.moa.entity.enums.GroupRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

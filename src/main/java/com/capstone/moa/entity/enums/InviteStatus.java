@@ -1,4 +1,4 @@
-package com.capstone.moa.entity;
+package com.capstone.moa.entity.enums;
 
 public enum InviteStatus {
 

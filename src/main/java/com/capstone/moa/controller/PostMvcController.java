@@ -4,7 +4,7 @@ import com.capstone.moa.dto.FindPostWithCommentsResponse;
 import com.capstone.moa.dto.FindPostsResponse;
 import com.capstone.moa.dto.WriteCommentRequest;
 import com.capstone.moa.dto.WritePostRequest;
-import com.capstone.moa.entity.Interest;
+import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

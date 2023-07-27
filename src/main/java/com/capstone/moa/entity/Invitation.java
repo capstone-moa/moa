@@ -1,5 +1,6 @@
 package com.capstone.moa.entity;
 
+import com.capstone.moa.entity.enums.InviteStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

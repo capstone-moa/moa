@@ -2,7 +2,7 @@ package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.GroupIntroResponse;
 import com.capstone.moa.dto.ModifyGroupIntroRequest;
-import com.capstone.moa.entity.Interest;
+import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

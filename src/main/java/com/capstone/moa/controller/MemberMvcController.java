@@ -1,7 +1,7 @@
 package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.*;
-import com.capstone.moa.entity.Interest;
+import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.InvitationService;
 import com.capstone.moa.service.MemberService;
