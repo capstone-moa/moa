@@ -7,6 +7,22 @@
     <link href="/css/view.css" rel="stylesheet"/>
     <title>view</title>
 </head>
+<script>
+    function toggleBtn1() {
+
+        // 토글 할 버튼 선택 (btn1)
+        const btn1 = document.getElementById('btn1');
+
+        // btn1 숨기기 (display: none)
+        if(btn1.style.display !== 'none') {
+            btn1.style.display = 'none';
+        }
+        // btn` 보이기 (display: block)
+        else {
+            btn1.style.display = 'block';
+        }
+    }
+</script>
 
 <body>
 <!--헤더-->
@@ -50,30 +66,42 @@
                 <span class="v104_2512" th:text="${postDetail.memberJob()}">작성자 직업</span>
                 <span class="v104_2676" th:text="${postDetail.createdDateTime()}">작성일</span>
                 <div class="writer_image"></div>
+                <button class="v10_510" id='btn2' onclick='toggleBtn1()'>
+                    <div class="v10_511"></div>
+                    <div class="v10_512"></div>
+                    <div class="v10_513"></div>
+                </button>
+                <div class="Toggle" style="display: none;" id='btn1'>
+                    <button class="v10_514">수정</button>
+                    <button class="v10_514">삭제</button>
+                </div>
             </div>
             <!-- 댓글 -->
             <!-- 댓글 작성-->
-
-            <div class="v104_2683" th:object="${writeCommentRequest}" method="post">
-                <form th:action="@{/posts/{postId}(postId=${postDetail.postId()})}" method="post">
-                    <div class="v104_2684">
-                        <div class="comment_profile_image"></div>
-                        <p><input  name="email" hidden="hidden" value="mem1@gmail.com" placeholder="작성자 추후 변경 필요"/></p>
-                        <p><textarea  class="comment_textarea"  name="content" placeholder="댓글을 작성해보세요"></textarea></p>
-                        <div class="v30_1649">
-                            <button type="submit" class="button"><span class="v30_1651">작성</span>
-                            </button>
-                        </div>
+            <div class="v104_2683"><hr>
+                <div class="v104_2684">
+                    <div class="comment_profile_image"></div>
+                    <p><textarea class="comment_textarea" placeholder="댓글을 작성해보세요"></textarea></p>
+                    <div class="v30_1649">
+                        <button type="button" th:onclick="" class="button"><span class="v30_1651">작성</span></button>
                     </div>
-                </form>
-                <!-- 댓글 조회1 -->
-                <div th:each="comment : ${postDetail.comments()}">
-                    <p><textarea class="v104_2689" th:text="${comment.content()}" readonly></textarea></p>
-                    <span class="v104_2690" th:text="${comment.createdDateTime()}">댓글 작성일</span>
-                    <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
-                    <div class="comment_profile_image1"></div>
                 </div>
+                <!-- 댓글 조회 한개 -->
+                <th:block th:each="comment : ${postDetail.comments()}">
+                    <div class="comment">
+                        <textarea class="v104_2689" th:text="${comment.content()}" readonly>댓글내용입니당.</textarea>
+                        <span class="v104_2690" th:text="${comment.createdDateTime()}">2023-07-14</span>
+                        <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
+                        <div class="comment_profile_image1"></div>
+                    </div>
+                    <div class="comment">
+                        <textarea class="v104_2689" th:text="${comment.content()}" readonly>댓글내용입니당.</textarea>
+                        <span class="v104_2690" th:text="${comment.createdDateTime()}">2023-07-14</span>
+                        <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
+                        <div class="comment_profile_image1"></div>
+                </th:block>
             </div>
+            </form>
         </div>
     </div>
 </div>
