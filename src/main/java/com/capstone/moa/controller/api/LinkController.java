@@ -28,4 +28,11 @@ public class LinkController {
         linkService.addFigmaLink(groupId, figmaLink.get("figmaLink"));
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "erdCloud 링크 등록")
+    @PostMapping("/erd-cloud/{groupId}")
+    public ResponseEntity<Void> addErdCloudLink(@PathVariable(name = "groupId") Long groupId, @RequestBody Map<String, String> erdCloudLink) {
+        linkService.addErdCloudLink(groupId, erdCloudLink.get("erdCloudLink"));
+        return ResponseEntity.noContent().build();
+    }
 }

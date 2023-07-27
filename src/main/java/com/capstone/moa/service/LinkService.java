@@ -44,6 +44,21 @@ public class LinkService {
         }
     }
 
+    @Transactional
+    public void addErdCloudLink(Long groupId, String erdCloudLink) {
+        Group group = findGroup(groupId);
+
+        if (linkRepository.existsLinkByGroup(group)) {
+            Link link = group.getLink();
+            link.modifyErdCloud(erdCloudLink);
+        } else {
+            linkRepository.save(Link.builder()
+                    .erdCloud(erdCloudLink)
+                    .group(group)
+                    .build());
+        }
+    }
+
     private Group findGroup(Long groupId) {
         return groupRepository.findById(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));
