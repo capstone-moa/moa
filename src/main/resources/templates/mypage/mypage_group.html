@@ -8,7 +8,21 @@
     <link href="/css/mypage_group.css" rel="stylesheet" />
     <title>mypage_group</title>
 </head>
+<script>
+    function group_invite_function() {
+        let text;
+        let person = prompt("초대할 이메일을 입력해주세요");
 
+        if (person == null || person == "") {
+            text = "이메일을 입력하지 않으셨습니다 :<";
+        }
+        else {
+            text = " 아이디 : " + person + "이/가 초대되었습니다 :)";
+        }
+        document.getElementById("test").innerHTML = text;
+    }
+
+</script>
 <body>
 <div class="v10_483">
     <!--로그인 한 헤더-->
