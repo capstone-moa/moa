@@ -57,8 +57,7 @@
                 <div class="back_image"></div>
                 <div class="profile_image"></div>
                 <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
-                <span class="profile_intro" th:text="${groupIntro.introduce()}">개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게
-                        진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!</span>
+                <textarea name="profile_intro" class="profile_intro" th:text="${groupIntro.introduce()}" required>개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!</textarea>
                 <div class="interest">
                     <div class="github_image"></div>
                     <span class="v10_769">GitHub : <span>https://github.com/capstone-moa</span></span>
@@ -67,8 +66,9 @@
                 </div>
                 <div class="v10_775">
                     <div class="v10_779"></div>
-                    <span class="mypage_location">경기도, 오산</span>
-                    <button class="v10_777">그룹정보 수정</button>
+                    <span class="mypage_location"><input class="blue3"
+                                                         placeholder="경기도, 오산"
+                                                         size="10px"></span>
                 </div>
             </div>
 
@@ -82,14 +82,12 @@
                 </div>
                 <div class="middle_category4" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">일정관리</span>
                 </div>
-                <div class="middle_category5" th:onclick="|location.href='@{/posts/group}'|"><span
-                        class="text_black">이슈</span></div>
             </div>
 
             <!-----------그룹 소개------------>
 
             <div class="v10_780">
-                <!-----------내용 수정하면 이거 버튼 누르면 저장되게 만들 예정...!----------->
+                <!-----------내용 수정하고 아래 버튼 누르면 저장되게...!----------->
                 <button class="v10_777_intro">그룹소개 수정</button>
                 <!-----------그룹 주소------------>
                 <div class="interest_intro">
