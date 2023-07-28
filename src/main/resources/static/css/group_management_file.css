@@ -745,7 +745,7 @@ hr.nav_role{
 }
 .v10_502 {
   width: 848px;
-  height: 180px;
+  height: 140px;
   position: relative;
   overflow: hidden;
 }
@@ -765,8 +765,8 @@ hr.nav_role{
   width: 539px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 90px;
-  left: 140px;
+  top: 30px;
+  left: 100px;
   font-family: NanumGothic;
   font-weight: Bold;
   font-size: 16px;
@@ -807,8 +807,8 @@ hr.nav_role{
   width: 539px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 120px;
-  left: 140px;
+  top: 70px;
+  left: 100px;
   font-family: NanumGothic;
   font-weight: normal;
   font-size: 14px;
@@ -852,8 +852,8 @@ hr.nav_role{
   background: rgba(255,255,255,1);
   opacity: 1;
   position: absolute;
-  top: 17px;
-  left: 780px;
+  top: 0px;
+  left: 800px;
   overflow: hidden;
   border: none;
 }
@@ -913,9 +913,9 @@ hr.nav_role{
 hr.bar {
   border: solid 2px #F7F9FB;
   position: absolute;
-  left: 30px;
-  top: 170px;
-  width: 883px;
+  left: 50px;
+  top:120px;
+  width: 753px;
 }
 .blue_box {
   width: 75px;

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link href="/css/group_notice.css" rel="stylesheet"/>
+    <title>group_notice</title>
+</head>
+<body>
+<div class="v10_483">
+    <!--로그인 한 헤더-->
+    <div class="header_bar">
+        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+        <div class='v-line'></div>
+        <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
+        <span class="nav_text_community">커뮤니티</span>
+        <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
+        <span class="nav_text_team">팀원모집</span>
+        <div class="search">
+            <input type="text" placeholder="검색어 입력">
+            <button type="button" onclick="" class="img_search">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+        <div class="v10_2253" th:onclick="|location.href='@{/posts/mypage_activity}'|">
+            <div class="header_profile_image"></div>
+            <span class="header_profile_name">hong kildong</span>
+        </div>
+        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+    </div>
+
+    <!--좌측 네비게이션 바-->
+    <div class="category">
+        <button type="button" class="v10_582" onclick="">
+            <span class="v10_584">마이페이지</span>
+            <div class="hashtag"></div>
+            <hr class="nav_role">
+        </button>
+        <button type="button" class="v10_582" onclick="">
+            <span class="v10_584">그룹관리</span>
+            <div class="hashtag"></div>
+            <hr class="nav_role">
+        </button>
+        <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
+        <button type="button" class="v10_582" onclick="">
+            <span class="v10_584" th:text="${groupIntro.name()}">MOA</span>
+            <hr class="nav_role">
+        </button>
+    </div>
+
+    <!--그룹페이지 메인 소개-->
+    <div class="grouppage_intro">
+        <form>
+            <div class="v10_762">
+                <div class="back_image"></div>
+                <div class="profile_image"></div>
+                <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
+                <span class="profile_intro" th:text="${groupIntro.introduce()}">그룹 설명</span>
+                <div class="interest">
+                    <div class="github_image"></div>
+                    <span class="v10_769">GitHub : <span>https://github.com/capstone-moa</span></span>
+                    <span class="v10_770">Interest : </span>
+                    <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span></div>
+                </div>
+                <div class="v10_775">
+                    <div class="v10_779"></div>
+                    <span class="mypage_location">경기도, 오산</span>
+                </div>
+            </div>
+
+            <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
+            <div class="v10_796">
+                <div class="middle_category1" th:onclick="|location.href='@{/posts/group_intro}'|"><span
+                        class="text_black">그룹소개</span></div>
+                <div class="middle_category2" th:onclick="|location.href='@{/posts/group_notice}'|"><span class="text_white">공지사항</span>
+                </div>
+                <div class="middle_category3" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">프로젝트 관리</span>
+                </div>
+                <div class="middle_category4" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">일정관리</span>
+                </div>
+            </div>
+
+            <!-----------공지사항------작성버튼 주소 바꿔야함------>
+            <div class="v10_780">
+                <span class="v10_782">공지사항<br></span>
+                <span class="v10_491"><hr>용어 정리 & 컨벤션(규칙) 등을 정리하는 공간</span>
+                <button type="button" class="button" th:onclick="window.open('이거 group_notice_write 주소로!')"><span class="v30_1660">작성</span>
+                </button>
+
+                <!--게시글 한개-->
+                <div class="v10_501">
+                    <th:block th:each="">
+                        <div class="v10_502">
+                            <div class="white_box">
+                                <button class="v10_514">삭제</button>
+                                <span class="v10_505" th:text="">커밋 메시지 규칙</span>
+                                <textarea class="v10_509" cols="50" rows="13">
+1.명사로 끝난다.
+2.커밋 유형 지정
+3.feat: 새로운 기능의 추가
+4.fix: 버그 수정
+5.docs: 문서 수정
+6.style: 스타일 관련 기능(코드 포맷팅, 세미콜론 누락, 코드 자체의 변경이 없는 경우)
+7.refactor: 코드 리펙토링
+8.test: 테스트 코트, 리펙토링 테스트 코드 추가
+9.chore: 빌드 업무 수정, 패키지 매니저 수정(ex .gitignore 수정 같은 경우)
+                                </textarea>
+                            </div>
+                        </div>
+                    </th:block>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

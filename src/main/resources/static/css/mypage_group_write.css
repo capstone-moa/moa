@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+}
+.v10_483 {
+  width: 100%;
+  height: 1600px;
+  background: rgba(247,249,251,1);
+  overflow: hidden;
+}
+
+
+
+/*****************게시판 메인*******************/
+.v10_488 {
+  width: 100%;
+  height: 1214px;
+  position: absolute;
+
+  left: 0px;
+  overflow: hidden;
+}
+
+.v10_490 {
+  width: 862px;
+  height: 800px;
+  background: rgba(255,255,255,1);
+  position: relative;
+
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  overflow: hidden;
+}
+.v30_1660 {
+  width: 23px;
+  color: rgba(255,255,255,1);
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 12px;
+  opacity: 1;
+  text-align: center;
+}
+.v10_493 {
+  width: 300px;
+  color: rgba(24,24,24,1);
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 25px;
+  opacity: 1;
+  text-align: left;
+}
+
+/*********카테고리 선택*********/
+
+.v10_501 {
+  width: 862px;
+  height: 865px;
+  opacity: 1;
+  position: absolute;
+  top: 120px;
+  left: 60px;
+  overflow: hidden;
+}
+
+.v10_495 {
+  width: 700px;
+  color: rgb(137, 137, 137);
+  position: absolute;
+  top: 80px;
+  left: 60px;
+  font-family: NanumGothic;
+  font-size: 13px;
+  opacity: 1;
+  text-align: left;
+}
+.category_name2{
+  width: 86px;
+  color: rgba(24,24,24,1);
+  position: absolute;
+  top: 60px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 16px;
+  text-align: left;
+}
+
+/*******************게시글 본문*************/
+
+.form-group{
+  width: 86px;
+  color: rgba(24,24,24,1);
+  position: absolute;
+
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 16px;
+  text-align: left;
+}
+
+.board_text2{
+  width: 86px;
+  color: rgba(24,24,24,1);
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 16px;
+  text-align: left;
+}
+.form-control{
+  width: 600px;
+  resize: none;
+  outline: none;
+}
+.v10_494 {
+  width: 600px;
+  color: rgba(24,24,24,1);
+  position: relative;
+  font-family: NanumGothic;
+  font-size: 16px;
+  opacity: 1;
+  text-align: left;
+  border: solid 1px;
+}
+
+.board_text3{
+  color: rgba(24,24,24,1);
+  position: relative;
+  top: 80px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 16px;
+  text-align: left;
+}
+
+.button {
+  width: 91px;
+  height: 32px;
+  background-color:rgba(0,119,181,1);
+  overflow: hidden;
+  border: none;
+  position: relative;
+  top: 100px;
+  left: 510px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}

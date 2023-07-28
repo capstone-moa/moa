@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link href="/css/group_file_write.css" rel="stylesheet" />
+    <title>group_file_write</title>
+</head>
+
+<body>
+<div class="v10_483">
+    <!--게시글 작성 메인 -->
+
+    <div class="v10_488">
+        <div class="v10_490">
+            <span class="v10_493">파일 업로드</span>
+            <span class="v10_495">보고서 파일을 업로드 하세요!<br><hr></span>
+        </div>
+
+        <!--카테고리 선택-->
+        <div class="v10_501">
+            <form th:action th:object="${writePostRequest}" method="post">
+
+                <!--게시글 작성 폼-->
+                <div class="form-group">
+                    <label for="title" class="board_text2">제목<br></label>
+                    <input type="text" class="form-control" id="title" name="title" maxlength="100" required="required"
+                           placeholder="제목을 입력해 주세요">
+
+                    <div class="board_text3">
+                        <label for="content">파일<br></label>
+                        <input type="file" name="file" accept="image/*">
+                    </div>
+
+                    <div>
+                        <button type="submit" class="button"><span class="v30_1660">작성</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
