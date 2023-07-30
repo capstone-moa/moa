@@ -27,4 +27,10 @@ public class NoticeController {
         noticeService.deleteNotice(noticeId, groupLeaderId);
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "그룹 공지 리스트 조회")
+    @GetMapping("/{groupId}")
+    public ResponseEntity<?> findNoticesByGroupId(@PathVariable(name = "groupId") Long groupId) {
+        return ResponseEntity.ok(noticeService.findNoticesByGroupId(groupId));
+    }
 }
