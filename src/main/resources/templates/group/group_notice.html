@@ -7,6 +7,12 @@
     <link href="/css/group_notice.css" rel="stylesheet"/>
     <title>group_notice</title>
 </head>
+<script>
+    function openNewWindow() {
+        let url = document.getElementById('myLink').getAttribute('href');
+        window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+    }
+</script>
 <body>
 <div class="v10_483">
     <!--로그인 한 헤더-->
@@ -19,7 +25,7 @@
         <span class="nav_text_team">팀원모집</span>
         <div class="search">
             <input type="text" placeholder="검색어 입력">
-            <button type="button" onclick="" class="img_search">
+            <button type="button"  class="img_search">
                 <i class="material-icons">search</i>
             </button>
         </div>
@@ -32,18 +38,18 @@
 
     <!--좌측 네비게이션 바-->
     <div class="category">
-        <button type="button" class="v10_582" onclick="">
+        <button type="button" class="v10_582" >
             <span class="v10_584">마이페이지</span>
             <div class="hashtag"></div>
             <hr class="nav_role">
         </button>
-        <button type="button" class="v10_582" onclick="">
+        <button type="button" class="v10_582">
             <span class="v10_584">그룹관리</span>
             <div class="hashtag"></div>
             <hr class="nav_role">
         </button>
         <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
-        <button type="button" class="v10_582" onclick="">
+        <button type="button" class="v10_582" >
             <span class="v10_584" th:text="${groupIntro.name()}">MOA</span>
             <hr class="nav_role">
         </button>
@@ -71,9 +77,9 @@
 
             <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
             <div class="v10_796">
-                <div class="middle_category1" th:onclick="|location.href='@{/posts/group_intro}'|"><span
+                <div class="middle_category1" th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupIntro.id()})}'|"><span
                         class="text_black">그룹소개</span></div>
-                <div class="middle_category2" th:onclick="|location.href='@{/posts/group_notice}'|"><span class="text_white">공지사항</span>
+                <div class="middle_category2" th:onclick="|location.href='@{/gruop/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_white">공지사항</span>
                 </div>
                 <div class="middle_category3" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">프로젝트 관리</span>
                 </div>
@@ -85,17 +91,18 @@
             <div class="v10_780">
                 <span class="v10_782">공지사항<br></span>
                 <span class="v10_491"><hr>용어 정리 & 컨벤션(규칙) 등을 정리하는 공간</span>
-                <button type="button" class="button" th:onclick="window.open('이거 group_notice_write 주소로!')"><span class="v30_1660">작성</span>
+                <a th:href="@{/group/notice/write}" target="_blank" id="myLink"></a>
+                <button type="button" class="button" onclick="openNewWindow()"><span class="v30_1660">작성</span>
                 </button>
 
                 <!--게시글 한개-->
                 <div class="v10_501">
-                    <th:block th:each="">
+                    <th:block th:each="notice : ${notices}">
                         <div class="v10_502">
                             <div class="white_box">
                                 <button class="v10_514">삭제</button>
-                                <span class="v10_505" th:text="">커밋 메시지 규칙</span>
-                                <textarea class="v10_509" cols="50" rows="13">
+                                <span class="v10_505" th:text="${notice.title()}">커밋 메시지 규칙</span>
+                                <textarea class="v10_509" cols="50" rows="13" th:text="${notice.content()}" readonly>
 1.명사로 끝난다.
 2.커밋 유형 지정
 3.feat: 새로운 기능의 추가
