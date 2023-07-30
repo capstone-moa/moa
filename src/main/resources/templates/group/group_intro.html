@@ -72,9 +72,9 @@
 
             <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
             <div class="v10_796">
-                <div class="middle_category1" th:onclick="|location.href='@{/posts/group_intro}'|"><span
+                <div class="middle_category1" th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupIntro.id()})}'|"><span
                         class="text_white">그룹소개</span></div>
-                <div class="middle_category2" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">공지사항</span>
+                <div class="middle_category2" th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_black">공지사항</span>
                 </div>
                 <div class="middle_category3" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">프로젝트 관리</span>
                 </div>

@@ -35,13 +35,13 @@ public class Group extends BaseTimeEntity {
     @Column(columnDefinition = "LONGTEXT")
     private String skills;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GroupMember> groupMembers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Invitation> invitations = new ArrayList<>();
 
-    @OneToOne(mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private Link link;
 
     public Group(String name, String interest, String introduce) {
