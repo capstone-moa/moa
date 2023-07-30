@@ -6,19 +6,48 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <link href="/css/mypage_group.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>mypage_group</title>
 </head>
-<script>
-    function group_invite_function() {
+<script th:inline="javascript">
+    function group_invite_function(groupId, leaderEmail) {
         let text;
         let person = prompt("초대할 이메일을 입력해주세요");
 
-        if (person == null || person == "") {
-            text = "이메일을 입력하지 않으셨습니다 :<";
+        if (person == null || person === "") {
+            alert(text = "이메일을 입력하지 않으셨습니다 :<");
         } else {
-            text = " 아이디 : " + person + "이/가 초대되었습니다 :)";
+            alert(text = " 아이디 : " + person + "이/가 초대되었습니다 :)" + groupId + leaderEmail)
         }
-        document.getElementById("test").innerHTML = text;
+    }
+
+    function group_invite_function2(groupId, leaderEmail) {
+        let inviteEmail = prompt("초대할 이메일을 입력해주세요");
+
+        if (inviteEmail == null || inviteEmail === "") {
+            alert("이메일을 입력하지 않으셨습니다 :<");
+            return;
+        }
+
+        let InviteGroupRequest = {
+            groupId: groupId,
+            leaderEmail: leaderEmail,
+            inviteEmail: inviteEmail
+        };
+
+        // Convert InviteGroupRequest to JSON string
+        let jsonData = JSON.stringify(InviteGroupRequest);
+
+        // Send JSON data to the backend
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/mypage/group/invite",
+            data: jsonData,
+            success: function (response) {
+                alert(" 아이디 : " + inviteEmail + "이/가 초대되었습니다 :)" + groupId + leaderEmail)
+            }
+        });
     }
 
     function openNewWindow() {
@@ -64,9 +93,9 @@
         </button>
         <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
         <button type="button" class="v10_582"
-                th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${group.groupId()})}'|"
-                th:each="group : ${groups}">
-            <span class="v10_584" th:text="${group.groupName()}"></span>
+                th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupCategory.groupId()})}'|"
+                th:each="groupCategory : ${groupCategories}">
+            <span class="v10_584" th:text="${groupCategory.groupName()}"></span>
             <hr class="nav_role">
         </button>
     </div>
@@ -122,7 +151,8 @@
                         <!--그룹명-->
                         <p class="h-line" th:text="${group.groupName()}">MOA</p>
                         <div class="group_invite_box">
-                            <button type="button" class="join_border" onclick="group_invite_function()"><span
+                            <button type="button" class="join_border"
+                                    th:onclick="group_invite_function2([[${group.groupId()}]], [[${member.email()}]])"><span
                                     class="name_join">그룹 초대</span></button>
                         </div>
                         <div class="group_delete_box">
@@ -131,26 +161,28 @@
                         </div>
 
                         <!--그룹원 한명-->
-                        <div class="v10_502" th:each="groupMember : ${group.groupMembers()}">
-                            <div class="white_box">
-                                <div class="v10_506">
-                                    <span class="v10_507" th:text="${groupMember.email()}">SEMI</span>
-                                    <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
-                                    <div class="profile_image_509"></div>
-                                    <div class="v10_22">
-                                        <div th:if="${groupMember.role()} != 'LEADER'">
-                                        <button type="button" class="login_border"><span class="name_login">추방</span></button>
+                        <th:block th:each="groupMember : ${group.groupMembers()}">
+                            <div class="v10_502">
+                                <div class="white_box">
+                                    <div class="v10_506">
+                                        <span class="v10_507" th:text="${groupMember.email()}">SEMI</span>
+                                        <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
+                                        <div class="profile_image_509"></div>
+                                        <div class="v10_22">
+                                            <button th:if="${groupMember.email()} != ${member.email()} or ${groupMember.role()} == 'MEMBER'"
+                                                    type="button"
+                                                    class="login_border"
+                                                    th:onclick="|location.href='@{/mypage/{leaderMemberId}/group/{groupMemberId}/remove(leaderMemberId=${member.id()}, groupMemberId=${groupMember.id()})}'|">
+                                                <span class="name_login">추방</span></button>
                                         </div>
                                     </div>
-                                    <span class="blue_font">#Interest</span>
                                 </div>
                             </div>
-                        </div>
-
-                        <!------그룹 한개 끝------>
-
+                        </th:block>
                     </th:block>
                 </div>
+                <!------그룹 한개 끝------>
+
 
                 <div class="v10_5011">
                     <!------초대받은 그룹------>
@@ -168,10 +200,14 @@
                                     프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다! 안녕하세요
                                 </div>
                                 <div class="v10_21">
-                                    <button type="button" class="join_border"><span class="name_join">수락</span></button>
+                                    <button type="button" class="join_border"><span class="name_join"
+                                                                                    th:onclick="|location.href='@{/mypage/{memberId}/group/{inviteId}/accept(memberId=${member.id()}, inviteId=${invitation.id()})}'|">수락</span>
+                                    </button>
                                 </div>
                                 <div class="v10_22">
-                                    <button type="button" class="login_border"><span class="name_login">거절</span>
+                                    <button type="button" class="login_border"
+                                            th:onclick="|location.href='@{/mypage/{memberId}/group/{inviteId}/reject(memberId=${member.id()}, inviteId=${invitation.id()})}'|">
+                                        <span class="name_login">거절</span>
                                     </button>
                                 </div>
 
