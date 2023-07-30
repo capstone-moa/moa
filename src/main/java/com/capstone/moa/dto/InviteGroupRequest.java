@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InviteGroupRequest {
 
-    private Long groupMemberId;
-    private String email;
+    private Long groupId;
+    private String leaderEmail;
+    private String inviteEmail;
 }

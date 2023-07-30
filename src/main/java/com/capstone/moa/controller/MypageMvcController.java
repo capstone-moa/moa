@@ -61,6 +61,12 @@ public class MypageMvcController {
         return "redirect:/";
     }
 
+    @PostMapping("/group/invite")
+    public String inviteMember(@RequestBody InviteGroupRequest request) {
+        invitationService.inviteToGroup(request);
+        return "redirect:/group/intro/" + request.getGroupId();
+    }
+
     @GetMapping("/{memberId}/group/{inviteId}/accept")
     public String pushAcceptBtn(@PathVariable("memberId") Long memberId, @PathVariable("inviteId") Long inviteId) {
         invitationService.acceptInvite(memberId, inviteId);
