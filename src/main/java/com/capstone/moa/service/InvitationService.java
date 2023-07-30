@@ -2,11 +2,13 @@ package com.capstone.moa.service;
 
 import com.capstone.moa.dto.FindInvitationResponse;
 import com.capstone.moa.dto.InviteGroupRequest;
+import com.capstone.moa.entity.Group;
 import com.capstone.moa.entity.GroupMember;
 import com.capstone.moa.entity.Invitation;
 import com.capstone.moa.entity.enums.InviteStatus;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.repository.GroupMemberRepository;
+import com.capstone.moa.repository.GroupRepository;
 import com.capstone.moa.repository.InvitationRepository;
 import com.capstone.moa.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,21 +23,21 @@ import java.util.Objects;
 public class InvitationService {
 
     private final GroupMemberRepository groupMemberRepository;
+    private final GroupRepository groupRepository;
     private final InvitationRepository invitationRepository;
     private final MemberRepository memberRepository;
 
     @Transactional
     public void inviteToGroup(InviteGroupRequest request) {
-        GroupMember leader = groupMemberRepository.findById(request.getGroupMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("GroupMember Not found"));
-        Member member = memberRepository.findByEmail(request.getEmail())
+        GroupMember leader = findGroupLeader(request.getGroupId(), request.getLeaderEmail());
+        Member member = memberRepository.findByEmail(request.getInviteEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
         if (!leader.isGroupLeader()) {
             throw new IllegalArgumentException("You are not the leader of this group");
         }
         if (groupMemberRepository.existsGroupMemberByGroupAndMember(leader.getGroup(), member)) {
-            throw new IllegalArgumentException(request.getEmail() + " is already a GroupMember");
+            throw new IllegalArgumentException(request.getInviteEmail() + " is already a GroupMember");
         }
         if (invitationRepository.existsByGroupAndMember(leader.getGroup(), member)) {
             throw new IllegalArgumentException("Invitation already sent");
@@ -100,4 +102,17 @@ public class InvitationService {
                 .toList();
     }
 
+    private GroupMember findGroupLeader(Long groupId, String email) {
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(() -> new IllegalArgumentException("Group not found"));
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+        GroupMember leader = groupMemberRepository.findGroupMemberByGroupAndMember(group, member)
+                .orElseThrow(() -> new IllegalArgumentException("GroupMember not found"));
+        if (!leader.isGroupLeader()) {
+            throw new IllegalArgumentException("You are not the Leader of this group");
+        }
+        return leader;
+    }
 }
