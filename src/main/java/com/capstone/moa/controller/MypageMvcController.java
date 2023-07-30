@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/mypage")
-public class MemberMvcController {
+public class MypageMvcController {
 
     private final PostService postService;
     private final GroupService groupService;
@@ -47,6 +47,18 @@ public class MemberMvcController {
 
         model.addAttribute("createGroupRequest", new CreateGroupRequest());
         return "mypage/mypage_group";
+    }
+
+    @GetMapping("/group/create")
+    public String getCreateGroupForm(Model model) {
+        model.addAttribute("createGroupRequest", new CreateGroupRequest());
+        return "mypage/mypage_group_write";
+    }
+
+    @PostMapping("/group/save")
+    public String saveGroup(CreateGroupRequest request) {
+        groupService.createGroup(request);
+        return "redirect:/";
     }
 
     @GetMapping("/{memberId}/group/{inviteId}/accept")
