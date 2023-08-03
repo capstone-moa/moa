@@ -6,7 +6,7 @@ body {
 }
 .v10_483 {
   width: 100%;
-  height: 100%;
+  height: auto;
   background: rgba(247,249,251,1);
   overflow: hidden;
 }
@@ -274,7 +274,7 @@ hr.nav_role{
 /**************마이페이지 메인소개***************/
 .mypage_intro {
   width: 100%;
-  height: 1214px;
+  height: auto;
   position: relative;
   left: 364px;
   overflow: hidden;
@@ -534,7 +534,7 @@ hr.nav_role{
 /***************그룹 관리*****************/
 .v10_780 {
   width: 862px;
-  height: 1214px;
+  height: auto;
   position: relative;
   top: 65px;
   left: 60px;
@@ -620,7 +620,7 @@ hr.nav_role{
 
 .v10_502 {
   width: 848px;
-  height: 100px;
+  height: 110px;
   position: relative;
   top: -20px;
   overflow: hidden;
@@ -705,6 +705,10 @@ hr.nav_role{
   top: 8px;
   left: 650px;
 }
+.v10_223 {
+  width: 900px;
+  height: 80px;
+}
 
 .login_border {
   width: 91px;
@@ -776,7 +780,7 @@ hr.nav_role{
   width: 848px;
   opacity: 1;
   position: relative;
-  top: 50px;
+
 }
 .group_invite {
   width: 848px;
