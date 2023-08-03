@@ -6,7 +6,7 @@ body {
 }
 .v10_483 {
   width: 100%;
-  height: 1800px;
+  height: auto;
   background: rgba(247,249,251,1);
   overflow: hidden;
 }
@@ -285,7 +285,7 @@ hr.nav_role{
 /**************그룹페이지 메인소개***************/
 .grouppage_intro {
   width: 100%;
-  height: 1600px;
+  height: auto;
   position: relative;
   left: 364px;
   overflow: hidden;
@@ -575,7 +575,7 @@ hr.nav_role{
 /***************그룹 소개*****************/
 .v10_780 {
   width: 862px;
-  height: 1600px;
+  height: auto;
   position: relative;
   top: 65px;
   left: 60px;
@@ -640,7 +640,7 @@ hr.nav_role{
 /*****************게시글 한개*************/
 .v10_501 {
   width: 848px;
-  height: 1600px;
+  height: auto;
   opacity: 1;
   position: relative;
   top: 80px;
@@ -741,4 +741,9 @@ hr.nav_role{
   text-align: center;
   border: none;
   background: none;
+}
+
+.v10_223 {
+  width: 900px;
+  height: 180px;
 }

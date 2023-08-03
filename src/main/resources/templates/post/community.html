@@ -37,11 +37,11 @@
     <!--좌측 네비게이션 바-->
     <div class="category">
         <th:block th:each="interest : ${interests}">
-        <button type="button" class="v10_582" th:onclick="|location.href='@{/posts/community(interest=${interest})}'|" >
-            <span class="v10_584" th:text="${interest.name()}" ></span>
-            <div class="hashtag"></div>
-            <hr class="nav_role">
-        </button>
+            <button type="button" class="v10_582" th:onclick="|location.href='@{/posts/community(interest=${interest})}'|" >
+                <span class="v10_584" th:text="${interest.name()}" ></span>
+                <div class="hashtag"></div>
+                <hr class="nav_role">
+            </button>
         </th:block>
     </div>
 
@@ -91,6 +91,8 @@
                 </div>
             </th:block>
 
+            <!---간격 띄우기-->
+            <div class="v10_223"></div>
         </div>
     </div>
 </div>

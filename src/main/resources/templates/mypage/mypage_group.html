@@ -15,7 +15,7 @@
         let person = prompt("초대할 이메일을 입력해주세요");
 
         if (person == null || person === "") {
-            alert(text = "이메일을 입력하지 않으셨습니다 :<");
+            alert(text = "이메일을 입력하지 않으셨습니다 :(");
         } else {
             alert(text = " 아이디 : " + person + "이/가 초대되었습니다 :)" + groupId + leaderEmail)
         }
@@ -25,7 +25,7 @@
         let inviteEmail = prompt("초대할 이메일을 입력해주세요");
 
         if (inviteEmail == null || inviteEmail === "") {
-            alert("이메일을 입력하지 않으셨습니다 :<");
+            alert("이메일을 입력하지 않으셨습니다 :(");
             return;
         }
 
@@ -178,11 +178,43 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="v10_502">
+                                <div class="white_box">
+                                    <div class="v10_506">
+                                        <span class="v10_507" th:text="${groupMember.email()}">SEMI</span>
+                                        <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
+                                        <div class="profile_image_509"></div>
+                                        <div class="v10_22">
+                                            <button th:if="${groupMember.email()} != ${member.email()} or ${groupMember.role()} == 'MEMBER'"
+                                                    type="button"
+                                                    class="login_border"
+                                                    th:onclick="|location.href='@{/mypage/{leaderMemberId}/group/{groupMemberId}/remove(leaderMemberId=${member.id()}, groupMemberId=${groupMember.id()})}'|">
+                                                <span class="name_login">추방</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="v10_502">
+                                <div class="white_box">
+                                    <div class="v10_506">
+                                        <span class="v10_507" th:text="${groupMember.email()}">SEMI</span>
+                                        <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
+                                        <div class="profile_image_509"></div>
+                                        <div class="v10_22">
+                                            <button th:if="${groupMember.email()} != ${member.email()} or ${groupMember.role()} == 'MEMBER'"
+                                                    type="button"
+                                                    class="login_border"
+                                                    th:onclick="|location.href='@{/mypage/{leaderMemberId}/group/{groupMemberId}/remove(leaderMemberId=${member.id()}, groupMemberId=${groupMember.id()})}'|">
+                                                <span class="name_login">추방</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </th:block>
+
                     </th:block>
                 </div>
                 <!------그룹 한개 끝------>
-
 
                 <div class="v10_5011">
                     <!------초대받은 그룹------>
@@ -210,11 +242,11 @@
                                         <span class="name_login">거절</span>
                                     </button>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
+                    <!---간격 띄우기-->
+                    <div class="v10_223"></div>
                 </div>
             </div>
         </div>
