@@ -6,5 +6,9 @@ public enum Job {
     DESIGNER,
     PLANNER,
     MARKETER,
-    ETC,
+    ETC;
+
+    public static Job find(String job) {
+        return Job.valueOf(job.toUpperCase());
+    }
 }
