@@ -38,6 +38,14 @@ input {
   font-size: 14px;
 }
 
+button {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
 .img_search {
   width: 40px;
   height: auto;
@@ -234,7 +242,7 @@ input {
 #join-form > input::placeholder{
   color: #D2D2D2;
 }
-#join-form > input[type="submit"]{
+#button{
   color: #fff;
   font-size: 16px;
   background-color: rgba(0,119,181,1);

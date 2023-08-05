@@ -24,7 +24,7 @@ public class AuthService {
     private final JwtService jwtService;
 
     @Transactional
-    public void signup(SignupRequest request) {
+    public void join(JoinRequest request) {
         if (memberRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("이미 가입한 회원입니다.");
         }

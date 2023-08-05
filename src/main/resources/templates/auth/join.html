@@ -1,12 +1,33 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet" />
-    <link href="./css/join.css" rel="stylesheet" />
+    <link href="/css/join.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <title>join</title>
 </head>
+
+<script>
+    function handleJoin(event) {
+        event.preventDefault();
+
+        fetch('http://localhost:8080/auth/join', {
+            method: 'POST',
+            body: new FormData(document.getElementById('join-form'))
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('회원가입 되었습니다. 로그인 하세요');
+                } else {
+                    alert('회원가입 실패. 아이디를 확인해주세요');
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error.message);
+            })
+
+    }
+</script>
 
 <body>
 <div class="v10_483">
@@ -38,28 +59,23 @@
         <div class="join-wrapper">
             <h2>회원가입</h2>
             <br>
-            <form method="post" action="서버url" id="join-form">
-                <input type="text" placeholder="name">
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="github 주소">
-                <input type="password" placeholder="Password">
-                <select name="interest" form="interest">
-                    <option>관심분야</option>
-                    <option value="americano">JAVA</option>
-                    <option value="caffe latte">SPTING</option>
-                    <option value="cafe au lait">SPRING BOOT</option>
-                    <option value="espresso">JSP</option>
+            <form th:object="${joinRequest}" method="post" th:action="@{/auth/join}" id="join-form">
+                <input type="text" placeholder="name" name="name">
+                <input type="text" placeholder="Email" name="email">
+                <input type="text" placeholder="github 주소" name="github">
+                <input type="password" placeholder="Password" name="password">
+                <select th:name="interest" th:field="*{interest}">
+                    <option value="">관심사 선택</option>
+                    <option th:each="interest : ${interests}" th:value="${interest.name()}"
+                            th:text="${interest.name()}"></option>
                 </select>
-                <select name="job" form="job">
-                    <option>직업</option>
-                    <option value="americano">FRONT</option>
-                    <option value="caffe latte">BACK</option>
-                    <option value="cafe au lait">DESIGNER</option>
-                    <option value="espresso">STUDENT</option>
-                    <option value="espresso">NOTHING</option>
+                <select th:name="job" th:field="*{job}">
+                    <option value="">직업</option>
+                    <option th:each="job : ${jobs}" th:value="${job.name()}"
+                            th:text="${job.name()}"></option>
                 </select>
                 <br><br><hr>
-                <input type="submit" value="회원가입">
+                <button type="submit" id="button">회원 가입</button>
                 <br><span>이미 회원이신가요? </span><span class="v33_1948" onclick="location.href='login.html'">로그인</span>
             </form>
         </div>
