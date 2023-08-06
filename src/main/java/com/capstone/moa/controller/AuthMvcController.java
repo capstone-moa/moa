@@ -1,11 +1,13 @@
 package com.capstone.moa.controller;
 
-import com.capstone.moa.dto.LoginRequest;
 import com.capstone.moa.dto.JoinRequest;
+import com.capstone.moa.dto.LoginRequest;
+import com.capstone.moa.dto.TokenResponse;
 import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.enums.Job;
 import com.capstone.moa.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,12 @@ public class AuthMvcController {
     public String login(Model model) {
         model.addAttribute("loginRequest", new LoginRequest());
         return "auth/login";
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> doLogin(LoginRequest request) {
+        TokenResponse token = authService.login(request);
+        return ResponseEntity.ok().body(token);
     }
 
     @ModelAttribute("interests")

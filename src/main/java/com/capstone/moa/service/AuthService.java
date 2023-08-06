@@ -1,6 +1,9 @@
 package com.capstone.moa.service;
 
-import com.capstone.moa.dto.*;
+import com.capstone.moa.dto.JoinRequest;
+import com.capstone.moa.dto.LoginRequest;
+import com.capstone.moa.dto.TokenResponse;
+import com.capstone.moa.dto.UserDetailsImpl;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.enums.Job;
@@ -26,7 +29,7 @@ public class AuthService {
     @Transactional
     public void join(JoinRequest request) {
         if (memberRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("이미 가입한 회원입니다.");
+            throw new IllegalArgumentException("이미 가입한 회원입니다.");
         }
 
         Member member = Member.builder()
@@ -43,14 +46,14 @@ public class AuthService {
 
     @Transactional
     public TokenResponse login(LoginRequest request) {
+        Member member = memberRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Member Not Found"));
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
                 )
         );
-        Member member = memberRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("Member Not Found"));
         String token = jwtService.generateToken(new UserDetailsImpl(member));
         return TokenResponse.of(token);
     }

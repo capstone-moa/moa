@@ -8,8 +8,7 @@
 </head>
 
 <script>
-    function handleJoin(event) {
-        event.preventDefault();
+    function handleJoin() {
 
         fetch('http://localhost:8080/auth/join', {
             method: 'POST',
@@ -18,6 +17,7 @@
             .then(response => {
                 if (response.ok) {
                     alert('회원가입 되었습니다. 로그인 하세요');
+                    location.href="/auth/login"
                 } else {
                     alert('회원가입 실패. 아이디를 확인해주세요');
                 }
@@ -75,7 +75,7 @@
                             th:text="${job.name()}"></option>
                 </select>
                 <br><br><hr>
-                <button type="submit" id="button">회원 가입</button>
+                <button type="button" id="button" onclick="handleJoin()">회원 가입</button>
                 <br><span>이미 회원이신가요? </span><span class="v33_1948" onclick="location.href='login.html'">로그인</span>
             </form>
         </div>

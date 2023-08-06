@@ -37,11 +37,11 @@ public class SecurityConfig {
 
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("api/auth/**").permitAll()
-                .requestMatchers("auth/**").permitAll()
-                .requestMatchers("/", "/css/**", "/images/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/", "/css/**", "/images/**",  "/favicon.ico", "/js/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "posts/**", "/api/posts/**").permitAll()
+                .anyRequest().permitAll()
 
                 .and()
                 .authenticationProvider(authenticationProvider)
