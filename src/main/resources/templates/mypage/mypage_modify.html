@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link href="/css/mypage_modify.css" rel="stylesheet" />
+    <title>mypage_modify</title>
+</head>
+
+<body>
+<div class="v10_483">
+    <!--로그인 한 헤더-->
+    <div class="header_bar">
+        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+        <div class='v-line'></div>
+        <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
+        <span class="nav_text_community">커뮤니티</span>
+        <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
+        <span class="nav_text_team">팀원모집</span>
+        <div class="search">
+            <input type="text" placeholder="검색어 입력">
+            <button type="button" onclick="" class="img_search">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+        <div class="v10_2253" th:onclick="|location.href='@{/posts/mypage_activity}'|">
+            <div class="header_profile_image"></div>
+            <span class="header_profile_name">hong kildong</span>
+        </div>
+        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+    </div>
+
+    <!--게시판 메인-->
+    <div class="v104_2240">
+        <div class="board_view">
+            <div class="v104_2505">
+                <!-- 회원정보 수정 ---이메일은 수정 불가능하게 막아뒀습니당-->
+                <span class="v10_782">회원정보<hr class="bar"></span>
+                <form>
+                    <div class="writer_profile">
+                        <div class="v104_2511">이름  <input class="text_box" placeholder="회원명" th:text="${postDetail.memberName()}"size="30px"></div>
+                        <div class="v10_770">이메일  <input class="text_box" placeholder="moa_backend@gmail.com" size="30px" readonly></div>
+                        <div class="v104_2512">직업  <input class="text_box" placeholder="학생" th:text="${postDetail.memberJob()}"size="30px"></div>
+                        <div class="v10_771_intro">관심사
+                            <select name="interest" class="text_box" id="tag" th:field="*{interest}">
+                                <option value="">관심사</option>
+                                <option th:each="interest : ${interests}" th:value="${interest.name()}"th:text="${interest.name()}"></option>
+                            </select>
+                        </div>
+                        <div class="v10_769_intro">GitHub : <input class="text_box" placeholder="https://github.com/capstone-moa" size="30px"></div>
+                        <div class="title_intro">회원소개
+                            <textarea name="projectDescription" class="v10_783" th:text="${groupIntro.projectDescription()}" required>개발자들을 연결시켜 공모전개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공</textarea>
+                        </div>
+                        <div class="writer_image"></div>
+                        <div class="v30_1649">
+                            <button type="button" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${member.id()})}'|" class="button"><span class="v30_1651">작성</span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
