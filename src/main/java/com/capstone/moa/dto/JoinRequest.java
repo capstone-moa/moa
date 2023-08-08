@@ -27,7 +27,7 @@ public class JoinRequest {
                 .email(email)
                 .password(new BCryptPasswordEncoder().encode(password))
                 .github(github)
-                .role(Role.ROLE_USER)
+                .role(Role.USER)
                 .interest(Interest.find(interest))
                 .job(Job.find(job))
                 .build();

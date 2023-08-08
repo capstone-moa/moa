@@ -13,7 +13,7 @@ public record UserDetailsImpl(Member member) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(Role.ROLE_USER.name()));
+        return List.of(new SimpleGrantedAuthority(Role.USER.name()));
     }
 
     @Override
