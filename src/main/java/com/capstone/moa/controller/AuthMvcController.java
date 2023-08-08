@@ -1,23 +1,19 @@
 package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.JoinRequest;
-import com.capstone.moa.dto.LoginRequest;
-import com.capstone.moa.dto.TokenResponse;
 import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.enums.Job;
 import com.capstone.moa.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/auth")
 public class AuthMvcController {
 
     private final AuthService authService;
@@ -29,22 +25,19 @@ public class AuthMvcController {
     }
 
     @PostMapping("/join")
-    public String doJoin(JoinRequest request) {
+    public String doJoin(JoinRequest request, BindingResult result) {
+        if (result.hasErrors()) {
+            return "auth/join";
+        }
         authService.join(request);
-        return "redirect:/auth/login";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("loginRequest", new LoginRequest());
+    public String login() {
         return "auth/login";
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> doLogin(LoginRequest request) {
-        TokenResponse token = authService.login(request);
-        return ResponseEntity.ok().body(token);
-    }
 
     @ModelAttribute("interests")
     private Interest[] putInterest() {
