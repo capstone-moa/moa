@@ -1,6 +1,10 @@
 package com.capstone.moa.config;
 
+import com.capstone.moa.security.CustomAuthenticationFailureHandler;
+import com.capstone.moa.security.CustomAuthenticationSuccessHandler;
+import com.capstone.moa.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final CustomAuthenticationSuccessHandler authenticationSuccessHandler;
+    private final CustomAuthenticationFailureHandler authenticationFailureHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -28,9 +34,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/login", "/join").permitAll()
-                .requestMatchers("/", "/css/**", "/images/**", "/favicon.ico", "/js/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "posts/**", "/api/posts/**").permitAll()
-                .anyRequest().authenticated();
+                .requestMatchers(HttpMethod.GET, "posts/**", "/api/posts/**", "/error", "/resources/**").permitAll()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login/save")
+                .defaultSuccessUrl("/posts")
+
+                .successHandler(authenticationSuccessHandler)
+                .failureHandler(authenticationFailureHandler)
+                .permitAll();
 
 
         return http.build();

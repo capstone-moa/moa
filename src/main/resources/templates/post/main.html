@@ -1,35 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <link href="/css/main.css" rel="stylesheet"/>
+    <link rel="icon" href="data:,">
     <title>moa</title>
 </head>
-<body>
 
+
+<body>
 <!--헤더-->
-<div class="header_bar">
-    <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
-    <div class='v-line'></div>
-    <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
-    <span class="nav_text_community">커뮤니티</span>
-    <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
-    <span class="nav_text_team">팀원모집</span>
-    <div class="search">
-        <input type="text" placeholder="검색어 입력">
-        <button type="button" onclick="" class="img_search">
-            <i class="material-icons">search</i>
-        </button>
-    </div>
-    <div class="v10_2253">
-        <button type="button" th:onclick="|location.href='@{/posts/login}'|" class="login_border"><span class="name_login">로그인</span></button>
-    </div>
-    <div class="v10_2261">
-        <button type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join">회원가입</span></button>
-    </div>
-    <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+<div class="container" >
+    <div th:replace="~{common/header::header}"></div>
 </div>
 
 
@@ -38,10 +22,12 @@
     <div class="community_board">
         <!--커뮤니티 메인-->
         <div class="hidden">
-            <div class="v10_157"></div><span class="v10_158"><br><hr>개발자들이 소통하는 공간</span>
+            <div class="v10_157"></div>
+            <span class="v10_158"><br><hr>개발자들이 소통하는 공간</span>
             <span class="v10_160">커뮤니티</span>
             <div class="v30_1649">
-                <button type="button" th:onclick="|location.href='@{/posts/write}'|" class="button"><span class="v30_1651">작성</span></button>
+                <button type="button" th:onclick="|location.href='@{/posts/write}'|" class="button"><span
+                        class="v30_1651">작성</span></button>
             </div>
         </div>
         <!--커뮤니티 게시글-->
