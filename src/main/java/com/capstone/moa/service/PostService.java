@@ -52,7 +52,7 @@ public class PostService {
     @Transactional(readOnly = true)
     public FindPostsResponse findPostsByPostType(String postType) {
         PostType selectedPostType = PostType.find(postType);
-        List<FindPostResponse> posts = postRepository.findAllByPostType(selectedPostType)
+        List<FindPostResponse> posts = postRepository.findAllByTypeFetch(selectedPostType)
                 .stream()
                 .map(FindPostResponse::from)
                 .toList();

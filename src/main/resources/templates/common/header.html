@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link href="/css/main.css" rel="stylesheet"/>
+    <link rel="icon" href="data:,">
+    <title>moa</title>
+</head>
+
+
+<body>
+<!--헤더-->
+<div th:fragment="header" class="header_bar">
+    <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+    <div class='v-line'></div>
+    <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
+    <span class="nav_text_community">커뮤니티</span>
+    <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
+    <span class="nav_text_team">팀원모집</span>
+    <div class="search">
+        <input type="text" placeholder="검색어 입력">
+        <button type="button" onclick="" class="img_search">
+            <i class="material-icons">search</i>
+        </button>
+    </div>
+    <div class="v10_2253">
+        <button sec:authorize="isAnonymous()" type="button" th:onclick="|location.href='@{/login}'|" class="login_border"><span
+                class="name_login" >로그인</span></button>
+        <button sec:authorize="isAuthenticated()" type="button" th:onclick="|location.href='@{/logout}'|" class="login_border"><span
+                class="name_login" >로그아웃</span></button>
+    </div>
+
+
+    <div id="resultContainer"></div>
+    <div class="v10_2261" >
+        <button <button sec:authorize="isAnonymous()" type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join" >회원가입</span></button>
+    </div>
+    <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
+</div>

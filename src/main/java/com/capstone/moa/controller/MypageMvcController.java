@@ -26,7 +26,7 @@ public class MypageMvcController {
     @GetMapping("/{memberId}/activity")
     public String findMemberActivities(@PathVariable("memberId") Long memberId, Model model) {
         FindPostsResponse postList = postService.findPostsByMember(memberId);
-        FindMemberByIdResponse member = memberService.findMemberById(memberId);
+        FindMemberResponse member = memberService.findMemberById(memberId);
 
         model.addAttribute("member", member);
         model.addAttribute("posts", postList.posts());
@@ -38,7 +38,7 @@ public class MypageMvcController {
         List<FindGroupByLeaderMemberIdResponse> groups = groupService.findGroupsByLeaderMemberId(memberId);
         List<FindGroupsByMemberIdResponse> groupsForCategory = groupService.findGroupsByMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
-        FindMemberByIdResponse member = memberService.findMemberById(memberId);
+        FindMemberResponse member = memberService.findMemberById(memberId);
 
         model.addAttribute("member", member);
         model.addAttribute("groups", groups);

@@ -1,48 +1,36 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet" />
-    <link href="./css/login.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link href="/css/login.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="icon" href="data:,">
     <title>login</title>
 </head>
-
 <body>
 <div class="v10_483">
     <!--헤더-->
-    <div class="header_bar">
-        <div class="logo" onclick="location.href='main.html'"></div>
-        <div class='v-line'></div>
-        <div class="community" onclick="location.href='community.html'"></div>
-        <span class="nav_text_community">커뮤니티</span>
-        <div class="team" onclick="location.href='team.html'"></div>
-        <span class="nav_text_team">팀원모집</span>
-        <div class="search">
-            <input type="text" placeholder="검색어 입력">
-            <button type="button" onclick="" class="img_search">
-                <i class="material-icons">search</i>
-            </button>
-        </div>
-        <div class="v10_2253">
-            <button type="button" onclick="location.href='login.html'" class="login_border"><span class="name_login">로그인</span></button>
-        </div>
-        <div class="v10_2261">
-            <button type="button" onclick="location.href='join.html'" class="join_border"><span class="name_join">회원가입</span></button>
-        </div>
-        <div class="logo" onclick="location.href='main.html'"></div>
+    <div class="container" >
+        <div th:replace="~{common/header::header}"></div>
     </div>
+
 
     <!--로그인 입력 폼-->
     <div class="v33_1648">
         <div class="login-wrapper">
             <h2>로그인</h2>
-            <form method="post" action="서버url" id="login-form">
-                <input type="text" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <br><br><hr>
-                <input type="submit" value="Login">
-                <div class="v33_1650"></div><span class="v33_1651">아직 회원이 아니신가요? </span><span class="v33_1948" onclick="location.href='join.html'"> 회원가입</span>
+            <div th:if="${param.error}">
+                <p th:text="${exception}" class="alert alert-danger"></p>
+            </div>
+            <form method="post" id="login-form" th:action="@{/login/save}">
+
+                <input type="text" placeholder="Email" name="username">
+                <input type="password" placeholder="Password" name="password">
+                <br><br>
+                <hr>
+
+                <button type="submit" id="Login" >로그인</button>
+                <div class="v33_1650"></div>
+                <span class="v33_1651">아직 회원이 아니신가요? </span><span class="v33_1948" th:onclick="|location.href='@{/join}'|"> 회원가입</span>
             </form>
         </div>
     </div>

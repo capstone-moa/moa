@@ -2,11 +2,11 @@ package com.capstone.moa.dto;
 
 import com.capstone.moa.entity.Member;
 
-public record FindMemberByIdResponse(
+public record FindMemberResponse(
         Long id, String name, String email, String interest, String job
 ) {
-    public static FindMemberByIdResponse from(Member member) {
-        return new FindMemberByIdResponse(
+    public static FindMemberResponse from(Member member) {
+        return new FindMemberResponse(
                 member.getId(),
                 member.getName(),
                 member.getEmail(),
