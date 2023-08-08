@@ -9,29 +9,8 @@
 <body>
 <div class="v10_483">
     <!--헤더-->
-    <div class="header_bar">
-        <div class="logo" onclick="location.href='main.html'"></div>
-        <div class='v-line'></div>
-        <div class="community" onclick="location.href='community.html'"></div>
-        <span class="nav_text_community">커뮤니티</span>
-        <div class="team" onclick="location.href='team.html'"></div>
-        <span class="nav_text_team">팀원모집</span>
-        <div class="search">
-            <input type="text" placeholder="검색어 입력">
-            <button type="button" onclick="" class="img_search">
-                <i class="material-icons">search</i>
-            </button>
-        </div>
-        <div class="v10_2253">
-            <button type="button" onclick="location.href='login.html'" class="login_border"><span
-                    class="name_login">로그인</span></button>
-        </div>
-
-        <div class="v10_2261">
-            <button type="button" onclick="location.href='join.html'" class="join_border"><span
-                    class="name_join" >회원가입</span></button>
-        </div>
-        <div class="logo" onclick="location.href='main.html'"></div>
+    <div class="container" >
+        <div th:replace="~{common/header::header}"></div>
     </div>
 
 

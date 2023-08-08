@@ -1,31 +1,42 @@
 package com.capstone.moa.controller;
 
-import com.capstone.moa.dto.FindPostWithCommentsResponse;
-import com.capstone.moa.dto.FindPostsResponse;
-import com.capstone.moa.dto.WriteCommentRequest;
-import com.capstone.moa.dto.WritePostRequest;
+import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.enums.Interest;
+import com.capstone.moa.service.MemberService;
 import com.capstone.moa.service.PostService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/posts")
 public class PostMvcController {
 
     private final PostService postService;
+    private final MemberService memberService;
     private final String COMMUNITY = "COMMUNITY";
     private final String TEAM = "TEAM";
 
     @GetMapping
-    public String findAllPosts(Model model) {
+    public String  findAllPosts(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
         FindPostsResponse communityList = postService.findPostsByPostType(COMMUNITY);
         FindPostsResponse teamList = postService.findPostsByPostType(TEAM);
+        String email = "";
         model.addAttribute("communityPosts", communityList.posts());
         model.addAttribute("teamPosts", teamList.posts());
+
+        if (userDetails != null) {
+            FindMemberResponse memberResponse = memberService.findMemberByEmail(userDetails.getUsername());
+            email = memberResponse.email();
+        }else {
+            email = "아무도 로그인하지 않음";
+        }
+        log.info("login user : {}", email);
 
         return "post/main";
     }
