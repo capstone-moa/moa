@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
@@ -10,18 +10,7 @@
     <title>mypage_group</title>
 </head>
 <script th:inline="javascript">
-    function group_invite_function(groupId, leaderEmail) {
-        let text;
-        let person = prompt("초대할 이메일을 입력해주세요");
-
-        if (person == null || person === "") {
-            alert(text = "이메일을 입력하지 않으셨습니다 :(");
-        } else {
-            alert(text = " 아이디 : " + person + "이/가 초대되었습니다 :)" + groupId + leaderEmail)
-        }
-    }
-
-    function group_invite_function2(groupId, leaderEmail) {
+    function group_invite_function(groupId) {
         let inviteEmail = prompt("초대할 이메일을 입력해주세요");
 
         if (inviteEmail == null || inviteEmail === "") {
@@ -31,7 +20,6 @@
 
         let InviteGroupRequest = {
             groupId: groupId,
-            leaderEmail: leaderEmail,
             inviteEmail: inviteEmail
         };
 
@@ -45,7 +33,7 @@
             url: "/mypage/group/invite",
             data: jsonData,
             success: function (response) {
-                alert(" 아이디 : " + inviteEmail + "이/가 초대되었습니다 :)" + groupId + leaderEmail)
+                alert(" 아이디 : " + inviteEmail + "이/가 초대되었습니다 :)")
             }
         });
     }
@@ -79,6 +67,8 @@
         <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
     </div>
 
+
+    </div>
     <!--좌측 네비게이션 바-->
     <div class="category">
         <button type="button" class="v10_582" onclick="">
@@ -141,7 +131,7 @@
                 <span class="v10_782">그룹 관리</span>
                 <div class="group_create">
                     <a th:href="@{/mypage/group/create}" target="_blank" id="myLink"></a>
-                    <button type="button" class="join_border" onclick="openNewWindow()">
+                    <button th:if="${check} == 'true'" type="button" class="join_border" onclick="openNewWindow()">
                         <span class="name_join">그룹 생성</span></button>
                 </div>
 
@@ -151,12 +141,12 @@
                         <!--그룹명-->
                         <p class="h-line" th:text="${group.groupName()}">MOA</p>
                         <div class="group_invite_box">
-                            <button type="button" class="join_border"
-                                    th:onclick="group_invite_function2([[${group.groupId()}]], [[${member.email()}]])"><span
+                            <button type="button" class="join_border" th:if="${check} == 'true'"
+                                    th:onclick="group_invite_function([[${group.groupId()}]], [[${member.email()}]])"><span
                                     class="name_join">그룹 초대</span></button>
                         </div>
-                        <div class="group_delete_box">
-                            <button type="button" class="login_border" onclick="group_delete_function()"><span
+                        <div class="group_delete_box" >
+                            <button th:if="${check} == 'true'" type="button" class="login_border" onclick="group_delete_function()"><span
                                     class="name_login">그룹 삭제</span></button>
                         </div>
 
@@ -178,38 +168,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="v10_502">
-                                <div class="white_box">
-                                    <div class="v10_506">
-                                        <span class="v10_507" th:text="${groupMember.email()}">SEMI</span>
-                                        <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
-                                        <div class="profile_image_509"></div>
-                                        <div class="v10_22">
-                                            <button th:if="${groupMember.email()} != ${member.email()} or ${groupMember.role()} == 'MEMBER'"
-                                                    type="button"
-                                                    class="login_border"
-                                                    th:onclick="|location.href='@{/mypage/{leaderMemberId}/group/{groupMemberId}/remove(leaderMemberId=${member.id()}, groupMemberId=${groupMember.id()})}'|">
-                                                <span class="name_login">추방</span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="v10_502">
-                                <div class="white_box">
-                                    <div class="v10_506">
-                                        <span class="v10_507" th:text="${groupMember.email()}">SEMI</span>
-                                        <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
-                                        <div class="profile_image_509"></div>
-                                        <div class="v10_22">
-                                            <button th:if="${groupMember.email()} != ${member.email()} or ${groupMember.role()} == 'MEMBER'"
-                                                    type="button"
-                                                    class="login_border"
-                                                    th:onclick="|location.href='@{/mypage/{leaderMemberId}/group/{groupMemberId}/remove(leaderMemberId=${member.id()}, groupMemberId=${groupMember.id()})}'|">
-                                                <span class="name_login">추방</span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </th:block>
 
                     </th:block>

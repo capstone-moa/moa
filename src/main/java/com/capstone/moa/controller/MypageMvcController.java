@@ -7,6 +7,7 @@ import com.capstone.moa.service.InvitationService;
 import com.capstone.moa.service.MemberService;
 import com.capstone.moa.service.PostService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +35,18 @@ public class MypageMvcController {
     }
 
     @GetMapping("/{memberId}/group")
-    public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model) {
+    public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         List<FindGroupByLeaderMemberIdResponse> groups = groupService.findGroupsByLeaderMemberId(memberId);
         List<FindGroupsByMemberIdResponse> groupsForCategory = groupService.findGroupsByMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
         FindMemberResponse member = memberService.findMemberById(memberId);
+
+        String check = "false";
+        if (userDetails != null && userDetails.getUsername().equals(member.email())) {
+            check = "true";
+        }
+        System.out.println(check);
+        model.addAttribute("check", check);
 
         model.addAttribute("member", member);
         model.addAttribute("groups", groups);
@@ -62,8 +70,8 @@ public class MypageMvcController {
     }
 
     @PostMapping("/group/invite")
-    public String inviteMember(@RequestBody InviteGroupRequest request) {
-        invitationService.inviteToGroup(request);
+    public String inviteMember(@RequestBody InviteGroupRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        invitationService.inviteToGroup(request, userDetails.getUsername());
         return "redirect:/group/intro/" + request.getGroupId();
     }
 

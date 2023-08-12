@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 public class InviteGroupRequest {
 
     private Long groupId;
-    private String leaderEmail;
     private String inviteEmail;
 }
