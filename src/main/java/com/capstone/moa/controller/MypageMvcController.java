@@ -35,18 +35,11 @@ public class MypageMvcController {
     }
 
     @GetMapping("/{memberId}/group")
-    public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model) {
         List<FindGroupByLeaderMemberIdResponse> groups = groupService.findGroupsByLeaderMemberId(memberId);
         List<FindGroupsByMemberIdResponse> groupsForCategory = groupService.findGroupsByMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
         FindMemberResponse member = memberService.findMemberById(memberId);
-
-        String check = "false";
-        if (userDetails != null && userDetails.getUsername().equals(member.email())) {
-            check = "true";
-        }
-        System.out.println(check);
-        model.addAttribute("check", check);
 
         model.addAttribute("member", member);
         model.addAttribute("groups", groups);
