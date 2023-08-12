@@ -16,8 +16,8 @@ public class PostController {
 
     @Operation(summary = "게시글 등록")
     @PostMapping
-    public ResponseEntity<Void> writePost(@RequestBody WritePostRequest request) {
-        postService.writePost(request);
+    public ResponseEntity<Void> writePost(@RequestBody WritePostRequest request, String email) {
+        postService.writePost(request, email);
         return ResponseEntity.noContent().build();
     }
 

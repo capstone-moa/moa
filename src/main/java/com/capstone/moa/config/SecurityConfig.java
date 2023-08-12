@@ -2,7 +2,6 @@ package com.capstone.moa.config;
 
 import com.capstone.moa.security.CustomAuthenticationFailureHandler;
 import com.capstone.moa.security.CustomAuthenticationSuccessHandler;
-import com.capstone.moa.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -32,8 +31,8 @@ public class SecurityConfig {
 
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/login", "/join").permitAll()
+                .requestMatchers("/api/**", "/login", "/join").permitAll()
+                .requestMatchers("posts/write/**").authenticated()
                 .requestMatchers(HttpMethod.GET, "posts/**", "/api/posts/**", "/error", "/resources/**").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated()

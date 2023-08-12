@@ -28,14 +28,23 @@
     <div class="v10_2253">
         <button sec:authorize="isAnonymous()" type="button" th:onclick="|location.href='@{/login}'|" class="login_border"><span
                 class="name_login" >로그인</span></button>
+
+        <!-- 로그인 했을 경우에만 표시되는 버튼-->
         <button sec:authorize="isAuthenticated()" type="button" th:onclick="|location.href='@{/logout}'|" class="login_border"><span
                 class="name_login" >로그아웃</span></button>
-    </div>
 
+
+    </div>
 
     <div id="resultContainer"></div>
     <div class="v10_2261" >
-        <button <button sec:authorize="isAnonymous()" type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join" >회원가입</span></button>
+        <button sec:authorize="isAnonymous()" type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join" >회원가입</span></button>
     </div>
+
+    <!-- 로그인 했을 경우에만 표시되는 버튼(수정 필요. 일단 로그인한 사용자 이메일 표시되도록 구현함)-->
+    <div class="v10_2261" >
+        <button sec:authentication="name" sec:authorize="isAuthenticated()" type="button" th:onclick="|location.href='@{/posts/join}'|" class="join_border"><span class="name_join" >사용자 이름</span></button>
+    </div>
+
     <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
 </div>
