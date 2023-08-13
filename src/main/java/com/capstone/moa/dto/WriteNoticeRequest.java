@@ -9,7 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class WriteNoticeRequest {
 
-    private Long groupMemberId;
     private String title;
     private String content;
 }

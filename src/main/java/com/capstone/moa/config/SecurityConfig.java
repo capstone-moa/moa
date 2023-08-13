@@ -2,7 +2,6 @@ package com.capstone.moa.config;
 
 import com.capstone.moa.security.CustomAuthenticationFailureHandler;
 import com.capstone.moa.security.CustomAuthenticationSuccessHandler;
-import com.capstone.moa.security.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -32,11 +31,16 @@ public class SecurityConfig {
 
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/login", "/join").permitAll()
-                .requestMatchers(HttpMethod.GET, "posts/**", "/api/posts/**", "/error", "/resources/**").permitAll()
+                .requestMatchers("/api/**", "/login", "/join", "/error", "/resources/**").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers(HttpMethod.GET, "posts/**", "/api/posts/**").permitAll()
+                .requestMatchers("posts/write/**").authenticated()
+                .requestMatchers("/group/intro/modify/**").authenticated()
+                .requestMatchers("/group/intro/**").permitAll()
+
+                .requestMatchers(HttpMethod.GET, "/mypage/**").permitAll()
+                .requestMatchers("/mypage/group/**").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

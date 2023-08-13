@@ -24,8 +24,8 @@ public class GroupService {
     private final GroupMemberRepository groupMemberRepository;
 
     @Transactional
-    public void createGroup(CreateGroupRequest request) {
-        Member member = memberRepository.findByEmail(request.getEmail())
+    public void createGroup(CreateGroupRequest request, String email) {
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
         if (groupRepository.existsByName(request.getName())) {
             throw new IllegalArgumentException("Duplicate group name");

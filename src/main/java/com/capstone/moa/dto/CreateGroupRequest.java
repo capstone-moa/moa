@@ -8,8 +8,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 public class CreateGroupRequest {
-
-    private String email;
     private String name;
     private String interest;
     private String introduce;

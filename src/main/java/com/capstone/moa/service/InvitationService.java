@@ -28,8 +28,8 @@ public class InvitationService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void inviteToGroup(InviteGroupRequest request) {
-        GroupMember leader = findGroupLeader(request.getGroupId(), request.getLeaderEmail());
+    public void inviteToGroup(InviteGroupRequest request, String email) {
+        GroupMember leader = findGroupLeader(request.getGroupId(), email);
         Member member = memberRepository.findByEmail(request.getInviteEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 

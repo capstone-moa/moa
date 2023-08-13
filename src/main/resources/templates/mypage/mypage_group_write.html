@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <link href="/css/mypage_group_write.css" rel="stylesheet"/>
+    <link rel="icon" href="data:,">
     <title>mypage_group_write</title>
 </head>
 <script>
@@ -47,9 +48,6 @@
             <form id="myForm" th:object="${createGroupRequest}" th:action="@{/mypage/group/save}" th:method="post">
                 <!--게시글 작성 폼-->
                 <div class="form-group">
-                    <!-- 로그인 구현 후 변경-->
-                    <input type="text" class="form-control" id="reg_id" name="email" >
-
 
                     <label for="title" class="board_text2">그룹명<br></label>
                     <input type="text" class="form-control" id="title" name="name" maxlength="100" required="required"

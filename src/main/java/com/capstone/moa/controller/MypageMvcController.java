@@ -7,6 +7,7 @@ import com.capstone.moa.service.InvitationService;
 import com.capstone.moa.service.MemberService;
 import com.capstone.moa.service.PostService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -56,14 +57,14 @@ public class MypageMvcController {
     }
 
     @PostMapping("/group/save")
-    public String saveGroup(CreateGroupRequest request) {
-        groupService.createGroup(request);
+    public String saveGroup(CreateGroupRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        groupService.createGroup(request, userDetails.getUsername());
         return "redirect:/";
     }
 
     @PostMapping("/group/invite")
-    public String inviteMember(@RequestBody InviteGroupRequest request) {
-        invitationService.inviteToGroup(request);
+    public String inviteMember(@RequestBody InviteGroupRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        invitationService.inviteToGroup(request, userDetails.getUsername());
         return "redirect:/group/intro/" + request.getGroupId();
     }
 
@@ -83,6 +84,11 @@ public class MypageMvcController {
     public String pushRemoveBtn(@PathVariable("leaderMemberId") Long leaderMemberId, @PathVariable("groupMemberId") Long groupMemberId) {
         invitationService.removeGroupMember(leaderMemberId, groupMemberId);
         return "redirect:/mypage/{leaderMemberId}/group";
+    }
+
+    @GetMapping("/{memberId}")
+    public String modifyForm(@PathVariable Long memberId) {
+        return "/mypage/mypage_modify";
     }
 
     @ModelAttribute("interests")

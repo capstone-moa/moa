@@ -20,7 +20,8 @@ public class InvitationController {
     @Operation(summary = "그룹 초대", description = "email로 회원을 검색해 그룹에 초대한다")
     @PostMapping("/invite")
     public ResponseEntity<Void> inviteToGroup(@RequestBody InviteGroupRequest request) {
-        invitationService.inviteToGroup(request);
+        String email = "test@email.com";
+        invitationService.inviteToGroup(request, email);
         return ResponseEntity.noContent().build();
     }
 

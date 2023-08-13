@@ -21,8 +21,8 @@ public class PostService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void writePost(WritePostRequest request) {
-        Member member = memberRepository.findByEmail(request.getEmail())
+    public void writePost(WritePostRequest request, String email) {
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
         postRepository.save(new Post(member, request.getTitle(), request.getContent(), request.getInterest(), request.getPostType()));
