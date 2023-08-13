@@ -15,9 +15,10 @@ public class NoticeController {
     private final NoticeService noticeService;
 
     @Operation(summary = "그룹 공지 등록")
-    @PostMapping
-    public ResponseEntity<Void> writeNotice(@RequestBody WriteNoticeRequest request) {
-        noticeService.createNotice(request);
+    @PostMapping("/{groupId}")
+    public ResponseEntity<Void> writeNotice(@RequestBody WriteNoticeRequest request, @PathVariable Long groupId) {
+        String email = "test@email.com";
+        noticeService.createNotice(request, groupId, email);
         return ResponseEntity.noContent().build();
     }
 
