@@ -40,7 +40,7 @@ public class SecurityConfig {
 
                 .requestMatchers(HttpMethod.GET, "/mypage/**").permitAll()
                 .requestMatchers("/mypage/group/**").authenticated()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")

@@ -86,6 +86,11 @@ public class MypageMvcController {
         return "redirect:/mypage/{leaderMemberId}/group";
     }
 
+    @GetMapping("/{memberId}")
+    public String modifyForm(@PathVariable Long memberId) {
+        return "/mypage/mypage_modify";
+    }
+
     @ModelAttribute("interests")
     private Interest[] putInterest() {
         return Interest.values();
