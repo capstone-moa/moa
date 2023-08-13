@@ -57,8 +57,8 @@ public class MypageMvcController {
     }
 
     @PostMapping("/group/save")
-    public String saveGroup(CreateGroupRequest request) {
-        groupService.createGroup(request);
+    public String saveGroup(CreateGroupRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        groupService.createGroup(request, userDetails.getUsername());
         return "redirect:/";
     }
 

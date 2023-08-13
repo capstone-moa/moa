@@ -20,7 +20,8 @@ public class GroupController {
     @Operation(summary = "그룹 생성")
     @PostMapping
     public ResponseEntity<Void> createGroup(@RequestBody CreateGroupRequest request) {
-        groupService.createGroup(request);
+        String email = "test@email.com";
+        groupService.createGroup(request, email);
         return ResponseEntity.noContent().build();
     }
 
