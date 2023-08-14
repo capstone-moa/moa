@@ -149,19 +149,6 @@ button {
   opacity: 1;
   text-align: center;
 }
-.v10_2261 {
-  width: 91px;
-  height: 32px;
-  background: url("../images/v10_2261.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 26px;
-  left: 1055px;
-  overflow: hidden;
-}
 .join_border {
   width: 91px;
   height: 32px;
@@ -208,7 +195,7 @@ button {
 
 .v33_1648 {
   width: 609px;
-  height: 730px;
+  height: 790px;
   opacity: 1;
   position: absolute;
   top: 150px;
@@ -216,14 +203,12 @@ button {
   overflow: hidden;
   background: rgba(255,255,255,1);
 }
-
 .join-wrapper{
   width: 609px;
   height: 500px;
   padding: 40px;
   box-sizing: border-box;
 }
-
 .join-wrapper > h2{
   font-size: 24px;
   color: rgba(0,119,181,1);

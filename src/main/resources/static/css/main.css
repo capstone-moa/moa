@@ -198,8 +198,85 @@ input {
   border-radius: 10px 10px 10px 10px;
   overflow: hidden;
 }
+/****************헤더-회원*****************/
+.v10_2252 {
+  all: unset;
+  border-left : 3px solid rgba(247,249,251,1);
+  height: 85px;
+  position: absolute;
+  left: 1050px;
+  width: 350px;
+}
 
+.header_profile_image {
+  width: 50px;
+  height: 50px;
+  background: url("../images/v10_186.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: absolute;
+  top: 18px;
+  left: 30px;
+  border-radius: 10px 10px 10px 10px;
+  overflow: hidden;
+}
 
+.header_profile_name{
+  color: rgb(0, 0, 0);
+  position: absolute;
+  top: 29px;
+  left: 100PX;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 14px;
+  opacity: 1;
+  text-align: left;
+  text-transform:uppercase
+}
+.Toggle{
+  width: 100px;
+  height: 115px;
+  font-size:14px;
+  position: relative;
+  top: 100px;
+  left: 1050px;
+  border: 2px solid rgba(127, 129, 131, 0.171);
+  background-color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  z-index: 2;
+}
+.v10_514 {
+  width: 100px;
+  height: 35px;
+  position: relative;
+  top: 3px;
+  left: -2px;
+  color: rgba(43, 43, 44, 0.699);
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  background: none;
+}
+.v10_513 {
+  width: 100px;
+  height: 35px;
+  position: relative;
+  top: -8px;
+  left: -2px;
+  color: rgb(43, 43, 44);
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  background: none;
+}
 /********************게시판 메인********************/
 .community_board {
   width: 581px;
