@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet" />
@@ -10,12 +13,8 @@
 </head>
 
 <body>
+<div layout:fragment="content">
 <div class="v10_483">
-    <!--헤더-->
-    <div class="container" >
-        <div th:replace="~{common/header::header}"></div>
-    </div>
-
     <!--좌측 네비게이션 바-->
     <div class="category">
         <button type="button" class="v10_582" th:onclick="|location.href='@{/posts/community}'|" >
@@ -75,6 +74,6 @@
         </div>
     </div>
 </div>
+</div>
 </body>
-
 </html>
