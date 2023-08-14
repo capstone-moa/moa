@@ -6,6 +6,20 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <title>join</title>
 </head>
+<script type="text/javascript">
+    function test() {
+        var p1 = document.getElementById('password1').value;
+        var p2 = document.getElementById('password2').value;
+
+        if( p1 != p2 ) {
+            alert("비밀번호가 불일치합니다.");
+            return false;
+        } else{
+            alert("비밀번호가 일치합니다.");
+            return true;
+        }
+    }
+</script>
 <body>
 <div class="v10_483">
     <!--헤더-->
@@ -22,7 +36,10 @@
                 <input type="text" placeholder="name" name="name" th:field="*{name}">
                 <input type="text" placeholder="Email" name="email" th:field="*{email}">
                 <input type="text" placeholder="github 주소" name="github" th:field="*{github}">
-                <input type="password" placeholder="Password" name="password" th:field="*{password}">
+                <input type="password" placeholder="비밀번호" id="password1" name="password" th:field="*{password}">
+                <input type="password" placeholder="비밀번호 확인" id="password2" name="password2" >
+                <input type="button" onclick="test()" value="비밀번호 확인">
+
                 <select th:name="interest" th:field="*{interest}">
                     <option value="">관심사 선택</option>
                     <option th:each="interest : ${interests}" th:value="${interest.name()}"
