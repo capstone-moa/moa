@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <script>
+        function toggleBtn1() {
+
+            // 토글 할 버튼 선택 (btn1)
+            const btn1 = document.getElementById('btn1');
+
+            // btn1 숨기기 (display: none)
+            if (btn1.style.display !== 'none') {
+                btn1.style.display = 'none';
+            }
+            // btn` 보이기 (display: block)
+            else {
+                btn1.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+
+<body>
+<div th:replace="common/header :: header"></div>
+<div layout:fragment="content"></div>
+</body>
+</html>
