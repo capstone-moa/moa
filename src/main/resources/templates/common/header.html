@@ -30,7 +30,7 @@
 
         <!--회원 헤더-->
         <div class="Toggle" style="display: none;" id='btn1' sec:authorize="isAuthenticated()">
-            <button class="v10_514">마이페이지</button>
+            <button type="button" class="v10_514" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${#authentication.principal.getMemberId()})}'|">마이페이지</button>
             <button class="v10_514">회원정보</button>
             <hr>
             <button type="button" th:onclick="|location.href='@{/logout}'|" class="v10_513">로그아웃</button>
@@ -42,3 +42,4 @@
     </div>
 </th:block>
 </html>
+

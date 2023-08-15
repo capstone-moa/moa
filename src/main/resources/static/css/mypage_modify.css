@@ -83,6 +83,11 @@ input.text_box {
   top: 5px;
   width: 400px;
 }
+textarea.text_box {
+  position: relative;
+  top: 5px;
+  width: 400px;
+}
 
 .v10_770 {
   width: 150px;

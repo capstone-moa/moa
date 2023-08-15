@@ -22,24 +22,31 @@
             <div class="v104_2505">
                 <!-- 회원정보 수정 ---이메일은 수정 불가능하게 막아뒀습니당-->
                 <span class="v10_782">회원정보<hr class="bar"></span>
-                <form>
+                <form th:object="${ModifyMemberRequest}" th:action="@{/mypage/{memberId}(memberId=${memberInfo.id()})}" th:method="put">
                     <div class="writer_profile">
-                        <div class="v104_2511">이름  <input class="text_box" placeholder="회원명" th:text="${postDetail.memberName()}"size="30px"></div>
-                        <div class="v10_770">이메일  <input class="text_box" placeholder="moa_backend@gmail.com" size="30px" readonly></div>
-                        <div class="v104_2512">직업  <input class="text_box" placeholder="학생" th:text="${postDetail.memberJob()}"size="30px"></div>
-                        <div class="v10_771_intro">관심사
-                            <select name="interest" class="text_box" id="tag" th:field="*{interest}">
-                                <option value="">관심사</option>
-                                <option th:each="interest : ${interests}" th:value="${interest.name()}"th:text="${interest.name()}"></option>
+                        <div class="v104_2511">이름  <textarea class="text_box" placeholder="회원명을 입력해주세요" size="30px" th:text="${memberInfo.name()}" name="name"></textarea></div>
+                        <div class="v10_770">이메일  <textarea class="text_box" th:text="${memberInfo.email()}" size="30px" readonly></textarea></div>
+                        <div class="v104_2512">직업
+                            <select th:name="job" class="text_box"  th:field="*{job}">
+                                <option th:value="${memberInfo.job()}" th:text="${memberInfo.job()}">직업</option>
+                                <option th:each="job : ${jobs}" th:value="${job.name()}"
+                                        th:text="${job.name()}"></option>
                             </select>
                         </div>
-                        <div class="v10_769_intro">GitHub : <input class="text_box" placeholder="https://github.com/capstone-moa" size="30px"></div>
+
+                        <div class="v10_771_intro">관심사
+                            <select name="interest" class="text_box" id="tag" th:field="*{interest}">
+                                <option th:value="${memberInfo.interest()}" th:text="${memberInfo.interest()}">관심사</option>
+                                <option th:each="interest : ${interests}" th:value="${interest.name()}" th:text="${interest.name()}"></option>
+                            </select>
+                        </div>
+                        <div class="v10_769_intro">GitHub : <textarea class="text_box" name="github" th:text="${memberInfo.github()}" placeholder="Github 주소를 입력해주세요" size="30px"></textarea></div>
                         <div class="title_intro">회원소개
-                            <textarea name="projectDescription" class="v10_783" th:text="${groupIntro.projectDescription()}" required>개발자들을 연결시켜 공모전개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공</textarea>
+                            <textarea name="introduce" class="v10_783" th:text="${memberInfo.introduce()}" placeholder="자신을 어필할 소개를 입력해주세요" required></textarea>
                         </div>
                         <div class="writer_image"></div>
                         <div class="v30_1649">
-                            <button type="button" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${member.id()})}'|" class="button"><span class="v30_1651">작성</span></button>
+                            <button type="submit"  class="button"><span class="v30_1651">작성</span></button>
                         </div>
                     </div>
                 </form>

@@ -14,11 +14,10 @@ public class AuthService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long join(JoinRequest request) {
+    public void join(JoinRequest request) {
         if (memberRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("이미 가입된 이메일 입니다.");
         }
         Member member = memberRepository.save(request.toEntity());
-        return member.getId();
     }
 }
