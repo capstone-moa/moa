@@ -95,6 +95,13 @@ public class GroupService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public FindMemberResponse findGroupLeaderByGroupId(Long groupId) {
+        GroupMember leader = groupMemberRepository.findGroupLeader(groupId)
+                .orElseThrow(() -> new IllegalArgumentException("GroupLeader not found"));
+        return FindMemberResponse.from(leader.getMember());
+    }
+
     private GroupMember checkGroupMember(Long groupId, String email) {
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));

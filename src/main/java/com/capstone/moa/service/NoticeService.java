@@ -24,8 +24,8 @@ public class NoticeService {
     private final GroupRepository groupRepository;
 
     @Transactional
-    public void createNotice(WriteNoticeRequest request, Long groupId, String email) {
-        GroupMember leader = groupMemberRepository.findGroupLeader(groupId)
+    public void createNotice(WriteNoticeRequest request, String email) {
+        GroupMember leader = groupMemberRepository.findGroupLeader(request.getGroupId())
                 .orElseThrow(() -> new IllegalArgumentException("Group Leader not found"));
 
         if (!leader.getMember().getEmail().equals(email)) {
