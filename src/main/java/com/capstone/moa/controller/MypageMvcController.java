@@ -2,6 +2,7 @@ package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.enums.Interest;
+import com.capstone.moa.entity.enums.Job;
 import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.InvitationService;
 import com.capstone.moa.service.MemberService;
@@ -27,7 +28,7 @@ public class MypageMvcController {
     @GetMapping("/{memberId}/activity")
     public String findMemberActivities(@PathVariable("memberId") Long memberId, Model model) {
         FindPostsResponse postList = postService.findPostsByMember(memberId);
-        FindMemberResponse member = memberService.findMemberById(memberId);
+        FindMemberInfoResponse member = memberService.findMemberInfoById(memberId);
 
         model.addAttribute("member", member);
         model.addAttribute("posts", postList.posts());
@@ -39,7 +40,7 @@ public class MypageMvcController {
         List<FindGroupByLeaderMemberIdResponse> groups = groupService.findGroupsByLeaderMemberId(memberId);
         List<FindGroupsByMemberIdResponse> groupsForCategory = groupService.findGroupsByMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
-        FindMemberResponse member = memberService.findMemberById(memberId);
+        FindMemberInfoResponse member = memberService.findMemberInfoById(memberId);
 
         model.addAttribute("member", member);
         model.addAttribute("groups", groups);
@@ -48,6 +49,21 @@ public class MypageMvcController {
 
         model.addAttribute("createGroupRequest", new CreateGroupRequest());
         return "mypage/mypage_group";
+    }
+
+    @GetMapping("/{memberId}")
+    public String modifyForm(@PathVariable Long memberId, Model model) {
+        FindMemberInfoResponse memberInfo = memberService.findMemberInfoById(memberId);
+
+        model.addAttribute("memberInfo", memberInfo);
+        model.addAttribute("ModifyMemberRequest", new ModifyMemberRequest());
+        return "/mypage/mypage_modify";
+    }
+
+    @PutMapping("/{memberId}")
+    public String modifyMember(@PathVariable Long memberId, @AuthenticationPrincipal UserDetailsImpl userDetails, ModifyMemberRequest request) {
+        memberService.modifyMemberDetails(memberId, userDetails.getUsername(), request);
+        return "redirect:/mypage/{memberId}/activity";
     }
 
     @GetMapping("/group/create")
@@ -86,13 +102,13 @@ public class MypageMvcController {
         return "redirect:/mypage/{leaderMemberId}/group";
     }
 
-    @GetMapping("/{memberId}")
-    public String modifyForm(@PathVariable Long memberId) {
-        return "/mypage/mypage_modify";
-    }
-
     @ModelAttribute("interests")
     private Interest[] putInterest() {
         return Interest.values();
+    }
+
+    @ModelAttribute("jobs")
+    private Job[] putJob() {
+        return Job.values();
     }
 }

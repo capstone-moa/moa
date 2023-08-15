@@ -37,6 +37,8 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Job job;
 
+    private String introduce;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<GroupMember> groupMembers = new ArrayList<>();
 
@@ -53,5 +55,13 @@ public class Member {
         this.role = role;
         this.interest = interest;
         this.job = job;
+    }
+
+    public void modify(String name, Job job, Interest interest, String github, String introduce) {
+        this.name = name;
+        this.job = job;
+        this.interest = interest;
+        this.github = github;
+        this.introduce = introduce;
     }
 }

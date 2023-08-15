@@ -2,6 +2,7 @@ package com.capstone.moa.dto;
 
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.entity.enums.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-public record UserDetailsImpl(Member member) implements UserDetails {
+@RequiredArgsConstructor
+public class UserDetailsImpl implements UserDetails {
+
+    private final Member member;
+    public Long getMemberId(){
+        return member.getId();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
