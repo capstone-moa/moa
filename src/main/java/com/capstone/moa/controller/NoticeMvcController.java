@@ -5,6 +5,7 @@ import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.NoticeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,12 @@ public class NoticeMvcController {
     public String saveNotice(WriteNoticeRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         noticeService.createNotice(request, userDetails.getUsername());
         return "redirect:/";
+    }
+
+    @PostMapping("/{noticeId}/delete")
+    public String deleteNotice(@PathVariable("noticeId") Long noticeId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        Long groupId = noticeService.deleteNotice(noticeId, userDetails.getUsername());
+        return "redirect:/group/notice/" + groupId;
     }
 
     @ModelAttribute("interests")

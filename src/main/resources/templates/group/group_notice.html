@@ -61,7 +61,7 @@
                          th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupIntro.id()})}'|"><span
                             class="text_black">그룹소개</span></div>
                     <div class="middle_category2"
-                         th:onclick="|location.href='@{/gruop/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                         th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span
                             class="text_white">공지사항</span>
                     </div>
                     <div class="middle_category3" th:onclick="|location.href='@{/posts/group}'|"><span
@@ -87,10 +87,10 @@
                         <th:block th:each="notice : ${notices}">
                             <div class="v10_502">
                                 <div class="white_box">
-                                    <button class="v10_514"  th:if="${leader.email()} == ${#authentication.name}">삭제</button>
+                                    <button class="v10_514"  th:if="${leader.email()} == ${#authentication.name}"
+                                    th:onclick="deleteNotice([[${notice.noticeId()}]])" >삭제</button>
                                     <span class="v10_505" th:text="${notice.title()}">커밋 메시지 규칙</span>
-                                    <textarea class="v10_509" cols="50" rows="13" th:text="${notice.content()}"
-                                              readonly>
+                                    <textarea class="v10_509" cols="50" rows="13" th:text="${notice.content()}" readonly>
 1.명사로 끝난다.
 2.커밋 유형 지정
 3.feat: 새로운 기능의 추가
@@ -114,10 +114,28 @@
             </form>
         </div>
     </div>
-    <script>
+    <script th:inline="javascript">
         function openNewWindow() {
             let url = document.getElementById('myLink').getAttribute('href');
             window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+        }
+
+        function deleteNotice(noticeId) {
+            const url = "/group/notice/" + noticeId + '/delete';
+            if (confirm("해당 공지를 삭제하시겠습니까??") === true) {    //확인
+                fetch(url, {
+                    method: 'POST'
+                }).then(response => {
+                    if (response) {
+                        alert("공지를 삭제했습니다.");
+                        window.location.reload();  // 페이지 새로 고침
+                    } else {
+                        alert("공지 삭제에 실패했습니다.")
+                    }
+                })
+            } else {   //취소
+                alert("공지 삭제를 취소합니다.")
+            }
         }
     </script>
 </div>

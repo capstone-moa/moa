@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -36,15 +35,18 @@ public class NoticeService {
     }
 
     @Transactional
-    public void deleteNotice(Long noticeId, Long groupLeaderId) {
-        GroupMember leader = findGroupLeader(groupLeaderId);
+    public Long deleteNotice(Long noticeId, String email) {
         Notice notice = noticeRepository.findById(noticeId)
                 .orElseThrow(() -> new IllegalArgumentException("Notice not found"));
-        if (!Objects.equals(leader.getGroup(), notice.getGroup())) {
+        GroupMember leader = groupMemberRepository.findGroupLeader(notice.getGroup().getId())
+                .orElseThrow(() -> new IllegalArgumentException("Group Leader not found"));
+
+        if (!leader.getMember().getEmail().equals(email)) {
             throw new IllegalArgumentException("You don't have permission");
         }
 
         noticeRepository.delete(notice);
+        return notice.getGroup().getId();
     }
 
     @Transactional(readOnly = true)
@@ -56,14 +58,5 @@ public class NoticeService {
                 .stream()
                 .map(FindNoticeByGroupIdResponse::from)
                 .toList();
-    }
-
-    private GroupMember findGroupLeader(Long groupLeaderId) {
-        GroupMember leader = groupMemberRepository.findById(groupLeaderId)
-                .orElseThrow(() -> new IllegalArgumentException("GroupMember not found"));
-        if (!leader.isGroupLeader()) {
-            throw new IllegalArgumentException("You are not the Leader of this group");
-        }
-        return leader;
     }
 }
