@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
@@ -9,27 +12,8 @@
 </head>
 
 <body>
+<div layout:fragment="content">
 <div class="v10_483">
-    <!--로그인 한 헤더-->
-    <div class="header_bar">
-        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
-        <div class='v-line'></div>
-        <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
-        <span class="nav_text_community">커뮤니티</span>
-        <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
-        <span class="nav_text_team">팀원모집</span>
-        <div class="search">
-            <input type="text" placeholder="검색어 입력">
-            <button type="button" onclick="" class="img_search">
-                <i class="material-icons">search</i>
-            </button>
-        </div>
-        <div class="v10_2253" th:onclick="|location.href='@{/posts/mypage_activity}'|">
-            <div class="header_profile_image"></div>
-            <span class="header_profile_name">hong kildong</span>
-        </div>
-        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
-    </div>
 
     <!--좌측 네비게이션 바-->
     <div class="category">
@@ -146,6 +130,7 @@
             </div>
         </div>
     </form>
+</div>
 </div>
 </body>
 </html>
