@@ -1,16 +1,12 @@
 package com.capstone.moa.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class Link {
 
     @Id
@@ -23,9 +19,19 @@ public class Link {
     private String github;
     private String figma;
     private String erdCloud;
+    private String projectLink;
 
-    public void modifyGithub(String githubLink) {
+    public Link(Group group) {
+        this.group = group;
+        this.figma = "Figma link";
+        this.github = "Github link";
+        this.erdCloud = "ErdCloud link";
+        this.projectLink = "Project Link";
+    }
+
+    public void modifyGroupIntroLink(String githubLink, String projectLink) {
         this.github = githubLink;
+        this.projectLink = projectLink;
     }
 
     public void modifyFigma(String figmaLink) {

@@ -3,8 +3,9 @@ package com.capstone.moa.service;
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.Group;
 import com.capstone.moa.entity.GroupMember;
-import com.capstone.moa.entity.enums.GroupRole;
+import com.capstone.moa.entity.Link;
 import com.capstone.moa.entity.Member;
+import com.capstone.moa.entity.enums.GroupRole;
 import com.capstone.moa.repository.GroupMemberRepository;
 import com.capstone.moa.repository.GroupRepository;
 import com.capstone.moa.repository.MemberRepository;
@@ -30,28 +31,23 @@ public class GroupService {
         if (groupRepository.existsByName(request.getName())) {
             throw new IllegalArgumentException("Duplicate group name");
         }
-
         Group group = new Group(request.getName(), request.getInterest(), request.getIntroduce());
         GroupMember groupMember = new GroupMember(group, member, "LEADER");
         group.putGroupMember(groupMember);
+        group.setLink(new Link(group));
 
         groupRepository.save(group);
     }
 
     @Transactional
-    public void modifyGroupInfo(Long groupId, ModifyGroupInfoRequest request) {
-        GroupMember groupLeader = checkGroupMember(groupId, request.getEmail());
-        isGroupLeader(groupLeader);
+    public void modifyGroupIntro(Long groupId, ModifyGroupIntroRequest request, String email) {
+        GroupMember groupLeader = groupMemberRepository.findGroupLeader(groupId)
+                .orElseThrow(() -> new IllegalArgumentException("Leader not found"));
+        if (!groupLeader.getMember().getEmail().equals(email)) {
+            throw new IllegalArgumentException("You are not leader of this group");
+        }
 
-        groupLeader.getGroup().modifyGroupInfo(request.getIntroduce());
-    }
-
-    @Transactional
-    public void modifyGroupIntro(Long groupId, ModifyGroupIntroRequest request) {
-        GroupMember groupLeader = checkGroupMember(groupId, request.getEmail());
-        isGroupLeader(groupLeader);
-
-        groupLeader.getGroup().modifyGroupIntro(request.getInterest(), request.getProjectDescription(), request.getSkills());
+        groupLeader.getGroup().modifyGroupIntro(request.getIntroduce(), request.getInterest(), request.getProjectDescription(), request.getSkills());
     }
 
     @Transactional

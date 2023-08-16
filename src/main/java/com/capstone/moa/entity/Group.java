@@ -58,11 +58,12 @@ public class Group extends BaseTimeEntity {
         this.groupMembers.add(groupMember);
     }
 
-    public void modifyGroupInfo(String introduce) {
-        this.introduce = introduce;
+    public void setLink(Link link) {
+        this.link = link;
     }
 
-    public void modifyGroupIntro(String interest, String projectDescription, String skills) {
+    public void modifyGroupIntro(String introduce, String interest, String projectDescription, String skills) {
+        this.introduce = introduce;
         this.interest = Interest.find(interest);
         this.projectDescription = projectDescription;
         this.skills = skills;
