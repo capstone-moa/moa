@@ -60,7 +60,7 @@
         </button>
         <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
         <button type="button" class="v10_582" onclick="">
-            <span class="v10_584" th:text="${groupIntro.name()}">MOA</span>
+            <span class="v10_584" >MOA</span>
             <hr class="nav_role">
         </button>
     </div>
@@ -75,7 +75,7 @@
                 <span class="profile_intro" th:text="${groupIntro.introduce()}">그룹 설명</span>
                 <div class="interest">
                     <div class="github_image"></div>
-                    <span class="v10_769">GitHub : <span>https://github.com/capstone-moa</span></span>
+                    <span class="v10_769">GitHub : <span th:text="${groupIntro.github()}">https://github.com/capstone-moa</span></span>
                     <span class="v10_770">Interest : </span>
                     <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span></div>
                 </div>
@@ -87,11 +87,11 @@
 
             <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
             <div class="v10_796">
-                <div class="middle_category1" th:onclick="|location.href='@{/posts/group_intro}'|"><span
+                <div class="middle_category1" th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupIntro.id()})}'|"><span
                         class="text_black">그룹소개</span></div>
-                <div class="middle_category2" th:onclick="|location.href='@{/posts/group_notice}'|"><span class="text_black">공지사항</span>
+                <div class="middle_category2" th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_black">공지사항</span>
                 </div>
-                <div class="middle_category3" th:onclick="|location.href='@{/posts/group}'|"><span class="text_white">프로젝트 관리</span>
+                <div class="middle_category3" th:onclick="|location.href='@{/group/project/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_white">프로젝트 관리</span>
                 </div>
                 <div class="middle_category4" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">일정관리</span>
                 </div>
@@ -110,18 +110,18 @@
                 <button class="image_4"></button>
                 <span class="image_512">보고서</span>
 
-                <button type="button" class="button" th:onclick=""><span class="v30_1660">작성</span>
+                <button type="button" class="button" ><span class="v30_1660">작성</span>
                 </button>
 
                 <!--게시글 한개-->
                 <div class="v10_501">
-                    <th:block th:each="">
+                    <th:block >
                         <div class="v10_502">
                             <div class="white_box">
                                 <div class="v10_506">
-                                    <span class="v10_507" th:text="${community.memberName()}">아이디1</span>
-                                    <span class="v10_508" th:text="${community.memberJob()}">직업</span>
-                                    <span class="v10_2226" th:text="${community.createdAt()}">2023.05-01</span>
+                                    <span class="v10_507" >아이디1</span>
+                                    <span class="v10_508" >직업</span>
+                                    <span class="v10_2226" >2023.05-01</span>
                                     <div class="profile_image_509"></div>
                                 </div>
                                 <button class="v10_510" id='btn2' type="button" onclick='toggleBtn1()'>
@@ -133,8 +133,8 @@
                                     <button class="v10_514">수정</button>
                                     <button class="v10_514">삭제</button>
                                 </div>
-                                <span class="v10_505" th:text="${community.title()}">제목</span>
-                                <span class="v10_509" th:text="${community.content()}">내용</span>
+                                <span class="v10_505" >제목</span>
+                                <span class="v10_509">내용</span>
                                 <hr class="bar">
                             </div>
                         </div>
