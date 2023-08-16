@@ -11,41 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>mypage_group</title>
 </head>
-<script th:inline="javascript">
-    function group_invite_function(groupId) {
-        let inviteEmail = prompt("초대할 이메일을 입력해주세요");
 
-        if (inviteEmail == null || inviteEmail === "") {
-            alert("이메일을 입력하지 않으셨습니다 :(");
-            return;
-        }
-
-        let InviteGroupRequest = {
-            groupId: groupId,
-            inviteEmail: inviteEmail
-        };
-
-        // Convert InviteGroupRequest to JSON string
-        let jsonData = JSON.stringify(InviteGroupRequest);
-
-        // Send JSON data to the backend
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: "/mypage/group/invite",
-            data: jsonData,
-            success: function (response) {
-                alert(" 아이디 : " + inviteEmail + "이/가 초대되었습니다 :)")
-            }
-        });
-    }
-
-    function openNewWindow() {
-        let url = document.getElementById('myLink').getAttribute('href');
-        window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
-    }
-
-</script>
 <body>
 <div layout:fragment="content">
     <div class="v10_483">
@@ -197,6 +163,40 @@
             </div>
         </form>
     </div>
+    <script th:inline="javascript">
+        function group_invite_function(groupId) {
+            let inviteEmail = prompt("초대할 이메일을 입력해주세요");
+
+            if (inviteEmail == null || inviteEmail === "") {
+                alert("이메일을 입력하지 않으셨습니다 :(");
+                return;
+            }
+
+            let InviteGroupRequest = {
+                groupId: groupId,
+                inviteEmail: inviteEmail
+            };
+
+            // Convert InviteGroupRequest to JSON string
+            let jsonData = JSON.stringify(InviteGroupRequest);
+
+            // Send JSON data to the backend
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/mypage/group/invite",
+                data: jsonData,
+                success: function (response) {
+                    alert(" 아이디 : " + inviteEmail + "이/가 초대되었습니다 :)")
+                }
+            });
+        }
+
+        function openNewWindow() {
+            let url = document.getElementById('myLink').getAttribute('href');
+            window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+        }
+    </script>
 </div>
 </body>
 </html>
