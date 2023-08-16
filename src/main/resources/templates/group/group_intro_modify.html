@@ -33,17 +33,17 @@
         </button>
     </div>
 
-    <!--그룹페이지 메인 소개-->
     <form th:object="${modifyGroupIntroRequest}" th:method="put">
+    <!--그룹페이지 메인 소개-->
         <div class="grouppage_intro">
             <div class="v10_762">
                 <div class="back_image"></div>
                 <div class="profile_image"></div>
                 <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
-                <textarea name="profile_intro" class="profile_intro" th:text="${groupIntro.introduce()}" required>개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!</textarea>
+                <textarea name="introduce" class="profile_intro" th:text="${groupIntro.introduce()}" required>개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!</textarea>
                 <div class="interest">
                     <div class="github_image"></div>
-                    <span class="v10_769">GitHub : <span>https://github.com/capstone-moa</span></span>
+                    <span class="v10_769">GitHub : <span th:text="${groupIntro.github()}">https://github.com/capstone-moa</span></span>
                     <span class="v10_770">Interest : </span>
                     <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span></div>
                 </div>
@@ -75,18 +75,18 @@
                 <!-----------그룹 주소------------>
                 <div class="interest_intro">
                     <div class="github_image_intro"></div>
-                    <div class="v10_769_intro">GitHub : <input class="blue"
+                    <div class="v10_769_intro">GitHub : <input class="blue" th:placeholder="${groupIntro.github()}" name="github"
                                                                placeholder="https://github.com/capstone-moa"
                                                                size="30px"></div>
                     <span class="v10_769_intro">Interest : </span>
                     <div class="v10_771_intro">
                         <select name="interest" class="v10_494" id="tag" th:field="*{interest}">
-                            <option value="">관심사 선택</option>
+                            <option th:value="${groupIntro.interest()}" th:text="${groupIntro.interest()}">관심사 선택</option>
                             <option th:each="interest : ${interests}" th:value="${interest.name()}"
                                     th:text="${interest.name()}"></option>
                         </select>
                     </div>
-                    <div class="v10_770_intro">project : <input class="blue"
+                    <div class="v10_770_intro">project : <input class="blue" th:placeholder="${groupIntro.projectLink()}" name="projectLink"
                                                                 placeholder="https://notion.com/capstone-moa"
                                                                 size="30px"></div>
                     <div class="v10_770_intro">Email : <input class="blue" placeholder="moa_backend@gmail.com"
@@ -102,8 +102,6 @@
                     <h2 class="v10_782">적용 기술</h2>
                     <textarea name="skills" class="v10_784" th:text="${groupIntro.skills()}"></textarea>
                 </div>
-
-                <textarea th:field="*{email}" required></textarea>
 
                 <!-----------그룹원 소개------------>
                 <div class="v10_501">
