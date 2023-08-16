@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
@@ -9,27 +12,8 @@
 </head>
 
 <body>
+<div layout:fragment="content">
 <div class="v10_483">
-    <!--로그인 한 헤더-->
-    <div class="header_bar">
-        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
-        <div class='v-line'></div>
-        <div class="community" th:onclick="|location.href='@{/posts/community}'|"></div>
-        <span class="nav_text_community">커뮤니티</span>
-        <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
-        <span class="nav_text_team">팀원모집</span>
-        <div class="search">
-            <input type="text" placeholder="검색어 입력">
-            <button type="button" onclick="" class="img_search">
-                <i class="material-icons">search</i>
-            </button>
-        </div>
-        <div class="v10_2253" th:onclick="|location.href='@{/posts/mypage_activity}'|">
-            <div class="header_profile_image"></div>
-            <span class="header_profile_name">hong kildong</span>
-        </div>
-        <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
-    </div>
 
     <!--좌측 네비게이션 바-->
     <div class="category">
@@ -60,7 +44,7 @@
                 <span class="profile_intro" th:text="${groupIntro.introduce()}">그룹 설명</span>
                 <div class="interest">
                     <div class="github_image"></div>
-                    <span class="v10_769">GitHub : <span>https://github.com/capstone-moa</span></span>
+                    <span class="v10_769">GitHub : <span th:text="${groupIntro.github()}">https://github.com/capstone-moa</span></span>
                     <span class="v10_770">Interest : </span>
                     <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span></div>
                 </div>
@@ -76,7 +60,7 @@
                         class="text_white">그룹소개</span></div>
                 <div class="middle_category2" th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_black">공지사항</span>
                 </div>
-                <div class="middle_category3" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">프로젝트 관리</span>
+                <div class="middle_category3" th:onclick="|location.href='@{/group/project/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_black">프로젝트 관리</span>
                 </div>
                 <div class="middle_category4" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">일정관리</span>
                 </div>
@@ -91,10 +75,10 @@
                 <!-----------그룹 주소------------>
                 <div class="interest_intro">
                     <div class="github_image_intro"></div>
-                    <div class="v10_769_intro">GitHub : <span>https://github.com/capstone-moa</span></div>
+                    <div class="v10_769_intro">GitHub : <span th:text="${groupIntro.github()}"></span></div>
                     <div class="v10_7691_intro">Interest :
                         <div class="v10_771_intro"><span class="v10_772_intro" th:text="|# ${groupIntro.interest()}|">#web</span></div></div>
-                    <div class="v10_770_intro">project : <span>https://github.com/capstone-moa</span></div>
+                    <div class="v10_770_intro">project : <span th:text="${groupIntro.projectLink()}"></span></div>
                     <div class="v10_770_intro">Email : <span>moa_backend@gmail.com</span></div>
                 </div>
 
@@ -146,6 +130,7 @@
             </div>
         </div>
     </form>
+</div>
 </div>
 </body>
 </html>

@@ -18,7 +18,7 @@ public class LinkController {
     @Operation(summary = "github 링크 등록")
     @PostMapping("/github/{groupId}")
     public ResponseEntity<Void> addGithubLink(@PathVariable(name = "groupId") Long groupId, @RequestBody Map<String, String> githubLink) {
-        linkService.addGithubLink(groupId, githubLink.get("githubLink"));
+        linkService.modifyGroupIntroLink(groupId, githubLink.get("githubLink"), "대표 링크");
         return ResponseEntity.noContent().build();
     }
 

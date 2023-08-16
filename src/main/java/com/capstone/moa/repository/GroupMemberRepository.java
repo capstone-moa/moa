@@ -6,6 +6,7 @@ import com.capstone.moa.entity.enums.GroupRole;
 import com.capstone.moa.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,5 +22,5 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> 
     List<GroupMember> findAllByMember(Member member);
 
     @Query("SELECT gm from GroupMember gm where gm.group.id = :groupId and gm.groupRole = 'LEADER'")
-    Optional<GroupMember> findGroupLeader(Long groupId);
+    Optional<GroupMember> findGroupLeader(@Param("groupId") Long groupId);
 }

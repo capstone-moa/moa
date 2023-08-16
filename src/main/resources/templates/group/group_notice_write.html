@@ -10,6 +10,30 @@
 </head>
 
 <body>
+<script>
+    function handleNoticeSubmission(event) {
+        event.preventDefault();
+
+        fetch('http://localhost:8080/group/notice/save', {
+            method: 'POST',
+            body: new FormData(document.getElementById('noticeForm'))
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('공지가 등록되었습니다');
+                } else {
+                    throw new Error('Failed to submit form');
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error.message);
+            })
+            .finally(() => {
+                window.opener.location.reload();
+                window.close();
+            });
+    }
+</script>
 <div class="v10_483">
     <!--게시글 작성 메인 -->
 
@@ -21,10 +45,10 @@
 
         <!--카테고리 선택-->
         <div class="v10_501">
-            <form th:action th:object="${writePostRequest}" method="post">
+            <form th:object="${WriteNoticeRequest}" id="noticeForm" method="post" th:action="@{/group/notice/save}">
 
                 <!--게시글 작성 폼-->
-                <div class="form-group">
+                <div class="form-group" >
                     <label for="title" class="board_text2">제목<br></label>
                     <input type="text" class="form-control" id="title" name="title" maxlength="100" required="required"
                            placeholder="제목을 입력해 주세요">
@@ -34,9 +58,11 @@
                         <textarea class="form-control" rows="30" name="content" required="required"
                                   placeholder="내용을 입력해 주세요"></textarea>
                     </div>
-
+                    <label>
+                        <input name="groupId" th:value="${groupId}" hidden="hidden">
+                    </label>
                     <div>
-                        <button type="submit" class="button"><span class="v30_1660">작성</span></button>
+                        <button type="submit" onclick="handleNoticeSubmission(event)" class="button"><span class="v30_1660">작성</span></button>
                     </div>
                 </div>
             </form>

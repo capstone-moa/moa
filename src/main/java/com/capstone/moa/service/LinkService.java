@@ -16,47 +16,25 @@ public class LinkService {
     private final GroupRepository groupRepository;
 
     @Transactional
-    public void addGithubLink(Long groupId, String githubLink) {
+    public void modifyGroupIntroLink(Long groupId, String githubLink, String projectLink) {
         Group group = findGroup(groupId);
-        if (linkRepository.existsLinkByGroup(group)) {
-            Link link = group.getLink();
-            link.modifyGithub(githubLink);
-        } else {
-            linkRepository.save(Link.builder()
-                    .github(githubLink)
-                    .group(group)
-                    .build());
-        }
+        Link link = linkRepository.findByGroup(group)
+                .orElseThrow(() -> new IllegalArgumentException("Link not found"));
+        link.modifyGroupIntroLink(githubLink, projectLink);
     }
 
     @Transactional
     public void addFigmaLink(Long groupId, String figmaLink) {
         Group group = findGroup(groupId);
-
-        if (linkRepository.existsLinkByGroup(group)) {
-            Link link = group.getLink();
-            link.modifyFigma(figmaLink);
-        } else {
-            linkRepository.save(Link.builder()
-                    .figma(figmaLink)
-                    .group(group)
-                    .build());
-        }
+        Link link = group.getLink();
+        link.modifyFigma(figmaLink);
     }
 
     @Transactional
     public void addErdCloudLink(Long groupId, String erdCloudLink) {
         Group group = findGroup(groupId);
-
-        if (linkRepository.existsLinkByGroup(group)) {
-            Link link = group.getLink();
-            link.modifyErdCloud(erdCloudLink);
-        } else {
-            linkRepository.save(Link.builder()
-                    .erdCloud(erdCloudLink)
-                    .group(group)
-                    .build());
-        }
+        Link link = group.getLink();
+        link.modifyErdCloud(erdCloudLink);
     }
 
     private Group findGroup(Long groupId) {

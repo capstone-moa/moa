@@ -18,14 +18,15 @@ public class NoticeController {
     @PostMapping("/{groupId}")
     public ResponseEntity<Void> writeNotice(@RequestBody WriteNoticeRequest request, @PathVariable Long groupId) {
         String email = "test@email.com";
-        noticeService.createNotice(request, groupId, email);
+        noticeService.createNotice(request, email);
         return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "그룹 공지 삭제")
-    @DeleteMapping("/{noticeId}")
-    public ResponseEntity<Void> deleteNotice(@PathVariable(name = "noticeId") Long noticeId, @RequestBody Long groupLeaderId) {
-        noticeService.deleteNotice(noticeId, groupLeaderId);
+    @DeleteMapping("/{noticeId}/delete")
+    public ResponseEntity<Void> deleteNotice(@PathVariable(name = "noticeId") Long noticeId) {
+        String email = "test@email.com";
+        noticeService.deleteNotice(noticeId,email);
         return ResponseEntity.noContent().build();
     }
 

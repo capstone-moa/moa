@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public record GroupIntroResponse(
         Long id, String name, String interest, String introduce, String projectDescription,
-        String skills, List<FindGroupMemberResponse> groupMembers
+        String skills, List<FindGroupMemberResponse> groupMembers, String github, String projectLink
 ) {
     public static GroupIntroResponse from(Group group) {
         return new GroupIntroResponse(
@@ -20,7 +20,9 @@ public record GroupIntroResponse(
                 group.getGroupMembers()
                         .stream()
                         .map(FindGroupMemberResponse::from)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                group.getLink().getGithub(),
+                group.getLink().getProjectLink()
         );
     }
 }

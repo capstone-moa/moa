@@ -12,31 +12,9 @@
     <link rel="icon" href="data:,">
     <title>mypage_group_write</title>
 </head>
-<script>
-    function handleFormSubmission(event) {
-        event.preventDefault();
 
-        fetch('http://localhost:8080/mypage/group/save', {
-            method: 'POST',
-            body: new FormData(document.getElementById('myForm'))
-        })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Form submitted successfully');
-                } else {
-                    throw new Error('Failed to submit form');
-                }
-            })
-            .catch(error => {
-                console.error('Error submitting form:', error.message);
-            })
-            .finally(() => {
-                window.opener.location.reload();
-                window.close();
-            });
-    }
-</script>
 <body>
+<div layout:fragment="content">
 <div class="v10_483">
     <!--게시글 작성 메인 -->
 
@@ -80,6 +58,31 @@
             </form>
         </div>
     </div>
+</div>
+    <script>
+        function handleFormSubmission(event) {
+            event.preventDefault();
+
+            fetch('http://localhost:8080/mypage/group/save', {
+                method: 'POST',
+                body: new FormData(document.getElementById('myForm'))
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('그룹이 생성되었습니다');
+                    } else {
+                        throw new Error('Failed to submit form');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error submitting form:', error.message);
+                })
+                .finally(() => {
+                    window.opener.location.reload();
+                    window.close();
+                });
+        }
+    </script>
 </div>
 </body>
 

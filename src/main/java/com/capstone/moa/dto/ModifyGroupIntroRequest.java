@@ -9,8 +9,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ModifyGroupIntroRequest {
 
-    private String email;
     private String interest;
+    private String introduce;
     private String projectDescription;
     private String skills;
+    private String github;
+    private String projectLink;
 }
