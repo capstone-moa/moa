@@ -1,26 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet" />
     <link href="/css/join.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <title>join</title>
 </head>
-<script type="text/javascript">
-    function test() {
-        var p1 = document.getElementById('password1').value;
-        var p2 = document.getElementById('password2').value;
 
-        if( p1 != p2 ) {
-            alert("비밀번호가 불일치합니다.");
-            return false;
-        } else{
-            alert("비밀번호가 일치합니다.");
-            return true;
-        }
-    }
-</script>
 <body>
+<div layout:fragment="content">
 <div class="v10_483">
     <!--헤더-->
     <div class="container" >
@@ -56,6 +46,21 @@
             </form>
         </div>
     </div>
+</div>
+    <script type="text/javascript">
+        function test() {
+            var p1 = document.getElementById('password1').value;
+            var p2 = document.getElementById('password2').value;
+
+            if( p1 != p2 ) {
+                alert("비밀번호가 불일치합니다.");
+                return false;
+            } else{
+                alert("비밀번호가 일치합니다.");
+                return true;
+            }
+        }
+    </script>
 </div>
 </body>
 </html>

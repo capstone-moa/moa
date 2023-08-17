@@ -48,19 +48,19 @@
 
     <!--좌측 네비게이션 바-->
     <div class="category">
-        <button type="button" class="v10_582" onclick="">
+        <button type="button" class="v10_582">
             <span class="v10_584">마이페이지</span>
             <div class="hashtag"></div>
             <hr class="nav_role">
         </button>
-        <button type="button" class="v10_582" onclick="">
+        <button type="button" class="v10_582">
             <span class="v10_584">그룹관리</span>
             <div class="hashtag"></div>
             <hr class="nav_role">
         </button>
         <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
-        <button type="button" class="v10_582" onclick="">
-            <span class="v10_584" >MOA</span>
+        <button type="button" class="v10_582">
+            <span class="v10_584" th:text="${groupIntro.name()}">MOA</span>
             <hr class="nav_role">
         </button>
     </div>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="middle_category3" th:onclick="|location.href='@{/group/project/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_white">프로젝트 관리</span>
                 </div>
-                <div class="middle_category4" th:onclick="|location.href='@{/posts/group}'|"><span class="text_black">일정관리</span>
+                <div class="middle_category4" th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_black">일정관리</span>
                 </div>
             </div>
 
