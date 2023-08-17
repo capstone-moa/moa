@@ -41,6 +41,9 @@ public class Group extends BaseTimeEntity {
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<Invitation> invitations = new ArrayList<>();
 
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Event> events = new ArrayList<>();
+
     @OneToOne(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private Link link;
 
@@ -57,7 +60,6 @@ public class Group extends BaseTimeEntity {
     public void putGroupMember(GroupMember groupMember) {
         this.groupMembers.add(groupMember);
     }
-
     public void setLink(Link link) {
         this.link = link;
     }

@@ -44,7 +44,7 @@
                     <span class="profile_intro" th:text="${groupIntro.introduce()}">그룹 설명</span>
                     <div class="interest">
                         <div class="github_image"></div>
-                        <span class="v10_769">GitHub : <span>https://github.com/capstone-moa</span></span>
+                        <span class="v10_769">GitHub : <span th:text="${groupIntro.github()}">https://github.com/capstone-moa</span></span>
                         <span class="v10_770">Interest : </span>
                         <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span>
                         </div>
@@ -64,10 +64,12 @@
                          th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span
                             class="text_white">공지사항</span>
                     </div>
-                    <div class="middle_category3" th:onclick="|location.href='@{/group/project/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                    <div class="middle_category3"
+                         th:onclick="|location.href='@{/group/project/{groupId}(groupId=${groupIntro.id()})}'|"><span
                             class="text_black">프로젝트 관리</span>
                     </div>
-                    <div class="middle_category4" th:onclick="|location.href='@{/posts/group}'|"><span
+                    <div class="middle_category4"
+                         th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${groupIntro.id()})}'|"><span
                             class="text_black">일정관리</span>
                     </div>
                 </div>
