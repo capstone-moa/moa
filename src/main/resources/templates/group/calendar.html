@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>calendar</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- bootstrap 4 -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- fullcalendar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js"></script>
+    <link href="/css/calendar.css" rel="stylesheet"/>
+
+    <script type="text/javascript" th:inline="javascript">
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var groupId = $("#groupId").val();
+            const url = '/group/calendar/' + groupId + '/list';
+
+            fetch(url, {method: "GET"})
+                .then(response => response.json())
+                .then(events => {
+                    var calendarEl = document.getElementById('calendar');
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        timeZone: 'UTC',
+                        initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
+                        events: events,
+                        headerToolbar: {
+                            center: 'addEventButton' // headerToolbar에 버튼을 추가
+                        }, customButtons: {
+                            addEventButton: { // 추가한 버튼 설정
+                                text: "일정 추가",  // 버튼 내용
+                                click: function () { // 버튼 클릭 시 이벤트 추가
+                                    $("#calendarModal").modal("show"); // modal 나타내기
+
+                                    $("#addCalendar").on("click", function () {  // modal의 추가 버튼 클릭 시
+                                        var content = $("#calendar_content").val();
+                                        var start_date = $("#calendar_start_date").val();
+                                        var end_date = $("#calendar_end_date").val();
+
+                                        //내용 입력 여부 확인
+                                        if (content == null || content === "") {
+                                            alert("내용을 입력하세요.");
+                                        } else if (start_date === "" || end_date === "") {
+                                            alert("날짜를 입력하세요.");
+                                        } else if (new Date(end_date) - new Date(start_date) < 0) { // date 타입으로 변경 후 확인
+                                            alert("종료일이 시작일보다 먼저입니다.");
+                                        } else { // 정상적인 입력 시
+                                            //전송할 객체 생성
+                                            var createEventRequest = {
+                                                "groupId": groupId,
+                                                "title": content,
+                                                "start": start_date,
+                                                "end": end_date
+                                            }
+                                            fetch('/group/calendar/save', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                },
+                                                body: JSON.stringify(createEventRequest),
+                                            })
+                                                .then(response => {
+                                                    console.log(createEventRequest); //서버로 해당 객체를 전달해서 DB 연동 가능
+
+                                                    // Close the modal
+                                                    $("#calendarModal").modal("hide");
+                                                    window.location.reload();
+                                                })
+                                        }
+                                    });
+                                }
+                            }
+                        },
+                        editable: true, // false로 변경 시 draggable 작동 x
+                        displayEventTime: false // 시간 표시 x
+                    });
+                    calendar.render();
+                });
+        });
+
+
+    </script>
+    <style>
+        #calendarBox {
+            width: 70%;
+            padding-left: 15%;
+        }
+
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+
+
+    <!-- 여기에 그룹 소개 부분 넣으면 될듯.?-->
+    <div class="v10_483">
+        <!--좌측 네비게이션 바-->
+        <div class="category">
+            <button type="button" class="v10_582">
+                <span class="v10_584">마이페이지</span>
+                <div class="hashtag"></div>
+                <hr class="nav_role">
+            </button>
+            <button type="button" class="v10_582">
+                <span class="v10_584">그룹관리</span>
+                <div class="hashtag"></div>
+                <hr class="nav_role">
+            </button>
+            <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
+            <button type="button" class="v10_582">
+                <span class="v10_584" th:text="${groupIntro.name()}">MOA</span>
+                <hr class="nav_role">
+            </button>
+        </div>
+
+        <!--그룹페이지 메인 소개-->
+        <div class="grouppage_intro">
+            <form>
+                <div class="v10_762">
+                    <div class="back_image"></div>
+                    <div class="profile_image"></div>
+                    <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
+                    <span class="profile_intro" th:text="${groupIntro.introduce()}">그룹 설명</span>
+                    <div class="interest">
+                        <div class="github_image"></div>
+                        <span class="v10_769">GitHub : <span th:text="${groupIntro.github()}">https://github.com/capstone-moa</span></span>
+                        <span class="v10_770">Interest : </span>
+                        <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span>
+                        </div>
+                    </div>
+                    <div class="v10_775">
+                        <div class="v10_779"></div>
+                        <span class="mypage_location">경기도, 오산</span>
+                    </div>
+                </div>
+
+                <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
+                <div class="v10_796">
+                    <div class="middle_category1"
+                         th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                            class="text_black">그룹소개</span></div>
+                    <div class="middle_category2"
+                         th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                            class="text_black">공지사항</span>
+                    </div>
+                    <div class="middle_category3"
+                         th:onclick="|location.href='@{/group/project/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                            class="text_black">프로젝트 관리</span>
+                    </div>
+                    <div class="middle_category4"
+                         th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                            class="text_white">일정관리</span>
+                    </div>
+                </div>
+
+            </form>
+
+            <!----------------- calendar 추가 -------------------->
+            <div id="calendarBox">
+                <div id="calendar"></div>
+            </div>
+
+            <!-- modal 추가 -->
+            <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">일정을 입력하세요.</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="taskId" class="col-form-label">일정 내용</label>
+                                <input type="text" class="form-control" id="calendar_content"
+                                       name="calendar_content">
+                                <label for="taskId" class="col-form-label">시작 날짜</label>
+                                <input type="date" class="form-control" id="calendar_start_date"
+                                       name="calendar_start_date">
+                                <label for="taskId" class="col-form-label">종료 날짜</label>
+                                <input type="date" class="form-control" id="calendar_end_date"
+                                       name="calendar_end_date">
+                                <input type="hidden" id="groupId" name="groupId" th:value="${groupIntro.id()}"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" id="addCalendar">추가</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                    onclick="window.location.reload()"
+                                    id="sprintSettingModalClose">취소
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!----------------- 여기까지 calendar 코드!! -------------------->
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
