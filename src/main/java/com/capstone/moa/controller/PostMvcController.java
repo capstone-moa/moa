@@ -5,10 +5,15 @@ import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,7 +26,7 @@ public class PostMvcController {
     private final String TEAM = "TEAM";
 
     @GetMapping
-    public String  findAllPosts( Model model) {
+    public String findAllPosts(Model model) {
         FindPostsResponse communityList = postService.findPostsByPostType(COMMUNITY);
         FindPostsResponse teamList = postService.findPostsByPostType(TEAM);
         model.addAttribute("communityPosts", communityList.posts());
@@ -73,5 +78,23 @@ public class PostMvcController {
         model.addAttribute("postDetail", postDetail);
         model.addAttribute("writeCommentRequest", new WriteCommentRequest());
         return "post/view";
+    }
+
+    @GetMapping("/search")
+    public String searchPosts(
+            @RequestParam(value = "title", defaultValue = "", required = false) String title,
+            @RequestParam(value = "postType", defaultValue = "", required = false) String postType,
+            Model model
+    ) {
+        SearchPostRequest request = SearchPostRequest.builder()
+                .title(title)
+                .postType(postType)
+                .build();
+        Pageable pageable = PageRequest.of(0, 6);
+        System.out.println("title : " + title);
+        List<FindPostResponse> posts = postService.searchPostsByTitleAndType(request, pageable);
+
+        model.addAttribute("posts", posts);
+        return "post/search";
     }
 }
