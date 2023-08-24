@@ -11,26 +11,32 @@
         <div class="team" th:onclick="|location.href='@{/posts/team}'|"></div>
         <span class="nav_text_team">팀원모집</span>
         <div class="search">
-            <input type="text" placeholder="검색어 입력">
-            <button type="button" onclick="" class="img_search">
-                <i class="material-icons">search</i>
-            </button>
+            <form th:action="@{/posts/search}" method="get">
+                <input type="text" placeholder="검색어 입력" name="title" />
+                <input type="submit" class="img_search" value="검색"/>
+                    <i class="material-icons">search</i>
+            </form>
         </div>
         <div class="logo" th:onclick="|location.href='@{/posts}'|"></div>
 
         <!--비회원 헤더-->
         <div class="v10_2253">
-            <button sec:authorize="isAnonymous()" type="button" th:onclick="|location.href='@{/login}'|" class="login_border"><span
-                    class="name_login" >로그인</span></button>
+            <button sec:authorize="isAnonymous()" type="button" th:onclick="|location.href='@{/login}'|"
+                    class="login_border"><span
+                    class="name_login">로그인</span></button>
         </div>
         <div id="resultContainer"></div>
         <div class="v10_2261" sec:authorize="isAnonymous()">
-            <button  type="button" th:onclick="|location.href='@{/join}'|" class="join_border"><span class="name_join" >회원가입</span></button>
+            <button type="submit" th:onclick="|location.href='@{/join}'|" class="join_border"><span class="name_join">회원가입</span>
+            </button>
         </div>
 
         <!--회원 헤더-->
         <div class="Toggle" style="display: none;" id='btn1' sec:authorize="isAuthenticated()">
-            <button type="button" class="v10_514" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${#authentication.principal.getMemberId()})}'|">마이페이지</button>
+            <button type="button" class="v10_514"
+                    th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${#authentication.principal.getMemberId()})}'|">
+                마이페이지
+            </button>
             <button class="v10_514">회원정보</button>
             <hr>
             <button type="button" th:onclick="|location.href='@{/logout}'|" class="v10_513">로그아웃</button>

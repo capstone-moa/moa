@@ -48,13 +48,16 @@
         <!--게시판 내용-->
         <div class="v10_501">
             <!--게시글 한개-----검색결과로 바꿔야합니당!-->
-            <th:block th:each="team : ${teamPosts}">
+            <p th:if="${posts.isEmpty()}">검색어에 해당하는 글이 없습니다</p>
+
+            <th:block th:each="post : ${posts}">
+
                 <div class="v10_502">
                     <div class="white_box">
                         <div class="v10_506">
-                            <span class="v10_507" th:text="${team.memberName()}">아이디1</span>
-                            <span class="v10_508" th:text="${team.memberJob()}">iOS developer</span>
-                            <span class="v10_2226" th:text="${team.createdDateTime()}">2023.05-01</span>
+                            <span class="v10_507" th:text="${post.memberName()}">아이디1</span>
+                            <span class="v10_508" th:text="${post.memberJob()}">iOS developer</span>
+                            <span class="v10_2226" th:text="${post.createdDateTime()}">2023.05-01</span>
                             <div class="profile_image_509"></div>
                         </div>
                         <div class="v10_510">
@@ -62,12 +65,12 @@
                             <div class="v10_512"></div>
                             <div class="v10_513"></div>
                         </div>
-                        <span class="v10_505" th:text="${team.title()}" th:onclick="|location.href='@{/posts/{postId}(postId=${team.postId()})}'|">포트폴리오 프로젝트 같이 협업하실 디자이너분 한분 구합니다!</span>
+                        <span class="v10_505" th:text="${post.title()}">포트폴리오 프로젝트 같이 협업하실 디자이너분 한분 구합니다!</span>
                         <hr class="bar">
-                        <div class="blue_box"></div><span class="blue_font" th:text="|# ${team.interest()}|">#Designer</span>
+                        <div class="blue_box"></div><span class="blue_font" th:text="|# ${post.interest()}|">#Designer</span>
                         <!--댓글-->
                         <div class="v10_315"></div>
-                        <span class="v10_317" th:text="${team.commentCnt()}">3</span>
+                        <span class="v10_317" th:text="${post.commentCnt()}" >3</span>
                     </div>
                 </div>
             </th:block>

@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostRepository extends JpaRepository<Post, Long>, PostRepositoryCustom{
 
     @Query("select distinct t from Post t join fetch t.member where t.postType = ?1")
     List<Post> findAllByTypeFetch(PostType postType);
