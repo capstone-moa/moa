@@ -21,11 +21,11 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public void writeComment(Long postId, WriteCommentRequest request) {
-        Member member = memberRepository.findByEmail(request.getEmail())
+    public void writeComment(WriteCommentRequest request, String email) {
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
 
-        Post post = postRepository.findById(postId)
+        Post post = postRepository.findById(request.getPostId())
                 .orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
         commentRepository.save(new Comment(post, member, request.getContent()));

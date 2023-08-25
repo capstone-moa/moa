@@ -2,12 +2,13 @@ package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.enums.Interest;
+import com.capstone.moa.service.CommentService;
 import com.capstone.moa.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import java.util.List;
 public class PostMvcController {
 
     private final PostService postService;
+    private final CommentService commentService;
     private final String COMMUNITY = "COMMUNITY";
     private final String TEAM = "TEAM";
 
@@ -78,6 +80,14 @@ public class PostMvcController {
         model.addAttribute("postDetail", postDetail);
         model.addAttribute("writeCommentRequest", new WriteCommentRequest());
         return "post/view";
+    }
+
+    @PostMapping("/comment")
+    public ResponseEntity<?> writeComment(@RequestBody WriteCommentRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        System.out.println("post id : " + request.getPostId());
+        System.out.println("content : " + request.getContent());
+        commentService.writeComment(request, userDetails.getUsername());
+        return ResponseEntity.ok("댓글이 등록되었습니다.");
     }
 
     @GetMapping("/search")

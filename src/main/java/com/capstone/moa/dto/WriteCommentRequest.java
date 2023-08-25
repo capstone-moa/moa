@@ -9,6 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class WriteCommentRequest {
 
-    private String email;
+    private Long postId;
     private String content;
 }
