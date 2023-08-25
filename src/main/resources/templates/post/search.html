@@ -65,7 +65,8 @@
                             <div class="v10_512"></div>
                             <div class="v10_513"></div>
                         </div>
-                        <span class="v10_505" th:text="${post.title()}">포트폴리오 프로젝트 같이 협업하실 디자이너분 한분 구합니다!</span>
+                        <span class="v10_505" th:text="${post.title()}"
+                              th:onclick="|location.href='@{/posts/{postId}(postId=${post.postId()})}'|">포트폴리오 프로젝트 같이 협업하실 디자이너분 한분 구합니다!</span>
                         <hr class="bar">
                         <div class="blue_box"></div><span class="blue_font" th:text="|# ${post.interest()}|">#Designer</span>
                         <!--댓글-->

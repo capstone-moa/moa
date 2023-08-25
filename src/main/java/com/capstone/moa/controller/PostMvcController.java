@@ -84,8 +84,6 @@ public class PostMvcController {
 
     @PostMapping("/comment")
     public ResponseEntity<?> writeComment(@RequestBody WriteCommentRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        System.out.println("post id : " + request.getPostId());
-        System.out.println("content : " + request.getContent());
         commentService.writeComment(request, userDetails.getUsername());
         return ResponseEntity.ok("댓글이 등록되었습니다.");
     }
