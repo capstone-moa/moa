@@ -16,7 +16,7 @@
 <!--헤더-->
 <div layout:fragment="content">
 
-    <div class="v104_2240">
+    <div class="v104_2240" >
         <!--게시판 뷰 메인-->
         <div class="board_view">
             <div class="v104_2505">
@@ -28,19 +28,22 @@
                     <span class="v104_2679" th:text="|#${postDetail.interest()}|">#JAVA</span>
                 </div>
                 <div class="writer_profile">
-                    <span class="v104_2511" th:text="${postDetail.memberName()}">작성자 이름</span>
+                    <span class="v104_2511" th:text="${postDetail.memberEmail()}">작성자 이메일</span>
                     <span class="v104_2512" th:text="${postDetail.memberJob()}">작성자 직업</span>
                     <span class="v104_2676" th:text="${postDetail.createdDateTime()}">작성일</span>
                     <div class="writer_image"></div>
-                    <button class="v10_510" id='btn2' onclick='toggleBtn3()'>
-                        <div class="v10_511"></div>
-                        <div class="v10_512"></div>
-                        <div class="v10_513"></div>
-                    </button>
-                    <div class="Toggle" style="display: none;" id='btn3'>
-                        <button class="v10_514">수정</button>
-                        <button class="v10_514">삭제</button>
+                    <div th:if="${postDetail.memberEmail()} == ${#authentication.name}">
+                        <button class="v10_510" id='btn2' onclick='toggleBtn3()'>
+                            <div class="v10_511"></div>
+                            <div class="v10_512"></div>
+                            <div class="v10_513"></div>
+                        </button>
+                        <div class="Toggle" style="display: none;" id='btn3'>
+                            <button class="v10_514">수정</button>
+                            <button class="v10_514" th:onclick="deletePost([[${postDetail.postId}]])">삭제</button>
+                        </div>
                     </div>
+
                 </div>
                 <!-- 댓글 -->
                 <!-- 댓글 작성-->
@@ -77,7 +80,7 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script>
+    <script th:inline="javascript">
         function toggleBtn3() {
 
             // 토글 할 버튼 선택 (btn1)
@@ -124,6 +127,22 @@
                 }).fail(function (error) {
                     alert(JSON.stringify(error))
                 });
+            }
+        }
+
+        function deletePost(postId) {
+            const url = '/posts/' + postId + '/delete';
+            if (confirm("게시글을 삭제하시겠습니까?") === true) {
+                fetch(url, {
+                    method: 'POST'
+                }).then(response => {
+                    if (response) {
+                        alert("게시글을 삭제했습니다.");
+                        window.location.href = '/posts';
+                    } else {
+                        alert("공지 삭제에 실패했습니다.")
+                    }
+                })
             }
         }
     </script>

@@ -69,6 +69,12 @@ public class PostMvcController {
         return "redirect:/posts";
     }
 
+    @PostMapping("/{postId}/delete")
+    public String deletePost(@PathVariable("postId") Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        postService.deletePost(postId, userDetails.getUsername());
+        return "redirect:/posts";
+    }
+
     @ModelAttribute("interests")
     private Interest[] putInterest() {
         return Interest.values();
