@@ -39,7 +39,7 @@
                             <div class="v10_513"></div>
                         </button>
                         <div class="Toggle" style="display: none;" id='btn3'>
-                            <button class="v10_514">수정</button>
+                            <button class="v10_514" th:onclick="|location.href='@{/posts/{postId}/modify(postId=${postDetail.postId()})}'|">수정</button>
                             <button class="v10_514" th:onclick="deletePost([[${postDetail.postId}]])">삭제</button>
                         </div>
                     </div>
