@@ -48,7 +48,7 @@ public class PostController {
     @Operation(summary = "게시글 수정")
     @PutMapping("/{postId}")
     public ResponseEntity<Void> modifyPost(@PathVariable("postId") Long postId, @RequestBody ModifyPostRequest request) {
-        postService.modifyPost(postId, request);
+        postService.modifyPost(postId, request, "test@email.com");
         return ResponseEntity.noContent().build();
     }
 

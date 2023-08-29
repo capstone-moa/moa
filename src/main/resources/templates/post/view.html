@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en"
+      lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout}">
 <head>
@@ -10,82 +10,142 @@
     <link href="/css/view.css" rel="stylesheet"/>
     <title>view</title>
 </head>
-<script>
-    function toggleBtn1() {
 
-        // 토글 할 버튼 선택 (btn1)
-        const btn1 = document.getElementById('btn1');
-
-        // btn1 숨기기 (display: none)
-        if(btn1.style.display !== 'none') {
-            btn1.style.display = 'none';
-        }
-        // btn` 보이기 (display: block)
-        else {
-            btn1.style.display = 'block';
-        }
-    }
-</script>
 
 <body>
 <!--헤더-->
 <div layout:fragment="content">
 
-<div class="v104_2240">
-    <!--게시판 뷰 메인-->
-    <div class="board_view">
-        <div class="v104_2505">
-            <!-- 게시물 메인 -->
+    <div class="v104_2240" >
+        <!--게시판 뷰 메인-->
+        <div class="board_view">
+            <div class="v104_2505">
+                <!-- 게시물 메인 -->
 
-            <span class="view_title" th:text="${postDetail.title()}">제목</span>
-            <textarea class="view_text" cols="33" th:text="${postDetail.content()}" readonly>내용</textarea>
-            <div class="v104_2678">
-                <span class="v104_2679" th:text="|#${postDetail.interest()}|">#JAVA</span>
-            </div>
-            <div class="writer_profile">
-                <span class="v104_2511" th:text="${postDetail.memberName()}">작성자 이름</span>
-                <span class="v104_2512" th:text="${postDetail.memberJob()}">작성자 직업</span>
-                <span class="v104_2676" th:text="${postDetail.createdDateTime()}">작성일</span>
-                <div class="writer_image"></div>
-                <button class="v10_510" id='btn2' onclick='toggleBtn1()'>
-                    <div class="v10_511"></div>
-                    <div class="v10_512"></div>
-                    <div class="v10_513"></div>
-                </button>
-                <div class="Toggle" style="display: none;" id='btn1'>
-                    <button class="v10_514">수정</button>
-                    <button class="v10_514">삭제</button>
+                <span class="view_title" th:text="${postDetail.title()}">제목</span>
+                <textarea class="view_text" cols="33" th:text="${postDetail.content()}" readonly>내용</textarea>
+                <div class="v104_2678">
+                    <span class="v104_2679" th:text="|#${postDetail.interest()}|">#JAVA</span>
+                </div>
+                <div class="writer_profile">
+                    <span class="v104_2511" th:text="${postDetail.memberEmail()}">작성자 이메일</span>
+                    <span class="v104_2512" th:text="${postDetail.memberJob()}">작성자 직업</span>
+                    <span class="v104_2676" th:text="${postDetail.createdDateTime()}">작성일</span>
+                    <div class="writer_image"></div>
+                    <div th:if="${postDetail.memberEmail()} == ${#authentication.name}">
+                        <button class="v10_510" id='btn2' onclick='toggleBtn3()'>
+                            <div class="v10_511"></div>
+                            <div class="v10_512"></div>
+                            <div class="v10_513"></div>
+                        </button>
+                        <div class="Toggle" style="display: none;" id='btn3'>
+                            <button class="v10_514" th:onclick="|location.href='@{/posts/{postId}/modify(postId=${postDetail.postId()})}'|">수정</button>
+                            <button class="v10_514" th:onclick="deletePost([[${postDetail.postId}]])">삭제</button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 댓글 -->
+                <!-- 댓글 작성-->
+                <div class="v104_2683">
+                    <hr>
+                    <div class="v104_2684">
+                        <form id="commentForm" method="post"  th:action="@{posts/comment}">
+                            <div class="comment_profile_image"></div>
+                            <input id="member" th:value="${#authentication.name}" hidden="hidden" />
+
+                            <input name="postId" th:value="${postDetail.postId()}" id="postId" hidden="hidden">
+                            <p><textarea class="comment_textarea" id="content" placeholder="댓글을 작성해보세요"
+                                         name="content"></textarea></p>
+                            <div class="v30_1649">
+                                <button type="button" onclick="saveComment()" class="button"><span
+                                        class="v30_1651">작성</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- 댓글 조회 한개 -->
+                    <th:block th:each="comment : ${postDetail.comments()}">
+                        <div class="comment">
+                            <textarea class="v104_2689" th:text="${comment.content()}" readonly>댓글내용입니당.</textarea>
+                            <span class="v104_2690" th:text="${comment.createdDateTime()}">2023-07-14</span>
+                            <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
+                            <div class="comment_profile_image1"></div>
+                        </div>
+
+                    </th:block>
                 </div>
             </div>
-            <!-- 댓글 -->
-            <!-- 댓글 작성-->
-            <div class="v104_2683"><hr>
-                <div class="v104_2684">
-                    <div class="comment_profile_image"></div>
-                    <p><textarea class="comment_textarea" placeholder="댓글을 작성해보세요"></textarea></p>
-                    <div class="v30_1649">
-                        <button type="button" th:onclick="" class="button"><span class="v30_1651">작성</span></button>
-                    </div>
-                </div>
-                <!-- 댓글 조회 한개 -->
-                <th:block th:each="comment : ${postDetail.comments()}">
-                    <div class="comment">
-                        <textarea class="v104_2689" th:text="${comment.content()}" readonly>댓글내용입니당.</textarea>
-                        <span class="v104_2690" th:text="${comment.createdDateTime()}">2023-07-14</span>
-                        <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
-                        <div class="comment_profile_image1"></div>
-                    </div>
-                    <div class="comment">
-                        <textarea class="v104_2689" th:text="${comment.content()}" readonly>댓글내용입니당.</textarea>
-                        <span class="v104_2690" th:text="${comment.createdDateTime()}">2023-07-14</span>
-                        <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
-                        <div class="comment_profile_image1"></div>
-                </th:block>
-            </div>
-            </form>
         </div>
     </div>
-</div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script th:inline="javascript">
+        function toggleBtn3() {
+
+            // 토글 할 버튼 선택 (btn1)
+            const btn3 = document.getElementById('btn3');
+
+            // btn1 숨기기 (display: none)
+            if (btn3.style.display !== 'none') {
+                btn3.style.display = 'none';
+            }
+            // btn` 보이기 (display: block)
+            else {
+                btn3.style.display = 'block';
+            }
+        }
+
+        function saveComment() {
+
+            const member = $('#member').val();
+
+            if (member === 'anonymousUser') {
+                alert('로그인한 사용자만 댓글을 입력할 수 있습니다.');
+                window.location.reload();
+            }
+
+
+            const WriteCommentRequest = {
+                postId: $('#postId').val(),
+                content: $('#content').val()
+            };
+
+            // 공백 및 빈 문자열 체크
+            if (!WriteCommentRequest.content || WriteCommentRequest.content.trim() === "") {
+                alert("공백 또는 입력하지 않은 부분이 있습니다.");
+                return false;
+            }else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/posts/comment',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(WriteCommentRequest)
+                }).done(function () {
+                    alert('댓글이 등록되었습니다.');
+                    window.location.reload()
+                }).fail(function (error) {
+                    alert(JSON.stringify(error))
+                });
+            }
+        }
+
+        function deletePost(postId) {
+            const url = '/posts/' + postId + '/delete';
+            if (confirm("게시글을 삭제하시겠습니까?") === true) {
+                fetch(url, {
+                    method: 'POST'
+                }).then(response => {
+                    if (response) {
+                        alert("게시글을 삭제했습니다.");
+                        window.location.href = '/posts';
+                    } else {
+                        alert("공지 삭제에 실패했습니다.")
+                    }
+                })
+            }
+        }
+    </script>
 </div>
 </body>
 

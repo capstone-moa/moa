@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/**", "/login", "/join", "/error", "/resources/**").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers(HttpMethod.GET, "posts/**", "/api/posts/**").permitAll()
-                .requestMatchers("posts/write/**").authenticated()
+                .requestMatchers("posts/write/**", "posts/comment/**").authenticated()
                 .requestMatchers("/group/intro/modify/**").authenticated()
                 .requestMatchers("/group/intro/**").permitAll()
 

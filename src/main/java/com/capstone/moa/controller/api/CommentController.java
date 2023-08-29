@@ -19,7 +19,7 @@ public class CommentController {
     @Operation(summary = "댓글 작성")
     @PostMapping("/{postId}/comments")
     public ResponseEntity<Void> writeComment(@PathVariable("postId") Long postId, @RequestBody WriteCommentRequest request) {
-        commentService.writeComment(postId, request);
+        commentService.writeComment(request, "test@email.com");
         return ResponseEntity.noContent().build();
     }
 

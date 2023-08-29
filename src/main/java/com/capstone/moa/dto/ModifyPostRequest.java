@@ -9,7 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ModifyPostRequest {
 
-    private String email;
     private String title;
     private String content;
     private String interest;

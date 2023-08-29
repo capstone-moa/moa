@@ -93,6 +93,12 @@ public class PostService {
         return FindPostResponse.from(post);
     }
 
+    @Transactional(readOnly = true)
+    public PostDetailResponse findModifyPostResponseById(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+        return PostDetailResponse.from(post);
+    }
 
     @Transactional(readOnly = true)
     public FindPostWithCommentsResponse findPostWithCommentsByPostId(Long postId) {
@@ -103,11 +109,11 @@ public class PostService {
     }
 
     @Transactional
-    public void modifyPost(Long postId, ModifyPostRequest request) {
+    public void modifyPost(Long postId, ModifyPostRequest request, String email) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("Post not found"));
 
-        if (!post.isSameWriter(request.getEmail())) {
+        if (!post.isSameWriter(email)) {
             throw new IllegalArgumentException("You are not the writer of this post");
         }
 
