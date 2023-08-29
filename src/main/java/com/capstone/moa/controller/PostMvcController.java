@@ -88,6 +88,20 @@ public class PostMvcController {
         return "post/view";
     }
 
+    @GetMapping("/{postId}/modify")
+    public String modifyPostForm(@PathVariable("postId") Long postId, Model model) {
+        PostDetailResponse post = postService.findModifyPostResponseById(postId);
+        model.addAttribute("post", post);
+        model.addAttribute("modifyPostRequest", new ModifyPostRequest());
+        return "post/modify";
+    }
+
+    @PutMapping("/{postId}/modify")
+    public String modifyPost(@PathVariable("postId") Long postId, ModifyPostRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        postService.modifyPost(postId, request, userDetails.getUsername());
+        return "redirect:/posts/{postId}";
+    }
+
     @PostMapping("/comment")
     public ResponseEntity<?> writeComment(@RequestBody WriteCommentRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         commentService.writeComment(request, userDetails.getUsername());
