@@ -323,7 +323,7 @@ body {
   width: 770px;
   height: 150px;
   position: relative;
-  top: 120px;
+  top: 190px;
   overflow: hidden;
 }
 
@@ -331,7 +331,7 @@ body {
   width: 677px;
   color: rgba(24,24,24,1);
   position: relative;
-  top: 110px;
+  top: 50px;
   left: 70px;
   font-family: NanumGothic;
   font-size: 14px;
@@ -347,7 +347,7 @@ body {
   width: 86px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 95px;
+  top: 35px;
   left: 80px;
   font-family: NanumGothic;
   font-size: 10px;
@@ -358,7 +358,7 @@ body {
   width: 48px;
   color: rgba(24,24,24,1);
   position: absolute;
-  top: 70px;
+  top: 10px;
   left: 80px;
   font-family: NanumGothic;
   font-weight: Bold;
@@ -376,11 +376,22 @@ body {
   background-size: cover;
   opacity: 1;
   position: absolute;
-  top: 70px;
+  top: 10px;
   left: 0px;
   border-top-left-radius: 26px;
   border-top-right-radius: 26px;
   border-bottom-left-radius: 26px;
   border-bottom-right-radius: 26px;
   overflow: hidden;
+}
+.del_comment {
+  all: unset;
+  color: rgba(0, 0, 0, 0.644);
+  position: absolute;
+  top: 15px;
+  left: 700px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 14px;
+  text-decoration: underline;
 }

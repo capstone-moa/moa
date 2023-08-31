@@ -6,22 +6,21 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <link href="/css/group_notice_write.css" rel="stylesheet" />
-    <title>group_file_write</title>
+    <title>group_issue_write</title>
 </head>
-<!------------------파일 페이지 헤더연결, 이슈 작성 페이지 연결 필요합니당---------------->
+
 <body>
 <div class="v10_483">
     <!--게시글 작성 메인 -->
 
     <div class="v10_488">
         <div class="v10_490">
-            <span class="v10_493">파일 업로드</span>
-            <span class="v10_495">프로젝트에 필요한 파일을 업로드하세요!<br><hr></span>
+            <span class="v10_493">이슈 글쓰기</span>
         </div>
 
         <!--카테고리 선택-->
         <div class="v10_501">
-            <form th:action th:object="${writePostRequest}" method="post" method="post" enctype="multipart/form-data">
+            <form th:action th:object="${writePostRequest}" method="post">
 
                 <!--게시글 작성 폼-->
                 <div class="form-group">
@@ -30,7 +29,9 @@
                            placeholder="제목을 입력해 주세요">
 
                     <div class="board_text3">
-                        <input type="file" name="profile">
+                        <label for="content">내용<br></label>
+                        <textarea class="form-control" rows="30" name="content" required="required"
+                                  placeholder="내용을 입력해 주세요"></textarea>
                     </div>
 
                     <div>
