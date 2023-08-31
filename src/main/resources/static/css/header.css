@@ -1,6 +1,6 @@
 
 /*******************상단바*******************/
-.header_bar {
+.header_main {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,7 +11,7 @@
     border-radius: 4px;
 }
 
-.search {
+.header_search {
     width: 340px;
     position : absolute;
     top: 28px;
@@ -26,10 +26,11 @@ input {
     font-size: 14px;
 }
 
-.img_search {
+.header_img_search {
     width: 40px;
     height: auto;
     position : absolute;
+    top:2px;
     right: 3px;
     padding: 8px 12px;
     border: none;
@@ -37,7 +38,7 @@ input {
     background-color: transparent;
 }
 
-.community {
+.header_community {
     width: 35px;
     height: 30px;
     background: url("../images/community.png");
@@ -51,7 +52,7 @@ input {
     overflow: hidden;
 }
 
-.team {
+.header_team {
     width: 37px;
     height: 32px;
     background: url("../images/team.png");
@@ -64,7 +65,7 @@ input {
     border-radius: 10px 10px 10px 10px;
     overflow: hidden;
 }
-.nav_text_community{
+.header_text_community{
     color: rgba(24,24,24);
     position: absolute;
     top: 56px;
@@ -76,7 +77,7 @@ input {
     text-align: left;
 }
 
-.nav_text_team{
+.header_text_team{
     color: rgba(24,24,24);
     position: absolute;
     top: 56px;
@@ -88,19 +89,19 @@ input {
     text-align: left;
 }
 
-.v-line {
+.header_v-line {
     border-left : 3px solid #F7F9FB;
     height: 80px;
     position: absolute;
     left: 230px;
 }
-.v10_2253 {
+.header_v10_2253 {
     position: absolute;
     top: 26px;
     left: 1230px;
 
 }
-.login_border {
+.header_login_border {
     width: 91px;
     height: 32px;
     background-repeat: no-repeat;
@@ -117,7 +118,7 @@ input {
     border-bottom-right-radius: 4px;
     overflow: hidden;
 }
-.name_login {
+.header_name_login {
     width: 34px;
     color: rgba(182,182,182,1);
     position: absolute;
@@ -129,7 +130,7 @@ input {
     opacity: 1;
     text-align: center;
 }
-.v10_2261 {
+.header_v10_2261 {
     width: 91px;
     height: 32px;
     background-repeat: no-repeat;
@@ -141,7 +142,7 @@ input {
     left: 1110px;
     overflow: hidden;
 }
-.join_border {
+.header_join_border {
     width: 91px;
     height: 32px;
     background: linear-gradient(rgba(0,119,181,1), rgba(14,102,148,1));
@@ -156,7 +157,7 @@ input {
     border-bottom-right-radius: 4px;
     overflow: hidden;
 }
-.name_join {
+.header_name_join {
     width: 46px;
     color: rgba(255,255,255,1);
     position: absolute;
@@ -169,7 +170,7 @@ input {
     text-align: center;
 }
 
-.logo {
+.header_logo {
     width: 55px;
     height: 55px;
     background: url("../images/logo.png");
@@ -183,7 +184,7 @@ input {
     overflow: hidden;
 }
 /****************헤더-회원*****************/
-.v10_2252 {
+.header_v10_2252 {
     all: unset;
     border-left : 3px solid rgba(247,249,251,1);
     height: 85px;
@@ -218,9 +219,9 @@ input {
     text-align: left;
     text-transform:uppercase
 }
-.Toggle{
-    width: 130px;
-    height: 115px;
+.header_Toggle{
+    width: 125px;
+    height: 150px;
     font-size:14px;
     position: absolute;
     top: 90px;
@@ -233,7 +234,7 @@ input {
     border-bottom-right-radius: 10px;
     z-index: 2;
 }
-.v10_514 {
+.header_v10_514 {
     width: 100px;
     height: 35px;
     position: relative;
@@ -247,7 +248,7 @@ input {
     border: none;
     background: none;
 }
-.v10_513 {
+.header_v10_513 {
     width: 100px;
     height: 35px;
     position: relative;

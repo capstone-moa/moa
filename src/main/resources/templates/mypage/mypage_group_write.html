@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{common/layout}">
+
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
@@ -14,7 +11,7 @@
 </head>
 
 <body>
-<div layout:fragment="content">
+
 <div class="v10_483">
     <!--게시글 작성 메인 -->
 
@@ -51,7 +48,7 @@
                     <div>
                         <button type="submit"  class="button" onclick="handleFormSubmission(event)">
                             <span
-                                class="v30_1660">그룹 생성
+                                    class="v30_1660">그룹 생성
                             </span></button>
                     </div>
                 </div>
@@ -59,30 +56,30 @@
         </div>
     </div>
 </div>
-    <script>
-        function handleFormSubmission(event) {
-            event.preventDefault();
+<script>
+    function handleFormSubmission(event) {
+        event.preventDefault();
 
-            fetch('http://localhost:8080/mypage/group/save', {
-                method: 'POST',
-                body: new FormData(document.getElementById('myForm'))
+        fetch('http://localhost:8080/mypage/group/save', {
+            method: 'POST',
+            body: new FormData(document.getElementById('myForm'))
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('그룹이 생성되었습니다');
+                } else {
+                    throw new Error('Failed to submit form');
+                }
             })
-                .then(response => {
-                    if (response.ok) {
-                        alert('그룹이 생성되었습니다');
-                    } else {
-                        throw new Error('Failed to submit form');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error submitting form:', error.message);
-                })
-                .finally(() => {
-                    window.opener.location.reload();
-                    window.close();
-                });
-        }
-    </script>
+            .catch(error => {
+                console.error('Error submitting form:', error.message);
+            })
+            .finally(() => {
+                window.opener.location.reload();
+                window.close();
+            });
+    }
+</script>
 </div>
 </body>
 

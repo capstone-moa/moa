@@ -290,6 +290,19 @@ hr.nav_role{
     left: 364px;
     overflow: hidden;
 }
+.v10_780 {
+    width: 862px;
+    height: auto;
+    position: relative;
+    top: 65px;
+    left: 60px;
+    overflow: hidden;
+    background: rgba(255,255,255,1);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
 .v10_762 {
     width: 862px;
     height: 364px;
@@ -527,25 +540,26 @@ hr.nav_role{
     overflow: hidden;
 }
 .middle_category3 {
-    width: 180px;
-    height: 40px;
-    position: relative;
-    top: -25px;
-    left: 342px;
-    background: linear-gradient(rgba(0,119,181,1), rgba(14,102,148,1));
-    opacity: 1;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    overflow: hidden;
-}
-.middle_category4 {
     width: 171px;
     height: 35px;
     position: absolute;
     top: 15px;
-    left: 522px;
+    left: 342px;
+    overflow: hidden;
     background: rgba(255,255,255,1);
     border: 1px solid rgba(230,230,230,1);
+    overflow: hidden;
+}
+.middle_category4 {
+    width: 180px;
+    height: 40px;
+    position: relative;
+    top: -25px;
+    left: 513px;
+    background: linear-gradient(rgba(0,119,181,1), rgba(14,102,148,1));
+    opacity: 1;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     overflow: hidden;
 }
 .text_black {
