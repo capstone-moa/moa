@@ -67,6 +67,13 @@ public class GroupService {
     }
 
     @Transactional(readOnly = true)
+    public GroupInfoResponse findGroupInfoById(Long groupId) {
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(() -> new IllegalArgumentException("Group not found"));
+        return GroupInfoResponse.from(group);
+    }
+
+    @Transactional(readOnly = true)
     public List<FindGroupByLeaderMemberIdResponse> findGroupsByLeaderMemberId(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
