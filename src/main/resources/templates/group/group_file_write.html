@@ -21,7 +21,7 @@
 
         <!--카테고리 선택-->
         <div class="v10_501">
-            <form th:action th:object="${writePostRequest}" method="post" method="post" enctype="multipart/form-data">
+            <form id="form" enctype="multipart/form-data">
 
                 <!--게시글 작성 폼-->
                 <div class="form-group">
@@ -30,16 +30,46 @@
                            placeholder="제목을 입력해 주세요">
 
                     <div class="board_text3">
-                        <input type="file" name="profile">
+                        <input type="file" name="file" id="file">
                     </div>
+                    <label>
+                        <input name="groupId" id="groupId" th:value="${groupId}" hidden="hidden">
+                    </label>
 
                     <div>
-                        <button type="submit" class="button"><span class="v30_1660">작성</span></button>
+                        <button type="button" class="button" onclick="saveReportFile()"><span class="v30_1660">작성</span></button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        function saveReportFile() {
+            const data = {
+                title: $('#title').val(),
+                groupId: $('#groupId').val()
+            };
+            const form = $('#form')[0];
+            const formData = new FormData(form);
+            formData.append('file', $('#file'));
+            formData.append('uploadFileRequest', new Blob([JSON.stringify(data)], {type: "application/json"}));
+            console.log(formData)
+            $.ajax({
+                type: 'post',
+                url: '/group/project/files/upload',
+                processData: false,
+                contentType: false,
+                data: formData,
+            }).done(function (){
+                alert('보고서가 등록되었습니다.');
+                window.opener.location.reload();
+                window.close();
+            }).fail(function (error){
+                alert(JSON.stringify(error));
+            });
+        }
+    </script>
 </div>
 </body>
 

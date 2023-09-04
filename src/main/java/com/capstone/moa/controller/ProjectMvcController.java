@@ -1,20 +1,18 @@
 package com.capstone.moa.controller;
 
-import com.capstone.moa.dto.FindIssueResponse;
-import com.capstone.moa.dto.GroupInfoResponse;
-import com.capstone.moa.dto.UserDetailsImpl;
-import com.capstone.moa.dto.WriteIssueRequest;
+import com.capstone.moa.dto.*;
 import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.IssueService;
+import com.capstone.moa.service.ReportFileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -24,6 +22,7 @@ public class ProjectMvcController {
 
     private final GroupService groupService;
     private final IssueService issueService;
+    private final ReportFileService reportFileService;
 
     @GetMapping("/{groupId}/issue")
     public String findProject(@PathVariable("groupId") Long groupId, Model model) {
@@ -47,11 +46,23 @@ public class ProjectMvcController {
         return "redirect:/";
     }
 
-
     @GetMapping("/{groupId}/files")
     public String findFiles(@PathVariable("groupId") Long groupId, Model model) {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
         model.addAttribute("group", groupInfo);
         return "group/group_management_file";
+    }
+
+    @GetMapping("/{groupId}/files/write")
+    public String fileForm(@PathVariable("groupId") Long groupId, Model model) {
+        model.addAttribute("groupId", groupId);
+        return "group/group_file_write";
+    }
+
+    @PostMapping(value = "/files/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String uploadFile(@RequestPart(value = "file") MultipartFile file,
+                             @RequestPart(value = "uploadFileRequest") UploadFileRequest request) throws IOException {
+        String uploadFile = reportFileService.uploadFile(file, request);
+        return uploadFile;
     }
 }
