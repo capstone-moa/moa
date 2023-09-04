@@ -1,13 +1,13 @@
 package com.capstone.moa.service;
 
 import com.capstone.moa.dto.*;
-import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.entity.Post;
+import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.enums.PostType;
 import com.capstone.moa.repository.MemberRepository;
 import com.capstone.moa.repository.PostRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PostService {
 
     private final PostRepository postRepository;
