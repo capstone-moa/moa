@@ -15,7 +15,9 @@ public class ReportFile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long groupId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    private Group group;
     private String title;
     private String fileName;
     private String contentType;
@@ -25,8 +27,8 @@ public class ReportFile {
     private byte[] fileData;
 
     @Builder
-    public ReportFile(Long groupId, String title, String fileName, String contentType, byte[] fileData) {
-        this.groupId = groupId;
+    public ReportFile(Group group, String title, String fileName, String contentType, byte[] fileData) {
+        this.group = group;
         this.title = title;
         this.fileName = fileName;
         this.contentType = contentType;

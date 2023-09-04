@@ -5,7 +5,10 @@ import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.IssueService;
 import com.capstone.moa.service.ReportFileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -49,7 +53,9 @@ public class ProjectMvcController {
     @GetMapping("/{groupId}/files")
     public String findFiles(@PathVariable("groupId") Long groupId, Model model) {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
+        List<FindReportFileResponse> reportFiles = reportFileService.findReportFilesByGroupId(groupId);
         model.addAttribute("group", groupInfo);
+        model.addAttribute("reportFiles", reportFiles);
         return "group/group_management_file";
     }
 
@@ -62,7 +68,19 @@ public class ProjectMvcController {
     @PostMapping(value = "/files/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String uploadFile(@RequestPart(value = "file") MultipartFile file,
                              @RequestPart(value = "uploadFileRequest") UploadFileRequest request) throws IOException {
-        String uploadFile = reportFileService.uploadFile(file, request);
-        return uploadFile;
+        return reportFileService.uploadFile(file, request);
+    }
+
+    @GetMapping("/download/{reportFileId}")
+    public ResponseEntity<?> download(@PathVariable("reportFileId") Long reportFileId) {
+        DownLoadFileResponse downloadFile = reportFileService.downloadFile(reportFileId);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDisposition(ContentDisposition.builder("attachment")
+                .filename(downloadFile.fileName(), StandardCharsets.UTF_8)
+                .build());
+        headers.set(HttpHeaders.CONTENT_TYPE, downloadFile.contentType());
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(downloadFile.fileData());
     }
 }

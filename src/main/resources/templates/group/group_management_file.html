@@ -94,7 +94,7 @@
                     </button>
                     <!--게시글 한개-->
                     <div class="v10_501">
-                        <th:block >
+                        <th:block th:each="reportFile : ${reportFiles}">
                             <div class="v10_502">
                                 <div class="white_box">
                                     <button class="v10_510" id='btn2' type="button" onclick='toggleBtn1()'>
@@ -103,11 +103,11 @@
                                         <div class="v10_513"></div>
                                     </button>
                                     <div class="Toggle" style="display: none;" id='btn1'>
-                                        <button class="v10_514">수정</button>
                                         <button class="v10_514">삭제</button>
                                     </div>
-                                    <span class="v10_505">제목</span>
-                                    <span class="v10_509">파일명</span>
+                                    <span class="v10_505" th:text="${reportFile.title()}">제목</span>
+                                    <span class="v10_509" th:text="${reportFile.fileName()}">파일명</span>
+                                    <a th:href="@{/group/project/download/{fileId}(fileId=${reportFile.id()})}">download</a>
                                     <hr class="bar">
                                 </div>
                             </div>
