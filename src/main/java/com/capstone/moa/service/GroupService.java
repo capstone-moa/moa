@@ -105,6 +105,11 @@ public class GroupService {
         return FindMemberResponse.from(leader.getMember());
     }
 
+    @Transactional(readOnly = true)
+    public boolean checkIsGroupMember(Long groupId, Long memberId) {
+        return groupMemberRepository.existsGroupMemberByGroupIdAndMemberId(groupId, memberId);
+    }
+
     private GroupMember checkGroupMember(Long groupId, String email) {
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));

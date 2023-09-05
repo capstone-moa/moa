@@ -14,12 +14,12 @@
     <div class="v10_483">
         <!--좌측 네비게이션 바-->
         <div class="category">
-            <button type="button" class="v10_582" >
+            <button type="button" class="v10_582">
                 <span class="v10_584">마이페이지</span>
                 <div class="hashtag"></div>
                 <hr class="nav_role">
             </button>
-            <button type="button" class="v10_582" >
+            <button type="button" class="v10_582">
                 <span class="v10_584">그룹관리</span>
                 <div class="hashtag"></div>
                 <hr class="nav_role">
@@ -86,28 +86,37 @@
                             th:onclick="|location.href='@{/group/project/{groupId}/files(groupId=${group.id()})}'|"></button>
                     <span class="image_512">보고서</span>
 
+                    <label>
+                        <input id="groupId" name="groupId" th:value="${groupId}" hidden="hidden">
+                    </label>
+
                     <a th:href="@{/group/project/{groupId}/files/write(groupId=${group.id()})}" target="_blank"
                        id="myLink"></a>
-                    <button type="button" class="button"
+                    <button th:if="${check}" type="button" class="button"
                             onclick="openNewWindow()">
-                        <span class="v30_1660">작성</span>
+                        <span class="v30_1660" >작성</span>
                     </button>
                     <!--게시글 한개-->
                     <div class="v10_501">
                         <th:block th:each="reportFile : ${reportFiles}">
                             <div class="v10_502">
                                 <div class="white_box">
-                                    <button class="v10_510" id='btn2' type="button" onclick='toggleBtn1()'>
+                                    <button th:if="${check} == true" class="v10_510" id='btn2' type="button" onclick='toggleBtn3()'>
                                         <div class="v10_511"></div>
                                         <div class="v10_512"></div>
                                         <div class="v10_513"></div>
                                     </button>
-                                    <div class="Toggle" style="display: none;" id='btn1'>
-                                        <button class="v10_514">삭제</button>
+
+                                    <div class="Toggle" style="display: none;" id='btn3'>
+                                        <button class="v10_514" type="button" onclick="deleteReportFile()">삭제</button>
                                     </div>
+                                    <label>
+                                        <input name="reportFileId" id="reportFileId" th:value="${reportFile.id()}"
+                                               hidden="hidden">
+                                    </label>
                                     <span class="v10_505" th:text="${reportFile.title()}">제목</span>
                                     <span class="v10_509" th:text="${reportFile.fileName()}">파일명</span>
-                                    <a th:href="@{/group/project/download/{fileId}(fileId=${reportFile.id()})}">download</a>
+                                    <a th:if="${check}" th:href="@{/group/project/download/{fileId}(fileId=${reportFile.id()})}">download</a>
                                     <hr class="bar">
                                 </div>
                             </div>
@@ -117,25 +126,48 @@
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
         function openNewWindow() {
             let url = document.getElementById('myLink').getAttribute('href');
             window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
         }
 
+        function toggleBtn3() {
 
-        function toggleBtn1() {
-
-            // 토글 할 버튼 선택 (btn1)
-            const btn1 = document.getElementById('btn1');
+            // 토글 할 버튼 선택 (btn3)
+            const btn3 = document.getElementById('btn3');
 
             // btn1 숨기기 (display: none)
-            if (btn1.style.display !== 'none') {
-                btn1.style.display = 'none';
+            if (btn3.style.display !== 'none') {
+                btn3.style.display = 'none';
             }
             // btn` 보이기 (display: block)
             else {
-                btn1.style.display = 'block';
+                btn3.style.display = 'block';
+            }
+        }
+
+        function deleteReportFile() {
+            const groupId = $('#groupId').val();
+            const reportFileId = $('#reportFileId').val();
+            console.log(reportFileId)
+            const url = "/group/project/" + groupId + "/files/" + reportFileId + "/delete";
+            if (confirm("해당 보고서를 삭제하시겠습니까??") === true) {    //확인
+                fetch(url, {
+                    method: 'POST'
+                }).then(response => {
+                    console.log(response.status)
+                    if (response.ok) {
+                        alert("보고서를 삭제했습니다.");
+                    } else {
+                        alert("보고서 삭제에 실패했습니다.")
+                    }
+                }).finally(() => {
+                    window.location.reload();
+                })
+            } else {   //취소
+                alert("보고서 삭제를 취소합니다.")
             }
         }
     </script>

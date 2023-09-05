@@ -51,11 +51,16 @@ public class ProjectMvcController {
     }
 
     @GetMapping("/{groupId}/files")
-    public String findFiles(@PathVariable("groupId") Long groupId, Model model) {
+    public String findFiles(@PathVariable("groupId") Long groupId, Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
         List<FindReportFileResponse> reportFiles = reportFileService.findReportFilesByGroupId(groupId);
+        boolean check = false;
+        if (userDetails != null) {
+            check = groupService.checkIsGroupMember(groupId, userDetails.getMemberId());
+        }
         model.addAttribute("group", groupInfo);
         model.addAttribute("reportFiles", reportFiles);
+        model.addAttribute("check", check);
         return "group/group_management_file";
     }
 
@@ -82,5 +87,19 @@ public class ProjectMvcController {
         return ResponseEntity.ok()
                 .headers(headers)
                 .body(downloadFile.fileData());
+    }
+
+    @PostMapping("/{groupId}/files/{reportFileId}/delete")
+    public ResponseEntity<?> deleteReportFile(
+            @PathVariable("groupId") Long groupId,
+            @PathVariable("reportFileId") Long reportFileId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        boolean check = groupService.checkIsGroupMember(groupId, userDetails.getMemberId());
+        if (check) {
+            reportFileService.deleteReportFile(reportFileId);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
