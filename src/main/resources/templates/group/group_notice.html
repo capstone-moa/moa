@@ -89,8 +89,12 @@
                         <th:block th:each="notice : ${notices}">
                             <div class="v10_502">
                                 <div class="white_box">
+                                    <label>
+                                        <input name="noticeId" id="noticeId" th:value="${notice.noticeId()}"
+                                               hidden="hidden">
+                                    </label>
                                     <button class="v10_514"  th:if="${leader.email()} == ${#authentication.name}"
-                                    th:onclick="deleteNotice([[${notice.noticeId()}]])" >삭제</button>
+                                    onclick="deleteNotice()" type="button">삭제</button>
                                     <span class="v10_505" th:text="${notice.title()}">커밋 메시지 규칙</span>
                                     <textarea class="v10_509" cols="50" rows="13" th:text="${notice.content()}" readonly>
 1.명사로 끝난다.
@@ -116,13 +120,15 @@
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script th:inline="javascript">
         function openNewWindow() {
             let url = document.getElementById('myLink').getAttribute('href');
             window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
         }
 
-        function deleteNotice(noticeId) {
+        function deleteNotice() {
+            const noticeId = $('#noticeId').val();
             const url = "/group/notice/" + noticeId + '/delete';
             if (confirm("해당 공지를 삭제하시겠습니까??") === true) {    //확인
                 fetch(url, {
