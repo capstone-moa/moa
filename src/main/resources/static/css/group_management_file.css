@@ -818,6 +818,15 @@ hr.nav_role{
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.v10_509_file {
+  position: absolute;
+  top: 90px;
+  left: 100px;
+  font-family: NanumGothic;
+  font-weight: normal;
+  font-size: 14px;
+  text-align: left;
+}
 .v10_2226 {
   width: 96px;
   color: rgba(24,24,24,1);
@@ -883,7 +892,7 @@ hr.nav_role{
 }
 .Toggle{
   width: 50px;
-  height: 60px;
+  height: 30px;
   font-size:14px;
   position: absolute;
   top: 10px;

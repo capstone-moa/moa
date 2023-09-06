@@ -116,7 +116,7 @@
                                     </label>
                                     <span class="v10_505" th:text="${reportFile.title()}">제목</span>
                                     <span class="v10_509" th:text="${reportFile.fileName()}">파일명</span>
-                                    <a th:if="${check}" th:href="@{/group/project/download/{fileId}(fileId=${reportFile.id()})}">download</a>
+                                    <a class="v10_509_file" th:if="${check}" th:href="@{/group/project/download/{fileId}(fileId=${reportFile.id()})}">download</a>
                                     <hr class="bar">
                                 </div>
                             </div>
