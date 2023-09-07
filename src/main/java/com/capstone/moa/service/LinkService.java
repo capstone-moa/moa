@@ -23,20 +23,6 @@ public class LinkService {
         link.modifyGroupIntroLink(githubLink, projectLink);
     }
 
-    @Transactional
-    public void addFigmaLink(Long groupId, String figmaLink) {
-        Group group = findGroup(groupId);
-        Link link = group.getLink();
-        link.modifyFigma(figmaLink);
-    }
-
-    @Transactional
-    public void addErdCloudLink(Long groupId, String erdCloudLink) {
-        Group group = findGroup(groupId);
-        Link link = group.getLink();
-        link.modifyErdCloud(erdCloudLink);
-    }
-
     private Group findGroup(Long groupId) {
         return groupRepository.findById(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));
