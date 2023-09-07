@@ -54,7 +54,6 @@ public class AuthMvcController {
     @GetMapping("/check-email")
     @ResponseBody
     public int checkEmailDuplication(String email) {
-        System.out.println("email : " + email);
         return authService.checkEmailDuplication(email);
     }
 
