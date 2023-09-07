@@ -25,6 +25,10 @@
             <form th:object="${joinRequest}" method="post" th:action="@{/join}" id="join-form" name="join_form">
                 <input type="text" placeholder="name" name="name" id="name" th:field="*{name}">
                 <input type="text" placeholder="Email" name="email" id="email" th:field="*{email}">
+
+                <button id="emailDuplication" type="button">중복확인</button><br>
+                <span id="dpmessage"></span>
+
                 <input type="text" placeholder="github 주소" name="github" id="github" th:field="*{github}">
                 <input type="password" placeholder="비밀번호" id="password1" name="password" th:field="*{password}">
                 <input type="password" placeholder="비밀번호 확인" id="password2" name="password2" >
@@ -47,12 +51,38 @@
         </div>
     </div>
 </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript">
+        let check = false;
+        $("#emailDuplication").click(function (){
+            $("#button").attr('type', 'button');
+            const email = $('#email').val();
+            $.ajax({
+                type: 'get',
+                async: false,
+                url: "http://localhost:8080/check-email",
+                data: {email: email},
+                success: function (data) {
+                    if (data === 1) {
+                        $("#dpmessage").text("이미 사용중인 ID 입니다.");
+                        $("#dpmessage").addClass("dpmessagef");
+                        $("#dpmessage").removeClass("dpmessaget");
+                    }else {
+                        $("#dpmessage").text("사용 가능한 ID 입니다.");
+                        $("#dpmessage").addClass("dpmessaget");
+                        $("#dpmessage").removeClass("dpmessagef");
+                        check = true;
+                       // $("#button").attr("type", "submit");
+                    }
+                },
+            })
+        });
+
         function test() {
             var p1 = document.getElementById('password1').value;
             var p2 = document.getElementById('password2').value;
 
-            if( p1 != p2 ) {
+            if( p1 !== p2 ) {
                 alert("비밀번호가 불일치합니다.");
                 return false;
             } else{
@@ -70,22 +100,22 @@
 
             var exptext = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 
-            if (password1.value == "" || password2.value == "") {
+            if (password1.value === "" || password2.value === "") {
                 alert("비밀번호를 입력하세요.");
                 password1.focus();
                 return false;
             }
-            if (name.value == "") {
+            if (name.value === "") {
                 alert("이름을 입력하세요.");
                 name.focus();
                 return false;
             }
-            if (github.value == "") {
+            if (github.value === "") {
                 alert("깃허브 주소를 입력하세요.");
                 github.focus();
                 return false;
             }
-            if (email.value == "") {
+            if (email.value === "") {
                 alert("이메일 주소를 입력하세요.");
                 email.focus();
                 return false;
@@ -93,6 +123,10 @@
             if(!exptext.test(email.value)){
                 //이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐 경우
                 alert("이메일 형식이 올바르지 않습니다.");
+                return false;
+            }
+            if (!check) {
+                alert("이메일 중복 확인을 해주세요");
                 return false;
             }
             document.join_form.submit();

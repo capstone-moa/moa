@@ -14,6 +14,9 @@ public class Issue extends BaseTimeEntity{
     private Long id;
 
     private String title;
+
+    @Lob
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)

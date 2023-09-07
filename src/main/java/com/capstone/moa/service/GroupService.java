@@ -39,21 +39,28 @@ public class GroupService {
         groupRepository.save(group);
     }
 
+    @Transactional(readOnly = true)
+    public int checkGroupNameDuplication(String groupName) {
+        if (groupRepository.existsByName(groupName)) {
+            return 1;
+        }
+        return 0;
+    }
+
     @Transactional
     public void modifyGroupIntro(Long groupId, ModifyGroupIntroRequest request, String email) {
         GroupMember groupLeader = groupMemberRepository.findGroupLeader(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("Leader not found"));
-        if (!groupLeader.getMember().getEmail().equals(email)) {
-            throw new IllegalArgumentException("You are not leader of this group");
-        }
+        isGroupLeader(groupLeader, email);
 
         groupLeader.getGroup().modifyGroupIntro(request.getIntroduce(), request.getInterest(), request.getProjectDescription(), request.getSkills());
     }
 
     @Transactional
     public void deleteGroup(Long groupId, String email) {
-        GroupMember groupLeader = checkGroupMember(groupId, email);
-        isGroupLeader(groupLeader);
+        GroupMember groupLeader = groupMemberRepository.findGroupLeader(groupId)
+                .orElseThrow(() -> new IllegalArgumentException("Leader not found"));
+        isGroupLeader(groupLeader, email);
 
         groupRepository.delete(groupLeader.getGroup());
     }
@@ -119,9 +126,9 @@ public class GroupService {
                 .orElseThrow(() -> new IllegalArgumentException("GroupMember not found"));
     }
 
-    private void isGroupLeader(GroupMember groupMember) {
-        if (!groupMember.isGroupLeader()) {
-            throw new IllegalArgumentException("You are not the leader of this group");
+    private void isGroupLeader(GroupMember groupMember, String email) {
+        if (!groupMember.getMember().getEmail().equals(email)) {
+            throw new IllegalArgumentException("You are not leader of this group");
         }
     }
 }

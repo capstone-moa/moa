@@ -119,7 +119,6 @@ public class PostMvcController {
                 .postType(postType)
                 .build();
         Pageable pageable = PageRequest.of(0, 6);
-        System.out.println("title : " + title);
         List<FindPostResponse> posts = postService.searchPostsByTitleAndType(request, pageable);
 
         model.addAttribute("posts", posts);

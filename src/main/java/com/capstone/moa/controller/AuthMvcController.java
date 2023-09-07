@@ -12,10 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -53,6 +50,13 @@ public class AuthMvcController {
         }
         return "redirect:/posts";
     }
+
+    @GetMapping("/check-email")
+    @ResponseBody
+    public int checkEmailDuplication(String email) {
+        return authService.checkEmailDuplication(email);
+    }
+
 
     @ModelAttribute("interests")
     private Interest[] putInterest() {

@@ -13,124 +13,148 @@
 
 <body>
 <div layout:fragment="content">
-<div class="v10_483">
+    <div class="v10_483">
 
-    <!--좌측 네비게이션 바-->
-    <div class="category">
-        <button type="button" class="v10_582" onclick="">
-            <span class="v10_584">마이페이지</span>
-            <div class="hashtag"></div>
-            <hr class="nav_role">
-        </button>
-        <button type="button" class="v10_582" onclick="">
-            <span class="v10_584">그룹관리</span>
-            <div class="hashtag"></div>
-            <hr class="nav_role">
-        </button>
-        <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
-        <button type="button" class="v10_582" onclick="">
-            <span class="v10_584" th:text="${groupIntro.name()}">MOA</span>
-            <hr class="nav_role">
-        </button>
-    </div>
-
-    <!--그룹페이지 메인 소개-->
-    <form>
-        <div class="grouppage_intro">
-            <div class="v10_762">
-                <div class="back_image"></div>
-                <div class="profile_image"></div>
-                <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
-                <span class="profile_intro" th:text="${groupIntro.introduce()}">그룹 설명</span>
-                <div class="interest">
-                    <div class="github_image"></div>
-                    <span class="v10_769">GitHub : <span th:text="${groupIntro.github()}">https://github.com/capstone-moa</span></span>
-                    <span class="v10_770">Interest : </span>
-                    <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span></div>
-                </div>
-                <div class="v10_775">
-                    <div class="v10_779"></div>
-                    <span class="mypage_location">경기도, 오산</span>
-                </div>
-            </div>
-
-            <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
-            <div class="v10_796">
-                <div class="middle_category1" th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupIntro.id()})}'|"><span
-                        class="text_white">그룹소개</span></div>
-                <div class="middle_category2" th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_black">공지사항</span>
-                </div>
-                <div class="middle_category3" th:onclick="|location.href='@{/group/project/{groupId}/issue(groupId=${groupIntro.id()})}'|"><span class="text_black">프로젝트 관리</span>
-                </div>
-                <div class="middle_category4" th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_black">일정관리</span>
-                </div>
-
-            </div>
-
-            <!-----------그룹 소개------------>
-
-            <div class="v10_780">
-                <span class="v10_777_intro" th:onclick="|location.href='@{/group/intro/modify/{groupId}(groupId=${groupIntro.id()})}'|">그룹소개 수정</span>
-
-                <!-----------그룹 주소------------>
-                <div class="interest_intro">
-                    <div class="github_image_intro"></div>
-                    <div class="v10_769_intro">GitHub : <span th:text="${groupIntro.github()}"></span></div>
-                    <div class="v10_7691_intro">Interest :
-                        <div class="v10_771_intro"><span class="v10_772_intro" th:text="|# ${groupIntro.interest()}|">#web</span></div></div>
-                    <div class="v10_770_intro">project : <span th:text="${groupIntro.projectLink()}"></span></div>
-                    <div class="v10_770_intro">Email : <span>moa_backend@gmail.com</span></div>
-                </div>
-
-                <!-----------그룹 주제(글자수 제한)------------>
-                <div class="title_intro">
-                    <div class="v10_782">프로젝트 설명</div>
-                    <div class="v10_783" th:text="${groupIntro.projectDescription()}">개발자들을 연결시켜 공모전개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더
-                        쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드
-                        프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을
-                        연결시개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드
-                        프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진, 사이드 프로젝트를 보다 더 쉽게
-                        진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는
-                        도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹
-                        플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을
-                        연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드
-                        프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할
-                        수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!!
-                    </div>
-                </div>
-                <div class="skill_intro">
-                    <div class="v10_782">적용 기술</div>
-                    <div class="v10_784" th:text="${groupIntro.skills()}">개발자들을 연결시켜 공모자들을 연결 공모자들을 연결시켜 공모자들을 연결시켜 공모자들을 연결시켜 공모자들을 연결시켜 공모자들을 연결시켜시켜
-                        공모전, 사자들을 연결시켜 공모전, 사자들을 연결시켜 공모전, 사자들을 연결시켜 공모전, 사전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를
-                        제공하는 소셜 네트워킹 플랫폼을 개발합니다개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을
-                        개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜
-                        공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다
-                        더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록
-                        관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는
-                        소셜 네트워킹 플랫폼을 개발합니다!!
-                    </div>
-                </div>
-
-
-                <!-----------그룹원 소개------------>
-                <div class="v10_501">
-                    <span class="v10_782">그룹원 소개</span>
-                    <!-----------그룹원 한세트(두명)------------>
-                    <div class="member">
-                        <!------그룹원 계속 추가하려면 아래 v10_506,v10_510을 반복하면 됨.-->
-                        <th:block th:each="groupmember, i : ${groupIntro.groupMembers()}">
-                            <div th:class="${i.odd}? 'v10_506' : 'v10_510'" class="v10_506">
-                                <span class="v10_507" th:text="${groupmember.email()}">아이디1</span>
-                                <span class="v10_508" th:text="${groupmember.job()}">직업</span>
-                                <div class="profile_image_509"></div>
-                            </div>
-                        </th:block>
-                    </div>
-                </div>
-            </div>
+        <!--좌측 네비게이션 바-->
+        <div class="category">
+            <button type="button" class="v10_582" onclick="">
+                <span class="v10_584">마이페이지</span>
+                <div class="hashtag"></div>
+                <hr class="nav_role">
+            </button>
+            <button type="button" class="v10_582" onclick="">
+                <span class="v10_584">그룹관리</span>
+                <div class="hashtag"></div>
+                <hr class="nav_role">
+            </button>
+            <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
+            <button type="button" class="v10_582" onclick="">
+                <span class="v10_584" th:text="${groupIntro.name()}">MOA</span>
+                <hr class="nav_role">
+            </button>
         </div>
-    </form>
-</div>
+
+        <!--그룹페이지 메인 소개-->
+        <form>
+            <div class="grouppage_intro">
+                <div class="v10_762">
+                    <div class="back_image"></div>
+                    <div class="profile_image"></div>
+                    <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
+                    <span class="profile_intro" th:text="${groupIntro.introduce()}">그룹 설명</span>
+                    <div class="interest">
+                        <div class="github_image"></div>
+                        <span class="v10_769">GitHub : <span th:text="${groupIntro.github()}">https://github.com/capstone-moa</span></span>
+                        <span class="v10_770">Interest : </span>
+                        <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span>
+                        </div>
+                    </div>
+                    <div class="v10_775">
+                        <div class="v10_779"></div>
+                        <span class="mypage_location">경기도, 오산</span>
+                    </div>
+                </div>
+
+                <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
+                <div class="v10_796">
+                    <div class="middle_category1"
+                         th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                            class="text_white">그룹소개</span></div>
+                    <div class="middle_category2"
+                         th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                            class="text_black">공지사항</span>
+                    </div>
+                    <div class="middle_category3"
+                         th:onclick="|location.href='@{/group/project/{groupId}/issue(groupId=${groupIntro.id()})}'|">
+                        <span class="text_black">프로젝트 관리</span>
+                    </div>
+                    <div class="middle_category4"
+                         th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                            class="text_black">일정관리</span>
+                    </div>
+
+                </div>
+
+                <!-----------그룹 소개------------>
+
+                <div class="v10_780">
+                                <span class="v10_777_intro" th:if="${leader.email()} == ${#authentication.name}"
+                                      th:onclick="|location.href='@{/group/intro/modify/{groupId}(groupId=${groupIntro.id()})}'|">그룹소개 수정</span>
+
+                    <!-----------그룹 주소------------>
+                    <div class="interest_intro">
+                        <div class="github_image_intro"></div>
+                        <div class="v10_769_intro">GitHub : <span th:text="${groupIntro.github()}"></span></div>
+                        <div class="v10_7691_intro">Interest :
+                            <div class="v10_771_intro"><span class="v10_772_intro"
+                                                             th:text="|# ${groupIntro.interest()}|">#web</span></div>
+                        </div>
+                        <div class="v10_770_intro">project : <span th:text="${groupIntro.projectLink()}"></span></div>
+                        <div class="v10_770_intro">Email : <span>moa_backend@gmail.com</span></div>
+                    </div>
+
+                    <!-----------그룹 주제(글자수 제한)------------>
+                    <div class="title_intro">
+                        <div class="v10_782">프로젝트 설명</div>
+                        <div class="v10_783" th:text="${groupIntro.projectDescription()}">개발자들을 연결시켜 공모전개발자들을 연결시켜 공모전,
+                            사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더
+                            쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전,
+                            사이드
+                            프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을
+                            연결시개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드
+                            프로젝트를 보다 더 쉽게 진개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진, 사이드 프로젝트를 보다 더
+                            쉽게
+                            진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해
+                            주는
+                            도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜
+                            네트워킹
+                            플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을
+                            개발합니다!개발자들을
+                            연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드
+                            프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게
+                            진행할
+                            수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!!
+                        </div>
+                    </div>
+                    <div class="skill_intro">
+                        <div class="v10_782">적용 기술</div>
+                        <div class="v10_784" th:text="${groupIntro.skills()}">개발자들을 연결시켜 공모자들을 연결 공모자들을 연결시켜 공모자들을 연결시켜
+                            공모자들을 연결시켜 공모자들을 연결시켜 공모자들을 연결시켜시켜
+                            공모전, 사자들을 연결시켜 공모전, 사자들을 연결시켜 공모전, 사자들을 연결시켜 공모전, 사전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를
+                            제공하는 소셜 네트워킹 플랫폼을 개발합니다개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹
+                            플랫폼을
+                            개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을
+                            연결시켜
+                            공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드
+                            프로젝트를 보다
+                            더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수
+                            있도록
+                            관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를
+                            제공하는
+                            소셜 네트워킹 플랫폼을 개발합니다!!
+                        </div>
+                    </div>
+
+
+                    <!-----------그룹원 소개------------>
+                    <div class="v10_501">
+                        <span class="v10_782">그룹원 소개</span>
+                        <!-----------그룹원 한세트(두명)------------>
+                        <div class="member">
+                            <!------그룹원 계속 추가하려면 아래 v10_506,v10_510을 반복하면 됨.-->
+                            <th:block th:each="groupmember, i : ${groupIntro.groupMembers()}">
+                                <div th:class="${i.odd}? 'v10_506' : 'v10_510'" class="v10_506">
+                                    <span class="v10_507" th:text="${groupmember.email()}">아이디1</span>
+                                    <span class="v10_508" th:text="${groupmember.job()}">직업</span>
+                                    <div class="profile_image_509"></div>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

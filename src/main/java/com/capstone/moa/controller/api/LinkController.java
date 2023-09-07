@@ -21,18 +21,4 @@ public class LinkController {
         linkService.modifyGroupIntroLink(groupId, githubLink.get("githubLink"), "대표 링크");
         return ResponseEntity.noContent().build();
     }
-
-    @Operation(summary = "figma 링크 등록")
-    @PostMapping("/figma/{groupId}")
-    public ResponseEntity<Void> addFigmaLink(@PathVariable(name = "groupId") Long groupId, @RequestBody Map<String, String> figmaLink) {
-        linkService.addFigmaLink(groupId, figmaLink.get("figmaLink"));
-        return ResponseEntity.noContent().build();
-    }
-
-    @Operation(summary = "erdCloud 링크 등록")
-    @PostMapping("/erd-cloud/{groupId}")
-    public ResponseEntity<Void> addErdCloudLink(@PathVariable(name = "groupId") Long groupId, @RequestBody Map<String, String> erdCloudLink) {
-        linkService.addErdCloudLink(groupId, erdCloudLink.get("erdCloudLink"));
-        return ResponseEntity.noContent().build();
-    }
 }

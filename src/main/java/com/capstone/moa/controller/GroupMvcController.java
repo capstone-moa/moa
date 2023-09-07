@@ -1,5 +1,6 @@
 package com.capstone.moa.controller;
 
+import com.capstone.moa.dto.FindMemberResponse;
 import com.capstone.moa.dto.GroupIntroResponse;
 import com.capstone.moa.dto.ModifyGroupIntroRequest;
 import com.capstone.moa.dto.UserDetailsImpl;
@@ -23,8 +24,10 @@ public class GroupMvcController {
     @GetMapping("/intro/{groupId}")
     public String findGroupIntroById(@PathVariable Long groupId, Model model) {
         GroupIntroResponse response = groupService.findGroupById(groupId);
-        model.addAttribute("groupIntro", response);
+        FindMemberResponse leader = groupService.findGroupLeaderByGroupId(groupId);
 
+        model.addAttribute("groupIntro", response);
+        model.addAttribute("leader", leader);
         return "group/group_intro";
     }
 

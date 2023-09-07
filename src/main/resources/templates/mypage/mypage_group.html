@@ -91,9 +91,10 @@
                                         th:onclick="group_invite_function([[${group.groupId()}]], [[${member.email()}]])"><span
                                         class="name_join">그룹 초대</span></button>
                             </div>
+                            <input name="groupId" id="groupId" th:value="${group.groupId()}" hidden="hidden">
                             <div class="group_delete_box">
                                 <button th:if="${member.email()} == ${#authentication.getName()}" type="button"
-                                        class="login_border" onclick="group_delete_function()"><span
+                                        class="login_border" onclick="deleteGroup()"><span
                                         class="name_login">그룹 삭제</span></button>
                             </div>
 
@@ -195,6 +196,25 @@
         function openNewWindow() {
             let url = document.getElementById('myLink').getAttribute('href');
             window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+        }
+
+        function deleteGroup() {
+            const groupId = $('#groupId').val();
+            const url = "/mypage/group/" + groupId + "/delete";
+            if (confirm("해당 그룹을 삭제하시겠습니까??") === true) {    //확인
+                fetch(url, {
+                    method: 'POST'
+                }).then(response => {
+                    if (response) {
+                        alert("그룹을 삭제했습니다.");
+                        window.location.reload();  // 페이지 새로 고침
+                    } else {
+                        alert("그룹 삭제에 실패했습니다.")
+                    }
+                })
+            } else {   //취소
+                alert("그룹 삭제를 취소합니다.")
+            }
         }
     </script>
 </div>
