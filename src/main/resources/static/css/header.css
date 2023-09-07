@@ -191,6 +191,7 @@ input {
     position: absolute;
     left: 1050px;
     width: 350px;
+    outline:none;
 }
 
 .header_profile_image {
