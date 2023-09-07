@@ -84,6 +84,12 @@ public class MypageMvcController {
         return "redirect:/";
     }
 
+    @PostMapping("/group/{groupId}/delete")
+    public String deleteGroup(@PathVariable("groupId") Long groupId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        groupService.deleteGroup(groupId, userDetails.getUsername());
+        return "redirect:/";
+    }
+
     @PostMapping("/group/invite")
     public String inviteMember(@RequestBody InviteGroupRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         invitationService.inviteToGroup(request, userDetails.getUsername());
