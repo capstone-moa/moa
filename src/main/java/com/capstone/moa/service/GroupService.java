@@ -39,6 +39,14 @@ public class GroupService {
         groupRepository.save(group);
     }
 
+    @Transactional(readOnly = true)
+    public int checkGroupNameDuplication(String groupName) {
+        if (groupRepository.existsByName(groupName)) {
+            return 1;
+        }
+        return 0;
+    }
+
     @Transactional
     public void modifyGroupIntro(Long groupId, ModifyGroupIntroRequest request, String email) {
         GroupMember groupLeader = groupMemberRepository.findGroupLeader(groupId)

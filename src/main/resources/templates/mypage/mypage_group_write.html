@@ -46,7 +46,7 @@
 
 
                     <div>
-                        <button type="submit"  class="button" onclick="handleFormSubmission(event)">
+                        <button type="button" id="submitBtn" class="button" >
                             <span
                                     class="v30_1660">그룹 생성
                             </span></button>
@@ -56,29 +56,41 @@
         </div>
     </div>
 </div>
-<script>
-    function handleFormSubmission(event) {
-        event.preventDefault();
-
-        fetch('http://localhost:8080/mypage/group/save', {
-            method: 'POST',
-            body: new FormData(document.getElementById('myForm'))
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('그룹이 생성되었습니다');
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+    $('#submitBtn').click(function () {
+        const groupName = $('#title').val();
+        $.ajax({
+            type: 'get',
+            async: false,
+            url: "http://localhost:8080/mypage/check-groupName",
+            data: {groupName: groupName},
+            success: function (data) {
+                if (data === 1) {
+                    alert("이미 존재하는 그룹입니다.");
                 } else {
-                    throw new Error('Failed to submit form');
+                    fetch('http://localhost:8080/mypage/group/save', {
+                        method: 'POST',
+                        body: new FormData(document.getElementById('myForm'))
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                alert('그룹이 생성되었습니다');
+                            } else {
+                                throw new Error('Failed to submit form');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error submitting form:', error.message);
+                        })
+                        .finally(() => {
+                            window.opener.location.reload();
+                            window.close();
+                        });
                 }
-            })
-            .catch(error => {
-                console.error('Error submitting form:', error.message);
-            })
-            .finally(() => {
-                window.opener.location.reload();
-                window.close();
-            });
-    }
+            }
+        })
+    })
 </script>
 </div>
 </body>

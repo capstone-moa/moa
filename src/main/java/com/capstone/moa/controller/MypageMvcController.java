@@ -72,6 +72,12 @@ public class MypageMvcController {
         return "mypage/mypage_group_write";
     }
 
+    @GetMapping("/check-groupName")
+    @ResponseBody
+    public int checkGroupNameDuplication(String groupName) {
+        return groupService.checkGroupNameDuplication(groupName);
+    }
+
     @PostMapping("/group/save")
     public String saveGroup(CreateGroupRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         groupService.createGroup(request, userDetails.getUsername());
