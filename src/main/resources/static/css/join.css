@@ -246,3 +246,7 @@ button {
 .v33_1948{
   color: rgba(0,119,181,1);
 }
+/******이메일 중복확인*********/
+#emailDuplication {background-color: GhostWhite; width: 15%; height: 40px;}
+.dpmessagef {color: red; font-style: Italic;}
+.dpmessaget {color: blue; font-style: Italic;}
