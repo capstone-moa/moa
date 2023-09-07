@@ -384,6 +384,7 @@ hr.nav_role{
 }
 .v10_491 {
   width: 800px;
+  height: 20px;
   color: rgba(24,24,24,0.20000000298023224);
   position: absolute;
   top: 58px;
@@ -432,7 +433,7 @@ hr.nav_role{
 }
 .v10_502 {
   width: 848px;
-  height: 300px;
+  height: 500px;
   position: relative;
   overflow: hidden;
 }
@@ -529,5 +530,5 @@ hr.nav_role{
 
 .v10_223 {
   width: 900px;
-  height: 180px;
+  height: 200px;
 }

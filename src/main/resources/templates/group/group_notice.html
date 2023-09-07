@@ -95,18 +95,9 @@
                                     </label>
                                     <button class="v10_514"  th:if="${leader.email()} == ${#authentication.name}"
                                     onclick="deleteNotice()" type="button">삭제</button>
-                                    <span class="v10_505" th:text="${notice.title()}">커밋 메시지 규칙</span>
-                                    <textarea class="v10_509" cols="50" rows="13" th:text="${notice.content()}" readonly>
-1.명사로 끝난다.
-2.커밋 유형 지정
-3.feat: 새로운 기능의 추가
-4.fix: 버그 수정
-5.docs: 문서 수정
-6.style: 스타일 관련 기능(코드 포맷팅, 세미콜론 누락, 코드 자체의 변경이 없는 경우)
-7.refactor: 코드 리펙토링
-8.test: 테스트 코트, 리펙토링 테스트 코드 추가
-9.chore: 빌드 업무 수정, 패키지 매니저 수정(ex .gitignore 수정 같은 경우)
-                                </textarea>
+                                    <span class="v10_505" th:text="${notice.title()}">제목</span>
+                                    <textarea class="v10_509" cols="50" rows="25" maxlength="600" th:text="${notice.content()}" readonly>
+                                    내용</textarea>
                                 </div>
                             </div>
 
