@@ -31,13 +31,12 @@ public class CommentController {
     }
 
     @Operation(summary = "댓글 삭제")
-    @DeleteMapping("/{postId}/comments/{commentId}")
+    @DeleteMapping("//comments/{commentId}")
     public ResponseEntity<Void> deleteComment(
-            @PathVariable("postId") Long postId,
             @PathVariable("commentId") Long commentId,
             @RequestBody String memberId
     ) {
-        commentService.deleteComment(postId, commentId, memberId);
+        commentService.deleteComment(commentId, memberId);
         return ResponseEntity.noContent().build();
     }
 }

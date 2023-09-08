@@ -50,6 +50,11 @@ public class ProjectMvcController {
         return "redirect:/";
     }
 
+    @GetMapping("/issue/{issueId}")
+    public String findIssue(@PathVariable("issueId") Long issueId, Model model) {
+        return "group/group_issue_view";
+    }
+
     @GetMapping("/{groupId}/files")
     public String findFiles(@PathVariable("groupId") Long groupId, Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);

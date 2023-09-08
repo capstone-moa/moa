@@ -83,6 +83,8 @@
                     <button type="button" class="button" onclick="openNewWindow()"
                     th:if="${leader.email()} == ${#authentication.name}"><span class="v30_1660">작성</span>
                     </button>
+                    <button th:unless="${leader.email()} == ${#authentication.name}" type="button" class="button1">
+                    </button>
 
                     <!--게시글 한개-->
                     <div class="v10_501">

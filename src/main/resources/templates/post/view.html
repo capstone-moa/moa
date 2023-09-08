@@ -68,11 +68,16 @@
                     <!-- 댓글 조회 한개 -->
                     <th:block th:each="comment : ${postDetail.comments()}">
                         <div class="comment">
+                            <label>
+                                <input name="commentId" id="commentId" th:value="${comment.commentId()}"
+                                       hidden="hidden">
+                            </label>
                             <textarea class="v104_2689" th:text="${comment.content()}" readonly>댓글내용입니당.</textarea>
                             <span class="v104_2690" th:text="${comment.createdDateTime()}">2023-07-14</span>
-                            <span class="v104_2691" th:text="${comment.memberName()}">닉네임1</span>
+                            <span class="v104_2691" th:text="${comment.writerEmail()}">닉네임1</span>
                             <div class="comment_profile_image1"></div>
-                            <button type="button" class="del_comment">삭제</button>
+                            <button type="button" class="del_comment"
+                                th:if="${#authentication.name} == ${comment.writerEmail()}" onclick="deleteComment()">삭제</button>
                         </div>
 
                     </th:block>
@@ -144,6 +149,25 @@
                         alert("공지 삭제에 실패했습니다.")
                     }
                 })
+            }
+        }
+
+        function deleteComment() {
+            const commentId = $('#commentId').val();
+            const url = "/posts/comment/" + commentId + "/delete";
+            if (confirm("댓글을 삭제하시겠습니까??") === true) {    //확인
+                fetch(url, {
+                    method: 'POST'
+                }).then(response => {
+                    if (response) {
+                        alert("댓글을 삭제했습니다.");
+                        window.location.reload();  // 페이지 새로 고침
+                    } else {
+                        alert("댓글 삭제에 실패했습니다.")
+                    }
+                })
+            } else {   //취소
+                alert("댓글 삭제를 취소합니다.")
             }
         }
     </script>

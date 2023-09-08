@@ -422,6 +422,17 @@ hr.nav_role{
   border-bottom-right-radius: 4px;
 }
 
+.button1{
+  width: 91px;
+  height: 32px;
+  background-color:rgba(255,255,255,1);
+  position: relative;
+  top: 19px;
+  left: 734px;
+  overflow: hidden;
+  border: none;
+}
+
 /*****************게시글 한개*************/
 .v10_501 {
   width: 848px;

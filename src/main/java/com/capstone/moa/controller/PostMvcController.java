@@ -108,6 +108,12 @@ public class PostMvcController {
         return ResponseEntity.ok("댓글이 등록되었습니다.");
     }
 
+    @PostMapping("/comment/{commentId}/delete")
+    public String deleteComment(@PathVariable("commentId") Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        commentService.deleteComment(commentId, userDetails.getUsername());
+        return "redirect:/";
+    }
+
     @GetMapping("/search")
     public String searchPosts(
             @RequestParam(value = "title", defaultValue = "", required = false) String title,

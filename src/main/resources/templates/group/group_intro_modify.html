@@ -75,9 +75,9 @@
                 <!-----------그룹 주소------------>
                 <div class="interest_intro">
                     <div class="github_image_intro"></div>
-                    <div class="v10_769_intro">GitHub : <input class="blue" th:placeholder="${groupIntro.github()}" name="github"
-                                                               placeholder="https://github.com/capstone-moa"
-                                                               size="30px"></div>
+                    <div class="v10_769_intro">GitHub : <textarea class="blue" th:value="${groupIntro.github()}" th:text="${groupIntro.github()}" name="github"
+                                                               placeholder="Group github Link"
+                                                                  size="30px"></textarea></div>
                     <span class="v10_769_intro">Interest : </span>
                     <div class="v10_771_intro">
                         <select name="interest" class="v10_494" id="tag" th:field="*{interest}">
@@ -86,9 +86,9 @@
                                     th:text="${interest.name()}"></option>
                         </select>
                     </div>
-                    <div class="v10_770_intro">project : <input class="blue" th:placeholder="${groupIntro.projectLink()}" name="projectLink"
-                                                                placeholder="https://notion.com/capstone-moa"
-                                                                size="30px"></div>
+                    <div class="v10_770_intro">project : <textarea class="blue" th:value="${groupIntro.projectLink()}" th:text="${groupIntro.projectLink()}" name="projectLink"
+                                                                placeholder="project link"
+                                                                   size="30px"></textarea></div>
                     <div class="v10_770_intro">Email : <input class="blue" placeholder="moa_backend@gmail.com"
                                                               size="30px"></div>
                 </div>

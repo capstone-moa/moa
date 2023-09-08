@@ -101,7 +101,7 @@
                                         <span class="v10_2226" th:text="${issue.createdDateTime()}">2023.05-01</span>
                                         <div class="profile_image_509"></div>
                                     </div>
-                                    <span class="v10_505" th:text="${issue.title()}">제목</span>
+                                    <span class="v10_505" th:text="${issue.title()}" th:onclick="|location.href='@{/group/project/issue/{issueId}(issueId=${issue.id()})}'|">제목</span>
                                     <span class="v10_509" th:text="${issue.content()}">내용</span>
                                     <hr class="bar">
                                 </div>
