@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link href="/css/group_address.css" rel="stylesheet"/>
+    <title>group_management</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="v10_483">
+        <!--좌측 네비게이션 바-->
+        <div class="category">
+            <button type="button" class="v10_582">
+                <span class="v10_584">마이페이지</span>
+                <div class="hashtag"></div>
+                <hr class="nav_role">
+            </button>
+            <button type="button" class="v10_582">
+                <span class="v10_584">그룹관리</span>
+                <div class="hashtag"></div>
+                <hr class="nav_role">
+            </button>
+            <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
+            <button type="button" class="v10_582">
+                <span class="v10_584" th:text="${group.name()}">MOA</span>
+                <hr class="nav_role">
+            </button>
+        </div>
+
+        <!--그룹페이지 메인 소개-->
+        <div class="grouppage_intro">
+            <form>
+                <div class="v10_762">
+                    <div class="back_image"></div>
+                    <div class="profile_image"></div>
+                    <span class="profile_name_font" th:text="${group.name()}">MOA</span>
+                    <span class="profile_intro" th:text="${group.introduce()}">그룹 설명</span>
+                    <div class="interest">
+                        <div class="github_image"></div>
+                        <span class="v10_769">GitHub : <span
+                                th:text="${group.github()}">https://github.com/capstone-moa</span></span>
+                        <span class="v10_770">Interest : </span>
+                        <div class="v10_771"><span class="v10_772" th:text="|# ${group.interest()}|">#web</span></div>
+                    </div>
+                    <div class="v10_775">
+                        <div class="v10_779"></div>
+                        <span class="mypage_location">경기도, 오산</span>
+                    </div>
+                </div>
+            </form>
+                <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
+                <div class="v10_796">
+                    <div class="middle_category1"
+                         th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${group.id()})}'|"><span
+                            class="text_black">그룹소개</span></div>
+                    <div class="middle_category2"
+                         th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${group.id()})}'|"><span
+                            class="text_black">공지사항</span>
+                    </div>
+                    <div class="middle_category3"
+                         th:onclick="|location.href='@{/group/project/{groupId}/issue(groupId=${group.id()})}'|"><span
+                            class="text_white">프로젝트 관리</span>
+                    </div>
+                    <div class="middle_category4"
+                         th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${group.id()})}'|"><span
+                            class="text_black">일정관리</span>
+                    </div>
+                </div>
+
+                <!-----------공지사항-----작성버튼 group_notice_write로 이동되게 하면됩니당! 모양이 똑같아성------->
+                <div class="v10_780">
+                    <span class="v10_782">오프라인 모임 장소<br></span>
+
+                    <a th:href="@{/group/address/{groupId}/write(groupId=${group.id()})}" target="_blank"
+                       id="myLink"></a>
+                    <button th:if="${address} == null" type="button" class="button" onclick="openNewWindow()">
+                        <span class="v30_1660">장소 등록</span>
+                    </button>
+                    <button th:unless="${address} == null" type="button" class="button">
+                        <span class="v30_1660">장소 수정</span>
+                    </button>
+
+                    <div th:if="${address} != null">
+                        모임 장소 : <span th:text="${address.streetAdr()}"></span>
+                        <span th:text="${address.detailAdr()}"></span><br>
+                        우편 번호 :  <span th:text="${address.zipcode()}"></span>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function findAddr() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    let addr = ''; //주소 변수
+                    let extraAddr = ''; // 참고항목 변수
+
+                    if (data.userSelectedType === 'R') {
+                        addr = data.roadAddress;
+                    } else {
+                        addr = data.jibunAddress;
+                    }
+
+                    if (data.userSelectedType === 'R') {
+                        if (data.bname !== '' && /[동|로|가]$/g.test(data.baseName)) {
+                            extraAddr += data.baseName;
+                        }
+                        if (data.buildingName !== '' && data.apartment === 'Y') {
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+                        if (extraAddr !== '') {
+                            extraAddr = ' (' + extraAddr + ')';
+                        }
+                        document.getElementById('detailAdr').value = extraAddr;
+                    } else {
+                        document.getElementById('detailAdr').value = '';
+                    }
+                    document.getElementById('zipcode').value = data.zonecode;
+                    document.getElementById('streetAdr').value = addr;
+                    document.getElementById('detailAdr').focus();
+                }
+            }).open();
+        }
+
+        function handleAddressSubmission(event) {
+            event.preventDefault();
+
+            fetch('http://localhost:8080/group/address/save', {
+                method: 'POST',
+                body: new FormData(document.getElementById('addressForm'))
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('모임 장소가 등록되었습니다');
+                    } else {
+                        throw new Error('Failed to submit form');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error submitting form:', error.message);
+                })
+                .finally(() => {
+                    window.location.reload();
+                });
+        }
+
+        function openNewWindow() {
+            let url = document.getElementById('myLink').getAttribute('href');
+            window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+        }
+    </script>
+</div>
+</body>
+
+</html>
