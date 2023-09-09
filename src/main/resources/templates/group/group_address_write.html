@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link href="/css/group_address.css.css" rel="stylesheet"/>
+    <title>group_address_write</title>
+</head>
+
+<body>
+<div class="v10_483">
+        <!--카테고리 선택-->
+        <div class="v10_501">
+            <form method="post" id="addressForm" th:object="${createAddressRequest}" action="/group/address/save">
+
+                <!--게시글 작성 폼-->
+                <div class="form-group1">
+                    <label th:for="zipcode">우편번호</label>
+                    <input name="zipcode" id="zipcode" type="text" placeholder="우편번호를 입력하세요" readonly
+                           onclick="findAddr()">
+                </div>
+                <div class="form-group2">
+                    <label th:for="streetAdr"> 도로명 주소</label>
+                    <input name="streetAdr" id="streetAdr" type="text" placeholder="도로명 주소 입력하세요" readonly>
+                </div>
+                <div class="form-group3">
+                    <label th:for="detailAdr"> 상세주소</label>
+                    <input name="detailAdr" id="detailAdr" type="text" placeholder="상세주소를 입력하세요">
+                </div>
+                <input name="groupId" th:value="${groupId}" type="hidden">
+
+                <button type="submit" class="button" onclick="handleAddressSubmission(event)"><span
+                        class="v30_1660">입력</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function findAddr() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                let addr = ''; //주소 변수
+                let extraAddr = ''; // 참고항목 변수
+
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else {
+                    addr = data.jibunAddress;
+                }
+
+                if (data.userSelectedType === 'R') {
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.baseName)) {
+                        extraAddr += data.baseName;
+                    }
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if (extraAddr !== '') {
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    document.getElementById('detailAdr').value = extraAddr;
+                } else {
+                    document.getElementById('detailAdr').value = '';
+                }
+                document.getElementById('zipcode').value = data.zonecode;
+                document.getElementById('streetAdr').value = addr;
+                document.getElementById('detailAdr').focus();
+            }
+        }).open();
+    }
+
+    function handleAddressSubmission(event) {
+        event.preventDefault();
+
+        fetch('http://localhost:8080/group/address/save', {
+            method: 'POST',
+            body: new FormData(document.getElementById('addressForm'))
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('모임 장소가 등록되었습니다');
+                } else {
+                    throw new Error('Failed to submit form');
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error.message);
+            })
+            .finally(() => {
+                window.opener.location.reload();
+                window.close();
+            });
+    }
+
+</script>
+</body>
+
+</html>
