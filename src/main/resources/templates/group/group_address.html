@@ -51,7 +51,7 @@
                         <span class="mypage_location">경기도, 오산</span>
                     </div>
                 </div>
-
+            </form>
                 <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
                 <div class="v10_796">
                     <div class="middle_category1"
@@ -77,12 +77,20 @@
 
                     <a th:href="@{/group/address/{groupId}/write(groupId=${group.id()})}" target="_blank"
                        id="myLink"></a>
-                    <button type="button" class="button" onclick="openNewWindow()">
+                    <button th:if="${address} == null" type="button" class="button" onclick="openNewWindow()">
                         <span class="v30_1660">장소 등록</span>
                     </button>
+                    <button th:unless="${address} == null" type="button" class="button">
+                        <span class="v30_1660">장소 수정</span>
+                    </button>
+
+                    <div th:if="${address} != null">
+                        모임 장소 : <span th:text="${address.streetAdr()}"></span>
+                        <span th:text="${address.detailAdr()}"></span><br>
+                        우편 번호 :  <span th:text="${address.zipcode()}"></span>
+                    </div>
 
                 </div>
-            </form>
         </div>
     </div>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

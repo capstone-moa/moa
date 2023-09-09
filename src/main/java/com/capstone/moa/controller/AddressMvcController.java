@@ -1,6 +1,7 @@
 package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.CreateAddressRequest;
+import com.capstone.moa.dto.FindAddressResponse;
 import com.capstone.moa.dto.GroupInfoResponse;
 import com.capstone.moa.dto.UserDetailsImpl;
 import com.capstone.moa.service.AddressService;
@@ -23,7 +24,9 @@ public class AddressMvcController {
     @GetMapping("group/address/{groupId}")
     public String groupAddress(@PathVariable("groupId") Long groupId, Model model) {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
+        FindAddressResponse address = addressService.findGroupAddress(groupId);
         model.addAttribute("group", groupInfo);
+        model.addAttribute("address", address);
         return "group/group_address";
     }
 
