@@ -11,7 +11,9 @@
     <link href="/css/write.css" rel="stylesheet" />
     <title>write</title>
 </head>
+<script>
 
+</script>
 <body>
 <div layout:fragment="content">
 <div class="v10_483">
@@ -27,15 +29,20 @@
         <div class="v10_501">
             <form th:action th:object="${writePostRequest}" method="post">
                 <div class="category_name1">게시판
-                    <select th:name="postType" class="v10_494" id="category">
+                    <select th:name="postType" class="v10_494_1" id="category">
                         <option>게시판 선택</option>
                         <option th:value="COMMUNITY" th:text="커뮤니티"></option>
                         <option th:value="TEAM" th:text="팀원모집"></option>
                     </select>
                 </div>
+                    <select th:name="location" class="v10_494_2" id="loc" th:field="*{interest}">
+                        <option value="">지역 선택</option>
+                        <option th:each="interest : ${interests}" th:value="${interest.name()}"
+                                th:text="${interest.name()}"></option>
+                    </select>
 
                 <div class="category_name2">관심사
-                    <select th:name="interest" class="v10_494" id="tag" th:field="*{interest}">
+                    <select th:name="interest" class="v10_494_3" id="tag" th:field="*{interest}">
                         <option value="">관심사 선택</option>
                         <option th:each="interest : ${interests}" th:value="${interest.name()}"
                                 th:text="${interest.name()}"></option>

@@ -69,6 +69,10 @@
                          th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${group.id()})}'|"><span
                             class="text_black">일정관리</span>
                     </div>
+                    <div class="middle_category5"
+                         th:onclick="|location.href='@{/group/address/{groupId}(groupId=${group.id()})}'|"><span
+                            class="text_black">오프라인 모임</span>
+                    </div>
                 </div>
 
                 <!-----------공지사항----작성버튼 group_file_write로 하면 됩니당!-------->
@@ -101,15 +105,10 @@
                         <th:block th:each="reportFile : ${reportFiles}">
                             <div class="v10_502">
                                 <div class="white_box">
-                                    <button th:if="${check} == true" class="v10_510" id='btn2' type="button" onclick='toggleBtn3()'>
-                                        <div class="v10_511"></div>
-                                        <div class="v10_512"></div>
-                                        <div class="v10_513"></div>
-                                    </button>
 
-                                    <div class="Toggle" style="display: none;" id='btn3'>
-                                        <button class="v10_514" type="button" onclick="deleteReportFile()">삭제</button>
-                                    </div>
+                                    <button type="button" class="del_comment"
+                                            th:if="${check} == true" onclick="deleteReportFile()">삭제</button>
+
                                     <label>
                                         <input name="reportFileId" id="reportFileId" th:value="${reportFile.id()}"
                                                hidden="hidden">
@@ -131,21 +130,6 @@
         function openNewWindow() {
             let url = document.getElementById('myLink').getAttribute('href');
             window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
-        }
-
-        function toggleBtn3() {
-
-            // 토글 할 버튼 선택 (btn3)
-            const btn3 = document.getElementById('btn3');
-
-            // btn1 숨기기 (display: none)
-            if (btn3.style.display !== 'none') {
-                btn3.style.display = 'none';
-            }
-            // btn` 보이기 (display: block)
-            else {
-                btn3.style.display = 'block';
-            }
         }
 
         function deleteReportFile() {

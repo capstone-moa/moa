@@ -87,6 +87,7 @@ textarea.text_box {
   position: relative;
   top: 5px;
   width: 400px;
+  resize: none;
 }
 
 .v10_770 {

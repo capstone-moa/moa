@@ -69,6 +69,10 @@
                          th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${group.id()})}'|"><span
                             class="text_black">일정관리</span>
                     </div>
+                    <div class="middle_category5"
+                         th:onclick="|location.href='@{/group/address/{groupId}(groupId=${group.id()})}'|"><span
+                            class="text_black">오프라인 모임</span>
+                    </div>
                 </div>
 
                 <!-----------공지사항-----작성버튼 group_notice_write로 이동되게 하면됩니당! 모양이 똑같아성------->
@@ -114,7 +118,7 @@
             </form>
         </div>
     </div>
-    <!------------------이슈페이지 헤더연결, 이슈 작성 페이지 연결 필요합니당---------------->
+
     <script>
         function openNewWindow() {
             let url = document.getElementById('myLink').getAttribute('href');

@@ -294,7 +294,6 @@ select {
   overflow: hidden;
 }
 
-
 .v10_166 {
   width: 86px;
   color: rgba(24,24,24,1);
@@ -308,16 +307,29 @@ select {
   text-align: left;
 }
 
-.category_name1{
-  width: 86px;
+.v10_494_1 {
+  width: 300px;
   color: rgba(24,24,24,1);
-  position: absolute;
+  position: relative;
   font-family: NanumGothic;
-  font-weight: Bold;
   font-size: 16px;
+  opacity: 1;
   text-align: left;
+  border: solid 1px;
 }
-.v10_494 {
+.v10_494_2 {
+  width: 300px;
+  color: rgba(24,24,24,1);
+  font-family: NanumGothic;
+  position: relative;
+  top:19px;
+  left: 300px;
+  font-size: 16px;
+  opacity: 1;
+  text-align: left;
+  border: solid 1px;
+}
+.v10_494_3 {
   width: 600px;
   color: rgba(24,24,24,1);
   position: relative;
@@ -326,6 +338,16 @@ select {
   opacity: 1;
   text-align: left;
   border: solid 1px;
+}
+
+.category_name1{
+  width: 86px;
+  color: rgba(24,24,24,1);
+  position: absolute;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 16px;
+  text-align: left;
 }
 
 .category_name2{
@@ -338,7 +360,6 @@ select {
   font-size: 16px;
   text-align: left;
 }
-
 
 /*******************게시글 본문*************/
 .board_text{
