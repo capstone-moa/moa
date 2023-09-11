@@ -333,6 +333,16 @@ hr.nav_role{
   border: 1px solid rgba(230,230,230,1);
   overflow: hidden;
 }
+.middle_category5 {
+  width: 171px;
+  height: 35px;
+  position: absolute;
+  top: 15px;
+  left: 693px;
+  background: rgba(255,255,255,1);
+  border: 1px solid rgba(230,230,230,1);
+  overflow: hidden;
+}
 .text_black {
   width: 124px;
   color: rgba(24,24,24,1);

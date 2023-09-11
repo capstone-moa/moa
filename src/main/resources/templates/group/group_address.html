@@ -53,23 +53,27 @@
                 </div>
             </form>
                 <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
-                <div class="v10_796">
-                    <div class="middle_category1"
-                         th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${group.id()})}'|"><span
-                            class="text_black">그룹소개</span></div>
-                    <div class="middle_category2"
-                         th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${group.id()})}'|"><span
-                            class="text_black">공지사항</span>
-                    </div>
-                    <div class="middle_category3"
-                         th:onclick="|location.href='@{/group/project/{groupId}/issue(groupId=${group.id()})}'|"><span
-                            class="text_white">프로젝트 관리</span>
-                    </div>
-                    <div class="middle_category4"
-                         th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${group.id()})}'|"><span
-                            class="text_black">일정관리</span>
-                    </div>
+            <div class="v10_796">
+                <div class="middle_category1"
+                     th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${group.id()})}'|"><span
+                        class="text_black">그룹소개</span></div>
+                <div class="middle_category2"
+                     th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${group.id()})}'|"><span
+                        class="text_black">공지사항</span>
                 </div>
+                <div class="middle_category3"
+                     th:onclick="|location.href='@{/group/project/{groupId}/issue(groupId=${group.id()})}'|">
+                    <span class="text_black">프로젝트 관리</span>
+                </div>
+                <div class="middle_category4"
+                     th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${group.id()})}'|"><span
+                        class="text_black">일정관리</span>
+                </div>
+                <div class="middle_category5"
+                     th:onclick="|location.href='@{/group/address/{groupId}(groupId=${group.id()})}'|"><span
+                        class="text_white">오프라인 모임</span>
+                </div>
+            </div>
 
                 <!-----------공지사항-----작성버튼 group_notice_write로 이동되게 하면됩니당! 모양이 똑같아성------->
                 <div class="v10_780">
@@ -77,8 +81,8 @@
 
                     <a th:href="@{/group/address/{groupId}/write(groupId=${group.id()})}" target="_blank"
                        id="myLink"></a>
-                    <button th:if="${address} == null" type="button" class="button" onclick="openNewWindow()">
-                        <span class="v30_1660">장소 등록</span>
+                    <button th:if="${address} == null" type="button" class="loc_button" onclick="openNewWindow()">
+                        <span class="loc_text">장소 등록</span>
                     </button>
                     <button th:unless="${address} == null" type="button" class="button">
                         <span class="v30_1660">장소 수정</span>
@@ -152,7 +156,7 @@
 
         function openNewWindow() {
             let url = document.getElementById('myLink').getAttribute('href');
-            window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+            window.open(url, '_blank', 'width=830, height=400, scrollbars=no, resizable=no, toolbars=no, menubar=no');
         }
     </script>
 </div>

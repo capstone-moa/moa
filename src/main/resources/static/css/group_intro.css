@@ -495,6 +495,7 @@ hr.nav_role{
 /**************그룹 주제****************/
 .title_intro {
   width: 790px;
+  height: 300px;
   color: rgba(24,24,24,1);
   position: absolute;
   top: 200px;
@@ -528,6 +529,9 @@ hr.nav_role{
   opacity: 1;
   text-align: left;
   overflow: hidden;
+  border: none;
+  outline: none;
+  resize: none;
 }
 .v10_784 {
   width: 660px;
@@ -542,9 +546,13 @@ hr.nav_role{
   opacity: 1;
   text-align: left;
   overflow: hidden;
+  border: none;
+  outline: none;
+  resize: none;
 }
 .skill_intro {
   width: 790px;
+  height: 300px;
   color: rgba(24,24,24,1);
   position: absolute;
   top: 550px;
@@ -561,8 +569,8 @@ hr.nav_role{
   height: 205px;
   opacity: 1;
   position: absolute;
-  top: 850px;
-  left: 60px;
+  top: 1350px;
+  left: 130px;
   overflow: hidden;
 }
 .member {

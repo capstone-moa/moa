@@ -5,12 +5,20 @@
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-    <link href="/css/group_address.css.css" rel="stylesheet"/>
+    <link href="/css/group_address_write.css" rel="stylesheet"/>
     <title>group_address_write</title>
 </head>
 
 <body>
 <div class="v10_483">
+    <!--게시글 작성 메인 -->
+
+    <div class="v10_488">
+        <div class="v10_490">
+            <span class="v10_493">오프라인 모임 장소 설정</span>
+            <span class="v10_495">오프라인 모임을 진행할 장소를 선택하세요!<br><hr></span>
+        </div>
+
         <!--카테고리 선택-->
         <div class="v10_501">
             <form method="post" id="addressForm" th:object="${createAddressRequest}" action="/group/address/save">
@@ -38,6 +46,8 @@
         </div>
     </div>
 </div>
+</div>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function findAddr() {

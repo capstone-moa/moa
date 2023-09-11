@@ -195,10 +195,10 @@ button {
 
 .v33_1648 {
   width: 609px;
-  height: 790px;
+  height: 825px;
   opacity: 1;
   position: absolute;
-  top: 150px;
+  top: 140px;
   left: 430px;
   overflow: hidden;
   background: rgba(255,255,255,1);
@@ -212,7 +212,7 @@ button {
 .join-wrapper > h2{
   font-size: 24px;
   color: rgba(0,119,181,1);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-align: center;
 }
 #join-form > input{

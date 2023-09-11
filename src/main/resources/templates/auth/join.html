@@ -13,9 +13,7 @@
 <div layout:fragment="content">
 <div class="v10_483">
     <!--헤더-->
-    <div class="container" >
-        <div th:replace="~{common/header::header}"></div>
-    </div>
+
 
     <!--회원가입 입력 폼-->
     <div class="v33_1648">
@@ -26,7 +24,7 @@
                 <input type="text" placeholder="name" name="name" id="name" th:field="*{name}">
                 <input type="text" placeholder="Email" name="email" id="email" th:field="*{email}">
 
-                <button id="emailDuplication" type="button">중복확인</button><br>
+                <input type="button" id="emailDuplication" value="이메일 중복 확인"></input><br>
                 <span id="dpmessage"></span>
 
                 <input type="text" placeholder="github 주소" name="github" id="github" th:field="*{github}">

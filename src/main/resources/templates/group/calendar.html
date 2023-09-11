@@ -154,12 +154,16 @@
                             class="text_black">공지사항</span>
                     </div>
                     <div class="middle_category3"
-                         th:onclick="|location.href='@{/group/project/{groupId}/issue(groupId=${groupIntro.id()})}'|"><span
-                            class="text_black">프로젝트 관리</span>
+                         th:onclick="|location.href='@{/group/project/{groupId}/issue(groupId=${groupIntro.id()})}'|">
+                        <span class="text_black">프로젝트 관리</span>
                     </div>
                     <div class="middle_category4"
                          th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${groupIntro.id()})}'|"><span
-                            class="text_white">일정 관리</span>
+                            class="text_white">일정관리</span>
+                    </div>
+                    <div class="middle_category5"
+                         th:onclick="|location.href='@{/group/address/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                            class="text_black">오프라인 모임</span>
                     </div>
                 </div>
 

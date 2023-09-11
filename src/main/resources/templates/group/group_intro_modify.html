@@ -27,8 +27,10 @@
             <hr class="nav_role">
         </button>
         <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
-        <button type="button" class="v10_582" onclick="" th:each="interest : ${interests}">
-            <span class="v10_584" th:text="${interest.name()}">MOA</span>
+        <button type="button" class="v10_582"
+                th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupCategory.groupId()})}'|"
+                th:each="groupCategory : ${groupCategories}">
+            <span class="v10_584" th:text="${groupCategory.groupName()}"></span>
             <hr class="nav_role">
         </button>
     </div>
@@ -57,13 +59,24 @@
 
             <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
             <div class="v10_796">
-                <div class="middle_category1" th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                <div class="middle_category1"
+                     th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupIntro.id()})}'|"><span
                         class="text_white">그룹소개</span></div>
-                <div class="middle_category2" th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_black">공지사항</span>
+                <div class="middle_category2"
+                     th:onclick="|location.href='@{/group/notice/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                        class="text_black">공지사항</span>
                 </div>
-                <div class="middle_category3" th:onclick="|location.href='@{/group/project/{groupId}/issue(groupId=${groupIntro.id()})}'|"><span class="text_black">프로젝트 관리</span>
+                <div class="middle_category3"
+                     th:onclick="|location.href='@{/group/project/{groupId}/issue(groupId=${groupIntro.id()})}'|">
+                    <span class="text_black">프로젝트 관리</span>
                 </div>
-                <div class="middle_category4" th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${groupIntro.id()})}'|"><span class="text_black">일정관리</span>
+                <div class="middle_category4"
+                     th:onclick="|location.href='@{/group/calendar/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                        class="text_black">일정관리</span>
+                </div>
+                <div class="middle_category5"
+                     th:onclick="|location.href='@{/group/address/{groupId}(groupId=${groupIntro.id()})}'|"><span
+                        class="text_black">오프라인 모임</span>
                 </div>
             </div>
 
