@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en"
+      lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout}">
 
@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-    <link href="/css/write.css" rel="stylesheet" />
+    <link href="/css/write.css" rel="stylesheet"/>
     <title>write</title>
 </head>
 <script>
@@ -16,59 +16,74 @@
 </script>
 <body>
 <div layout:fragment="content">
-<div class="v10_483">
+    <div class="v10_483">
 
-    <!--게시글 작성 메인 -->
-    <div class="v10_488">
-        <div class="v10_490">
-            <span class="v10_493">글쓰기</span>
-            <span class="v10_495">다양한 사람을 만나고 지식을 쌓아보세요!<br><hr></span>
-        </div>
+        <!--게시글 작성 메인 -->
+        <div class="v10_488">
+            <div class="v10_490">
+                <span class="v10_493">글쓰기</span>
+                <span class="v10_495">다양한 사람을 만나고 지식을 쌓아보세요!<br><hr></span>
+            </div>
 
-        <!--카테고리 선택-->
-        <div class="v10_501">
-            <form th:action th:object="${writePostRequest}" method="post">
-                <div class="category_name1">게시판
-                    <select th:name="postType" class="v10_494_1" id="category">
-                        <option>게시판 선택</option>
-                        <option th:value="COMMUNITY" th:text="커뮤니티"></option>
-                        <option th:value="TEAM" th:text="팀원모집"></option>
-                    </select>
-                </div>
-                    <select th:name="location" class="v10_494_2" id="loc" th:field="*{interest}">
-                        <option value="">지역 선택</option>
-                        <option th:each="interest : ${interests}" th:value="${interest.name()}"
-                                th:text="${interest.name()}"></option>
-                    </select>
-
-                <div class="category_name2">관심사
-                    <select th:name="interest" class="v10_494_3" id="tag" th:field="*{interest}">
-                        <option value="">관심사 선택</option>
-                        <option th:each="interest : ${interests}" th:value="${interest.name()}"
-                                th:text="${interest.name()}"></option>
-                    </select>
-                </div>
-
-                <!--게시글 작성 폼-->
-                <div class="form-group">
-                    <label for="title" class="board_text2">제목<br></label>
-                    <input type="text" class="form-control" id="title" name="title" maxlength="100" required="required"
-                           placeholder="제목을 입력해 주세요">
-
-                    <div class="board_text3">
-                        <label for="content">내용<br></label>
-                        <textarea class="form-control" rows="30" name="content" required="required"
-                                  placeholder="내용을 입력해 주세요"></textarea>
+            <!--카테고리 선택-->
+            <div class="v10_501">
+                <form th:action th:object="${writePostRequest}" method="post">
+                    <div class="category_name1">게시판
+                        <select th:name="postType" class="v10_494_1" id="category">
+                            <option>게시판 선택</option>
+                            <option th:value="COMMUNITY" th:text="커뮤니티"></option>
+                            <option th:value="TEAM" th:text="팀원모집"></option>
+                        </select>
                     </div>
 
-                    <div>
-                        <button type="submit" class="button"><span class="v30_1660">작성</span></button>
+                    <select th:name="location" class="v10_494_2"  id="locationSelect" th:field="*{region}" style="display: none;">
+                        <option th:each="region : ${regions}" th:value="${region.getKrName()}"
+                                th:text="${region.getKrName()}" th:if="${region.getKrName()} != '커뮤니티'"></option>
+                    </select>
+
+                    <div class="category_name2">관심사
+                        <select th:name="interest" class="v10_494_3" id="tag" th:field="*{interest}">
+                            <option value="">관심사 선택</option>
+                            <option th:each="interest : ${interests}" th:value="${interest.name()}"
+                                    th:text="${interest.name()}"></option>
+                        </select>
                     </div>
-                </div>
-            </form>
+
+                    <!--게시글 작성 폼-->
+                    <div class="form-group">
+                        <label for="title" class="board_text2">제목<br></label>
+                        <input type="text" class="form-control" id="title" name="title" maxlength="100"
+                               required="required"
+                               placeholder="제목을 입력해 주세요">
+
+                        <div class="board_text3">
+                            <label for="content">내용<br></label>
+                            <textarea class="form-control" rows="30" name="content" required="required"
+                                      placeholder="내용을 입력해 주세요"></textarea>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="button"><span class="v30_1660">작성</span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+    <script>
+        var postTypeSelect = document.getElementById("category");
+        var locationSelect = document.getElementById("locationSelect");
+
+        postTypeSelect.addEventListener("change", function () {
+            var selectedValue = postTypeSelect.value;
+
+            if (selectedValue === "TEAM") {
+                locationSelect.style.display = "block";
+            } else {
+                locationSelect.style.display = "none";
+            }
+        });
+    </script>
 </div>
 </body>
 

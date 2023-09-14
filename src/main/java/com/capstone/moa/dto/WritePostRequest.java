@@ -12,4 +12,5 @@ public class WritePostRequest {
     private String content;
     private String interest;
     private String postType;
+    private String region;
 }

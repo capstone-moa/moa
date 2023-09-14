@@ -2,6 +2,7 @@ package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.enums.Interest;
+import com.capstone.moa.entity.enums.Region;
 import com.capstone.moa.service.CommentService;
 import com.capstone.moa.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -75,11 +76,6 @@ public class PostMvcController {
         return "redirect:/posts";
     }
 
-    @ModelAttribute("interests")
-    private Interest[] putInterest() {
-        return Interest.values();
-    }
-
     @GetMapping("/{postId}")
     public String findPostDetailById(@PathVariable("postId") Long postId, Model model) {
         FindPostWithCommentsResponse postDetail = postService.findPostWithCommentsByPostId(postId);
@@ -129,5 +125,15 @@ public class PostMvcController {
 
         model.addAttribute("posts", posts);
         return "post/search";
+    }
+
+    @ModelAttribute("interests")
+    private Interest[] putInterest() {
+        return Interest.values();
+    }
+
+    @ModelAttribute("regions")
+    private Region[] putRegion() {
+        return Region.values();
     }
 }
