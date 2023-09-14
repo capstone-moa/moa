@@ -50,9 +50,18 @@ public class ProjectMvcController {
         return "redirect:/";
     }
 
-    @GetMapping("/issue/{issueId}")
-    public String findIssue(@PathVariable("issueId") Long issueId, Model model) {
+    @GetMapping("/{groupId}/issue/{issueId}")
+    public String findIssue(@PathVariable("groupId") Long groupId, @PathVariable("issueId") Long issueId, Model model) {
+        FindIssueResponse issue = issueService.findIssueById(issueId);
+        model.addAttribute("issue", issue);
+        model.addAttribute("groupId", groupId);
         return "group/group_issue_view";
+    }
+
+    @PostMapping("/issue/{issueId}/delete")
+    public String deleteIssue(@PathVariable("issueId") Long issueId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        issueService.deleteIssue(issueId, userDetails.getMemberId());
+        return "redirect:/";
     }
 
     @GetMapping("/{groupId}/files")

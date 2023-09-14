@@ -16,28 +16,31 @@
 <!--헤더-->
 <div layout:fragment="content">
 
-    <div class="v104_2240" >
+    <div class="v104_2240">
         <!--게시판 뷰 메인-->
         <div class="board_view">
             <div class="v104_2505">
                 <!-- 게시물 메인 -->
 
-                <span class="view_title" >제목</span>
-                <textarea class="view_text" cols="33"  readonly>내용</textarea>
+                <span class="view_title" th:text="${issue.title()}">제목</span>
+                <textarea class="view_text" cols="33" th:text="${issue.content()}" readonly>내용</textarea>
                 <div class="writer_profile">
-                    <span class="v104_2511" >작성자 이메일</span>
-                    <span class="v104_2512" >작성자 직업</span>
-                    <span class="v104_2676" >작성일</span>
+                    <span class="v104_2511" th:text="${issue.writer()}">작성자 이메일</span>
+                    <span class="v104_2676" th:text="${issue.createdDateTime()}">작성일</span>
                     <div class="writer_image"></div>
-                    <div >
+                    <div th:if="${issue.email()} == ${#authentication.name}">
                         <button class="v10_510" id='btn2' onclick='toggleBtn3()'>
                             <div class="v10_511"></div>
                             <div class="v10_512"></div>
                             <div class="v10_513"></div>
                         </button>
+
+                        <input name="noticeId" id="groupId" th:value="${groupId}" hidden="hidden">
+                        <input name="noticeId" id="issueId" th:value="${issue.id()}" hidden="hidden">
+
                         <div class="Toggle" style="display: none;" id='btn3'>
-                            <button class="v10_514" >수정</button>
-                            <button class="v10_514" >삭제</button>
+                            <button class="v10_514">수정</button>
+                            <button class="v10_514" onclick="deleteIssue()">삭제</button>
                         </div>
                     </div>
 
@@ -62,51 +65,19 @@
             }
         }
 
-        function saveComment() {
-
-            const member = $('#member').val();
-
-            if (member === 'anonymousUser') {
-                alert('로그인한 사용자만 댓글을 입력할 수 있습니다.');
-                window.location.reload();
-            }
-
-
-            const WriteCommentRequest = {
-                postId: $('#postId').val(),
-                content: $('#content').val()
-            };
-
-            // 공백 및 빈 문자열 체크
-            if (!WriteCommentRequest.content || WriteCommentRequest.content.trim() === "") {
-                alert("공백 또는 입력하지 않은 부분이 있습니다.");
-                return false;
-            }else {
-                $.ajax({
-                    type: 'POST',
-                    url: '/posts/comment',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(WriteCommentRequest)
-                }).done(function () {
-                    alert('댓글이 등록되었습니다.');
-                    window.location.reload()
-                }).fail(function (error) {
-                    alert(JSON.stringify(error))
-                });
-            }
-        }
-
-        function deletePost(postId) {
-            const url = '/posts/' + postId + '/delete';
-            if (confirm("게시글을 삭제하시겠습니까?") === true) {
+        function deleteIssue() {
+            const groupId = $('#groupId').val();
+            const issueId = $('#issueId').val();
+            const url = '/group/project/issue/' + issueId + '/delete';
+            if (confirm("이슈를 삭제하시겠습니까?") === true) {
                 fetch(url, {
                     method: 'POST'
                 }).then(response => {
                     if (response) {
-                        alert("게시글을 삭제했습니다.");
-                        window.location.href = '/posts';
+                        alert("이슈를 삭제했습니다.");
+                        window.location.href = '/group/project/' + groupId + '/issue';
                     } else {
-                        alert("공지 삭제에 실패했습니다.")
+                        alert("이슈 삭제에 실패했습니다.")
                     }
                 })
             }
