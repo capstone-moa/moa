@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout}">
 <head>
+    <meta charset="utf-8"/>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
@@ -52,7 +53,7 @@
                     </div>
                 </div>
             </form>
-                <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
+            <!--그룹페이지 중간 카테고리 -------주소 바꿔야함-------->
             <div class="v10_796">
                 <div class="middle_category1"
                      th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${group.id()})}'|"><span
@@ -75,28 +76,31 @@
                 </div>
             </div>
 
-                <!-----------공지사항-----작성버튼 group_notice_write로 이동되게 하면됩니당! 모양이 똑같아성------->
-                <div class="v10_780">
-                    <span class="v10_782">오프라인 모임 장소<br></span>
+            <!-----------공지사항-----작성버튼 group_notice_write로 이동되게 하면됩니당! 모양이 똑같아성------->
+            <div class="v10_780">
+                <span class="v10_782">오프라인 모임 장소<br></span>
 
-                    <a th:href="@{/group/address/{groupId}/write(groupId=${group.id()})}" target="_blank"
-                       id="myLink"></a>
-                    <button th:if="${address} == null" type="button" class="loc_button" onclick="openNewWindow()">
-                        <span class="loc_text">장소 등록</span>
-                    </button>
-                    <button th:unless="${address} == null" type="button" class="button">
-                        <span class="v30_1660">장소 수정</span>
-                    </button>
+                <a th:href="@{/group/address/{groupId}/write(groupId=${group.id()})}" target="_blank"
+                   id="myLink"></a>
+                <button th:if="${address} == null" type="button" class="loc_button" onclick="openNewWindow()">
+                    <span class="loc_text">장소 등록</span>
+                </button>
+                <button th:unless="${address} == null" type="button" class="button">
+                    <span class="v30_1660">장소 수정</span>
+                </button>
 
-                    <div th:if="${address} != null">
-                        모임 장소 : <span th:text="${address.streetAdr()}"></span>
-                        <span th:text="${address.detailAdr()}"></span><br>
-                        우편 번호 :  <span th:text="${address.zipcode()}"></span>
-                    </div>
-
+                <div th:if="${address} != null">
+                    모임 장소 : <span th:text="${address.streetAdr()}" id="streetAdr"></span>
+                    <span th:text="${address.detailAdr()}" id="detailAdr"></span><br>
+                    우편 번호 : <span th:text="${address.zipcode()}"></span>
                 </div>
+                <!-- 지도 -->
+                <div id="map" style="width:500px;height:400px;top: 50px;"></div>
+            </div>
         </div>
     </div>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f05826e8025d6a6bb78f36e631bb618&libraries=services&autoload=false"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         function findAddr() {
@@ -158,6 +162,46 @@
             let url = document.getElementById('myLink').getAttribute('href');
             window.open(url, '_blank', 'width=830, height=400, scrollbars=no, resizable=no, toolbars=no, menubar=no');
         }
+    </script>
+    <script>
+        kakao.maps.load(function () {
+            var mapContainer = document.getElementById('map'),
+                mapOption = {
+                    center: new kakao.maps.LatLng(33.450701, 126.570667),
+                    level: 3
+                };
+
+            var streetAdr = document.getElementById('streetAdr').innerText;
+            var detailAdr = document.getElementById('detailAdr').innerText;
+            // 지도 생성
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+
+            // 주소-좌표 변환 객체 생성
+            var geocoder = new kakao.maps.services.Geocoder();
+
+
+            console.log(streetAdr)
+            // 주소로 좌표 검색
+            geocoder.addressSearch(streetAdr, function (result, status) {
+
+                // 정상적으로 검색이 완료됐으면
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: '<div style="width:150px;text-align:center;padding:6px 0;">' + detailAdr + '</div>'
+                    });
+                    infowindow.open(map, marker);
+
+                    map.setCenter(coords);
+                }
+            });
+        })
     </script>
 </div>
 </body>
