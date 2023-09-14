@@ -39,4 +39,11 @@ public class IssueService {
                 .map(FindIssueResponse::from)
                 .toList();
     }
+
+    @Transactional(readOnly = true)
+    public FindIssueResponse findIssueById(Long issueId) {
+        Issue issue = issueRepository.findById(issueId)
+                .orElseThrow(() -> new IllegalArgumentException("Issue not found"));
+        return FindIssueResponse.from(issue);
+    }
 }

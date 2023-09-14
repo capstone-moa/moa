@@ -52,6 +52,8 @@ public class ProjectMvcController {
 
     @GetMapping("/issue/{issueId}")
     public String findIssue(@PathVariable("issueId") Long issueId, Model model) {
+        FindIssueResponse issue = issueService.findIssueById(issueId);
+        model.addAttribute("issue", issue);
         return "group/group_issue_view";
     }
 
