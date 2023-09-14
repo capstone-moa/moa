@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +46,16 @@ public class IssueService {
         Issue issue = issueRepository.findById(issueId)
                 .orElseThrow(() -> new IllegalArgumentException("Issue not found"));
         return FindIssueResponse.from(issue);
+    }
+
+    @Transactional
+    public void deleteIssue(Long issueId, Long memberId) {
+        Issue issue = issueRepository.findById(issueId)
+                .orElseThrow(() -> new IllegalArgumentException("Issue not found"));
+        if (!Objects.equals(issue.getGroupMember().getMember().getId(), memberId)) {
+            throw new IllegalArgumentException("You don't have authentication");
+        }
+
+        issueRepository.delete(issue);
     }
 }
