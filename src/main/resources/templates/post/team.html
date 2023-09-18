@@ -8,7 +8,7 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!--이거 js 경로를 어떻게 해야하는지 모르겠어서 임의로 css에 넣어놨어.....-->
+    <!--이거 js 경로를 어떻게 해야하는지 모르겠어서 임의로 css에 넣어놨어.....**페이징**-->
     <script src="/css/jquery.twbsPagination.js" type="text/javascript"></script>
 
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet" />
@@ -22,112 +22,111 @@
 
 <body>
 <div layout:fragment="content">
-<div class="v10_483">
-    <!--좌측 네비게이션 바-->
-    <div class="category">
-        <th:block th:each="interest : ${interests}">
-            <button type="button" class="v10_582" th:onclick="|location.href='@{/posts/team(interest=${interest})}'|" >
-                <span class="v10_584" th:text="${interest.name()}" ></span>
-                <div class="hashtag"></div>
-                <hr class="nav_role">
-            </button>
-        </th:block>
-    </div>
-
-    <!--상단 네비게이션 바-->
-    <div class="v10_636">
-        <div class="v10_658" onclick="">
-            <div class="top_nav_box"></div><span class="top_nav_text">전체</span>
-        </div>
-        <div class="v10_661" onclick="">
-            <div class="top_nav_box"></div><span class="top_nav_text">서울/인천</span>
-        </div>
-        <div class="v10_664" onclick="">
-            <div class="top_nav_box"></div><span class="top_nav_text">경기/충청</span>
-         </div>
-        <div class="v10_667" onclick="">
-            <div class="top_nav_box"></div><span class="top_nav_text">대전/강원</span>
-        </div>
-        <div class="v10_670" onclick="">
-            <div class="top_nav_box"></div><span class="top_nav_text">부산/울산</span>
-        </div>
-        <div class="v10_673" onclick="">
-            <div class="top_nav_box"></div><span class="top_nav_text">대구/경상</span>
-        </div>
-        <div class="v10_674" onclick="">
-            <div class="top_nav_box"></div><span class="top_nav_text">그 외
-            </span>
-        </div>
-    </div>
-
-
-    <!--게시판 메인-->
-    <div class="v10_488">
-        <div class="v10_490">
-            <button type="button" class="button" th:onclick="|location.href='@{/posts/write}'|"><span class="v30_1660">작성</span></button>
-            <span class="v10_493">팀원모집</span>
-            <span class="v10_491"><hr>팀원을 모집하는 공간</span>
-        </div>
-
-        <!--정렬-->
-        <div class="v10_497">
-            <select name="" id="">
-                <option value="">최근순</option>
-                <option value="">인기순</option>
-            </select>
-        </div>
-
-        <!--게시판 내용-->
-        <div class="v10_501">
-            <!--게시글 한개-->
-            <th:block th:each="team : ${teamPosts}">
-                <div class="v10_502">
-                    <div class="white_box">
-                        <div class="v10_506">
-                            <span class="v10_507" th:text="${team.memberName()}">아이디1</span>
-                            <span class="v10_508" th:text="${team.memberJob()}">iOS developer</span>
-                            <span class="v10_2226" th:text="${team.createdDateTime()}">2023.05-01</span>
-                            <div class="profile_image_509"></div>
-                        </div>
-                        <div class="v10_510">
-                            <div class="v10_511"></div>
-                            <div class="v10_512"></div>
-                            <div class="v10_513"></div>
-                        </div>
-                        <span class="v10_505" th:text="${team.title()}" th:onclick="|location.href='@{/posts/{postId}(postId=${team.postId()})}'|">포트폴리오 프로젝트 같이 협업하실 디자이너분 한분 구합니다!</span>
-                        <hr class="bar">
-                        <div class="blue_box"></div><span class="blue_font" th:text="|# ${team.interest()}|">#Designer</span>
-                        <!--<div class="blue_box2"></div><span class="blue_font2">경기/인천</span>-->
-                        <!--댓글-->
-                        <div class="v10_315"></div>
-                        <span class="v10_317" th:text="${team.commentCnt()}">3</span>
-                    </div>
-                </div>
+    <div class="v10_483">
+        <!--좌측 네비게이션 바-->
+        <div class="category">
+            <th:block th:each="interest : ${interests}">
+                <button type="button" class="v10_582" th:onclick="|location.href='@{/posts/team(interest=${interest})}'|" >
+                    <span class="v10_584" th:text="${interest.name()}" ></span>
+                    <div class="hashtag"></div>
+                    <hr class="nav_role">
+                </button>
             </th:block>
+        </div>
 
-            <div class="container">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination" id="pagination"></ul>
-                </nav>
+        <!--상단 네비게이션 바-->
+        <div class="v10_636">
+            <div class="v10_658">
+                <button type="button" class="top_nav_box" th:onclick="|location.href='@{/posts/team(interest=${interest})}'|" ><p class="top_nav_text_1">전체</p></button>
+            </div>
+            <div class="v10_661">
+                <button type="button" class="top_nav_box"><p class="top_nav_text_1">서울</p></button>
+            </div>
+            <div class="v10_664">
+                <button type="button" class="top_nav_box"><p class="top_nav_text_1">경기/인천</p></button>
+            </div>
+            <div class="v10_667">
+                <button type="button" class="top_nav_box"><p class="top_nav_text">대전/충청/<br>강원</p></button>
+            </div>
+            <div class="v10_670">
+                <button type="button" class="top_nav_box"><p class="top_nav_text">대구/경상/<br>부산/울산</p></button>
+            </div>
+            <div class="v10_673">
+                <button type="button" class="top_nav_box"><p class="top_nav_text">광주/전라/<br>제주</p></button>
+            </div>
+            <div class="v10_674">
+                <button type="button" class="top_nav_box"><p class="top_nav_text_1">온라인</p></button>
+            </div>
+        </div>
+
+
+        <!--게시판 메인-->
+        <div class="v10_488">
+            <div class="v10_490">
+                <button type="button" class="button" th:onclick="|location.href='@{/posts/write}'|"><span class="v30_1660">작성</span></button>
+                <span class="v10_493">팀원모집</span>
+                <span class="v10_491"><hr>팀원을 모집하는 공간</span>
             </div>
 
+            <!--정렬-->
+            <div class="v10_497">
+                <select name="" id="">
+                    <option value="">최근순</option>
+                    <option value="">인기순</option>
+                </select>
+            </div>
+
+            <!--게시판 내용-->
+            <div class="v10_501">
+                <!--게시글 한개-->
+                <th:block th:each="team : ${teamPosts}">
+                    <div class="v10_502">
+                        <div class="white_box">
+                            <div class="v10_506">
+                                <span class="v10_507" th:text="${team.memberName()}">아이디1</span>
+                                <span class="v10_508" th:text="${team.memberJob()}">iOS developer</span>
+                                <span class="v10_2226" th:text="${team.createdDateTime()}">2023.05-01</span>
+                                <div class="profile_image_509"></div>
+                            </div>
+                            <div class="v10_510">
+                                <div class="v10_511"></div>
+                                <div class="v10_512"></div>
+                                <div class="v10_513"></div>
+                            </div>
+                            <span class="v10_505" th:text="${team.title()}" th:onclick="|location.href='@{/posts/{postId}(postId=${team.postId()})}'|">포트폴리오 프로젝트 같이 협업하실 디자이너분 한분 구합니다!</span>
+                            <hr class="bar">
+                            <div class="blue_box"></div><span class="blue_font" th:text="|# ${team.interest()}|">#Designer</span>
+                            <!--<div class="blue_box2"></div><span class="blue_font2">경기/인천</span>-->
+                            <!--댓글-->
+                            <div class="v10_315"></div>
+                            <span class="v10_317" th:text="${team.commentCnt()}">3</span>
+                        </div>
+                    </div>
+                </th:block>
+
+                <div class="container">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="pagination"></ul>
+                    </nav>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: 35,
-            visiblePages: 5,
-            onPageClick: function (event, page) {
-                console.info(page + ' (from options)');
-            }
-        }).on('page', function (event, page) {
-            console.info(page + ' (from event listening)');
+        $(function () {
+            window.pagObj = $('#pagination').twbsPagination({
+                totalPages: 35,
+                visiblePages: 5,
+                onPageClick: function (event, page) {
+                    console.info(page + ' (from options)');
+                }
+            }).on('page', function (event, page) {
+                console.info(page + ' (from event listening)');
+            });
         });
-    });
-</script>
+    </script>
 </div>
 </body>
 
