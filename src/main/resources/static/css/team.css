@@ -379,19 +379,36 @@ hr.nav_role{
   top: 0px;
   left: 0px;
   overflow: hidden;
+  outline:none !important;
+  box-shadow:none !important;
+  border:none;
 }
 
 .top_nav_text {
+  width: 125px;
+  height: 80px;
   width: 90px;
   color: rgba(24,24,24,1);
-  position: absolute;
-  top: 33px;
-  left: 35px;
+  position: relative;
   font-family: NanumGothic;
   font-weight: Bold;
   font-size: 18px;
   opacity: 1;
-  text-align: left;
+  text-align: center;
+}
+
+.top_nav_text_1 {
+  width: 125px;
+  height: 80px;
+  width: 90px;
+  color: rgba(24,24,24,1);
+  position: relative;
+  top:12px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 18px;
+  opacity: 1;
+  text-align: center;
 }
 
 .v10_658 {

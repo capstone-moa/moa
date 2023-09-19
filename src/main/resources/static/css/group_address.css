@@ -358,7 +358,7 @@ hr.nav_role{
   overflow: hidden;
 }
 .interest {
-  width: 403px;
+  width: 450px;
   height: 58px;
   background: rgba(255,255,255,1);
   border: 1px solid rgba(2,117,177,1);
@@ -588,7 +588,7 @@ hr.nav_role{
   border-bottom-right-radius: 4px;
 }
 .v10_782 {
-  width: 400px;
+  width: 600px;
   color: rgba(24,24,24,1);
   position: absolute;
   top: 35px;
@@ -771,6 +771,19 @@ hr.nav_role{
   font-size: 12px;
   opacity: 1;
   text-align: center;
+}
+
+.loc_name {
+  width: 700px;
+  height: 50px;
+  position: absolute;
+  top: 110px;
+  left: 40px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 18px;
+  opacity: 1;
+  text-align: left;
 }
 
 .v10_501 {

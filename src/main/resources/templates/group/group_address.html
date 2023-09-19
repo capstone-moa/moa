@@ -78,24 +78,24 @@
 
             <!-----------공지사항-----작성버튼 group_notice_write로 이동되게 하면됩니당! 모양이 똑같아성------->
             <div class="v10_780">
-                <span class="v10_782">오프라인 모임 장소<br></span>
+                <span class="v10_782">오프라인 모임 장소<br><hr></span>
 
                 <a th:href="@{/group/address/{groupId}/write(groupId=${group.id()})}" target="_blank"
                    id="myLink"></a>
                 <button th:if="${address} == null" type="button" class="loc_button" onclick="openNewWindow()">
                     <span class="loc_text">장소 등록</span>
                 </button>
-                <button th:unless="${address} == null" type="button" class="button">
-                    <span class="v30_1660">장소 수정</span>
+                <button th:unless="${address} == null" type="button" class="loc_button">
+                    <span class="loc_text">장소 삭제</span>
                 </button>
 
-                <div th:if="${address} != null">
+                <div class="loc_name" th:if="${address} != null">
                     모임 장소 : <span th:text="${address.streetAdr()}" id="streetAdr"></span>
                     <span th:text="${address.detailAdr()}" id="detailAdr"></span><br>
                     우편 번호 : <span th:text="${address.zipcode()}"></span>
                 </div>
                 <!-- 지도 -->
-                <div id="map" style="width:500px;height:400px;top: 50px;"></div>
+                <div id="map" style="width:800px;height:400px;top: 150px;left: 25px;"></div>
             </div>
         </div>
     </div>
