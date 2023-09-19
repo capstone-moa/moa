@@ -5,7 +5,7 @@ import com.capstone.moa.entity.Comment;
 import java.time.format.DateTimeFormatter;
 
 public record FindCommentResponse(
-        Long commentId, String content, String writerEmail,
+        Long commentId, String content, String writerEmail,String writerName, Long writerId,
         String createdDateTime
 
 ) {
@@ -14,6 +14,8 @@ public record FindCommentResponse(
                 comment.getId(),
                 comment.getContent(),
                 comment.getMember().getEmail(),
+                comment.getMember().getName(),
+                comment.getMember().getId(),
                 comment.getCreatedDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         );
 

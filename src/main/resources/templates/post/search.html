@@ -55,7 +55,7 @@
                 <div class="v10_502">
                     <div class="white_box">
                         <div class="v10_506">
-                            <span class="v10_507" th:text="${post.memberName()}">아이디1</span>
+                            <span class="v10_507" th:text="${post.memberName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${post.memberId()})}'|">아이디1</span>
                             <span class="v10_508" th:text="${post.memberJob()}">iOS developer</span>
                             <span class="v10_2226" th:text="${post.createdDateTime()}">2023.05-01</span>
                             <div class="profile_image_509"></div>

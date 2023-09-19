@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record FindPostWithCommentsResponse(
-        Long postId, String title, String content, String interest, String memberEmail, String memberJob,
+        Long postId, String title, String content, String interest, String memberEmail, Long memberId, String memberName, String memberJob,
         String createdDateTime, List<FindCommentResponse> comments
 ) {
 
@@ -18,6 +18,8 @@ public record FindPostWithCommentsResponse(
                 post.getContent(),
                 post.getInterest().name(),
                 post.getMember().getEmail(),
+                post.getMember().getId(),
+                post.getMember().getName(),
                 post.getMember().getJob().name(),
                 post.getCreatedDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                 post.getComments().stream()

@@ -83,10 +83,10 @@
                     <div class="v10_502">
                         <div class="white_box">
                             <div class="v10_506">
-                                <span class="v10_507" th:text="${team.memberName()}">아이디1</span>
+                                <span class="v10_507" th:text="${team.memberName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${team.memberId()})}'|">아이디1</span>
                                 <span class="v10_508" th:text="${team.memberJob()}">iOS developer</span>
                                 <span class="v10_2226" th:text="${team.createdDateTime()}">2023.05-01</span>
-                                <div class="profile_image_509"></div>
+                                <div class="profile_image_509" ></div>
                             </div>
                             <div class="v10_510">
                                 <div class="v10_511"></div>
