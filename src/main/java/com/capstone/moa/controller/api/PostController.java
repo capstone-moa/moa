@@ -27,12 +27,6 @@ public class PostController {
         return ResponseEntity.ok(postService.findAllPosts());
     }
 
-    @Operation(summary = "선택된 관심사에 해당하는 모든 게시물 조회")
-    @GetMapping("/interest")
-    public ResponseEntity<FindPostsByInterestResponse> findPostsByInterest(@RequestParam("interest") String interest) {
-        return ResponseEntity.ok(postService.findPostsByInterest(interest));
-    }
-
     @Operation(summary = "게시물 아이디로 게시물 상세 조회")
     @GetMapping("/{postId}")
     public ResponseEntity<FindPostResponse> findPostById(@PathVariable("postId") Long postId) {

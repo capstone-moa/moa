@@ -33,7 +33,9 @@
             <th:block th:each="community : ${communityPosts}">
                 <div class="v10_162">
                     <div class="white_box"></div>
-                    <div class="v10_165"><span class="v10_166" th:text="${community.memberName()}">아이디</span><span class="v10_167" th:text="${community.memberJob()}">직업</span><span class="v10_2226" th:text="${community.createdDateTime()}">작성일</span>
+                    <div class="v10_165"><span class="v10_166" th:text="${community.memberName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${community.memberId()})}'|">아이디</span>
+                        <span class="v10_167" th:text="${community.memberJob()}">직업</span>
+                        <span class="v10_2226" th:text="${community.createdDateTime()}">작성일</span>
                         <div class="profile_image_168"></div>
                     </div>
                     <div class="v10_249">
@@ -68,7 +70,9 @@
             <th:block th:each="team : ${teamPosts}">
                 <div class="v10_162">
                     <div class="white_box"></div>
-                    <div class="v10_165"><span class="v10_166" th:text="${team.memberName()}">아이디</span><span class="v10_167" th:text="${team.memberJob()}">iOS developer</span><span class="v10_2226" th:text="${team.createdDateTime()}">작성일</span>
+                    <div class="v10_165"><span class="v10_166" th:text="${team.memberName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${team.memberId()})}'|">아이디</span>
+                        <span class="v10_167" th:text="${team.memberJob()}">iOS developer</span>
+                        <span class="v10_2226" th:text="${team.createdDateTime()}">작성일</span>
                         <div class="profile_image_247"></div>
                     </div>
                     <div class="v10_249">

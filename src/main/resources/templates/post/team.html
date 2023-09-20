@@ -37,25 +37,25 @@
         <!--상단 네비게이션 바-->
         <div class="v10_636">
             <div class="v10_658">
-                <button type="button" class="top_nav_box" th:onclick="|location.href='@{/posts/team(interest=${interest})}'|" ><p class="top_nav_text_1">전체</p></button>
+                <button type="button" class="top_nav_box" th:onclick="|location.href='@{/posts/team(interest=${interest})}'|"><p class="top_nav_text_1">전체</p></button>
             </div>
             <div class="v10_661">
-                <button type="button" class="top_nav_box"><p class="top_nav_text_1">서울</p></button>
+                <button type="button" th:onclick="|location.href='@{/posts/team(region='서울')}'|" class="top_nav_box"><p class="top_nav_text_1">서울</p></button>
             </div>
             <div class="v10_664">
-                <button type="button" class="top_nav_box"><p class="top_nav_text_1">경기/인천</p></button>
+                <button type="button" th:onclick="|location.href='@{/posts/team(region='경기/인천')}'|" class="top_nav_box"><p class="top_nav_text_1">경기/인천</p></button>
             </div>
             <div class="v10_667">
-                <button type="button" class="top_nav_box"><p class="top_nav_text">대전/충청/<br>강원</p></button>
+                <button type="button" th:onclick="|location.href='@{/posts/team(region='대전/충청/강원')}'|" class="top_nav_box"><p class="top_nav_text">대전/충청/<br>강원</p></button>
             </div>
             <div class="v10_670">
-                <button type="button" class="top_nav_box"><p class="top_nav_text">대구/경상/<br>부산/울산</p></button>
+                <button type="button" th:onclick="|location.href='@{/posts/team(region='부산/대구/울산/경상')}'|" class="top_nav_box"><p class="top_nav_text">대구/경상/<br>부산/울산</p></button>
             </div>
             <div class="v10_673">
-                <button type="button" class="top_nav_box"><p class="top_nav_text">광주/전라/<br>제주</p></button>
+                <button type="button" th:onclick="|location.href='@{/posts/team(region='광주/전라/제주')}'|" class="top_nav_box"><p class="top_nav_text">광주/전라/<br>제주</p></button>
             </div>
             <div class="v10_674">
-                <button type="button" class="top_nav_box"><p class="top_nav_text_1">온라인</p></button>
+                <button type="button" th:onclick="|location.href='@{/posts/team(region='온라인')}'|" class="top_nav_box"><p class="top_nav_text_1">온라인</p></button>
             </div>
         </div>
 
@@ -83,10 +83,10 @@
                     <div class="v10_502">
                         <div class="white_box">
                             <div class="v10_506">
-                                <span class="v10_507" th:text="${team.memberName()}">아이디1</span>
+                                <span class="v10_507" th:text="${team.memberName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${team.memberId()})}'|">아이디1</span>
                                 <span class="v10_508" th:text="${team.memberJob()}">iOS developer</span>
                                 <span class="v10_2226" th:text="${team.createdDateTime()}">2023.05-01</span>
-                                <div class="profile_image_509"></div>
+                                <div class="profile_image_509" ></div>
                             </div>
                             <div class="v10_510">
                                 <div class="v10_511"></div>

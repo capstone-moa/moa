@@ -25,13 +25,18 @@ public class PostMvcController {
 
     private final PostService postService;
     private final CommentService commentService;
-    private final String COMMUNITY = "COMMUNITY";
-    private final String TEAM = "TEAM";
 
     @GetMapping
     public String findAllPosts(Model model) {
-        FindPostsResponse communityList = postService.findPostsByPostType(COMMUNITY);
-        FindPostsResponse teamList = postService.findPostsByPostType(TEAM);
+        FindPostsByConditionRequest community = FindPostsByConditionRequest.builder()
+                .postType("COMMUNITY")
+                .build();
+        FindPostsByConditionRequest team = FindPostsByConditionRequest.builder()
+                .postType("TEAM")
+                .build();
+        Pageable pageable = PageRequest.of(0, 100);
+        FindPostsResponse communityList = postService.findPostsByCondition(community, pageable);
+        FindPostsResponse teamList = postService.findPostsByCondition(team, pageable);
         model.addAttribute("communityPosts", communityList.posts());
         model.addAttribute("teamPosts", teamList.posts());
 
@@ -40,20 +45,29 @@ public class PostMvcController {
 
     @GetMapping("/community")
     public String communityList(@RequestParam(value = "interest", required = false) String interest, Model model) {
-        FindPostsResponse communityList = postService.findPostsByPostType(COMMUNITY);
-        if (interest != null) {
-            communityList = postService.findPostsByPostTypeAndInterest(COMMUNITY, interest);
-        }
-        model.addAttribute("communityPosts", communityList.posts());
+        FindPostsByConditionRequest request = FindPostsByConditionRequest.builder()
+                .postType("COMMUNITY")
+                .interest(interest)
+                .build();
+        Pageable pageable = PageRequest.of(0, 6);
+        FindPostsResponse community = postService.findPostsByCondition(request, pageable);
+        model.addAttribute("communityPosts", community.posts());
         return "post/community";
     }
 
     @GetMapping("/team")
-    public String teamRecruitList(@RequestParam(value = "interest", required = false) String interest, Model model) {
-        FindPostsResponse teamPosts = postService.findPostsByPostType(TEAM);
-        if (interest != null) {
-            teamPosts = postService.findPostsByPostTypeAndInterest(TEAM, interest);
-        }
+    public String teamRecruitList(
+            @RequestParam(value = "interest", required = false) String interest,
+            @RequestParam(value = "region", required = false) String region,
+            Model model) {
+        FindPostsByConditionRequest request = FindPostsByConditionRequest.builder()
+                .postType("TEAM")
+                .interest(interest)
+                .region(region)
+                .build();
+        Pageable pageable = PageRequest.of(0, 6);
+        FindPostsResponse teamPosts = postService.findPostsByCondition(request, pageable);
+
         model.addAttribute("teamPosts", teamPosts.posts());
         return "post/team";
     }

@@ -3,8 +3,6 @@ package com.capstone.moa.service;
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.entity.Post;
-import com.capstone.moa.entity.enums.Interest;
-import com.capstone.moa.entity.enums.PostType;
 import com.capstone.moa.repository.MemberRepository;
 import com.capstone.moa.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,34 +40,12 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public FindPostsByInterestResponse findPostsByInterest(String interest) {
-        Interest selectedInterest = Interest.find(interest);
-        List<FindPostByInterestResponse> posts = postRepository.findAllByInterest(selectedInterest)
-                .stream()
-                .map(FindPostByInterestResponse::from)
-                .toList();
-
-        return new FindPostsByInterestResponse(selectedInterest, posts);
-    }
-
-    @Transactional(readOnly = true)
-    public FindPostsResponse findPostsByPostType(String postType) {
-        PostType selectedPostType = PostType.find(postType);
-        List<FindPostResponse> posts = postRepository.findAllByTypeFetch(selectedPostType)
+    public FindPostsResponse findPostsByCondition(FindPostsByConditionRequest request, Pageable pageable) {
+        Page<Post> postPage = postRepository.findAllPostsByCondition(request, pageable);
+        List<FindPostResponse> posts =  postPage.getContent()
                 .stream()
                 .map(FindPostResponse::from)
-                .toList();
-        return new FindPostsResponse(posts);
-    }
-
-    @Transactional(readOnly = true)
-    public FindPostsResponse findPostsByPostTypeAndInterest(String postType, String interest) {
-        PostType selectedPostType = PostType.find(postType);
-        Interest selectedInterest = Interest.find(interest);
-        List<FindPostResponse> posts = postRepository.findAllByPostTypeAndInterest(selectedPostType, selectedInterest)
-                .stream()
-                .map(FindPostResponse::from)
-                .toList();
+                .collect(Collectors.toList());
         return new FindPostsResponse(posts);
     }
 

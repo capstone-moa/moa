@@ -104,7 +104,7 @@
                                 <div class="v10_502">
                                     <div class="white_box">
                                         <div class="v10_506">
-                                            <span class="v10_507" th:text="${groupMember.email()}">SEMI</span>
+                                            <span class="v10_507" th:text="${groupMember.name()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${groupMember.memberId()})}'|">SEMI</span>
                                             <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
                                             <div class="profile_image_509"></div>
                                             <div class="v10_22"
