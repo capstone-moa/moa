@@ -82,15 +82,15 @@
 
                 <a th:href="@{/group/address/{groupId}/write(groupId=${group.id()})}" target="_blank"
                    id="myLink"></a>
-                <button th:if="${address} == null" type="button" class="loc_button" onclick="openNewWindow()">
-                    <span class="loc_text">장소 등록</span>
+                <button th:if="${address == null && check} " type="button" class="loc_button" onclick="openNewWindow()">
+                    <span class="loc_text" >장소 등록</span>
                 </button>
 
                 <label th:if="${address} != null">
                     <input name="addressId" id="addressId" th:value="${address.addressId()}"
                            hidden="hidden">
                 </label>
-                <button th:unless="${address} == null" type="button" class="loc_button" onclick="deleteAddress()">
+                <button th:unless="${address} == null" th:if="${check}" type="button" class="loc_button" onclick="deleteAddress()">
                     <span class="loc_text" >장소 삭제</span>
                 </button>
 

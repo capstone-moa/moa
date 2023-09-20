@@ -117,15 +117,6 @@ public class GroupService {
         return groupMemberRepository.existsGroupMemberByGroupIdAndMemberId(groupId, memberId);
     }
 
-    private GroupMember checkGroupMember(Long groupId, String email) {
-        Group group = groupRepository.findById(groupId)
-                .orElseThrow(() -> new IllegalArgumentException("Group not found"));
-        Member member = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
-        return groupMemberRepository.findGroupMemberByGroupAndMember(group, member)
-                .orElseThrow(() -> new IllegalArgumentException("GroupMember not found"));
-    }
-
     private void isGroupLeader(GroupMember groupMember, String email) {
         if (!groupMember.getMember().getEmail().equals(email)) {
             throw new IllegalArgumentException("You are not leader of this group");

@@ -25,7 +25,6 @@ public class GroupMvcController {
     public String findGroupIntroById(@PathVariable Long groupId, Model model) {
         GroupIntroResponse response = groupService.findGroupById(groupId);
         FindMemberResponse leader = groupService.findGroupLeaderByGroupId(groupId);
-
         model.addAttribute("groupIntro", response);
         model.addAttribute("leader", leader);
         return "group/group_intro";

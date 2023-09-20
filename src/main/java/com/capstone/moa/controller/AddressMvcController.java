@@ -25,11 +25,18 @@ public class AddressMvcController {
     private final GroupService groupService;
 
     @GetMapping("/{groupId}")
-    public String groupAddress(@PathVariable("groupId") Long groupId, Model model) {
+    public String groupAddress(@PathVariable("groupId") Long groupId, @AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
         FindAddressResponse address = addressService.findGroupAddress(groupId);
+
+        boolean check = false;
+        if (userDetails != null) {
+            check = groupService.checkIsGroupMember(groupId, userDetails.getMemberId());
+        }
         model.addAttribute("group", groupInfo);
         model.addAttribute("address", address);
+        model.addAttribute("check", check);
+
         return "group/group_address";
     }
 
