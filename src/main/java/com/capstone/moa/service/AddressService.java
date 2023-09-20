@@ -50,6 +50,17 @@ public class AddressService {
         return FindAddressResponse.from(address);
     }
 
+    @Transactional
+    public boolean deleteGroupAddress(Long addressId, Long memberId) {
+        Address address = addressRepository.findById(addressId)
+                .orElseThrow(() -> new IllegalArgumentException("Address not found"));
+        if (!groupMemberRepository.existsGroupMemberByGroupIdAndMemberId(address.getGroup().getId(), memberId)) {
+            return false;
+        }
+        addressRepository.delete(address);
+        return true;
+    }
+
     private boolean isAddressSaved(Long groupId) {
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));
