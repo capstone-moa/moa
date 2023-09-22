@@ -46,6 +46,28 @@ public class InvitationService {
         invitationRepository.save(new Invitation(member, leader.getGroup()));
     }
 
+    @Transactional(readOnly = true)
+    public int checkInvitation(Long groupId, String email) {
+        if (memberRepository.existsByEmail(email)) {
+            Member member = memberRepository.findByEmail(email)
+                    .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+            Group group = groupRepository.findById(groupId)
+                    .orElseThrow(() -> new IllegalArgumentException("Group Not found"));
+            if (invitationRepository.existsByGroupAndMember(group, member)) {
+                Invitation invitation = invitationRepository.findByMemberAndGroup(member, group)
+                        .orElseThrow(() -> new IllegalArgumentException("Invitation Not found"));;
+                if (invitation.getInviteStatus().equals(InviteStatus.ACCEPT)) {
+                    return 1;
+                } else if (invitation.getInviteStatus().equals(InviteStatus.REQUEST)) {
+                    return 2;
+                }
+            }
+            return 3;
+        }
+        return 0;
+    }
+
     @Transactional
     public void acceptInvite(Long memberId, Long inviteId) {
         Invitation invitation = invitationRepository.findById(inviteId)

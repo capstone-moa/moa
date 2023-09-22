@@ -143,9 +143,8 @@
                                     </div>
                                     <div class="v10_21">
                                         <button type="button" class="join_border"
-                                                th:if="${member.email()} == ${#authentication.getName()}">
-                                        <span class="name_join"
-                                              th:onclick="|location.href='@{/mypage/{memberId}/group/{inviteId}/accept(memberId=${member.id()}, inviteId=${invitation.id()})}'|">수락</span>
+                                                th:if="${member.email()} == ${#authentication.getName()}" th:onclick="|location.href='@{/mypage/{memberId}/group/{inviteId}/accept(memberId=${member.id()}, inviteId=${invitation.id()})}'|">
+                                        <span class="name_join">수락</span>
                                         </button>
                                     </div>
                                     <div class="v10_22">
@@ -173,7 +172,7 @@
                 alert("이메일을 입력하지 않으셨습니다 :(");
                 return;
             }
-
+console.log(inviteEmail)
             let InviteGroupRequest = {
                 groupId: groupId,
                 inviteEmail: inviteEmail
@@ -182,16 +181,42 @@
             // Convert InviteGroupRequest to JSON string
             let jsonData = JSON.stringify(InviteGroupRequest);
 
-            // Send JSON data to the backend
             $.ajax({
-                type: "POST",
+                type: 'get',
+                async: false,
                 contentType: "application/json",
-                url: "/mypage/group/invite",
-                data: jsonData,
-                success: function (response) {
-                    alert(" 아이디 : " + inviteEmail + "이/가 초대되었습니다 :)")
-                }
-            });
+                url: "http://localhost:8080/mypage/check-invitation",
+                data: {
+                    inviteEmail,
+                    groupId
+                },
+                success: function (data) {
+                    console.log(data)
+                    if (data === 0) {
+                        alert("회원을 찾을 수 없습니다.");
+                        window.location.reload();
+                    }else if (data === 1){
+                        alert("이미 가입된 회원입니다.");
+                        window.location.reload();
+                    }else if (data === 2) {
+                        alert("이미 초대된 회원입니다.");
+                        window.location.reload();
+                    } else {
+                        // Send JSON data to the backend
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json",
+                            url: "/mypage/group/invite",
+                            data: jsonData,
+                            success: function (response) {
+                                alert(" 아이디 : " + inviteEmail + "이/가 초대되었습니다 :)")
+                            }
+                        });
+                    }
+                },
+            })
+
+
         }
 
         function openNewWindow() {

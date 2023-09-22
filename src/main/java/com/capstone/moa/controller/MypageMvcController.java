@@ -3,10 +3,7 @@ package com.capstone.moa.controller;
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.enums.Job;
-import com.capstone.moa.service.GroupService;
-import com.capstone.moa.service.InvitationService;
-import com.capstone.moa.service.MemberService;
-import com.capstone.moa.service.PostService;
+import com.capstone.moa.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -123,4 +120,11 @@ public class MypageMvcController {
     private Job[] putJob() {
         return Job.values();
     }
+
+    @GetMapping("/check-invitation")
+    @ResponseBody
+    public int checkEmailDuplication(@RequestParam String inviteEmail, Long groupId) {
+        return invitationService.checkInvitation(groupId, inviteEmail);
+    }
+
 }
