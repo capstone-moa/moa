@@ -15,6 +15,7 @@ textarea.blue {
   height:17px;
   display : inline;
   border : none;
+  position: absolute;
   resize: none !important;
   overflow :hidden;
 }
@@ -442,29 +443,31 @@ hr.nav_role{
   background-size: cover;
   opacity: 1;
   position: relative;
-  top: 10px;
+  top: 15px;
   left: 20px;
   overflow: hidden;
 }
-.notion_image_intro {
-  width: 21px;
-  height: 21px;
-  background: url("../images/notion.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: relative;
-  top: -22px;
-  left: 20px;
-  overflow: hidden;
-}
+
 .v10_769_intro {
   width: 500px;
   height: 25px;
   color: rgba(2,117,177,1);
   position: relative;
-  top: -10px;
+  top: -5px;
+  left: 50px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 15px;
+  opacity: 1;
+  text-align: left;
+}
+
+.v10_7691_intro {
+  width: 500px;
+  height: 25px;
+  color: rgba(2,117,177,1);
+  position: relative;
+  top: 0px;
   left: 50px;
   font-family: NanumGothic;
   font-weight: Bold;
@@ -476,10 +479,9 @@ hr.nav_role{
 .v10_771_intro {
   width: 65px;
   height: 39px;
-  background: rgba(232,240,247,1);
   opacity: 1;
   position: relative;
-  top: -27px;
+  top: -17px;
   left: 120px;
 }
 .v10_772_intro {
@@ -500,7 +502,7 @@ hr.nav_role{
   height: 25px;
   color: rgba(2,117,177,1);
   position: relative;
-  top: -40px;
+  top: -25px;
   left: 50px;
   font-family: NanumGothic;
   font-weight: Bold;

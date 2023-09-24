@@ -395,3 +395,14 @@ body {
   font-size: 14px;
   text-decoration: underline;
 }
+.del_Issue {
+  all: unset;
+  color: rgba(0, 0, 0, 0.644);
+  position: absolute;
+  top:10px;
+  left: 730px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 14px;
+  text-decoration: underline;
+}

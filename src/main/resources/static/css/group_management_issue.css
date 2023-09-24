@@ -743,3 +743,14 @@ hr.bar {
   width: 900px;
   height: 200px;
 }
+.del_comment {
+  all: unset;
+  color: rgba(0, 0, 0, 0.644);
+  position: absolute;
+  top: 50px;
+  left: 750px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 14px;
+  text-decoration: underline;
+}

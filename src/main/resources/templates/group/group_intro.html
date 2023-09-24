@@ -93,7 +93,6 @@
                                                              th:text="|# ${groupIntro.interest()}|">#web</span></div>
                         </div>
                         <div class="v10_770_intro">project : <span th:text="${groupIntro.projectLink()}"></span></div>
-                        <div class="v10_770_intro">Email : <span>moa_backend@gmail.com</span></div>
                     </div>
 
                     <!-----------그룹 주제(글자수 제한)------------>
@@ -104,28 +103,28 @@
                     <div class="skill_intro">
                         <div class="v10_782">적용 기술</div>
                         <textarea class="v10_784" th:text="${groupIntro.skills()}" readonly></textarea>
-                        </div>
                     </div>
+                </div>
 
-                    <!-----------그룹원 소개------------>
-                    <div class="v10_501">
-                        <span class="v10_782">그룹원 소개</span>
-                        <!-----------그룹원 한세트(두명)------------>
-                        <div class="member">
-                            <!------그룹원 계속 추가하려면 아래 v10_506,v10_510을 반복하면 됨.-->
-                            <th:block th:each="groupmember, i : ${groupIntro.groupMembers()}">
-                                <div th:class="${i.odd}? 'v10_506' : 'v10_510'" class="v10_506">
-                                    <span class="v10_507" th:text="${groupmember.name()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${groupmember.memberId()})}'|">아이디1</span>
-                                    <span class="v10_508" th:text="${groupmember.job()}">직업</span>
-                                    <div class="profile_image_509" th:style="'background-image: url(\'/images/' + ${groupmember.memberProfile()} + '.png\')'"></div>
-                                </div>
-                            </th:block>
-                        </div>
+                <!-----------그룹원 소개------------>
+                <div class="v10_501">
+                    <span class="v10_782">그룹원 소개</span>
+                    <!-----------그룹원 한세트(두명)------------>
+                    <div class="member">
+                        <!------그룹원 계속 추가하려면 아래 v10_506,v10_510을 반복하면 됨.-->
+                        <th:block th:each="groupmember, i : ${groupIntro.groupMembers()}">
+                            <div th:class="${i.odd}? 'v10_506' : 'v10_510'" class="v10_506">
+                                <span class="v10_507" th:text="${groupmember.name()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${groupmember.memberId()})}'|">아이디1</span>
+                                <span class="v10_508" th:text="${groupmember.job()}">직업</span>
+                                <div class="profile_image_509" th:style="'background-image: url(\'/images/' + ${groupmember.memberProfile()} + '.png\')'"></div>
+                            </div>
+                        </th:block>
                     </div>
                 </div>
             </div>
-        </form>
     </div>
+    </form>
+</div>
 </div>
 </body>
 </html>

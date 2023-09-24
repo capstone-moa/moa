@@ -195,7 +195,7 @@ button {
 
 .v33_1648 {
   width: 609px;
-  height: 825px;
+  height: 845px;
   opacity: 1;
   position: absolute;
   top: 140px;
@@ -203,6 +203,7 @@ button {
   overflow: hidden;
   background: rgba(255,255,255,1);
 }
+
 .join-wrapper{
   width: 609px;
   height: 500px;
