@@ -31,7 +31,7 @@
                     <span class="v104_2511" th:text="${postDetail.memberName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${postDetail.memberId()})}'|">작성자 이메일</span>
                     <span class="v104_2512" th:text="${postDetail.memberJob()}">작성자 직업</span>
                     <span class="v104_2676" th:text="${postDetail.createdDateTime()}">작성일</span>
-                    <div class="writer_image"></div>
+                    <div class="writer_image" th:style="'background-image: url(\'../images/' + ${postDetail.memberProfile()} + '.png\')'"></div>
                     <div th:if="${postDetail.memberEmail()} == ${#authentication.name}">
                         <button class="v10_510" id='btn2' onclick='toggleBtn3()'>
                             <div class="v10_511"></div>
@@ -75,7 +75,7 @@
                             <textarea class="v104_2689" th:text="${comment.content()}" readonly>댓글내용입니당.</textarea>
                             <span class="v104_2690" th:text="${comment.createdDateTime()}">2023-07-14</span>
                             <span class="v104_2691" th:text="${comment.writerName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${comment.writerId()})}'|">닉네임1</span>
-                            <div class="comment_profile_image1"></div>
+                            <div class="comment_profile_image1" th:style="'background-image: url(\'../images/' + ${comment.memberProfile()} + '.png\')'"></div>
                             <button type="button" class="del_comment"
                                 th:if="${#authentication.name} == ${comment.writerEmail()}" onclick="deleteComment()">삭제</button>
                         </div>

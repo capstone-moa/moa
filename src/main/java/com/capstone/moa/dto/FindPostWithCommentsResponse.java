@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public record FindPostWithCommentsResponse(
         Long postId, String title, String content, String interest, String memberEmail, Long memberId, String memberName, String memberJob,
-        String createdDateTime, List<FindCommentResponse> comments
+        String createdDateTime, List<FindCommentResponse> comments, String memberProfile
 ) {
 
     public static FindPostWithCommentsResponse from(Post post) {
@@ -24,7 +24,8 @@ public record FindPostWithCommentsResponse(
                 post.getCreatedDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                 post.getComments().stream()
                         .map(FindCommentResponse::from)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                post.getMember().getProfile().getProfileName()
         );
     }
 }

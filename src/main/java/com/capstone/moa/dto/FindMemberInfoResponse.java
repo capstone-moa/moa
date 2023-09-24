@@ -4,7 +4,7 @@ import com.capstone.moa.entity.Member;
 
 public record FindMemberInfoResponse(
         Long id, String name, String email, String interest, String job,
-        String github, String introduce
+        String github, String introduce, String profileImage
 ) {
     public static FindMemberInfoResponse from(Member member) {
         return new FindMemberInfoResponse(
@@ -14,7 +14,8 @@ public record FindMemberInfoResponse(
                 member.getInterest().name(),
                 member.getJob().name(),
                 member.getGithub(),
-                member.getIntroduce()
+                member.getIntroduce(),
+                member.getProfile().getProfileName()
         );
     }
 }

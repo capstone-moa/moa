@@ -52,7 +52,7 @@
                             <span class="v10_507" th:text="${community.memberName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${community.memberId()})}'|">아이디1</span>
                             <span class="v10_508" th:text="${community.memberJob()}">직업</span>
                             <span class="v10_2226" th:text="${community.createdDateTime()}">2023.05-01</span>
-                            <div class="profile_image_509"></div>
+                            <div class="profile_image_509" th:style="'background-image: url(\'../images/' + ${community.memberProfileImage()} + '.png\')'"></div>
                         </div>
                         <div class="v10_510">
                             <div class="v10_511"></div>
