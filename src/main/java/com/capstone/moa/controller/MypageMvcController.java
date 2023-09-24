@@ -127,4 +127,9 @@ public class MypageMvcController {
         return invitationService.checkInvitation(groupId, inviteEmail);
     }
 
+    @GetMapping("/profile-image")
+    public String profileImage() {
+        return "mypage/mypage_profile_image";
+    }
+
 }
