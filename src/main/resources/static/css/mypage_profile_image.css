@@ -18,14 +18,16 @@ body {
   width: 100%;
   height: 1214px;
   position: absolute;
-  top: 30px;
+  top: 0px;
   left: 0px;
   overflow: hidden;
 }
 
 .v10_490 {
-  width: 862px;
-  height: 400px;
+  width: 910px;
+  height: 710px;
+  top: 10px;
+  left: 10px;
   background: rgba(255,255,255,1);
   position: relative;
 
@@ -65,12 +67,12 @@ body {
   opacity: 1;
   position: absolute;
   top: 120px;
-  left: 60px;
+  left: 50px;
   overflow: hidden;
 }
 
 .v10_495 {
-  width: 700px;
+  width: 800px;
   color: rgb(137, 137, 137);
   position: absolute;
   top: 80px;
@@ -84,18 +86,40 @@ body {
 /*******************게시글 본문*************/
 
 .form-group{
-  width: 600px;
+  width: 86px;
+  color: rgba(24,24,24,1);
+  position: absolute;
+
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 16px;
+  text-align: left;
+}
+
+.board_text2{
+  width: 86px;
   color: rgba(24,24,24,1);
   font-family: NanumGothic;
   font-weight: Bold;
   font-size: 16px;
   text-align: left;
 }
-.form-group>input{
-  width: 400px;
-
+.form-control{
+  width: 600px;
+  resize: none;
+  outline: none;
 }
 
+
+.board_text3{
+  color: rgba(24,24,24,1);
+  position: relative;
+  top: 10px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 16px;
+  text-align: left;
+}
 
 .button {
   width: 91px;
@@ -105,9 +129,74 @@ body {
   border: none;
   position: relative;
   top: 40px;
-  left: 600px;
+  left: 680px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+}
+
+
+/*******************이미지 선택*************/
+ul {
+  list-style-type: none;
+}
+
+li {
+  display: inline-block;
+}
+
+input[type="radio"][id^="myRadio"] {
+  display: none;
+}
+
+label {
+  border: 1px solid #fff;
+  padding: 10px;
+  display: block;
+  position: relative;
+  margin: 10px;
+  cursor: pointer;
+}
+
+label:before {
+  background-color: white;
+  color: white;
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  border: 1px solid grey;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 28px;
+  transition-duration: 0.4s;
+  transform: scale(0);
+}
+
+label img {
+  height: 100px;
+  width: 100px;
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
+}
+
+/* Updated styling for the selected radio button */
+:checked + label {
+  border-color: #ddd;
+}
+
+:checked + label:before {
+  content: "✓";
+  background-color: grey;
+  transform: scale(1);
+}
+
+:checked + label img {
+  transform: scale(0.9);
+  /* box-shadow: 0 0 5px #333; */
+  z-index: -1;
 }

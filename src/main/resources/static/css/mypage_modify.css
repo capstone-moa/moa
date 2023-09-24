@@ -14,7 +14,7 @@ body {
 /*********게시판 메인***********/
 
 .board_view {
-  width: 850px;
+  width: 910px;
   height: 950px;
   position: absolute;
   left: 295px;
@@ -22,13 +22,16 @@ body {
 }
 
 .v104_2505 {
-  width: 850px;
-  height: 1800px;
+  width: 855px;
+  height: 820px;
+  -moz-border-radius:10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
   position: absolute;
   top: 54px;
-  left: 0px;
-  overflow: hidden;
-  background: rgba(255,255,255,1);
+  left: 5px;
+  opacity: 74;
+  box-shadow: rgb(255, 255, 255) 0px 1px 2px 0px, rgba(0,119,181,1) 0px 1px 3px 1px;
 }
 
 .v10_782 {
@@ -154,6 +157,7 @@ textarea.text_box {
   overflow: hidden;
   resize: none;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .v10_771_intro {
@@ -237,25 +241,36 @@ select.text_box {
   text-align: center;
 }
 
-/************페이지네이션*********/
-.post-container {
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  border: 2px solid #d7d7d7;
-  margin: 15px;
+/**********프로필 이미지*********/
+.v30_1660 {
+  width: 70px;
+  color: rgba(182,182,182,1);
+  position: absolute;
+  top: 9px;
+  left: 25px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 12px;
+  opacity: 1;
+  text-align: center;
+}
+.button_image {
+  width: 120px;
+  height: 32px;
+  background-color:rgba(231,231,231,1);
+  position: relative;
+  top: 220px;
+  left: 570px;
+  overflow: hidden;
+  border: none;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  z-index: 2;
+
 }
 
-.post-title {
-  font-size: 20px;
-}
 
-.post-number {
-  font-size: 15px;
-  padding: 15px;
-}
 
-.pagination-container {
-  display: flex;
-  justify-content: center;
-}
+

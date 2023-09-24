@@ -22,21 +22,24 @@
         <!--카테고리 선택-->
         <div class="v10_501">
             <form method="post" id="addressForm" th:object="${createAddressRequest}" action="/group/address/save">
-
+                <br>
                 <!--게시글 작성 폼-->
-                <div class="form-group1">
-                    <label th:for="zipcode">우편번호</label>
+                <div class="form-group">
+                    <label th:for="zipcode">우편번호     :&nbsp&nbsp&nbsp&nbsp</label>
                     <input name="zipcode" id="zipcode" type="text" placeholder="우편번호를 입력하세요" readonly
                            onclick="findAddr()">
                 </div>
-                <div class="form-group2">
-                    <label th:for="streetAdr"> 도로명 주소</label>
+                <br>
+                <div class="form-group">
+                    <label th:for="streetAdr"> 도로명 주소 : </label>
                     <input name="streetAdr" id="streetAdr" type="text" placeholder="도로명 주소 입력하세요" readonly>
                 </div>
-                <div class="form-group3">
-                    <label th:for="detailAdr"> 상세주소</label>
+                <br>
+                <div class="form-group">
+                    <label th:for="detailAdr"> 상세주소 :&nbsp&nbsp&nbsp&nbsp</label>
                     <input name="detailAdr" id="detailAdr" type="text" placeholder="상세주소를 입력하세요">
                 </div>
+                <br>
                 <input name="groupId" th:value="${groupId}" type="hidden">
 
                 <button type="submit" class="button" onclick="handleAddressSubmission(event)"><span
