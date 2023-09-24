@@ -185,7 +185,6 @@ select.text_box {
 .writer_image {
   width: 170px;
   height: 170px;
-  background: url("../images/v10_168.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

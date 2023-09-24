@@ -43,7 +43,7 @@
                         <div class="title_intro">회원소개
                             <textarea name="introduce" class="v10_783" th:text="${memberInfo.introduce()}" placeholder="자신을 어필할 소개를 입력해주세요" required></textarea>
                         </div>
-                        <div class="writer_image"></div>
+                        <div class="writer_image" th:style="'background-image: url(\'../images/' + ${memberInfo.profileImage} + '.png\')'"></div>
 
                         <a th:href="@{/mypage/profile-image}" target="_blank" id="myLink"></a>
                         <button type="button" class="button_image" onclick="openNewWindow()">

@@ -3,7 +3,11 @@ package com.capstone.moa.controller;
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.enums.Job;
-import com.capstone.moa.service.*;
+import com.capstone.moa.entity.enums.Profile;
+import com.capstone.moa.service.GroupService;
+import com.capstone.moa.service.InvitationService;
+import com.capstone.moa.service.MemberService;
+import com.capstone.moa.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -128,8 +132,20 @@ public class MypageMvcController {
     }
 
     @GetMapping("/profile-image")
-    public String profileImage() {
+    public String profileImage(Model model) {
+        model.addAttribute("modifyProfileImageRequest", new ModifyProfileImageRequest());
         return "mypage/mypage_profile_image";
     }
 
+    @PostMapping("/profile-image/save")
+    public String modifyProfileImage(ModifyProfileImageRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        memberService.modifyMemberProfileImage(request, userDetails.getMemberId());
+        System.out.println(request.getProfile());
+        return "redirect:/";
+    }
+
+    @ModelAttribute("profiles")
+    private String[] putProfile() {
+        return Profile.getProfileNames();
+    }
 }

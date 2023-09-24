@@ -3,6 +3,7 @@ package com.capstone.moa.service;
 import com.capstone.moa.dto.FindMemberInfoResponse;
 import com.capstone.moa.dto.FindMemberResponse;
 import com.capstone.moa.dto.ModifyMemberRequest;
+import com.capstone.moa.dto.ModifyProfileImageRequest;
 import com.capstone.moa.entity.Member;
 import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.enums.Job;
@@ -49,5 +50,13 @@ public class MemberService {
         }
 
         member.modify(request.getName(), Job.find(request.getJob()), Interest.find(request.getInterest()), request.getGithub(), request.getIntroduce());
+    }
+
+    @Transactional
+    public void modifyMemberProfileImage(ModifyProfileImageRequest request, Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+        member.modifyProfile(request.getProfile());
     }
 }
