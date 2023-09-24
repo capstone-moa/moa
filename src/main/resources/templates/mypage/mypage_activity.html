@@ -33,7 +33,7 @@
         <div class="mypage_intro">
             <div class="v10_762">
                 <div class="back_image"></div>
-                <div class="profile_image"></div>
+                <div class="profile_image" th:style="'background-image: url(\'/images/' + ${member.profileImage()} + '.png\')'"></div>
                 <span class="profile_name_font" th:text="${member.name()}">hongkildong</span>
                 <span class="profile_intro" th:text="${member.introduce()}"></span>
                 <div class="interest">
@@ -76,7 +76,7 @@
                                     <span class="v10_507" th:text="${post.memberName()}" >아이디1</span>
                                     <span class="v10_508" th:text="${post.memberJob()}">직업</span>
                                     <span class="v10_2226" th:text="${post.createdDateTime()}">2023.05-01</span>
-                                    <div class="profile_image_509"></div>
+                                    <div class="profile_image_509" th:style="'background-image: url(\'/images/' + ${post.memberProfileImage()} + '.png\')'"></div>
                                 </div>
 
                                 <span class="v10_505"

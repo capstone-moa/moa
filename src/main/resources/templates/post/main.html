@@ -36,7 +36,7 @@
                     <div class="v10_165"><span class="v10_166" th:text="${community.memberName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${community.memberId()})}'|">아이디</span>
                         <span class="v10_167" th:text="${community.memberJob()}">직업</span>
                         <span class="v10_2226" th:text="${community.createdDateTime()}">작성일</span>
-                        <div class="profile_image_168"></div>
+                        <div class="profile_image_168" th:style="'background-image: url(\'../images/' + ${community.memberProfileImage()} + '.png\')'"></div>
                     </div>
                     <div class="v10_249">
                         <div class="v10_250"></div>
@@ -73,7 +73,7 @@
                     <div class="v10_165"><span class="v10_166" th:text="${team.memberName()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${team.memberId()})}'|">아이디</span>
                         <span class="v10_167" th:text="${team.memberJob()}">iOS developer</span>
                         <span class="v10_2226" th:text="${team.createdDateTime()}">작성일</span>
-                        <div class="profile_image_247"></div>
+                        <div class="profile_image_247" th:style="'background-image: url(\'../images/' + ${team.memberProfileImage()} + '.png\')'"></div>
                     </div>
                     <div class="v10_249">
                         <div class="v10_250"></div>

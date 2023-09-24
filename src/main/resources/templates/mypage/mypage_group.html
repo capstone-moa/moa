@@ -42,7 +42,7 @@
             <div class="mypage_intro">
                 <div class="v10_762">
                     <div class="back_image"></div>
-                    <div class="profile_image"></div>
+                    <div class="profile_image" th:style="'background-image: url(\'/images/' + ${member.profileImage()} + '.png\')'"></div>
                     <span class="profile_name_font" th:text="${member.name()}">hongkildong</span>
                     <span class="profile_intro" th:text="${member.introduce()}"> </span>
                     <div class="interest">
@@ -106,7 +106,7 @@
                                         <div class="v10_506">
                                             <span class="v10_507" th:text="${groupMember.name()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${groupMember.memberId()})}'|">SEMI</span>
                                             <span class="v10_508" th:text="${groupMember.job()}">Designer</span>
-                                            <div class="profile_image_509"></div>
+                                            <div class="profile_image_509" th:style="'background-image: url(\'/images/' + ${groupMember.memberProfile()} + '.png\')'"></div>
                                             <div class="v10_22"
                                                  th:if="${member.email()} == ${#authentication.getName()}">
                                                 <button th:if="${groupMember.email()} != ${member.email()} or ${groupMember.role()} == 'MEMBER'"
@@ -136,7 +136,7 @@
                             <div class="white_box">
                                 <div class="v10_506">
                                     <span class="v10_507" th:text="${invitation.groupName()}">MOA</span>
-                                    <div class="group_profile_image_509"></div>
+                                    <div class="group_profile_image_509" ></div>
                                     <div class="group_intro" th:text="${invitation.groupIntroduce()}">개발자들을 연결시켜 공모전,
                                         사이드
                                         프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다! 안녕하세요

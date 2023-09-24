@@ -2,6 +2,7 @@ package com.capstone.moa.entity;
 
 import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.entity.enums.Job;
+import com.capstone.moa.entity.enums.Profile;
 import com.capstone.moa.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -39,6 +40,9 @@ public class Member {
 
     private String introduce;
 
+    @Enumerated(EnumType.STRING)
+    private Profile profile;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<GroupMember> groupMembers = new ArrayList<>();
 
@@ -55,6 +59,7 @@ public class Member {
         this.role = role;
         this.interest = interest;
         this.job = job;
+        this.profile = Profile.PROFILE1;
     }
 
     public void modify(String name, Job job, Interest interest, String github, String introduce) {
@@ -63,5 +68,9 @@ public class Member {
         this.interest = interest;
         this.github = github;
         this.introduce = introduce;
+    }
+
+    public void modifyProfile(String profileName) {
+        this.profile = Profile.fromProfileName(profileName);
     }
 }

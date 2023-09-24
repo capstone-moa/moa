@@ -31,15 +31,13 @@ public class SecurityConfig {
 
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/**", "/login", "/join", "/error", "/resources/**").permitAll()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers(HttpMethod.GET, "posts/**", "/api/posts/**").permitAll()
-                .requestMatchers("posts/write/**", "posts/comment/**").authenticated()
+                .requestMatchers("posts/write", "posts/write/**", "posts/comment").authenticated()
                 .requestMatchers("/group/intro/modify/**").authenticated()
+                .requestMatchers(HttpMethod.POST).authenticated()
+                .requestMatchers("/mypage/*").authenticated()
                 .requestMatchers("/group/intro/**").permitAll()
 
                 .requestMatchers(HttpMethod.GET, "/mypage/**").permitAll()
-                .requestMatchers("/mypage/group/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

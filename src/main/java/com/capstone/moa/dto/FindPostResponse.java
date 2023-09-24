@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public record FindPostResponse(
         Long postId, String title, String interest, String postType,
-        String memberName, String memberJob, String createdDateTime, int commentCnt, Long memberId
+        String memberName, String memberJob, String createdDateTime, int commentCnt, Long memberId, String memberProfileImage
 ) {
 
     public static FindPostResponse from(Post post) {
@@ -19,7 +19,8 @@ public record FindPostResponse(
                 post.getMember().getJob().name(),
                 post.getCreatedDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                 post.getComments().size(),
-                post.getMember().getId()
+                post.getMember().getId(),
+                post.getMember().getProfile().getProfileName()
         );
     }
 }
