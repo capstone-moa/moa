@@ -28,21 +28,8 @@
                     <span class="v104_2511" th:text="${issue.writer()}">작성자 이메일</span>
                     <span class="v104_2676" th:text="${issue.createdDateTime()}">작성일</span>
                     <div class="writer_image"></div>
-                    <div th:if="${issue.email()} == ${#authentication.name}">
-                        <button class="v10_510" id='btn2' onclick='toggleBtn3()'>
-                            <div class="v10_511"></div>
-                            <div class="v10_512"></div>
-                            <div class="v10_513"></div>
-                        </button>
-
-                        <input name="noticeId" id="groupId" th:value="${groupId}" hidden="hidden">
-                        <input name="noticeId" id="issueId" th:value="${issue.id()}" hidden="hidden">
-
-                        <div class="Toggle" style="display: none;" id='btn3'>
-                            <button class="v10_514">수정</button>
-                            <button class="v10_514" onclick="deleteIssue()">삭제</button>
-                        </div>
-                    </div>
+                    <button type="button" class="del_Issue" th:if="${check} == true"
+                           onclick="deleteIssue()">삭제</button>
 
                 </div>
             </div>

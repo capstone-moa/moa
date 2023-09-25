@@ -100,6 +100,8 @@
                         <th:block th:each="issue : ${issueList}">
                             <div class="v10_502">
                                 <div class="white_box">
+                                    <button type="button" class="del_comment" th:if="${check} == true" onclick="deleteIssue()">삭제</button>
+
                                     <div class="v10_506">
                                         <span class="v10_507" th:text="${issue.writer()}">아이디1</span>
                                         <span class="v10_2226" th:text="${issue.createdDateTime()}">2023.05-01</span>
@@ -124,21 +126,24 @@
             let url = document.getElementById('myLink').getAttribute('href');
             window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
         }
-
-        function toggleBtn1() {
-
-            // 토글 할 버튼 선택 (btn1)
-            const btn1 = document.getElementById('btn1');
-
-            // btn1 숨기기 (display: none)
-            if(btn1.style.display !== 'none') {
-                btn1.style.display = 'none';
-            }
-            // btn` 보이기 (display: block)
-            else {
-                btn1.style.display = 'block';
+        function deleteIssue() {
+            const groupId = $('#groupId').val();
+            const issueId = $('#issueId').val();
+            const url = '/group/project/issue/' + issueId + '/delete';
+            if (confirm("이슈를 삭제하시겠습니까?") === true) {
+                fetch(url, {
+                    method: 'POST'
+                }).then(response => {
+                    if (response) {
+                        alert("이슈를 삭제했습니다.");
+                        window.location.href = '/group/project/' + groupId + '/issue';
+                    } else {
+                        alert("이슈 삭제에 실패했습니다.")
+                    }
+                })
             }
         }
+
     </script>
 </div>
 </body>

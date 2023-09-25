@@ -43,12 +43,6 @@
                     <span class="v10_770">Interest : </span>
                     <div class="v10_771"><span class="v10_772" th:text="|# ${member.interest()}|">#web</span></div>
                 </div>
-                <div class="v10_775">
-                    <div class="v10_779"></div>
-                    <span class="mypage_location">경기도, 오산</span>
-                    <span th:if="${#authentication.name} == ${member.email()}" class="v10_777" th:onclick="|location.href='@{/mypage/{memberId}(memberId=${member.id()})}'|">회원정보 수정</span>
-
-                </div>
             </div>
 
 

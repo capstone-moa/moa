@@ -42,10 +42,10 @@
                     <div class="back_image"></div>
                     <div class="profile_image"></div>
                     <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
-                    <textarea name="introduce" class="profile_intro" th:text="${groupIntro.introduce()}" required>개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다!</textarea>
+                    <textarea name="introduce" class="profile_intro" th:text="${groupIntro.introduce()}" required></textarea>
                     <div class="interest">
                         <div class="github_image"></div>
-                        <span class="v10_769">GitHub : <span th:text="${groupIntro.github()}">https://github.com/capstone-moa</span></span>
+                        <span class="v10_769">GitHub : <span th:text="${groupIntro.github()}">https://github.com/</span></span>
                         <span class="v10_770">Interest : </span>
                         <div class="v10_771"><span class="v10_772" th:text="|# ${groupIntro.interest()}|">#web</span></div>
                     </div>
@@ -90,7 +90,7 @@
                         <div class="github_image_intro"></div>
                         <div class="v10_769_intro">GitHub : <textarea class="blue" th:value="${groupIntro.github()}" th:text="${groupIntro.github()}" name="github"
                                                                       placeholder="Group github Link"></textarea></div>
-                        <span class="v10_769_intro">Interest : </span>
+                        <span class="v10_7691_intro">Interest : </span>
                         <div class="v10_771_intro">
                             <select name="interest" class="v10_494" id="tag" th:field="*{interest}">
                                 <option th:value="${groupIntro.interest()}" th:text="${groupIntro.interest()}">관심사 선택</option>
@@ -100,7 +100,6 @@
                         </div>
                         <div class="v10_770_intro">project : <textarea class="blue" th:value="${groupIntro.projectLink()}" th:text="${groupIntro.projectLink()}" name="projectLink"
                                                                        placeholder="project link"></textarea></div>
-                        <div class="v10_770_intro">Email : <input class="blue" placeholder="moa_backend@gmail.com"></div>
                     </div>
 
                     <!-----------그룹 주제(글자수 제한)------------>
