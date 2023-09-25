@@ -28,6 +28,8 @@
                     <span class="v104_2511" th:text="${issue.writer()}">작성자 이메일</span>
                     <span class="v104_2676" th:text="${issue.createdDateTime()}">작성일</span>
                     <div class="writer_image"></div>
+                    <input name="groupId" id="groupId" th:value="${groupId}" hidden="hidden">
+                    <input name="issueId" id="issueId" th:value="${issue.id()}" hidden="hidden">
                     <button type="button" class="del_Issue" th:if="${check} == true"
                            onclick="deleteIssue()">삭제</button>
 

@@ -29,11 +29,22 @@ public class ProjectMvcController {
     private final ReportFileService reportFileService;
 
     @GetMapping("/{groupId}/issue")
-    public String findProject(@PathVariable("groupId") Long groupId, Model model) {
+    public String findProject(
+            @PathVariable("groupId") Long groupId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails,
+            Model model
+    ) {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
         List<FindIssueResponse> issueList = issueService.findIssueList(groupId);
         model.addAttribute("group", groupInfo);
         model.addAttribute("issueList", issueList);
+
+        boolean check = false;
+        if (userDetails != null) {
+            check = groupService.checkIsGroupMember(groupId, userDetails.getMemberId());
+        }
+        model.addAttribute("check", check);
+
         return "group/group_management_issue";
     }
 
@@ -51,10 +62,19 @@ public class ProjectMvcController {
     }
 
     @GetMapping("/{groupId}/issue/{issueId}")
-    public String findIssue(@PathVariable("groupId") Long groupId, @PathVariable("issueId") Long issueId, Model model) {
+    public String findIssue(
+            @PathVariable("groupId") Long groupId,
+            @PathVariable("issueId") Long issueId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails,
+            Model model) {
         FindIssueResponse issue = issueService.findIssueById(issueId);
         model.addAttribute("issue", issue);
         model.addAttribute("groupId", groupId);
+        boolean check = false;
+        if (userDetails != null) {
+            check = groupService.checkIsGroupMember(groupId, userDetails.getMemberId());
+        }
+        model.addAttribute("check", check);
         return "group/group_issue_view";
     }
 

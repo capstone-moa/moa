@@ -91,7 +91,7 @@
                     <span class="image_512">보고서</span>
                     <a th:href="@{/group/project/{groupId}/issue/write(groupId=${group.id()})}" target="_blank"
                        id="myLink"></a>
-                    <button type="button" class="button" onclick="openNewWindow()">
+                    <button type="button" class="button" th:if="${check} == true" onclick="openNewWindow()">
                         <span class="v30_1660">작성</span>
                     </button>
 
@@ -100,6 +100,8 @@
                         <th:block th:each="issue : ${issueList}">
                             <div class="v10_502">
                                 <div class="white_box">
+                                    <input name="groupId" id="groupId" th:value="${groupId}" hidden="hidden">
+                                    <input name="issueId" id="issueId" th:value="${issue.id()}" hidden="hidden">
                                     <button type="button" class="del_comment" th:if="${check} == true" onclick="deleteIssue()">삭제</button>
 
                                     <div class="v10_506">
