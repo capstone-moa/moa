@@ -144,10 +144,10 @@ body {
   position: absolute;
   top: 3px;
   left: 0px;
-  border-top-left-radius: 26px;
-  border-top-right-radius: 26px;
-  border-bottom-left-radius: 26px;
-  border-bottom-right-radius: 26px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   overflow: hidden;
 }
 .v10_510 {
