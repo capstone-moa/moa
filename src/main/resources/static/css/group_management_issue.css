@@ -613,6 +613,18 @@ hr.nav_role{
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.del_comment {
+  all: unset;
+  color: rgba(0, 0, 0, 0.644);
+  position: absolute;
+  top: 20px;
+  left: 680px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 14px;
+  text-decoration: underline;
+  z-index: 4;
+}
 .v10_2226 {
   width: 96px;
   color: rgba(24,24,24,1);
@@ -742,15 +754,4 @@ hr.bar {
 .v10_223 {
   width: 900px;
   height: 200px;
-}
-.del_comment {
-  all: unset;
-  color: rgba(0, 0, 0, 0.644);
-  position: absolute;
-  top: 50px;
-  left: 750px;
-  font-family: NanumGothic;
-  font-weight: Bold;
-  font-size: 14px;
-  text-decoration: underline;
 }
