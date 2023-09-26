@@ -106,7 +106,7 @@
                                     <div class="v10_506">
                                         <span class="v10_507" th:text="${issue.writer()}">아이디1</span>
                                         <span class="v10_2226" th:text="${issue.createdDateTime()}">2023.05-01</span>
-                                        <div class="profile_image_509"></div>
+                                        <div class="profile_image_509" th:style="'background-image: url(\'/images/' + ${issue.profileImage()} + '.png\')'"></div>
                                         <button type="button" class="del_comment" th:if="${check} == true" onclick="deleteIssue()">삭제</button>
 
                                     </div>
@@ -123,6 +123,7 @@
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <script>
         function openNewWindow() {

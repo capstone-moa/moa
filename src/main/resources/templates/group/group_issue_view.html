@@ -27,7 +27,7 @@
                 <div class="writer_profile">
                     <span class="v104_2511" th:text="${issue.writer()}">작성자 이메일</span>
                     <span class="v104_2676" th:text="${issue.createdDateTime()}">작성일</span>
-                    <div class="writer_image"></div>
+                    <div class="writer_image" th:style="'background-image: url(\'/images/' + ${issue.profileImage()} + '.png\')'"></div>
                     <input name="groupId" id="groupId" th:value="${groupId}" hidden="hidden">
                     <input name="issueId" id="issueId" th:value="${issue.id()}" hidden="hidden">
                     <button type="button" class="del_Issue" th:if="${check} == true"
