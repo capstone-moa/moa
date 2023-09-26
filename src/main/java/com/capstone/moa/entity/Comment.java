@@ -34,6 +34,7 @@ public class Comment extends BaseTimeEntity {
     }
 
     public boolean isSameWriter(String email) {
+        System.out.println(this.member.getEmail());
         return Objects.equals(this.member.getEmail(), email);
     }
 

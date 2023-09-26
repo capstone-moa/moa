@@ -120,6 +120,7 @@ public class PostMvcController {
 
     @PostMapping("/comment/{commentId}/delete")
     public String deleteComment(@PathVariable("commentId") Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        System.out.println(userDetails.getUsername());
         commentService.deleteComment(commentId, userDetails.getUsername());
         return "redirect:/";
     }
