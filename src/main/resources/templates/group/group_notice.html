@@ -100,7 +100,7 @@
                                                hidden="hidden">
                                     </label>
                                     <button class="v10_514"  th:if="${leader.email()} == ${#authentication.name}"
-                                    onclick="deleteNotice()" type="button">삭제</button>
+                                    th:onclick="deleteNotice([[${notice.noticeId()}]])" type="button">삭제</button>
                                     <span class="v10_505" th:text="${notice.title()}">제목</span>
                                     <textarea class="v10_509" cols="50" rows="25" maxlength="600" th:text="${notice.content()}" readonly>
                                     내용</textarea>
@@ -124,8 +124,7 @@
             window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
         }
 
-        function deleteNotice() {
-            const noticeId = $('#noticeId').val();
+        function deleteNotice(noticeId) {
             const url = "/group/notice/" + noticeId + '/delete';
             if (confirm("해당 공지를 삭제하시겠습니까??") === true) {    //확인
                 fetch(url, {

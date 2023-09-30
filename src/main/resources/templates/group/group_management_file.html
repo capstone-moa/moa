@@ -107,12 +107,7 @@
                                 <div class="white_box">
 
                                     <button type="button" class="del_comment"
-                                            th:if="${check} == true" onclick="deleteReportFile()">삭제</button>
-
-                                    <label>
-                                        <input name="reportFileId" id="reportFileId" th:value="${reportFile.id()}"
-                                               hidden="hidden">
-                                    </label>
+                                            th:if="${check} == true" th:onclick="deleteReportFile([[${reportFile.id()}]])">삭제</button>
                                     <span class="v10_505" th:text="${reportFile.title()}">제목</span>
                                     <span class="v10_509" th:text="${reportFile.fileName()}">파일명</span>
                                     <a class="v10_509_file" th:if="${check}" th:href="@{/group/project/download/{fileId}(fileId=${reportFile.id()})}">download</a>
@@ -126,15 +121,14 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script>
+    <script th:inline="javascript">
         function openNewWindow() {
             let url = document.getElementById('myLink').getAttribute('href');
             window.open(url, '_blank', 'width=800, height=350, scrollbars=no, resizable=no, toolbars=no, menubar=no');
         }
 
-        function deleteReportFile() {
+        function deleteReportFile(reportFileId) {
             const groupId = $('#groupId').val();
-            const reportFileId = $('#reportFileId').val();
             console.log(reportFileId)
             const url = "/group/project/" + groupId + "/files/" + reportFileId + "/delete";
             if (confirm("해당 보고서를 삭제하시겠습니까??") === true) {    //확인

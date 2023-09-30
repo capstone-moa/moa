@@ -31,13 +31,15 @@ public class SecurityConfig {
 
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("posts/write", "posts/write/**", "posts/comment").authenticated()
-                .requestMatchers("/group/intro/modify/**").authenticated()
-                .requestMatchers(HttpMethod.POST).authenticated()
+                .requestMatchers("/api/**", "/login", "/join", "/error", "/resources/**").permitAll()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .requestMatchers("posts/write", "posts/write/**", "posts/comment/**").authenticated()
+                .requestMatchers("/group/intro/modify/**", "/group/calendar/save").authenticated()
                 .requestMatchers("/mypage/*").authenticated()
                 .requestMatchers("/group/intro/**").permitAll()
 
                 .requestMatchers(HttpMethod.GET, "/mypage/**").permitAll()
+                .requestMatchers("/mypage/group/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
@@ -48,7 +50,6 @@ public class SecurityConfig {
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler)
                 .permitAll();
-
 
         return http.build();
     }
