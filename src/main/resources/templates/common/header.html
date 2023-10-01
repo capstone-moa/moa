@@ -10,6 +10,8 @@
         <span class="header_text_community">커뮤니티</span>
         <div class="header_team" th:onclick="|location.href='@{/posts/team}'|"></div>
         <span class="header_text_team">팀원모집</span>
+        <div class="header_group" th:onclick="|location.href='@{/group/grouplist}'|"></div>
+        <span class="header_text_group">그룹</span>
         <div class="header_search">
             <form th:action="@{/posts/search}" method="get">
                 <input type="text" placeholder="검색어 입력" name="title" />

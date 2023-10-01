@@ -15,7 +15,7 @@
     width: 340px;
     position : absolute;
     top: 28px;
-    left: 600px;
+    left: 580px;
 }
 
 input {
@@ -47,7 +47,7 @@ input {
     background-size: cover;
     position: absolute;
     top: 20px;
-    left: 300px;
+    left: 322px;
     border-radius: 10px 10px 10px 10px;
     overflow: hidden;
 }
@@ -61,15 +61,28 @@ input {
     background-size: cover;
     position: absolute;
     top: 20px;
-    left: 382px;
+    left: 400px;
     border-radius: 10px 10px 10px 10px;
+    overflow: hidden;
+}
+.header_group {
+    width: 48px;
+    height: 48px;
+    background: url("../images/group.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    top: 13px;
+    left: 472px;
+
     overflow: hidden;
 }
 .header_text_community{
     color: rgba(24,24,24);
     position: absolute;
     top: 56px;
-    left: 294px;
+    left: 316px;
     font-family: NanumGothic;
     font-weight: Bold;
     font-size: 12px;
@@ -81,7 +94,18 @@ input {
     color: rgba(24,24,24);
     position: absolute;
     top: 56px;
-    left: 378px;
+    left: 396px;
+    font-family: NanumGothic;
+    font-weight: Bold;
+    font-size: 12px;
+    opacity: 1;
+    text-align: left;
+}
+.header_text_group{
+    color: rgba(24,24,24);
+    position: absolute;
+    top: 56px;
+    left: 485px;
     font-family: NanumGothic;
     font-weight: Bold;
     font-size: 12px;
@@ -93,12 +117,12 @@ input {
     border-left : 3px solid #F7F9FB;
     height: 80px;
     position: absolute;
-    left: 230px;
+    left: 285px;
 }
 .header_v10_2253 {
     position: absolute;
     top: 26px;
-    left: 1230px;
+    left: 1180px;
 
 }
 .header_login_border {
@@ -139,7 +163,7 @@ input {
     opacity: 1;
     position: absolute;
     top: 26px;
-    left: 1110px;
+    left: 1050px;
     overflow: hidden;
 }
 .header_join_border {
@@ -179,7 +203,7 @@ input {
     background-size: cover;
     position: absolute;
     top: 15px;
-    left: 150px;
+    left: 210px;
     border-radius: 10px 10px 10px 10px;
     overflow: hidden;
 }
@@ -189,11 +213,12 @@ input {
     border-left : 3px solid rgba(247,249,251,1);
     height: 85px;
     position: absolute;
-    left: 1050px;
+    left: 1000px;
     width: 350px;
 }
 
 .header_profile_image {
+
     width: 50px;
     height: 50px;
     background: url("../images/v10_186.png");
@@ -205,13 +230,14 @@ input {
     left: 30px;
     border-radius: 10px 10px 10px 10px;
     overflow: hidden;
+    display: none;
 }
 
 .header_profile_name{
     color: rgb(0, 0, 0);
     position: absolute;
     top: 29px;
-    left: 100PX;
+    left: 50PX;
     font-family: NanumGothic;
     font-weight: Bold;
     font-size: 14px;

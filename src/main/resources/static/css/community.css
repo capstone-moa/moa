@@ -15,12 +15,12 @@ body {
   width: 100%;
   height: 2214px;
   position: relative;
-  left: 384px;
+  left: 350px;
   overflow: hidden;
 }
 
 .v10_490 {
-  width: 862px;
+  width: 830px;
   height: 105px;
   background: rgba(255,255,255,1);
   opacity: 1;
@@ -39,7 +39,7 @@ body {
   background-color:rgba(0,119,181,1);
   position: relative;
   top: 19px;
-  left: 734px;
+  left: 710px;
   overflow: hidden;
   border: none;
   border-top-left-radius: 4px;
@@ -111,7 +111,7 @@ select::-ms-expand {
 }
 
 .v10_501 {
-  width: 860px;
+  width: 830px;
   height: 1800px;
   opacity: 1;
   position: absolute;
@@ -216,7 +216,7 @@ select::-ms-expand {
   color: rgba(24,24,24,1);
   position: absolute;
   top: 0px;
-  left: 710px;
+  left: 700px;
   font-family: NanumGothic;
   font-weight: normal;
   font-size: 10px;
@@ -260,12 +260,12 @@ select::-ms-expand {
   color: rgba(90,147,232,1);
   position: absolute;
   top: 166px;
-  left: 40px;
+  left: 30px;
   font-family: NanumGothic;
   font-weight: Bold;
   font-size: 12px;
   opacity: 1;
-  text-align: left;
+  text-align: center;
 }
 
 
@@ -287,8 +287,8 @@ select::-ms-expand {
 .category {
   position: absolute;
   top: 91px;
-  left: 120px;
-  width: 290px;
+  left: 220px;
+  width: 145px;
   height: 420px;
   overflow: hidden;
 }
@@ -349,15 +349,15 @@ hr.bar {
 }
 
 .v10_315 {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: url("../images/comment.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   position: absolute;
   top: 168px;
-  left: 790px;
+  left: 770px;
   border-radius: 10px 10px 10px 10px;
   overflow: hidden;
 }
@@ -367,7 +367,7 @@ hr.bar {
   color: rgba(24,24,24,1);
   position: absolute;
   top: 168px;
-  left: 820px;
+  left: 800px;
   font-family: NanumGothic;
   font-weight: Bold;
   font-size: 14px;
