@@ -4,6 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout}">
 <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
@@ -65,6 +68,51 @@
                     </div>
                 </div>
             </th:block>
+
+            <!-- 페이징 -->
+            <nav style="text-align: center;">
+                <ul class="pagination"
+                    th:with="start=${communityPosts.getNumber()/10*10 + 1},
+                    last=(${start + 9 < communityPosts.totalPages ? start + 9 : communityPosts.totalPages})">
+                    <th:block th:with="
+                firstAddr=@{/posts/community(page=1)},
+                prevAddr=@{/posts/community(page=${communityPosts.number})},
+                nextAddr=@{/posts/community(page=${communityPosts.number + 2})},
+                lastAddr=@{/posts/community(page=${communityPosts.totalPages})}">
+                        <li>
+                            <a th:href="${firstAddr}" aria-label="First">
+                                <span aria-hidden="true">First</span>
+                            </a>
+                        </li>
+                        <!-- 이전 페이지로 가기 버튼 -->
+                        <li th:class="${communityPosts.first} ? 'disabled'">
+                            <a th:href="${communityPosts.first} ? '#' :${prevAddr}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                        <!--1,2,3,4,.. 등 페이지-->
+                        <li th:each="page: ${#numbers.sequence(start, last)}"
+                            th:class="${page == communityPosts.number + 1} ? 'active'">
+                            <a th:text="${page}" th:href="@{/posts/community(page=${page})}"></a>
+                        </li>
+                        <!--다음 페이지로 -->
+                        <li th:class="${communityPosts.last} ? 'disabled'">
+                            <a th:href="${communityPosts.last} ? '#' : ${nextAddr}"
+                               aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                        <!--맨 마지막 페이지로 이동 -->
+                        <li>
+                            <a th:href="${lastAddr}" aria-label="Last">
+                                <span aria-hidden="true">Last</span>
+                            </a>
+                        </li>
+                    </th:block>
+                </ul>
+            </nav>
+            <!-- 페이징 -->
 
             <!---간격 띄우기-->
             <div class="v10_223"></div>

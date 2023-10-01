@@ -40,13 +40,9 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public FindPostsResponse findPostsByCondition(FindPostsByConditionRequest request, Pageable pageable) {
+    public Page<FindPostResponse> findPostsByCondition(FindPostsByConditionRequest request, Pageable pageable) {
         Page<Post> postPage = postRepository.findAllPostsByCondition(request, pageable);
-        List<FindPostResponse> posts =  postPage.getContent()
-                .stream()
-                .map(FindPostResponse::from)
-                .collect(Collectors.toList());
-        return new FindPostsResponse(posts);
+        return postPage.map(FindPostResponse::from);
     }
 
     @Transactional(readOnly = true)

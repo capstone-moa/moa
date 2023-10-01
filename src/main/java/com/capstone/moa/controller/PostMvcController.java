@@ -7,6 +7,7 @@ import com.capstone.moa.service.CommentService;
 import com.capstone.moa.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -35,23 +36,26 @@ public class PostMvcController {
                 .postType("TEAM")
                 .build();
         Pageable pageable = PageRequest.of(0, 100);
-        FindPostsResponse communityList = postService.findPostsByCondition(community, pageable);
-        FindPostsResponse teamList = postService.findPostsByCondition(team, pageable);
-        model.addAttribute("communityPosts", communityList.posts());
-        model.addAttribute("teamPosts", teamList.posts());
+        Page<FindPostResponse> communityList = postService.findPostsByCondition(community, pageable);
+        Page<FindPostResponse> teamList = postService.findPostsByCondition(team, pageable);
+        model.addAttribute("communityPosts", communityList.getContent());
+        model.addAttribute("teamPosts", teamList.getContent());
 
         return "post/main";
     }
 
     @GetMapping("/community")
-    public String communityList(@RequestParam(value = "interest", required = false) String interest, Model model) {
+    public String communityList(
+            @RequestParam(value = "interest", required = false) String interest,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            Model model) {
         FindPostsByConditionRequest request = FindPostsByConditionRequest.builder()
                 .postType("COMMUNITY")
                 .interest(interest)
                 .build();
-        Pageable pageable = PageRequest.of(0, 6);
-        FindPostsResponse community = postService.findPostsByCondition(request, pageable);
-        model.addAttribute("communityPosts", community.posts());
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<FindPostResponse> community = postService.findPostsByCondition(request, pageable);
+        model.addAttribute("communityPosts", community);
         return "post/community";
     }
 
@@ -59,16 +63,16 @@ public class PostMvcController {
     public String teamRecruitList(
             @RequestParam(value = "interest", required = false) String interest,
             @RequestParam(value = "region", required = false) String region,
+            @RequestParam(value = "page", defaultValue = "1") int page,
             Model model) {
         FindPostsByConditionRequest request = FindPostsByConditionRequest.builder()
                 .postType("TEAM")
                 .interest(interest)
                 .region(region)
                 .build();
-        Pageable pageable = PageRequest.of(0, 6);
-        FindPostsResponse teamPosts = postService.findPostsByCondition(request, pageable);
-
-        model.addAttribute("teamPosts", teamPosts.posts());
+        Pageable pageable = PageRequest.of(page-1, 5);
+        Page<FindPostResponse> teamPosts = postService.findPostsByCondition(request, pageable);
+        model.addAttribute("teamPosts", teamPosts);
         return "post/team";
     }
 
