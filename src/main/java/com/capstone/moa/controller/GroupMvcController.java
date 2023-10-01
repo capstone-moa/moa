@@ -50,4 +50,10 @@ public class GroupMvcController {
     private Interest[] putInterest() {
         return Interest.values();
     }
+
+    @GetMapping("/grouplist")
+    public String findGroups() {
+        return "group/grouplist";
+    }
+
 }

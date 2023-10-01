@@ -41,6 +41,10 @@
                 <div class="v10_762">
                     <div class="back_image"></div>
                     <div class="profile_image"></div>
+                    </a>
+                    <button type="button" class="button_image" onclick="openNewWindow()">
+                        <span class="v30_1660" >이미지 선택</span>
+                    </button>
                     <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
                     <textarea name="introduce" class="profile_intro" th:text="${groupIntro.introduce()}" required></textarea>
                     <div class="interest">
@@ -128,6 +132,13 @@
             </div>
         </form>
     </div>
+    <script>
+        function openNewWindow() {
+            let url = document.getElementById('myLink').getAttribute('href');
+            window.open(url, '_blank', 'width=910, height=760, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </div>
 </body>
 

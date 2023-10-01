@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link href="/css/grouplist.css" rel="stylesheet"/>
+    <title>mypage_group</title>
+</head>
+<!--필요한 내용 그룹목록, 그룹명, 그룹소개, 그룹 프로필(아직 미완성! 나오는 모양 보고 수정 더 해야함!)-->
+<body>
+<div layout:fragment="content">
+    <div class="v10_483">
+        <div class="v10_490">
+            <span class="v10_493">그룹 목록</span>
+            <span class="v10_491"><hr>참여하고 있는 그룹이 있는 공간</span>
+        </div>
+
+        <!--게시판 내용-->
+        <div class="v10_501">
+            <!--게시글 한개-->
+            <!--<th:block th:each="groupCategory : ${groupCategories}">-->
+                <div class="white_box">
+                    <div class="v10_506">
+                        <span class="v10_507" >그룹명</span>
+                        <div class="group_profile_image_509" ></div>
+                        <div class="group_intro">개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다! 안녕하세dy</div>
+                    </div>
+                </div>
+            <!--</th:block>-->
+        </div>
+
+            <!---간격 띄우기-->
+            <div class="v10_223"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
