@@ -101,13 +101,12 @@
                             <div class="v10_502">
                                 <div class="white_box">
                                     <input name="groupId" id="groupId" th:value="${groupId}" hidden="hidden">
-                                    <input name="issueId" id="issueId" th:value="${issue.id()}" hidden="hidden">
 
                                     <div class="v10_506">
                                         <span class="v10_507" th:text="${issue.writer()}">아이디1</span>
                                         <span class="v10_2226" th:text="${issue.createdDateTime()}">2023.05-01</span>
                                         <div class="profile_image_509" th:style="'background-image: url(\'/images/' + ${issue.profileImage()} + '.png\')'"></div>
-                                        <button type="button" class="del_comment" th:if="${check} == true" onclick="deleteIssue()">삭제</button>
+                                        <button type="button" class="del_comment" th:if="${check} == true" th:onclick="deleteIssue([[${issue.id()}]])">삭제</button>
 
                                     </div>
                                     <span class="v10_505" th:text="${issue.title()}" th:onclick="|location.href='@{/group/project/{groupId}/issue/{issueId}(groupId=${group.id()}, issueId=${issue.id()})}'|">제목</span>
@@ -124,15 +123,13 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
-    <script>
+    <script th:inline="javascript">
         function openNewWindow() {
             let url = document.getElementById('myLink').getAttribute('href');
             window.open(url, '_blank', 'width=800, height=800, scrollbars=no, resizable=no, toolbars=no, menubar=no');
         }
-        function deleteIssue() {
+        function deleteIssue(issueId) {
             const groupId = $('#groupId').val();
-            const issueId = $('#issueId').val();
             const url = '/group/project/issue/' + issueId + '/delete';
             if (confirm("이슈를 삭제하시겠습니까?") === true) {
                 fetch(url, {
