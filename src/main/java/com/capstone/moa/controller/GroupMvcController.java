@@ -2,6 +2,7 @@ package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.enums.Interest;
+import com.capstone.moa.service.GroupProfileService;
 import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.LinkService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -19,13 +22,16 @@ public class GroupMvcController {
 
     private final GroupService groupService;
     private final LinkService linkService;
+    private final GroupProfileService groupProfileService;
 
     @GetMapping("/intro/{groupId}")
-    public String findGroupIntroById(@PathVariable Long groupId, Model model) {
+    public String findGroupIntroById(@PathVariable Long groupId, Model model) throws IOException {
         GroupIntroResponse response = groupService.findGroupById(groupId);
         FindMemberResponse leader = groupService.findGroupLeaderByGroupId(groupId);
+        String groupProfile = groupProfileService.downloadImage(groupId);
         model.addAttribute("groupIntro", response);
         model.addAttribute("leader", leader);
+        model.addAttribute("groupProfile", groupProfile);
         return "group/group_intro";
     }
 
@@ -50,18 +56,32 @@ public class GroupMvcController {
         List<FindGroupsForListResponse> groups = null;
         if (userDetails != null) {
             groups = groupService.findGroupsByMemberId(userDetails.getMemberId());
-        }else {
+        } else {
             groups = groupService.findAllGroups();
         }
         model.addAttribute("groups", groups);
         return "group/grouplist";
     }
 
-    @GetMapping("/{groupId}/upload-profile")
-    public String uploadGroupProfile(@PathVariable Long groupId) {
-        // "" 안에 프로필 업로드 폼 경로 넣어주세용
-        return "group/업로드폼";
+    @GetMapping("/{groupId}/profile/write")
+    public String uploadGroupProfileForm(@PathVariable Long groupId, Model model) {
+        model.addAttribute("groupId", groupId);
+        return "group/group_profile_upload";
     }
+
+    @PostMapping("/{groupId}/profile/save")
+    public String saveGroupProfile(@PathVariable Long groupId, @RequestBody MultipartFile file) throws Exception {
+        groupProfileService.uploadGroupProfile(file, groupId);
+        return "redirect:/";
+    }
+
+//    @GetMapping("/{groupId}")
+//    public ResponseEntity<?> downloadProfile(@PathVariable Long groupId) throws IOException {
+//        byte[] downloadImage = groupProfileService.downloadImage(groupId);
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .contentType(MediaType.valueOf("image/png"))
+//                .body(downloadImage);
+//    }
 
     @ModelAttribute("interests")
     private Interest[] putInterest() {

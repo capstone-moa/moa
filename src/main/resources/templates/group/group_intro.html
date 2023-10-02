@@ -38,8 +38,9 @@
         <form>
             <div class="grouppage_intro">
                 <div class="v10_762">
-                    <div class="back_image"></div>
-                    <div class="profile_image"></div>
+                    <div class="back_image">
+                    </div>
+                    <div class="profile_image" th:style="'background-image: url(data:image/png;base64,' + ${groupProfile} + ');'"></div>
                     <span class="profile_name_font" th:text="${groupIntro.name()}">MOA</span>
                     <span class="profile_intro" th:text="${groupIntro.introduce()}">그룹 설명</span>
                     <div class="interest">
@@ -114,9 +115,11 @@
                         <!------그룹원 계속 추가하려면 아래 v10_506,v10_510을 반복하면 됨.-->
                         <th:block th:each="groupmember, i : ${groupIntro.groupMembers()}">
                             <div th:class="${i.odd}? 'v10_506' : 'v10_510'" class="v10_506">
-                                <span class="v10_507" th:text="${groupmember.name()}" th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${groupmember.memberId()})}'|">아이디1</span>
+                                <span class="v10_507" th:text="${groupmember.name()}"
+                                      th:onclick="|location.href='@{/mypage/{memberId}/activity(memberId=${groupmember.memberId()})}'|">아이디1</span>
                                 <span class="v10_508" th:text="${groupmember.job()}">직업</span>
-                                <div class="profile_image_509" th:style="'background-image: url(\'/images/' + ${groupmember.memberProfile()} + '.png\')'"></div>
+                                <div class="profile_image_509"
+                                     th:style="'background-image: url(\'/images/' + ${groupmember.memberProfile()} + '.png\')'"></div>
                             </div>
                         </th:block>
                     </div>
