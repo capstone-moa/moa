@@ -1,6 +1,7 @@
 package com.capstone.moa.controller;
 
 import com.capstone.moa.dto.*;
+import com.capstone.moa.service.GroupProfileService;
 import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.IssueService;
 import com.capstone.moa.service.ReportFileService;
@@ -27,15 +28,20 @@ public class ProjectMvcController {
     private final GroupService groupService;
     private final IssueService issueService;
     private final ReportFileService reportFileService;
+    private final GroupProfileService groupProfileService;
+
 
     @GetMapping("/{groupId}/issue")
     public String findProject(
             @PathVariable("groupId") Long groupId,
             @AuthenticationPrincipal UserDetailsImpl userDetails,
             Model model
-    ) {
+    ) throws IOException {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
         List<FindIssueResponse> issueList = issueService.findIssueList(groupId);
+        String groupProfile = groupProfileService.downloadImage(groupId);
+        model.addAttribute("groupProfile", groupProfile);
+
         model.addAttribute("group", groupInfo);
         model.addAttribute("issueList", issueList);
 
@@ -85,13 +91,16 @@ public class ProjectMvcController {
     }
 
     @GetMapping("/{groupId}/files")
-    public String findFiles(@PathVariable("groupId") Long groupId, Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public String findFiles(@PathVariable("groupId") Long groupId, Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
         List<FindReportFileResponse> reportFiles = reportFileService.findReportFilesByGroupId(groupId);
         boolean check = false;
         if (userDetails != null) {
             check = groupService.checkIsGroupMember(groupId, userDetails.getMemberId());
         }
+        String groupProfile = groupProfileService.downloadImage(groupId);
+        model.addAttribute("groupProfile", groupProfile);
+
         model.addAttribute("group", groupInfo);
         model.addAttribute("reportFiles", reportFiles);
         model.addAttribute("check", check);

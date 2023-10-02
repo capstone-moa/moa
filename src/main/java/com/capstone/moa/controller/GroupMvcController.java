@@ -36,8 +36,10 @@ public class GroupMvcController {
     }
 
     @GetMapping("/intro/modify/{groupId}")
-    public String getModifyGroupIntro(@PathVariable Long groupId, Model model) {
+    public String getModifyGroupIntro(@PathVariable Long groupId, Model model) throws IOException {
         GroupIntroResponse response = groupService.findGroupById(groupId);
+        String groupProfile = groupProfileService.downloadImage(groupId);
+        model.addAttribute("groupProfile", groupProfile);
         model.addAttribute("groupIntro", response);
         model.addAttribute("modifyGroupIntroRequest", new ModifyGroupIntroRequest());
 

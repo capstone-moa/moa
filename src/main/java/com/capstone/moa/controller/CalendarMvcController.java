@@ -4,6 +4,7 @@ import com.capstone.moa.dto.CreateEventRequest;
 import com.capstone.moa.dto.FindEventsByGroupResponse;
 import com.capstone.moa.dto.GroupIntroResponse;
 import com.capstone.moa.service.EventService;
+import com.capstone.moa.service.GroupProfileService;
 import com.capstone.moa.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -22,10 +24,12 @@ public class CalendarMvcController {
 
     private final EventService eventService;
     private final GroupService groupService;
+    private final GroupProfileService groupProfileService;
 
     @GetMapping("/{groupId}")
-    public String calendar(@PathVariable("groupId") Long groupId, Model model) {
-
+    public String calendar(@PathVariable("groupId") Long groupId, Model model) throws IOException {
+        String groupProfile = groupProfileService.downloadImage(groupId);
+        model.addAttribute("groupProfile", groupProfile);
         GroupIntroResponse groupIntro = groupService.findGroupById(groupId);
         model.addAttribute("groupIntro", groupIntro);
         return "group/calendar";

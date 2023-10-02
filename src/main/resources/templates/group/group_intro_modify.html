@@ -40,7 +40,7 @@
             <div class="grouppage_intro">
                 <div class="v10_762">
                     <div class="back_image"></div>
-                    <div class="profile_image"></div>
+                    <div class="profile_image" th:style="'background-image: url(data:image/png;base64,' + ${groupProfile} + ');'"></div>
                     <a th:href="@{/group/{groupId}/profile/write(groupId=${groupIntro.id()})}" target="_blank"
                        id="myLink"></a>
                     <button type="button" class="button_image" onclick="openNewWindow()">
