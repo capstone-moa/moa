@@ -39,13 +39,11 @@ public class MypageMvcController {
     @GetMapping("/{memberId}/group")
     public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model) {
         List<FindGroupByLeaderMemberIdResponse> groups = groupService.findGroupsByLeaderMemberId(memberId);
-        List<FindGroupsByMemberIdResponse> groupsForCategory = groupService.findGroupsByMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
         FindMemberInfoResponse member = memberService.findMemberInfoById(memberId);
 
         model.addAttribute("member", member);
         model.addAttribute("groups", groups);
-        model.addAttribute("groupCategories", groupsForCategory);
         model.addAttribute("invitations", invitations);
 
         model.addAttribute("createGroupRequest", new CreateGroupRequest());

@@ -93,15 +93,21 @@ public class GroupService {
     }
 
     @Transactional(readOnly = true)
-    public List<FindGroupsByMemberIdResponse> findGroupsByMemberId(Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
-
-        List<GroupMember> groupMembers = groupMemberRepository.findAllByMember(member);
+    public List<FindGroupsForListResponse> findGroupsByMemberId(Long memberId) {
+        List<GroupMember> groupMembers = groupMemberRepository.findGroupMembersByMember(memberId);
         List<Group> groups = groupMembers.stream().map(GroupMember::getGroup).toList();
         return groups
                 .stream()
-                .map(FindGroupsByMemberIdResponse::from)
+                .map(FindGroupsForListResponse::from)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<FindGroupsForListResponse> findAllGroups() {
+        List<Group> groups = groupRepository.findAllOrderByCreatedDate();
+        return groups
+                .stream()
+                .map(FindGroupsForListResponse::from)
                 .collect(Collectors.toList());
     }
 

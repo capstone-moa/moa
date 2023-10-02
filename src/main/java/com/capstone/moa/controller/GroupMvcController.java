@@ -1,9 +1,6 @@
 package com.capstone.moa.controller;
 
-import com.capstone.moa.dto.FindMemberResponse;
-import com.capstone.moa.dto.GroupIntroResponse;
-import com.capstone.moa.dto.ModifyGroupIntroRequest;
-import com.capstone.moa.dto.UserDetailsImpl;
+import com.capstone.moa.dto.*;
 import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.LinkService;
@@ -12,6 +9,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -46,14 +45,20 @@ public class GroupMvcController {
         return "redirect:/group/intro/{groupId}";
     }
 
+    @GetMapping("/grouplist")
+    public String findGroups(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+        List<FindGroupsForListResponse> groups = null;
+        if (userDetails != null) {
+            groups = groupService.findGroupsByMemberId(userDetails.getMemberId());
+        }else {
+            groups = groupService.findAllGroups();
+        }
+        model.addAttribute("groups", groups);
+        return "group/grouplist";
+    }
+
     @ModelAttribute("interests")
     private Interest[] putInterest() {
         return Interest.values();
     }
-
-    @GetMapping("/grouplist")
-    public String findGroups() {
-        return "group/grouplist";
-    }
-
 }
