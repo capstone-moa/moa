@@ -57,6 +57,12 @@ public class GroupMvcController {
         return "group/grouplist";
     }
 
+    @GetMapping("/{groupId}/upload-profile")
+    public String uploadGroupProfile(@PathVariable Long groupId) {
+        // "" 안에 프로필 업로드 폼 경로 넣어주세용
+        return "group/업로드폼";
+    }
+
     @ModelAttribute("interests")
     private Interest[] putInterest() {
         return Interest.values();

@@ -53,6 +53,8 @@ public class Group extends BaseTimeEntity {
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notice> notices = new ArrayList<>();
 
+    private Long groupProfileId;
+
     public Group(String name, String interest, String introduce) {
         this(name, Interest.find(interest), introduce);
     }
@@ -73,6 +75,10 @@ public class Group extends BaseTimeEntity {
 
     public void addAddress(Address address) {
         this.address = address;
+    }
+
+    public void addGroupProfile(Long groupProfileId) {
+        this.groupProfileId = groupProfileId;
     }
 
     public void modifyGroupIntro(String introduce, String interest, String projectDescription, String skills) {
