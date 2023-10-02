@@ -5,6 +5,7 @@ import com.capstone.moa.dto.FindAddressResponse;
 import com.capstone.moa.dto.GroupInfoResponse;
 import com.capstone.moa.dto.UserDetailsImpl;
 import com.capstone.moa.service.AddressService;
+import com.capstone.moa.service.GroupProfileService;
 import com.capstone.moa.service.GroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.IOException;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/group/address")
@@ -23,9 +26,10 @@ public class AddressMvcController {
 
     private final AddressService addressService;
     private final GroupService groupService;
+    private final GroupProfileService groupProfileService;
 
     @GetMapping("/{groupId}")
-    public String groupAddress(@PathVariable("groupId") Long groupId, @AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+    public String groupAddress(@PathVariable("groupId") Long groupId, @AuthenticationPrincipal UserDetailsImpl userDetails, Model model) throws IOException {
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
         FindAddressResponse address = addressService.findGroupAddress(groupId);
 
@@ -33,6 +37,9 @@ public class AddressMvcController {
         if (userDetails != null) {
             check = groupService.checkIsGroupMember(groupId, userDetails.getMemberId());
         }
+
+        String groupProfile = groupProfileService.downloadImage(groupId);
+        model.addAttribute("groupProfile", groupProfile);
         model.addAttribute("group", groupInfo);
         model.addAttribute("address", address);
         model.addAttribute("check", check);

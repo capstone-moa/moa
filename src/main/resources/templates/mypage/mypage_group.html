@@ -28,13 +28,7 @@
                 <div class="hashtag"></div>
                 <hr class="nav_role">
             </button>
-            <!--가입한 그룹 정렬할 위치 주소도 바꿔야함-->
-            <button type="button" class="v10_582"
-                    th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${groupCategory.groupId()})}'|"
-                    th:each="groupCategory : ${groupCategories}">
-                <span class="v10_584" th:text="${groupCategory.groupName()}"></span>
-                <hr class="nav_role">
-            </button>
+
         </div>
 
         <!--마이페이지 메인 소개-->
@@ -80,7 +74,8 @@
                         <th:block th:each="group : ${groups}">
                             <!------그룹 한개------>
                             <!--그룹명-->
-                            <p class="h-line" th:text="${group.groupName()}">MOA</p>
+                            <p class="h-line" th:text="${group.groupName()}"
+                               th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${group.groupId()})}'|">MOA</p>
                             <div class="group_invite_box">
                                 <button type="button" class="join_border"
                                         th:if="${member.email()} == ${#authentication.getName()}"

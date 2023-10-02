@@ -27,7 +27,10 @@ public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> 
     Optional<GroupMember> findGroupLeader(@Param("groupId") Long groupId);
 
     @Query(value = "select gm.member.id as member_id from GroupMember gm where gm.group.id = :groupId")
-    List<GroupMember> findGroupMembers(@Param("groupId") Long groupId);
+    List<GroupMember> findGroupMembersByGroup(@Param("groupId") Long groupId);
+
+    @Query(value = "select gm from GroupMember gm where gm.member.id = :memberId order by gm.group.createdDateTime desc")
+    List<GroupMember> findGroupMembersByMember(@Param("memberId") Long memberId);
 
     boolean existsGroupMemberByGroupIdAndMemberId(Long groupId, Long memberId);
 }
