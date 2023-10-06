@@ -47,7 +47,8 @@ public class GroupMvcController {
     }
 
     @PutMapping("/intro/modify/{groupId}")
-    public String modifyGroupIntro(@PathVariable Long groupId, ModifyGroupIntroRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public String modifyGroupIntro(@PathVariable Long groupId, ModifyGroupIntroRequest request,
+        @AuthenticationPrincipal UserDetailsImpl userDetails) {
         groupService.modifyGroupIntro(groupId, request, userDetails.getUsername());
         linkService.modifyGroupIntroLink(groupId, request.getGithub(), request.getProjectLink());
         return "redirect:/group/intro/{groupId}";
@@ -72,18 +73,18 @@ public class GroupMvcController {
     }
 
     @PostMapping("/{groupId}/profile/save")
-    public String saveGroupProfile(@PathVariable Long groupId, @RequestBody MultipartFile file) throws Exception {
+    public String saveGroupProfile(@PathVariable Long groupId, @RequestBody MultipartFile file)
+        throws Exception {
         groupProfileService.uploadGroupProfile(file, groupId);
         return "redirect:/";
     }
 
-//    @GetMapping("/{groupId}")
-//    public ResponseEntity<?> downloadProfile(@PathVariable Long groupId) throws IOException {
-//        byte[] downloadImage = groupProfileService.downloadImage(groupId);
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .contentType(MediaType.valueOf("image/png"))
-//                .body(downloadImage);
-//    }
+    @PostMapping("/{groupId}/profile/delete")
+    public String deleteGroupProfile(@PathVariable Long groupId,
+        @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        groupProfileService.deleteGroupProfile(groupId, userDetails.getMemberId());
+        return "redirect:/";
+    }
 
     @ModelAttribute("interests")
     private Interest[] putInterest() {

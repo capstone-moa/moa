@@ -1,7 +1,9 @@
 package com.capstone.moa.service;
 
 import com.capstone.moa.entity.Group;
+import com.capstone.moa.entity.GroupMember;
 import com.capstone.moa.entity.GroupProfile;
+import com.capstone.moa.repository.GroupMemberRepository;
 import com.capstone.moa.repository.GroupProfileRepository;
 import com.capstone.moa.repository.GroupRepository;
 import com.capstone.moa.utils.ImageUtils;
@@ -20,6 +22,7 @@ public class GroupProfileService {
 
     private final GroupProfileRepository groupProfileRepository;
     private final GroupRepository groupRepository;
+    private final GroupMemberRepository groupMemberRepository;
 
     public void uploadGroupProfile(MultipartFile file, Long groupId) throws Exception {
         Group group = groupRepository.findById(groupId)
@@ -48,5 +51,16 @@ public class GroupProfileService {
         String filePath = groupProfile.getImgPath();
         byte[] downloadImage = Files.readAllBytes(new File(filePath).toPath());
         return Base64.getEncoder().encodeToString(downloadImage);
+    }
+
+    public void deleteGroupProfile(Long groupId, Long memberId) {
+        GroupMember leader = groupMemberRepository.findGroupLeader(groupId)
+            .orElseThrow(() -> new IllegalArgumentException("GroupLeader not found"));
+        if (!leader.getMember().getId().equals(memberId)) {
+            throw new IllegalStateException("You're not leader of this group");
+        }
+
+        GroupProfile groupProfile = groupProfileRepository.findGroupProfileByGroup(leader.getGroup());
+        groupProfileRepository.delete(groupProfile);
     }
 }
