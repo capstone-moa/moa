@@ -1,19 +1,28 @@
 package com.capstone.moa.controller;
 
-import com.capstone.moa.dto.*;
+import com.capstone.moa.dto.FindGroupsForListResponse;
+import com.capstone.moa.dto.FindMemberResponse;
+import com.capstone.moa.dto.GroupIntroResponse;
+import com.capstone.moa.dto.ModifyGroupIntroRequest;
+import com.capstone.moa.dto.UserDetailsImpl;
 import com.capstone.moa.entity.enums.Interest;
 import com.capstone.moa.service.GroupProfileService;
 import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.LinkService;
+import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -47,14 +56,15 @@ public class GroupMvcController {
     }
 
     @PutMapping("/intro/modify/{groupId}")
-    public String modifyGroupIntro(@PathVariable Long groupId, ModifyGroupIntroRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public String modifyGroupIntro(@PathVariable Long groupId, ModifyGroupIntroRequest request,
+        @AuthenticationPrincipal UserDetailsImpl userDetails) {
         groupService.modifyGroupIntro(groupId, request, userDetails.getUsername());
         linkService.modifyGroupIntroLink(groupId, request.getGithub(), request.getProjectLink());
         return "redirect:/group/intro/{groupId}";
     }
 
     @GetMapping("/grouplist")
-    public String findGroups(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+    public String findGroups(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) throws IOException {
         List<FindGroupsForListResponse> groups = null;
         if (userDetails != null) {
             groups = groupService.findGroupsByMemberId(userDetails.getMemberId());
@@ -72,18 +82,18 @@ public class GroupMvcController {
     }
 
     @PostMapping("/{groupId}/profile/save")
-    public String saveGroupProfile(@PathVariable Long groupId, @RequestBody MultipartFile file) throws Exception {
+    public String saveGroupProfile(@PathVariable Long groupId, @RequestBody MultipartFile file)
+        throws Exception {
         groupProfileService.uploadGroupProfile(file, groupId);
         return "redirect:/";
     }
 
-//    @GetMapping("/{groupId}")
-//    public ResponseEntity<?> downloadProfile(@PathVariable Long groupId) throws IOException {
-//        byte[] downloadImage = groupProfileService.downloadImage(groupId);
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .contentType(MediaType.valueOf("image/png"))
-//                .body(downloadImage);
-//    }
+    @PostMapping("/{groupId}/profile/delete")
+    public String deleteGroupProfile(@PathVariable Long groupId,
+        @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        groupProfileService.deleteGroupProfile(groupId, userDetails.getMemberId());
+        return "redirect:/";
+    }
 
     @ModelAttribute("interests")
     private Interest[] putInterest() {

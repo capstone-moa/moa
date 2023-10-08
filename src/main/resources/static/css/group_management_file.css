@@ -104,8 +104,7 @@ hr.nav_role{
 .profile_image {
   width: 170px;
   height: 170px;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background: url("../images/v10_168.png") no-repeat center center;
   background-size: cover;
   opacity: 1;
   position: absolute;

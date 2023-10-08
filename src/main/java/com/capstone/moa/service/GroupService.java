@@ -9,6 +9,11 @@ import com.capstone.moa.entity.enums.GroupRole;
 import com.capstone.moa.repository.GroupMemberRepository;
 import com.capstone.moa.repository.GroupRepository;
 import com.capstone.moa.repository.MemberRepository;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Base64;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,22 +98,33 @@ public class GroupService {
     }
 
     @Transactional(readOnly = true)
-    public List<FindGroupsForListResponse> findGroupsByMemberId(Long memberId) {
+    public List<FindGroupsForListResponse> findGroupsByMemberId(Long memberId) throws IOException {
         List<GroupMember> groupMembers = groupMemberRepository.findGroupMembersByMember(memberId);
         List<Group> groups = groupMembers.stream().map(GroupMember::getGroup).toList();
-        return groups
-                .stream()
-                .map(FindGroupsForListResponse::from)
-                .collect(Collectors.toList());
+
+        return getFindGroupsForListResponses(groups);
     }
 
     @Transactional(readOnly = true)
-    public List<FindGroupsForListResponse> findAllGroups() {
+    public List<FindGroupsForListResponse> findAllGroups() throws IOException {
         List<Group> groups = groupRepository.findAllOrderByCreatedDate();
-        return groups
-                .stream()
-                .map(FindGroupsForListResponse::from)
-                .collect(Collectors.toList());
+        return getFindGroupsForListResponses(groups);
+    }
+
+    private List<FindGroupsForListResponse> getFindGroupsForListResponses(List<Group> groups)
+        throws IOException {
+        List<FindGroupsForListResponse> groupResponse = new ArrayList<>();
+        for (Group group : groups) {
+            if (group.getGroupProfile() != null) {
+                byte[] image = Files.readAllBytes(
+                    new File(group.getGroupProfile().getImgPath()).toPath());
+                groupResponse.add(FindGroupsForListResponse.from(group, Base64.getEncoder().encodeToString(image)));
+                continue;
+            }
+            groupResponse.add(FindGroupsForListResponse.from(group, null));
+        }
+
+        return groupResponse;
     }
 
     @Transactional(readOnly = true)

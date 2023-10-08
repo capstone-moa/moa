@@ -36,7 +36,8 @@
             <form>
                 <div class="v10_762">
                     <div class="back_image"></div>
-                    <div class="profile_image" th:style="'background-image: url(data:image/png;base64,' + ${groupProfile} + ');'"></div>
+                    <div class="profile_image" th:if="${groupProfile} != null" th:style="'background-image: url(data:image/png;base64,' + ${groupProfile} + ');'"></div>
+                    <div class="profile_image" th:if="${groupProfile} == null"></div>
                     <span class="profile_name_font" th:text="${group.name()}">MOA</span>
                     <span class="profile_intro" th:text="${group.introduce()}">그룹 설명</span>
                     <div class="interest">
