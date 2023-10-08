@@ -27,8 +27,8 @@
                     <div class="v10_506">
                         <span class="v10_507" th:text="${group.groupName()}"
                               th:onclick="|location.href='@{/group/intro/{groupId}(groupId=${group.groupId()})}'|">그룹명</span>
-                        <div class="group_profile_image_509" ></div>
-                        <div class="group_intro" th:text="${group.groupIntro()}">개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다! 안녕하세dy</div>
+                        <div class="group_profile_image_509" th:if="${group.image()} != null" th:style="'background-image: url(data:image/png;base64,' + ${group.image()} + ');'"></div>
+                        <div class="group_profile_image_509" th:if="${group.image()} == null"></div>                        <div class="group_intro" th:text="${group.groupIntro()}">개발자들을 연결시켜 공모전, 사이드 프로젝트를 보다 더 쉽게 진행할 수 있도록 관리해 주는 도구를 제공하는 소셜 네트워킹 플랫폼을 개발합니다! 안녕하세dy</div>
                     </div>
                 </div>
             </th:block>
