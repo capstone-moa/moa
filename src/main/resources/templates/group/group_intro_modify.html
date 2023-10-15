@@ -119,10 +119,10 @@
                         <textarea name="skills" class="v10_784" th:text="${groupIntro.skills()}"></textarea>
                     </div>
 
-                    <!-----------그룹원 소개------------>
+                    <!-----------그룹원 소개(삭제)---------
                     <div class="v10_501">
                         <span class="v10_782">그룹원 소개</span>
-                        <!-----------그룹원 한세트(두명)------------>
+                        ---------그룹원 한세트(두명)------------
                         <th:block th:each="groupmember, i : ${groupIntro.groupMembers()}">
                             <div th:class="${i.odd}? 'v10_506' : 'v10_510'" class="v10_506">
                                 <span class="v10_507" th:text="${groupmember.email()}">아이디1</span>
@@ -130,7 +130,7 @@
                                 <div class="profile_image_509"></div>
                             </div>
                         </th:block>
-                    </div>
+                    </div>---->
                 </div>
             </div>
         </form>
