@@ -66,7 +66,51 @@
   opacity: 1;
   text-align: left;
 }
+.button_mini1 {
+  width: 91px;
+  height: 32px;
+  background-color:rgba(0,119,181,1);
+  position: relative;
+  top: 19px;
+  left: 580px;
+  overflow: hidden;
+  border: none;
+  padding: 4px 12px;
+  font-size: 12px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.button_mini2 {
+  width: 91px;
+  height: 32px;
+  background-color:rgba(0,119,181,1);
+  position: relative;
+  top: 19px;
+  left: 600px;
+  overflow: hidden;
+  border: none;
+  padding: 4px 12px;
+  font-size: 12px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
 
+.v30_1660 {
+  width: 60px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 9px;
+  left: 15px;
+  font-family: NanumGothic;
+  font-weight: Bold;
+  font-size: 12px;
+  opacity: 1;
+  text-align: center;
+}
 .v10_493 {
   width: 287px;
   color: rgba(24,24,24,1);
@@ -169,7 +213,7 @@
   text-overflow: ellipsis;
 }
 .group_profile_image_509 {
-  width: 76px;
+  width: 64px;
   height: 52px;
   display: inline-block;
   background: url("../images/v10_168.png");

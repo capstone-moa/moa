@@ -345,7 +345,7 @@ hr.nav_role{
   color: rgba(24,24,24,1);
   position: absolute;
   top: 8px;
-  left: 26px;
+  left: 26p0x;
   font-family: NanumGothic;
   font-weight: Bold;
   font-size: 15px;
@@ -357,7 +357,7 @@ hr.nav_role{
 /***************그룹 소개*****************/
 .v10_780 {
   width: 862px;
-  height: 1600px;
+  height: 1800px;
   position: relative;
   top: 65px;
   left: 60px;
@@ -481,7 +481,7 @@ hr.nav_role{
 /**************그룹 주제****************/
 .title_intro {
   width: 790px;
-  height: 300px;
+  height: 320px;
   color: rgba(24,24,24,1);
   position: absolute;
   top: 200px;
@@ -504,7 +504,7 @@ hr.nav_role{
 }
 .v10_783 {
   width: 660px;
-  height: 268px;
+  height: 300px;
   color: rgba(24,24,24,1);
   position: relative;
   top: 20px;
@@ -521,7 +521,7 @@ hr.nav_role{
 }
 .v10_784 {
   width: 660px;
-  height: 220px;
+  height: 280px;
   color: rgba(24,24,24,1);
   position: relative;
   top: 20px;
@@ -538,7 +538,7 @@ hr.nav_role{
 }
 .skill_intro {
   width: 790px;
-  height: 300px;
+  height: 320px;
   color: rgba(24,24,24,1);
   position: absolute;
   top: 550px;
@@ -552,16 +552,16 @@ hr.nav_role{
 /********* 그룹원 소개 *************/
 .v10_501 {
   width: 848px;
-  height: 205px;
+  height: auto;
   opacity: 1;
   position: absolute;
-  top: 1350px;
+  top: 1360px;
   left: 130px;
   overflow: hidden;
 }
 .member {
   width: 800px;
-  height: 205px;
+  height: 210px;
   position: relative;
   overflow: hidden;
 }
