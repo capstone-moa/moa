@@ -35,7 +35,7 @@ public class Group extends BaseTimeEntity {
     @Column(columnDefinition = "LONGTEXT")
     private String skills;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GroupMember> groupMembers = new ArrayList<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
@@ -55,6 +55,13 @@ public class Group extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notice> notices = new ArrayList<>();
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Issue> issues;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReportFile> reportFiles;
+
 
     public Group(String name, String interest, String introduce) {
         this(name, Interest.find(interest), introduce);

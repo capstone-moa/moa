@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{common/layout}">
 <head>
     <link href="https://fonts.googleapis.com/css?family=NanumGothic&display=swap" rel="stylesheet"/>
@@ -15,8 +16,9 @@
 <div layout:fragment="content">
     <div class="v10_483">
         <div class="v10_490">
-            <button type="button" class="button_mini1"><span class="v30_1660">내 그룹</span></button>
-            <button type="button" class="button_mini2"><span class="v30_1660">전체 그룹</span></button>
+            <button type="button" class="button_mini1"  sec:authorize="isAuthenticated()"><span class="v30_1660" th:onclick="|location.href='@{/group/grouplist/my-group}'|">내 그룹</span></button>
+            <button type="button" class="button_mini3"  sec:authorize="isAnonymous()"></button>
+            <button type="button" class="button_mini2"><span class="v30_1660" th:onclick="|location.href='@{/group/grouplist/all}'|">전체 그룹</span></button>
             <span class="v10_493">그룹 목록</span>
             <span class="v10_491"><hr>참여하고 있는 그룹이 있는 공간</span>
         </div>
