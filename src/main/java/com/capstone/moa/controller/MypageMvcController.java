@@ -9,6 +9,9 @@ import com.capstone.moa.service.InvitationService;
 import com.capstone.moa.service.MemberService;
 import com.capstone.moa.service.PostService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +30,14 @@ public class MypageMvcController {
     private final MemberService memberService;
 
     @GetMapping("/{memberId}/activity")
-    public String findMemberActivities(@PathVariable("memberId") Long memberId, Model model) {
-        FindPostsResponse postList = postService.findPostsByMember(memberId);
+    public String findMemberActivities(@PathVariable("memberId") Long memberId,
+                                       @RequestParam(value = "page", defaultValue = "1") int page,
+                                       Model model) {
+        Pageable pageable = PageRequest.of(page-1, 5);
+        Page<FindPostResponse> posts = postService.findPostsByMember(memberId, pageable);
         FindMemberInfoResponse member = memberService.findMemberInfoById(memberId);
-
         model.addAttribute("member", member);
-        model.addAttribute("posts", postList.posts());
+        model.addAttribute("posts", posts);
         return "mypage/mypage_activity";
     }
 
@@ -40,7 +45,7 @@ public class MypageMvcController {
     public String findMemberGroups(@PathVariable("memberId") Long memberId, Model model) {
         List<FindGroupByLeaderMemberIdResponse> groups = groupService.findGroupsByLeaderMemberId(memberId);
         List<FindInvitationResponse> invitations = invitationService.findInvitationsByMember(memberId);
-        FindMemberInfoResponse member = memberService.findMemberInfoById(memberId);
+        FindMemberInfoResponse  member = memberService.findMemberInfoById(memberId);
 
         model.addAttribute("member", member);
         model.addAttribute("groups", groups);
