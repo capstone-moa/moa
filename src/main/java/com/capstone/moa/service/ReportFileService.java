@@ -9,6 +9,8 @@ import com.capstone.moa.repository.GroupRepository;
 import com.capstone.moa.repository.ReportFileRepository;
 import com.capstone.moa.utils.FileUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,13 +41,11 @@ public class ReportFileService {
     }
 
     @Transactional(readOnly = true)
-    public List<FindReportFileResponse> findReportFilesByGroupId(Long groupId) {
+    public Page<FindReportFileResponse> findReportFilesByGroupId(Long groupId, Pageable pageable) {
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));
-        return reportFileRepository.findAllByGroup(group)
-                .stream()
-                .map(FindReportFileResponse::from)
-                .toList();
+        return reportFileRepository.findAllReportFileByGroup(group, pageable)
+                .map(FindReportFileResponse::from);
     }
 
     @Transactional(readOnly = true)

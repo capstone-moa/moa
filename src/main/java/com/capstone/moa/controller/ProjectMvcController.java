@@ -96,9 +96,12 @@ public class ProjectMvcController {
     }
 
     @GetMapping("/{groupId}/files")
-    public String findFiles(@PathVariable("groupId") Long groupId, Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+    public String findFiles(@PathVariable("groupId") Long groupId, Model model,
+                            @AuthenticationPrincipal UserDetailsImpl userDetails,
+                            @RequestParam(value = "page", defaultValue = "1") int page) throws IOException {
+        Pageable pageable = PageRequest.of(page-1, 5);
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
-        List<FindReportFileResponse> reportFiles = reportFileService.findReportFilesByGroupId(groupId);
+        Page<FindReportFileResponse> reportFiles = reportFileService.findReportFilesByGroupId(groupId, pageable);
         boolean check = false;
         if (userDetails != null) {
             check = groupService.checkIsGroupMember(groupId, userDetails.getMemberId());
