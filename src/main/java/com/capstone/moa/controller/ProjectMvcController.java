@@ -6,6 +6,9 @@ import com.capstone.moa.service.GroupService;
 import com.capstone.moa.service.IssueService;
 import com.capstone.moa.service.ReportFileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -35,13 +38,15 @@ public class ProjectMvcController {
     public String findProject(
             @PathVariable("groupId") Long groupId,
             @AuthenticationPrincipal UserDetailsImpl userDetails,
+            @RequestParam(value = "page", defaultValue = "1") int page,
             Model model
     ) throws IOException {
+        Pageable pageable = PageRequest.of(page-1, 5);
         GroupInfoResponse groupInfo = groupService.findGroupInfoById(groupId);
-        List<FindIssueResponse> issueList = issueService.findIssueList(groupId);
+        Page<FindIssueResponse> issueList = issueService.findIssueList(groupId, pageable);
         String groupProfile = groupProfileService.downloadImage(groupId);
-        model.addAttribute("groupProfile", groupProfile);
 
+        model.addAttribute("groupProfile", groupProfile);
         model.addAttribute("group", groupInfo);
         model.addAttribute("issueList", issueList);
 

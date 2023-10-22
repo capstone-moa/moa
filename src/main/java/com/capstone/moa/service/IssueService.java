@@ -9,6 +9,8 @@ import com.capstone.moa.repository.GroupMemberRepository;
 import com.capstone.moa.repository.GroupRepository;
 import com.capstone.moa.repository.IssueRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,13 +34,11 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public List<FindIssueResponse> findIssueList(Long groupId) {
+    public Page<FindIssueResponse> findIssueList(Long groupId, Pageable pageable) {
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new IllegalArgumentException("Group not found"));
-        return issueRepository.findAllByGroup(group)
-                .stream()
-                .map(FindIssueResponse::from)
-                .toList();
+        return issueRepository.findAllIssueByGroup(group, pageable)
+                .map(FindIssueResponse::from);
     }
 
     @Transactional(readOnly = true)

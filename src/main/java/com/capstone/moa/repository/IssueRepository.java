@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface IssueRepository extends JpaRepository<Issue, Long> {
+public interface IssueRepository extends JpaRepository<Issue, Long>, IssueRepositoryCustom {
 
-    List<Issue> findAllByGroup(Group group);
+    //List<Issue> findAllByGroup(Group group);
 }
