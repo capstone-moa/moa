@@ -31,7 +31,7 @@
                     </div>
 
                     <div>
-                        <button type="button" class="button" th:onclick="saveReportFile([[${groupId}]])"><span class="v30_1660">작성</span></button>
+                        <button type="button" class="button" th:onclick="saveReportFile([[${groupId}]])"><span class="v30_1660">등록</span></button>
                     </div>
                 </div>
             </form>
@@ -51,7 +51,7 @@
                 contentType: false,
                 data: formData,
             }).done(function (){
-                alert('보고서가 등록되었습니다.');
+                alert('그룹 프로필이 등록되었습니다.');
                 window.opener.location.reload();
                 window.close();
             }).fail(function (error){

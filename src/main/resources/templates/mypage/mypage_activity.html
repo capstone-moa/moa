@@ -81,9 +81,53 @@
                                 <span class="blue_font" th:text="|# ${post.interest()}|">#Designer</span>
                             </div>
                         </div>
-
                     </th:block>
                 </div>
+
+                <!-- 페이징 -->
+                <nav style="text-align: center;" th:if="${posts.totalPages > 0}">
+                    <ul class="pagination"
+                        th:with="start=${posts.getNumber()/10*10 + 1},
+        last=(${start + 9 < posts.totalPages ? start + 9 : posts.totalPages})">
+                        <th:block th:with="
+            firstAddr=@{/mypage/{memberId}/activity(memberId=${member.id()},page=1)},
+            prevAddr=@{/mypage/{memberId}/activity(memberId=${member.id()},page=${posts.number})},
+            nextAddr=@{/mypage/{memberId}/activity(memberId=${member.id()},page=${posts.number + 2})},
+            lastAddr=@{/mypage/{memberId}/activity(memberId=${member.id()},page=${posts.totalPages})}">
+                            <li>
+                                <a th:href="${firstAddr}" aria-label="First">
+                                    <span aria-hidden="true">First</span>
+                                </a>
+                            </li>
+                            <!-- 이전 페이지로 가기 버튼 -->
+                            <li th:class="${posts.first} ? 'disabled'">
+                                <a th:href="${posts.first} ? '#' :${prevAddr}"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&lt;</span>
+                                </a>
+                            </li>
+                            <!--1,2,3,4,.. 등 페이지-->
+                            <li th:each="page: ${#numbers.sequence(start, last)}"
+                                th:class="${page == posts.number + 1} ? 'active'">
+                                <a th:text="${page}" th:href="@{/mypage/{memberId}/activity(memberId=${member.id()}, page=${page})}"></a>
+                            </li>
+                            <!--다음 페이지로 -->
+                            <li th:class="${posts.last} ? 'disabled'">
+                                <a th:href="${posts.last} ? '#' : ${nextAddr}"
+                                   aria-label="Next">
+                                    <span aria-hidden="true">&gt;</span>
+                                </a>
+                            </li>
+                            <!--맨 마지막 페이지로 이동 -->
+                            <li>
+                                <a th:href="${lastAddr}" aria-label="Last">
+                                    <span aria-hidden="true">Last</span>
+                                </a>
+                            </li>
+                        </th:block>
+                    </ul>
+                </nav>
+                <!-- 페이징 -->
 
 
                 <!---간격 띄우기-->

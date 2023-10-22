@@ -46,14 +46,11 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public FindPostsResponse findPostsByMember(Long memberId) {
+    public Page<FindPostResponse> findPostsByMember(Long memberId, Pageable pageable) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
-        List<FindPostResponse> posts = postRepository.findAllByMember(member)
-                .stream()
-                .map(FindPostResponse::from)
-                .toList();
-        return new FindPostsResponse(posts);
+        Page<Post> postPage = postRepository.findAllByMember(member.getEmail(), pageable);
+        return postPage.map(FindPostResponse::from);
     }
 
     @Transactional(readOnly = true)
@@ -87,7 +84,6 @@ public class PostService {
         if (!post.isSameWriter(email)) {
             throw new IllegalArgumentException("You are not the writer of this post");
         }
-
         post.modify(request.getTitle(), request.getContent(), request.getInterest());
     }
 
@@ -99,14 +95,12 @@ public class PostService {
         if (!post.isSameWriter(email)) {
             throw new IllegalArgumentException("You are not the writer of this post");
         }
-
         postRepository.delete(post);
     }
 
     @Transactional(readOnly = true)
     public List<FindPostResponse> searchPostsByTitleAndType(SearchPostRequest request, Pageable pageable) {
         Page<Post> postPage = postRepository.findAllPostsPage(request, pageable);
-        List<FindPostResponse> posts = new ArrayList<>();
         return postPage.getContent()
                 .stream()
                 .map(FindPostResponse::from)

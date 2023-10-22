@@ -12,4 +12,6 @@ public interface PostRepositoryCustom {
     Page<Post> findAllPostsPage(SearchPostRequest request, Pageable pageable);
 
     Page<Post> findAllPostsByCondition(FindPostsByConditionRequest request, Pageable pageable);
+
+    Page<Post> findAllByMember(String email, Pageable pageable);
 }

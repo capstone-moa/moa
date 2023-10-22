@@ -70,15 +70,15 @@
             </th:block>
 
             <!-- 페이징 -->
-            <nav style="text-align: center;">
+            <nav style="text-align: center;" th:if="${communityPosts.totalPages > 0}">
                 <ul class="pagination"
                     th:with="start=${communityPosts.getNumber()/10*10 + 1},
-                    last=(${start + 9 < communityPosts.totalPages ? start + 9 : communityPosts.totalPages})">
+        last=(${start + 9 < communityPosts.totalPages ? start + 9 : communityPosts.totalPages})">
                     <th:block th:with="
-                firstAddr=@{/posts/community(page=1)},
-                prevAddr=@{/posts/community(page=${communityPosts.number})},
-                nextAddr=@{/posts/community(page=${communityPosts.number + 2})},
-                lastAddr=@{/posts/community(page=${communityPosts.totalPages})}">
+            firstAddr=@{/posts/community(page=1)},
+            prevAddr=@{/posts/community(page=${communityPosts.number})},
+            nextAddr=@{/posts/community(page=${communityPosts.number + 2})},
+            lastAddr=@{/posts/community(page=${communityPosts.totalPages})}">
                         <li>
                             <a th:href="${firstAddr}" aria-label="First">
                                 <span aria-hidden="true">First</span>

@@ -74,6 +74,27 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
         return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
     }
 
+    @Override
+    public Page<Post> findAllByMember(String email, Pageable pageable) {
+        List<Post> content = jpaQueryFactory
+                .selectFrom(post)
+                .where(
+                        memberEq(email)
+                )
+                .orderBy(post.createdDateTime.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        JPAQuery<Post> countQuery = jpaQueryFactory
+                .selectFrom(post)
+                .where(
+                        memberEq(email)
+                );
+
+        return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+    }
+
     private BooleanExpression titleEq(String title) {
         return StringUtils.hasText(title) ? post.title.contains(title) : null;
     }
@@ -88,5 +109,9 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
 
     private BooleanExpression regionEq(String region) {
         return StringUtils.hasText(region) ? post.region.eq(Region.fromKrName(region)) : null;
+    }
+
+    private BooleanExpression memberEq(String email) {
+        return StringUtils.hasText(email) ? post.member.email.eq(email) : null;
     }
 }

@@ -112,15 +112,15 @@
                 </th:block>
 
                 <!-- 페이징 -->
-                <nav style="text-align: center;">
+                <nav style="text-align: center;" th:if="${teamPosts.totalPages > 0}">
                     <ul class="pagination"
                         th:with="start=${teamPosts.getNumber()/10*10 + 1},
-                    last=(${start + 9 < teamPosts.totalPages ? start + 9 : teamPosts.totalPages})">
+        last=(${start + 9 < teamPosts.totalPages ? start + 9 : teamPosts.totalPages})">
                         <th:block th:with="
-                firstAddr=@{/posts/team(page=1)},
-                prevAddr=@{/posts/team(page=${teamPosts.number})},
-                nextAddr=@{/posts/team(page=${teamPosts.number + 2})},
-                lastAddr=@{/posts/team(page=${teamPosts.totalPages})}">
+            firstAddr=@{/posts/team(page=1)},
+            prevAddr=@{/posts/team(page=${teamPosts.number})},
+            nextAddr=@{/posts/team(page=${teamPosts.number + 2})},
+            lastAddr=@{/posts/team(page=${teamPosts.totalPages})}">
                             <li>
                                 <a th:href="${firstAddr}" aria-label="First">
                                     <span aria-hidden="true">First</span>
