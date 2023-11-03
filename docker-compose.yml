@@ -1,0 +1,13 @@
+  version: '3'
+
+  services:
+    mysql:
+      image: mysql:latest
+      container_name: moa-container
+      environment:
+        MYSQL_ROOT_PASSWORD: root1234!
+        MYSQL_DATABASE: moa_db
+        MYSQL_CHARSET: utf8mb4
+        MYSQL_COLLATION: utf8mb4_unicode_ci
+      ports:
+        - "3308:3306"
